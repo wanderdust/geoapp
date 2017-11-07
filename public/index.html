@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geo App</title>
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div id="app-container">
+      <div id="sidebar-icon">
+        <span onclick="openNav()" class="glyphicon glyphicon-align-justify"></span>
+      </div>
+
+      <div id="sidebar-container" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Crear Grupo</a>
+        <a href="#">Amigos</a>
+      </div>
+
+      <div id="map-container">
+
+      </div>
+
+      <div id="tabs-container">
+        <div id="tabs-header">
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active tab  col-xs-4"><a href="#">Activos</a></li>
+            <li role="presentation" class=" tab col-xs-4"><a href="#">Pendientes</a></li>
+            <li role="presentation" class=" tab col-xs-4"><a href="#">Todos</a></li>
+          </ul>
+        </div>
+
+        <div id="tabs-content">
+          <ul>
+            <li>
+              <div class="group-container">
+                <div class="group-active"><img class="glyphicon" src="css/fonts/dot-glyphi.png" alt=""></span></div>
+                <div class="image"><img src="http://www.fillmurray.com/g/200/300" class="img-responive img-fluid" alt=""></div>
+                <div class="group-header">
+                  <p class="group-title">Grupo Ejemplo</p>
+                  <p class="group-status">Pablo, Wilson ...</p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="group-container">
+                <div class="image"><img src="http://www.fillmurray.com/g/350/600" class="img-responive img-fluid" alt=""></div>
+                <div class="group-header">
+                  <p class="group-title">Grupo Ejemplo 2</p>
+                  <p class="group-status">Bill</p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="group-container">
+                <div class="image"><img src="http://www.fillmurray.com/g/202/600" class="img-responive img-fluid" alt=""></div>
+                <div class="group-header">
+                  <p class="group-title">Grupo Ejemplo 3</p>
+                  <p class="group-status">Scooby, Doo ...</p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="group-container">
+                <div class="image"><img src="http://www.fillmurray.com/g/303/600" class="img-responive img-fluid" alt=""></div>
+                <div class="group-header">
+                  <p class="group-title">Grupo Ejemplo 4</p>
+                  <p class="group-status">Billy, Joe ...</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Provisional JS -->
+    <script type="text/javascript">
+    /* For sidebar */
+    function openNav() {
+        document.getElementById("sidebar-container").style.width = "220px";
+    }
+
+    function closeNav() {
+        document.getElementById("sidebar-container").style.width = "0";
+    }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
