@@ -12,20 +12,25 @@ html, body {
 }
 
 #map-container {
+  position:absolute;
+  top:0;
   height: 60%;
   width: 100%;
-  background-color: #41A0E7;
+  transition: height 0.5s;
+  background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=Albany,+NY&zoom=13&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true")
 }
 
 #tabs-header {
   width: auto;
-  height: 20%;
+  height: 50px;
 }
 
 #tabs-container {
+  position: absolute;
+  bottom: 0;
   height: 40%;
   width: 100%;
-  border: solid;
+  transition: height 0.5s;
 }
 
 #tabs-container .tab a {
@@ -53,7 +58,6 @@ html, body {
   position: relative;
   width: 100%;
   height: 60px;
-  border-bottom: solid 0.1px;
 }
 
 #tabs-content .group-container .group-active {
@@ -64,12 +68,19 @@ html, body {
   height: 100%;
 }
 
-#tabs-content .group-container .group-active img.glyphicon {
+#tabs-content .group-container .group-active span.icon {
   position: absolute;
-  top: 30%;
+  top: 15%;
   left: 30%;
   height: 15px;
   width: auto;
+  font-size: 20px;
+}
+
+#tabs-content .group-container .group-active span.glyphicon-dot:before {
+    content: "\25cf";
+    font-size: 1.5em;
+    color: green;
 }
 
 #tabs-content .group-container .image {
@@ -77,9 +88,10 @@ html, body {
   left: 40px;
   display: inline-block;
   width: 60px;
-  height: 100%;
+  height: 90%;
   overflow: hidden;
-  border: solid 1px;
+  border-radius: 50px;
+  z-index: 1;
 }
 
 #tabs-content .group-container .image img {
@@ -88,12 +100,13 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   max-width: 100%;
+  z-index: 0;
 }
 
 #tabs-content .group-container .group-header {
   position: absolute;
   left: 125px;
-  width:100%;
+  width: 50%;
   height: 100%;
 }
 
@@ -119,7 +132,7 @@ html, body {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 2; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #111; /* Black*/
@@ -170,6 +183,7 @@ html, body {
   left: 2.5%;
   width: 30px;
   height: 30px;
+  z-index: 1;
 }
 
 #sidebar-icon .glyphicon-align-justify {
