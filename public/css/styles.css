@@ -60,6 +60,10 @@ html, body {
   height: 60px;
 }
 
+#tabs-content .group-container:hover {
+  background-color: #D8D8D8;
+}
+
 #tabs-content .group-container .group-active {
   position: absolute;
   display: inline-block;
@@ -68,44 +72,65 @@ html, body {
   height: 100%;
 }
 
-#tabs-content .group-container .group-active span.icon {
-  position: absolute;
-  top: 15%;
-  left: 30%;
-  height: 15px;
-  width: auto;
-  font-size: 20px;
-}
-
-#tabs-content .group-container .group-active span.glyphicon-dot:before {
-    content: "\25cf";
-    font-size: 1.5em;
-    color: green;
-}
 
 #tabs-content .group-container .image {
   position: absolute;
-  left: 40px;
+  top: 5%;
+  left: 20px;
   display: inline-block;
-  width: 60px;
+  width: 55px;
   height: 90%;
   overflow: hidden;
   border-radius: 50px;
-  z-index: 1;
+  z-index: 2;
 }
 
 #tabs-content .group-container .image img {
-  position: relative;
+  position: absolute;
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
   max-width: 100%;
+  z-index: 1;
+}
+
+@-webkit-keyframes gradient {
+  0%   {background-color:#64db64;}
+  50%   {background-color:#ffffff;}
+  100%   {background-color:#64db64;}
+}
+
+@-moz-keyframes gradient {
+  0%   {background-color:#64db64;}
+  50%   {background-color:#ffffff;}
+  100%   {background-color:#64db64;}
+}
+
+@-o-keyframes gradient {
+  0%   {background-color:#64db64;}
+  50%   {background-color:#ffffff;}
+  100%   {background-color:#64db64;}
+}
+
+#tabs-content .group-container .image-animation {
+  position: absolute;
+  top: 0%;
+  left: 17px;
+  display: inline-block;
+  width: 61px;
+  height: 100%;
+  overflow: hidden;
+  background-color: #64db64;
+  border-radius: 50px;
   z-index: 0;
+  -webkit-animation: gradient 2s 3;
+  -moz-animation: gradient 2s 3;
+  -o-animationn: gradient 2s 3;
 }
 
 #tabs-content .group-container .group-header {
   position: absolute;
-  left: 125px;
+  left: 105px;
   width: 50%;
   height: 100%;
 }
@@ -132,7 +157,7 @@ html, body {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 2; /* Stay on top */
+    z-index: 5; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #111; /* Black*/

@@ -30,9 +30,9 @@
       <div id="tabs-container">
         <div id="tabs-header">
           <ul class="nav nav-tabs">
-            <li role="presentation" class=" tab  col-xs-4"><a href="#">Activos</a></li>
+            <li role="presentation" class="active tab  col-xs-4"><a href="#">Activos</a></li>
             <li role="presentation" class=" tab col-xs-4"><a href="#">Pendientes</a></li>
-            <li role="presentation" class=" active tab col-xs-4"><a href="#">Todos</a></li>
+            <li role="presentation" class=" tab col-xs-4"><a href="#">Todos</a></li>
           </ul>
         </div>
 
@@ -40,7 +40,7 @@
           <ul>
             <li>
               <div class="group-container">
-                <div class="group-active"><span class="icon glyphicon-dot"></span></div>
+                <div class="image-animation"></div>
                 <div class="image"><img src="http://www.fillmurray.com/g/200/300" class="img-responive img-fluid" alt=""></div>
                 <div class="group-header">
                   <p class="group-title">Grupo Ejemplo</p>
@@ -51,7 +51,7 @@
 
             <li>
               <div class="group-container">
-                <div class="group-active"><span class="icon glyphicon glyphicon-time"></span></div>
+                <div class="image-animation"></div>
                 <div class="image"><img src="http://www.fillmurray.com/g/350/600" class="img-responive img-fluid" alt=""></div>
                 <div class="group-header">
                   <p class="group-title">Grupo Ejemplo 2</p>
@@ -62,7 +62,7 @@
 
             <li>
               <div class="group-container">
-                <div class="group-active"><span class="icon glyphicon-dot"></span></div>
+                <div class="image-animation"></div>
                 <div class="image"><img src="http://www.fillmurray.com/g/202/600" class="img-responive img-fluid" alt=""></div>
                 <div class="group-header">
                   <p class="group-title">Grupo Ejemplo 3</p>
@@ -73,7 +73,7 @@
 
             <li>
               <div class="group-container">
-                <div class="group-active"><span class="icon glyphicon-dot"></span></div>
+                <div class="image-animation"></div>
                 <div class="image"><img src="http://www.fillmurray.com/g/303/600" class="img-responive img-fluid" alt=""></div>
                 <div class="group-header">
                   <p class="group-title">Grupo Ejemplo 4</p>
@@ -96,14 +96,6 @@
 
       <!-- Provisional JS -->
       <script type="text/javascript">
-      /* For sidebar */
-      jQuery('.openbtn').on('click', () => {
-        jQuery('#sidebar-container').css('width', '220px')
-      })
-
-      jQuery('.closebtn').on('click', () => {
-        jQuery('#sidebar-container').css('width', '0px')
-      })
 
       /* For resizable swipe*/
 
@@ -119,6 +111,22 @@
         jQuery('#tabs-container').css('height', '40%');
         jQuery('#map-container').css('height','60%');
         jQuery('#sidebar-icon').show();
+      })
+
+      /* For sidebar */
+      let swipeSidebar = document.getElementById('sidebar-container');
+      let sl = new Hammer(swipeSidebar);
+
+      jQuery('.openbtn').on('click', () => {
+        jQuery('#sidebar-container').css('width', '220px')
+      })
+
+      jQuery('.closebtn').on('click', () => {
+        jQuery('#sidebar-container').css('width', '0px')
+      })
+
+      sl.on("swipeleft", () => {
+        jQuery('#sidebar-container').css('width', '0px')
       })
       </script>
   </body>
