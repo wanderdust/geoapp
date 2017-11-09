@@ -3,6 +3,8 @@ html, body {
   width: 100%;
   min-width: 325px;
   position: absolute;
+  margin: 0;
+  padding: 0;
 }
 
 #app-container {
@@ -31,40 +33,53 @@ html, body {
   height: 40%;
   width: 100%;
   transition: height 0.5s;
+  text-align: left;
+}
+
+#tabs-container .nav li {
+  padding: 5px;
 }
 
 #tabs-container .tab a {
-  text-align: center;
   font-size: 1.2em;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
 }
 
-#tabs-content {
+.tabs-content::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs-content {
+  position:absolute;
+  bottom: 0px;
   width: 100%;
   height: 80%;
   min-height: 25%;
   overflow: scroll;
 }
 
-#tabs-content ul {
+.tabs-content ul {
   list-style-type: none;
   padding: 0px;
 }
 
-#tabs-content li {
+.tabs-content li {
   margin-top: 10px;
 }
 
-#tabs-content .group-container {
+.tabs-content .group-container {
   position: relative;
   width: 100%;
   height: 60px;
 }
 
-#tabs-content .group-container:hover {
+.tabs-content .group-container:hover {
   background-color: #D8D8D8;
 }
 
-#tabs-content .group-container .group-active {
+.tabs-content .group-container .group-active {
   position: absolute;
   display: inline-block;
   left: 0px;
@@ -73,7 +88,7 @@ html, body {
 }
 
 
-#tabs-content .group-container .image {
+.tabs-content .group-container .image {
   position: absolute;
   top: 5%;
   left: 20px;
@@ -85,7 +100,7 @@ html, body {
   z-index: 2;
 }
 
-#tabs-content .group-container .image img {
+.tabs-content .group-container .image img {
   position: absolute;
   width: 100%;
   top: 50%;
@@ -112,7 +127,7 @@ html, body {
   100%   {background-color:#64db64;}
 }
 
-#tabs-content .group-container .image-animation {
+.tabs-content .group-container .image-animation {
   position: absolute;
   top: 0%;
   left: 17px;
@@ -128,21 +143,21 @@ html, body {
   -o-animationn: gradient 2s 3;
 }
 
-#tabs-content .group-container .group-header {
+.tabs-content .group-container .group-header {
   position: absolute;
   left: 105px;
   width: 50%;
   height: 100%;
 }
 
-#tabs-content .group-header .group-title {
+.tabs-content .group-header .group-title {
   position: absolute;
   width: 100%
   top: 5px;
   font-size: 20px
 }
 
-#tabs-content .group-header .group-status {
+.tabs-content .group-header .group-status {
   position: absolute;
   width: 100%;
   bottom: 5px;
@@ -154,16 +169,16 @@ html, body {
 
 /* The side navigation menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 5; /* Stay on top */
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 5;
     top: 0;
     left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    background-color: #191919;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
 }
 
 /* The navigation menu links */
@@ -176,12 +191,11 @@ html, body {
     transition: 0.3s
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
+/* Position and style the close button */
 .sidenav .closebtn {
     position: absolute;
     top: 0;
@@ -190,13 +204,7 @@ html, body {
     margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/* On smaller screens, where height is less than 450px, change the style of the sidenav */
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
@@ -213,4 +221,103 @@ html, body {
 
 #sidebar-icon .glyphicon-align-justify {
   font-size: 30px;
+  color: #4c4c4c;
+}
+
+
+/* Styles for groups.html*/
+
+#header-nav {
+  position: relative;
+  height: 8%;
+  width: 100%;
+  background-color: #596059;
+}
+
+#header-nav #back-arrow-container {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  left: 0px;
+  width: 15%;
+}
+
+#header-nav #back-arrow-container a {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#header-nav #back-arrow-container a span {
+  font-size: 35px;
+  color: white;
+  line-height: 50px;
+  text-align: center;
+}
+
+#header-nav #group-title-container {
+  position: absolute;
+  display: inline-block;
+  width: 85%;
+  height: 100%;
+  right: 0px;
+  padding-left: 15px;
+}
+
+#header-nav #group-title-container #group-title-group {
+  position: absolute;
+  top: 0;
+  height: 60%;
+  width: 100%;
+}
+
+#header-nav #group-title-container #group-title-group p {
+  font-size: 25px;
+  color: white;
+}
+
+#header-nav #group-title-container #group-sub-title {
+  position: absolute;
+  bottom: 0;
+  height:40%;
+  width: 100%;
+}
+
+#header-nav #group-title-container #group-sub-title p {
+  font-size: 15px;
+  color: white;
+}
+
+#header-nav #group-title-container p {
+  margin: 0;
+}
+
+.online-users-list ul {
+  margin: 0;
+}
+
+.online-users-list {
+  width: 100%;
+  height: auto;
+}
+
+.online-users-list p, .offline-users-list p {
+  padding-left: 10px
+}
+
+.offline-users-list {
+  width: 100%;
+  height: auto;
+}
+
+.tabs-content.status-users-content {
+  height: 90%;
+}
+
+.tabs-content.status-users-content .group-header .group-title {
+  padding-top: 12px;
+}
+
+.tabs-content.status-users-content ul:last-child {
+  margin-bottom: 20px;
 }
