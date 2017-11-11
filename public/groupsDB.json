@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Group Example" ,
+    "status": "Offline" ,
+    "activeUsers": ["Alfredo", "Juan"],
+    "groupImage": "http://www.fillmurray.com/g/315/620"
+  }, {
+    "title": "Group Example 2" ,
+    "status": "Offline" ,
+    "activeUsers": ["Peter", "Alvaro"],
+    "groupImage": "http://www.fillmurray.com/g/315/620"
+  }, {
+    "title": "Group Example 3" ,
+    "status": "Offline" ,
+    "activeUsers": ["José"],
+    "groupImage": "http://www.fillmurray.com/g/315/620"
+  }, {
+    "title": "Group Example 4" ,
+    "status": "Offline" ,
+    "activeUsers": ["Peter", "Alvaro","Peter", "Alvaro"],
+    "groupImage": "http://www.fillmurray.com/g/315/620"
+  }
+]

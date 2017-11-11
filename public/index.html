@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Geo App</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
   <body>
     <div id="app-container">
@@ -34,123 +34,41 @@
         </div>
 
         <div class="tabs-content">
-          <ul>
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/200/300" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo</p>
-                  <p class="group-status">Pablo, Wilson ...</p>
-                </div>
-              </div>
-            </li>
+          <ul id="group-list">
 
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/350/600" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 2</p>
-                  <p class="group-status">Bill</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/202/600" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 3</p>
-                  <p class="group-status">Scooby, Doo ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/303/600" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/313/600" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/304/600" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/312/585" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/323/610" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div class="group-container">
-                <div class="image-animation"></div>
-                <div class="image"><img src="http://www.fillmurray.com/g/315/620" class="img-responive img-fluid"></div>
-                <div class="group-header">
-                  <p class="group-title">Grupo Ejemplo 4</p>
-                  <p class="group-status">Billy, Joe ...</p>
-                </div>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../node_modules/hammerjs/hammer.min.js"></script>
-    <script src="../node_modules/underscore/underscore-min.js"></script>
-    <script src="../node_modules/backbone/backbone-min.js"></script>
-    <script src="js/models/groupModel.js"></script>
-    <script src="js/models/userModel.js"></script>
-    <script src="js/collections/groups.js"></script>
-    <script src="js/collections/users.js"></script>
-    <script src="js/views/groupView.js"></script>
-    <script src="js/views/userView.js"></script>
-    <script src="js/views/appView.js"></script>
-    <script src="js/app.js"></script>
+    <script id="group-template" type="text/template">
+      <li>
+        <div class="group-container">
+          <div class="image-animation"></div>
+          <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
+          <div class="group-header">
+            <p class="group-title">{{title}}</p>
+            <p class="group-status">{{activeUsers}}</p>
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="groupsDB.json"></script> <!-- Provisional -->
+    <script src="./js/models/groupModel.js"></script>
+    <script src="./js/models/userModel.js"></script>
+    <script src="./js/collections/groups.js"></script>
+    <script src="./js/collections/users.js"></script>
+    <script src="./js/views/groupView.js"></script>
+    <script src="./js/views/userView.js"></script>
+    <script src="./js/views/appView.js"></script>
+    <script src="./js/app.js"></script>
 
       <!-- Provisional JS -->
     <script type="text/javascript">
