@@ -1,23 +1,47 @@
 [
   {
-    "title": "Group Example" ,
-    "status": "Offline" ,
-    "activeUsers": ["Alfredo", "Juan"],
-    "groupImage": "http://www.fillmurray.com/g/315/620"
+    "title": "LA FLACA" ,
+    "activeUsers": [],
+    "groupImage": "http://www.fillmurray.com/315/620"
   }, {
-    "title": "Group Example 2" ,
-    "status": "Offline" ,
+    "title": "Chiringuito" ,
     "activeUsers": ["Peter", "Alvaro"],
-    "groupImage": "http://www.fillmurray.com/g/315/620"
+    "groupImage": "http://www.fillmurray.com/g/305/600"
   }, {
-    "title": "Group Example 3" ,
-    "status": "Offline" ,
+    "title": "La oficina" ,
     "activeUsers": ["José"],
-    "groupImage": "http://www.fillmurray.com/g/315/620"
+    "groupImage": "http://www.fillmurray.com/325/640"
   }, {
-    "title": "Group Example 4" ,
-    "status": "Offline" ,
-    "activeUsers": ["Peter", "Alvaro","Peter", "Alvaro"],
-    "groupImage": "http://www.fillmurray.com/g/315/620"
+    "title": "C/Alcalá" ,
+    "activeUsers": ["Julio","Cesar", "Alvaro"],
+    "groupImage": "http://www.placecage.com/c/200/300"
+  }, {
+    "title": "Botellon Atocha" ,
+    "activeUsers": ["Andrea", "Alfonso","Arancha"],
+    "groupImage": "http://www.fillmurray.com/605/626"
+  }, {
+    "title": "Estacion de tren" ,
+    "activeUsers": ["Marea", "Marina","Paloma"],
+    "groupImage": "http://www.fillmurray.com/305/626"
+  }, {
+    "title": "Colón" ,
+    "activeUsers": [],
+    "groupImage": "http://www.placecage.com/c/220/310"
+  }, {
+    "title": "Casa de Alvaro" ,
+    "activeUsers": ["Diego"],
+    "groupImage": "http://www.fillmurray.com/300/300"
+  }, {
+    "title": "Los saps" ,
+    "activeUsers": ["Pepito", "Pablo","Lucia", "Wilson"],
+    "groupImage": "http://www.placecage.com/c/200/250"
+  }, {
+    "title": "Taller" ,
+    "activeUsers": [],
+    "groupImage": "http://www.fillmurray.com/400/400"
+  }, {
+    "title": "ASDF 3" ,
+    "activeUsers": ["Elgran", "Lebowski"],
+    "groupImage": "http://www.placecage.com/c/300/300"
   }
 ]

@@ -11,8 +11,8 @@ $(function () {
 
     initialize: function () {
       this.$list = $('#group-list');
-      app.groupCollection.fetch();
 
+      app.groupCollection.fetch();
       this.listenTo(app.groupCollection, 'add', this.appendOne);
 
     },
@@ -24,11 +24,6 @@ $(function () {
     appendOne: function (group) {
       let view = new app.GroupView({model: group});
       this.$list.append(view.render().el)
-    },
-
-    appendAll: function () {
-      this.$list.html('');
-      app.groupCollection.each(this.appendOne, this)
     }
   })
 

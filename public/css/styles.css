@@ -135,9 +135,13 @@ html, body {
   width: 61px;
   height: 100%;
   overflow: hidden;
-  background-color: #64db64;
   border-radius: 50px;
   z-index: 0;
+  background-color: gray;
+}
+
+.tabs-content .group-container .image-animation.online-group {
+  background-color: #64db64;
   -webkit-animation: gradient 2s 3;
   -moz-animation: gradient 2s 3;
   -o-animationn: gradient 2s 3;
@@ -146,7 +150,7 @@ html, body {
 .tabs-content .group-container .group-header {
   position: absolute;
   left: 105px;
-  width: 50%;
+  width: 65%;
   height: 100%;
 }
 
