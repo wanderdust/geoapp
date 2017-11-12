@@ -2,46 +2,57 @@
   {
     "title": "LA FLACA" ,
     "activeUsers": [],
-    "groupImage": "http://www.fillmurray.com/315/620"
+    "groupImage": "http://www.fillmurray.com/315/620",
+    "pending": false
   }, {
     "title": "Chiringuito" ,
     "activeUsers": ["Peter", "Alvaro"],
-    "groupImage": "http://www.fillmurray.com/g/305/600"
+    "groupImage": "http://www.fillmurray.com/g/305/600",
+    "pending": false
   }, {
     "title": "La oficina" ,
     "activeUsers": ["José"],
-    "groupImage": "http://www.fillmurray.com/325/640"
+    "groupImage": "http://www.fillmurray.com/325/640",
+    "pending": false
   }, {
     "title": "C/Alcalá" ,
     "activeUsers": ["Julio","Cesar", "Alvaro"],
-    "groupImage": "http://www.placecage.com/c/200/300"
+    "groupImage": "http://www.placecage.com/c/200/300",
+    "pending": false
   }, {
     "title": "Botellon Atocha" ,
-    "activeUsers": ["Andrea", "Alfonso","Arancha"],
-    "groupImage": "http://www.fillmurray.com/605/626"
+    "activeUsers": [],
+    "groupImage": "http://www.fillmurray.com/605/626",
+    "pending": true
   }, {
     "title": "Estacion de tren" ,
     "activeUsers": ["Marea", "Marina","Paloma"],
-    "groupImage": "http://www.fillmurray.com/305/626"
+    "groupImage": "http://www.fillmurray.com/305/626",
+    "pending": false
   }, {
     "title": "Colón" ,
     "activeUsers": [],
-    "groupImage": "http://www.placecage.com/c/220/310"
+    "groupImage": "http://www.placecage.com/c/220/310",
+    "pending": true
   }, {
     "title": "Casa de Alvaro" ,
     "activeUsers": ["Diego"],
-    "groupImage": "http://www.fillmurray.com/300/300"
+    "groupImage": "http://www.fillmurray.com/300/300",
+    "pending": false
   }, {
     "title": "Los saps" ,
-    "activeUsers": ["Pepito", "Pablo","Lucia", "Wilson"],
-    "groupImage": "http://www.placecage.com/c/200/250"
+    "activeUsers": [],
+    "groupImage": "http://www.placecage.com/c/200/250",
+    "pending": true
   }, {
     "title": "Taller" ,
     "activeUsers": [],
-    "groupImage": "http://www.fillmurray.com/400/400"
+    "groupImage": "http://www.fillmurray.com/400/400",
+    "pending": true
   }, {
     "title": "ASDF 3" ,
     "activeUsers": ["Elgran", "Lebowski"],
-    "groupImage": "http://www.placecage.com/c/300/300"
+    "groupImage": "http://www.placecage.com/c/300/300",
+    "pending": false
   }
 ]

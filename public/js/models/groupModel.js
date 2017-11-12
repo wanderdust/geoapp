@@ -6,7 +6,8 @@ $(function () {
     defaults: {
       title: '',
       activeUsers: [],
-      groupImage: ''
+      groupImage: '',
+      pending: false
     }
   })
 
