@@ -228,6 +228,28 @@ html, body {
   color: #4c4c4c;
 }
 
+/* Add class for swipe Animation*/
+
+#tabs-container.swipeUp {
+  height: 100%;
+}
+
+#map-container.swipeUp {
+  height: 0%
+}
+
+#sidebar-icon.swipeUp {
+  visibility: hidden;
+}
+
+.tabs-content.swipeUp {
+  height: 91%;
+}
+
+#sidebar-container.swipeIt {
+  width: 220px;
+}
+
 
 /* Styles for groups.html*/
 

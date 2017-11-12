@@ -8,22 +8,26 @@ $(function () {
     events: {
       "click .online-tab": "showOnline",
       "click .pending-tab": "showPending",
-      "click .all-tab": "showAll"
+      "click .all-tab": "showAll",
     },
 
     initialize: function () {
 
       this.$list = $('#group-list');
+      this.$tabsHeader = $('#tabs-header');
+
 
       app.groupCollection.fetch();
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'reset', this.appendAll);
-
+      this.render();
 
     },
 
     render: function () {
-
+      // Swipe Events;
+      let mc = $('#tabs-header').hammer().on("swipe", this.swipeTabs);
+      mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
     appendOne: function (group) {
@@ -50,13 +54,14 @@ $(function () {
       this.appendAll(app.groupCollection);
     },
 
-    swipeIt: function (e) {
-      if (e.direction == 8) {
-        console.log('Swipe up')
-      } else if (e.direction == 16) {
-        console.log('Swipe down')
-      }
+    swipeTabs: function (e) {
+      let $elements =   $("#tabs-container ,#map-container ,#sidebar-icon ,.tabs-content");
 
+      if (e.gesture.offsetDirection === 8) {
+        $elements.addClass('swipeUp');
+      } else if (e.gesture.offsetDirection === 16) {
+        $elements.removeClass('swipeUp');
+      }
     }
   })
 

@@ -77,25 +77,7 @@
       <!-- Provisional JS -->
     <script type="text/javascript">
 
-      /* For resizable swipe*/
-
-      let swipeTabs = document.getElementById('tabs-header');
-      let mc = new Hammer(swipeTabs);
-      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-      mc.on("swipeup", () => {
-        jQuery('#tabs-container').css('height', '100%');
-        jQuery('#map-container').css('height','0%');
-        jQuery('#sidebar-icon').hide();
-        jQuery('.tabs-content').css('height', '91%');
-      })
-      mc.on("swipedown", () => {
-        jQuery('#tabs-container').css('height', '40%');
-        jQuery('#map-container').css('height','60%');
-        jQuery('#sidebar-icon').show();
-        jQuery('.tabs-content').css('height', '80%');
-      });
-
-      /* For sidebar */
+      /* For sidebar -- Maybe make a separate view for the top part of the app */
       let swipeSidebar = document.getElementById('sidebar-container');
       let sl = new Hammer(swipeSidebar);
 
