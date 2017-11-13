@@ -1,5 +1,6 @@
 var app = app || {};
 
 $(function () {
-  new app.tabsContent();
+  new app.MapsContent();
+  new app.TabsContent();
 })

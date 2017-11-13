@@ -2,7 +2,7 @@ var app = app || {};
 
 $(function () {
 
-  app.tabsContent = Backbone.View.extend({
+  app.TabsContent = Backbone.View.extend({
     el: '#tabs-container',
 
     events: {
@@ -26,7 +26,7 @@ $(function () {
 
     render: function () {
       // Swipe Events;
-      let mc = $('#tabs-header').hammer().on("swipe", this.swipeTabs);
+      let mc = this.$tabsHeader.hammer().on("swipe", this.swipeTabs);
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
