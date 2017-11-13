@@ -9,6 +9,7 @@ $(function () {
       "click .online-tab": "showOnline",
       "click .pending-tab": "showPending",
       "click .all-tab": "showAll",
+      "swipe #tabs-header": "swipeTabs"
     },
 
     initialize: function () {
@@ -26,7 +27,7 @@ $(function () {
 
     render: function () {
       // Swipe Events;
-      let mc = this.$tabsHeader.hammer().on("swipe", this.swipeTabs);
+      let mc = this.$tabsHeader.hammer()
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
