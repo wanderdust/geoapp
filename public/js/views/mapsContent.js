@@ -13,9 +13,10 @@ $(function () {
 
     initialize: function () {
       _.bindAll(this, 'closeSidebar');
-
       this.$sideNav = $('#sidebar-container');
-      this.initMap();
+      this.map = this.initMap();
+
+      this.listenTo(app.groupCollection, 'add', this.appendMarker);
       this.render();
 
     },
@@ -32,18 +33,21 @@ $(function () {
       this.$sideNav.removeClass('swipeIt');
     },
 
+    //Plantearse crear un modelo aparte para Maps.
     initMap: function () {
-      let map =  new google.maps.Map(document.getElementById('map-frame'), {
-          zoom: 15,
-          center: {lat: 40.476552, lng: -3.880276},
+      return new google.maps.Map(document.getElementById('map-frame'), {
+          zoom: 14,
+          center: {lat: 40.472841, lng: -3.868697},
           disableDefaultUI: true
         });
+    },
 
-      let marker = new google.maps.Marker({
-          position: {lat: 40.476552, lng: -3.880276},
-          map: map
-        });
-    }
+    appendMarker: function (model) {
+      new google.maps.Marker({
+          position: {lat: model.get('coords').lat, lng: model.get('coords').lng},
+          map: this.map,
+      })
+    },
   })
 
 })

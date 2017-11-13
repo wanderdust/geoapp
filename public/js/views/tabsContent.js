@@ -17,10 +17,9 @@ $(function () {
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
-
-      app.groupCollection.fetch();
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'reset', this.appendAll);
+
       this.render();
 
     },
@@ -64,6 +63,7 @@ $(function () {
         $elements.removeClass('swipeUp');
       }
     }
+
   })
 
 })

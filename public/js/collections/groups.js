@@ -24,4 +24,5 @@ $(function () {
   })
 
   app.groupCollection = new GroupCollection();
+  app.groupCollection.fetch();
 })
