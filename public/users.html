@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app-container">
+      <nav id="header-nav">
+        <div id="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+
+        <div id="group-title-container">
+
+        </div>
+      </nav>
+
+      <div class="tabs-content status-users-content">
+        <div class="online-users-list">
+          <p></p>
+          <ul>  </ul>
+        </div>
+
+        <div class="offline-users-list">
+          <p></p>
+          <ul>  </ul>
+        </div>
+      </div>
+
+    </div>
+
+    
+
+  <script id="header-template" type="text/template">
+    <div id="group-title-group">
+      <p>{{groupName}}</p>
+    </div>
+    <div id="group-sub-title">
+      <p>Estado: {{status}}</p>
+    </div>
+  </script>
+
+  <script id="online-user-count" type="text/template">
+    <span>Usuarios online ({{onlineUsers}})</span>
+  </script>
+
+  <script id="offline-user-count" type="text/template">
+    <span>Usuarios offline ({{offlineUsers}})</span>
+  </script>
+
+    <script id="user-template" type="text/template">
+      <li>
+        <div class="group-container user-container">
+          <div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>
+          <div class="image">
+            <img src={{userImage}} class="img-responive img-fluid">
+          </div>
+          <div class="group-header">
+            <p class="group-title">{{name}}</p>
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/models/userModel.js"></script>
+    <script src="./js/collections/users.js"></script>
+    <script src="./js/views/users/userView.js"></script>
+    <script src="./js/views/users/userList.js"></script>
+    <script src="./js/views/users/usersView.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>

@@ -5,7 +5,7 @@ $(function () {
   let GroupCollection = Backbone.Collection.extend({
     model: app.GroupModel,
 
-    url: 'groupsDB.json',
+    url: './json/groupsDB.json',
 
     online: function () {
       let filtered = this.filter(function (e) {

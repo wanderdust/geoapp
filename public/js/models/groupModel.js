@@ -11,7 +11,8 @@ $(function () {
       },
       activeUsers: [],
       groupImage: '',
-      pending: false
+      pending: false,
+      _id: ''
     }
   })
 

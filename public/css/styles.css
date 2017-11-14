@@ -322,13 +322,13 @@ html, body {
   margin: 0;
 }
 
-.online-users-list ul {
-  margin: 0;
-}
-
 .online-users-list {
   width: 100%;
   height: auto;
+}
+
+.online-users-list ul {
+  margin: 0;
 }
 
 .online-users-list p, .offline-users-list p {

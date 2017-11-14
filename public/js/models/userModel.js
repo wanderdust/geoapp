@@ -5,7 +5,7 @@ $(function () {
   app.UserModel = Backbone.Model.extend({
     defaults: {
       name: '',
-      status: 'offline',
+      isOnline: false,
       userImage: ''
     }
   })
