@@ -1,3 +1,5 @@
+// View of the whole users app.
+
 var app = app || {};
 
 $(function () {
@@ -7,12 +9,10 @@ $(function () {
 
     headerTemplate: Handlebars.compile($('#header-template').html()),
 
-    onlineUsersTemplate: Handlebars.compile($('#online-user-count').html()),
-
-    offlineUsersTemplate: Handlebars.compile($('#offline-user-count').html()),
+    userCountTemplate: Handlebars.compile($('#user-count-template').html()),
 
     events: {
-
+      "click #back-arrow-container": "backToMain"
     },
 
     initialize: function () {
@@ -25,17 +25,33 @@ $(function () {
       this.listenTo(app.userCollection, 'all', _.debounce(this.render, 0));
     },
 
+    // Gathers data from database and then renders it to the view.
     render: function () {
+      let currentGroup = sessionStorage.getItem('currentGroup');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
+      let isOnline = app.groupCollection.isOnline(currentGroup).isOnline;
+      let pending = app.groupCollection.isOnline(currentGroup).pending;
 
-      this.$onlineUsers.html(this.onlineUsersTemplate({onlineUsers}));
-      this.$offlineUsers.html(this.offlineUsersTemplate({offlineUsers}))
-      this.$header.html(this.headerTemplate({
-        groupName: 'Group Example 1',
-        status: 'online'
+      this.$onlineUsers.html(this.userCountTemplate({
+        isOnline: true,
+        onlineUsers
+      }));
+
+      this.$offlineUsers.html(this.userCountTemplate({
+        isOnline: false,
+        offlineUsers
       }))
 
+      this.$header.html(this.headerTemplate({
+        groupName: currentGroup,
+        isOnline,
+        pending
+      }))
+    },
+
+    backToMain: function () {
+      window.location.href = '/';
     }
   })
 

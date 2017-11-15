@@ -1,3 +1,5 @@
+// View of all the user views.
+
 var app = app || {};
 
 $(function () {
@@ -14,6 +16,7 @@ $(function () {
         this.listenTo(app.userCollection, 'add', this.appendOne);
     },
 
+    // Appends a model every time there is an 'add' event.
     appendOne: function (user) {
       let view = new app.UserView({model: user});
 

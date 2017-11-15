@@ -1,3 +1,5 @@
+// View for the map container.
+
 var app = app || {};
 
 $(function () {
@@ -33,6 +35,7 @@ $(function () {
       this.$sideNav.removeClass('swipeIt');
     },
 
+    // Inits google maps.
     //Plantearse crear un modelo aparte para Maps.
     initMap: function () {
       return new google.maps.Map(document.getElementById('map-frame'), {
@@ -42,6 +45,7 @@ $(function () {
         });
     },
 
+    // Creates and renders new Markers.
     appendMarker: function (model) {
       new google.maps.Marker({
           position: {lat: model.get('coords').lat, lng: model.get('coords').lng},

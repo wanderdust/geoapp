@@ -1,3 +1,5 @@
+// View of the group list.
+
 var app = app || {};
 
 $(function () {
@@ -30,11 +32,13 @@ $(function () {
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
+    // Appends a model every time there is an 'add' event.
     appendOne: function (group) {
       let view = new app.GroupView({model: group});
       this.$list.append(view.render().el);
     },
 
+    // Clears the view and attaches the new collection.
     appendAll: function (collection) {
       this.$list.html('');
       collection.each(this.appendOne, this);

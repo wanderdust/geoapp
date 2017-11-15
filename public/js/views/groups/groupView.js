@@ -1,3 +1,5 @@
+// View of a single group model.
+
 var app = app || {};
 
 $(function () {
@@ -8,11 +10,11 @@ $(function () {
     template: $('#group-template').html(),
 
     events: {
-
+      "click .group-container": "showUsers"
     },
 
     initialize: function () {
-      
+
     },
 
     render: function () {
@@ -21,6 +23,13 @@ $(function () {
 
       this.$el.html(html);
       return this;
+    },
+
+    // Saves data in session storage and sends you to users.html.
+    showUsers: function () {
+      let currentGroup = this.model.get('title');
+      sessionStorage.setItem('currentGroup', currentGroup);
+      window.location.href = '/users.html';
     }
   })
 

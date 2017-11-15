@@ -1,3 +1,5 @@
+// Model for a single group.
+
 var app = app || {};
 
 $(function () {

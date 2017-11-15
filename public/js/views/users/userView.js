@@ -1,3 +1,5 @@
+// View for a single user.
+
 var app = app || {};
 
 $(function () {

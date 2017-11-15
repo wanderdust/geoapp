@@ -14,43 +14,46 @@
         <div id="back-arrow-container">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
         </div>
-
-        <div id="group-title-container">
-
-        </div>
+        <div id="group-title-container"></div>
       </nav>
 
       <div class="tabs-content status-users-content">
         <div class="online-users-list">
           <p></p>
-          <ul>  </ul>
+          <ul></ul>
         </div>
 
         <div class="offline-users-list">
           <p></p>
-          <ul>  </ul>
+          <ul></ul>
         </div>
+
       </div>
-
     </div>
-
-    
 
   <script id="header-template" type="text/template">
     <div id="group-title-group">
       <p>{{groupName}}</p>
     </div>
     <div id="group-sub-title">
-      <p>Estado: {{status}}</p>
+      {{#if isOnline}}
+        <p>Estado: online</p>
+      {{else}}
+        {{#if pending}}
+            <p>Estado: pendiente</p>
+        {{else}}
+            <p>Estado: offline</p>
+        {{/if}}
+      {{/if}}
     </div>
   </script>
 
-  <script id="online-user-count" type="text/template">
-    <span>Usuarios online ({{onlineUsers}})</span>
-  </script>
-
-  <script id="offline-user-count" type="text/template">
-    <span>Usuarios offline ({{offlineUsers}})</span>
+  <script id="user-count-template" type="text/template">
+    {{#if isOnline}}
+      <span>Usuarios online ({{onlineUsers}})</span>
+    {{else}}
+      <span>Usuarios offline ({{offlineUsers}})</span>
+    {{/if}}
   </script>
 
     <script id="user-template" type="text/template">
@@ -75,10 +78,13 @@
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
     <script src="./js/models/userModel.js"></script>
+    <script src="./js/models/groupModel.js"></script>
     <script src="./js/collections/users.js"></script>
+    <script src="./js/collections/groups.js"></script>
     <script src="./js/views/users/userView.js"></script>
     <script src="./js/views/users/userList.js"></script>
     <script src="./js/views/users/usersView.js"></script>
-    <script src="./js/app.js"></script>
+
+    <script src="./js/app-users.js"></script>
   </body>
 </html>
