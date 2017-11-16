@@ -22,5 +22,4 @@ $(function () {
 
   // New instance of the collection and we grab data with fetch.
   app.userCollection = new UserCollection();
-  app.userCollection.fetch();
 })

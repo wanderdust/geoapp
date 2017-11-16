@@ -1,0 +1,68 @@
+[
+  {
+    "groupName": "LA FLACA",
+    "userName": "Pablo",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "LA FLACA",
+    "userName": "Meg",
+    "online": false,
+    "pending": true
+  }, {
+    "groupName": "Chiringuito",
+    "userName": "Juan",
+    "online": true,
+    "pending": false
+  }, {
+    "groupName": "Chiringuito",
+    "userName": "Pablo",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "La oficina",
+    "userName": "Meg",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "La oficina",
+    "userName": "Juan",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "La oficina",
+    "userName": "Pablo",
+    "online": true,
+    "pending": false
+  }, {
+    "groupName": "C/Alcalá",
+    "userName": "Meg",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "C/Alcalá",
+    "userName": "Wilson",
+    "online": true,
+    "pending": true
+  }, {
+    "groupName": "Botellon Atocha",
+    "userName": "Wilson",
+    "online": true,
+    "pending": false
+  }, {
+    "groupName": "Botellon Atocha",
+    "userName": "Pablo",
+    "online": false,
+    "pending": false
+  }, {
+    "groupName": "Botellon Atocha",
+    "userName": "Juan",
+    "online": false,
+    "pending": true
+  }, {
+    "groupName": "Botellon Atocha",
+    "userName": "Meg",
+    "online": true,
+    "pending": false
+  }
+]

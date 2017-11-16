@@ -1,17 +1,18 @@
 [
   {
     "name": "Pablo",
-    "isOnline": false,
     "userImage": "http://www.fillmurray.com/315/620"
   },
   {
-    "name": "Juancho Pancho",
-    "isOnline": true,
+    "name": "Juan",
+    "userImage": "http://www.fillmurray.com/325/520"
+  },
+  {
+    "name": "Meg",
     "userImage": "http://www.fillmurray.com/305/520"
   },
   {
-    "name": "Billy Willy",
-    "isOnline": false,
-    "userImage": "http://www.fillmurray.com/305/520"
+    "name": "Wilson",
+    "userImage": "http://www.fillmurray.com/310/520"
   }
 ]

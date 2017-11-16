@@ -14,7 +14,7 @@ $(function () {
     },
 
     initialize: function () {
-
+      
     },
 
     render: function () {

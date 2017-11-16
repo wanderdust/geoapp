@@ -5,7 +5,6 @@
       "lat": 40.476552,
       "lng": -3.880276
     },
-    "activeUsers": [],
     "groupImage": "http://www.fillmurray.com/315/620",
     "pending": false
   }, {
@@ -14,7 +13,6 @@
       "lat": 40.471879,
       "lng": -3.869919
     },
-    "activeUsers": ["Peter", "Alvaro"],
     "groupImage": "http://www.fillmurray.com/g/305/600",
     "pending": false
   }, {
@@ -23,7 +21,6 @@
       "lat": 40.470018,
       "lng": -3.877287
     },
-    "activeUsers": ["José"],
     "coords": {
       "lat": 40.474630,
       "lng": -3.845130
@@ -36,7 +33,6 @@
       "lat": 42.476552,
       "lng": -3.870276
     },
-    "activeUsers": ["Julio","Cesar", "Alvaro"],
     "groupImage": "http://www.placecage.com/c/200/300",
     "pending": false
   }, {
@@ -45,62 +41,7 @@
       "lat": 40.489368,
       "lng": -3.877471
     },
-    "activeUsers": [],
     "groupImage": "http://www.fillmurray.com/605/626",
     "pending": true
-  }, {
-    "title": "Estacion de tren" ,
-    "coords": {
-      "lat": 41.476573,
-      "lng": -3.880000
-    },
-    "activeUsers": ["Marea", "Marina","Paloma"],
-    "groupImage": "http://www.fillmurray.com/305/626",
-    "pending": false
-  }, {
-    "title": "Colón" ,
-    "coords": {
-      "lat": 40.468318,
-      "lng": -3.868356
-    },
-    "activeUsers": [],
-    "groupImage": "http://www.placecage.com/c/220/310",
-    "pending": true
-  }, {
-    "title": "Casa de Alvaro" ,
-    "coords": {
-      "lat": 40.406552,
-      "lng": -3.880276
-    },
-    "activeUsers": ["Diego"],
-    "groupImage": "http://www.fillmurray.com/300/300",
-    "pending": false
-  }, {
-    "title": "Los saps" ,
-    "coords": {
-      "lat": 40.478552,
-      "lng": -3.880276
-    },
-    "activeUsers": [],
-    "groupImage": "http://www.placecage.com/c/200/250",
-    "pending": true
-  }, {
-    "title": "Taller" ,
-    "coords": {
-      "lat": 40.476552,
-      "lng": -3.881276
-    },
-    "activeUsers": [],
-    "groupImage": "http://www.fillmurray.com/400/400",
-    "pending": true
-  }, {
-    "title": "ASDF 3" ,
-    "coords": {
-      "lat": 40.473552,
-      "lng": -3.880276
-    },
-    "activeUsers": ["Elgran", "Lebowski"],
-    "groupImage": "http://www.placecage.com/c/300/300",
-    "pending": false
   }
 ]
