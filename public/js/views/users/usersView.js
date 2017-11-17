@@ -21,7 +21,7 @@ $(function () {
       this.$header = $('#group-title-container');
 
       new app.UserList();
-
+      
       this.listenTo(app.userCollection, 'all', _.debounce(this.render, 0));
     },
 

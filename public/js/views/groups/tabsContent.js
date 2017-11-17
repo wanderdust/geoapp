@@ -8,9 +8,7 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-      "click .online-tab": "showOnline",
-      "click .pending-tab": "showPending",
-      "click .all-tab": "showAll",
+    
       "swipe #tabs-header": "swipeTabs"
     },
 
@@ -23,7 +21,9 @@ $(function () {
       let mc = this.$tabsHeader.hammer()
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-      //this.listenTo(app.groupCollection, 'add', this.appendOne);
+      this.listenTo(app.groupCollection, 'showAll', this.showAll);
+      this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
+      this.listenTo(app.groupCollection, 'showPending', this.showPending);
       this.listenTo(app.groupCollection, 'reset', this.appendAll);
       this.listenTo(app.userGroupCollection, 'all', _.debounce(this.render, 0));
 
