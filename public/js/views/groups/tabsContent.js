@@ -19,17 +19,19 @@ $(function () {
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
-      this.listenTo(app.groupCollection, 'add', this.appendOne);
-      this.listenTo(app.groupCollection, 'reset', this.appendAll);
+      // Swipe Events;
+      let mc = this.$tabsHeader.hammer()
+      mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-      this.render();
+      //this.listenTo(app.groupCollection, 'add', this.appendOne);
+      this.listenTo(app.groupCollection, 'reset', this.appendAll);
+      this.listenTo(app.userGroupCollection, 'all', _.debounce(this.render, 0));
 
     },
 
     render: function () {
-      // Swipe Events;
-      let mc = this.$tabsHeader.hammer()
-      mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+      this.groupsForUser();
+
     },
 
     // Appends a model every time there is an 'add' event.
@@ -42,6 +44,13 @@ $(function () {
     appendAll: function (collection) {
       this.$list.html('');
       collection.each(this.appendOne, this);
+    },
+
+    groupsForUser: function () {
+      let userName = sessionStorage.getItem('usrName');
+      let belongingGroups = app.userGroupCollection.filteredByUser(userName);
+
+      app.userGroupCollection.userGroups(belongingGroups);
     },
 
     showOnline: function () {

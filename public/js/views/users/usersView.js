@@ -30,8 +30,8 @@ $(function () {
       let currentGroup = sessionStorage.getItem('currentGroup');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
-      let isOnline = app.groupCollection.isOnline(currentGroup).isOnline;
-      let pending = app.groupCollection.isOnline(currentGroup).pending;
+      let isOnline = app.userCollection.isOnline(currentGroup).isOnline;
+      let pending = app.userCollection.isOnline(currentGroup).pending;
 
       this.$onlineUsers.html(this.userCountTemplate({
         isOnline: true,

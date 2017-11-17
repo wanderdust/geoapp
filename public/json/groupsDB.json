@@ -5,16 +5,14 @@
       "lat": 40.476552,
       "lng": -3.880276
     },
-    "groupImage": "http://www.fillmurray.com/315/620",
-    "pending": false
+    "groupImage": "http://www.fillmurray.com/315/620"
   }, {
     "title": "Chiringuito" ,
     "coords": {
       "lat": 40.471879,
       "lng": -3.869919
     },
-    "groupImage": "http://www.fillmurray.com/g/305/600",
-    "pending": false
+    "groupImage": "http://www.fillmurray.com/g/305/600"
   }, {
     "title": "La oficina" ,
     "coords": {
@@ -25,23 +23,20 @@
       "lat": 40.474630,
       "lng": -3.845130
     },
-    "groupImage": "http://www.fillmurray.com/325/640",
-    "pending": false
+    "groupImage": "http://www.fillmurray.com/325/640"
   }, {
     "title": "C/Alcalá" ,
     "coords": {
       "lat": 42.476552,
       "lng": -3.870276
     },
-    "groupImage": "http://www.placecage.com/c/200/300",
-    "pending": false
+    "groupImage": "http://www.placecage.com/c/200/300"
   }, {
     "title": "Botellon Atocha" ,
     "coords": {
       "lat": 40.489368,
       "lng": -3.877471
     },
-    "groupImage": "http://www.fillmurray.com/605/626",
-    "pending": true
+    "groupImage": "http://www.fillmurray.com/605/626"
   }
 ]

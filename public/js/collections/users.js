@@ -17,6 +17,19 @@ $(function () {
       // filters and return collection with offline users.
     offlineUsers: function () {
       return this.where({isOnline: false});
+    },
+
+    // Returns boolean of the online status of the current group.
+    //Do it by _id.
+    isOnline: function (name) {
+      let model = this.where({isOnline: true});
+
+      let isOnline = model.length > 0;
+
+      // Undefined for the moment
+      let pending;
+
+      return {isOnline, pending}
     }
   })
 

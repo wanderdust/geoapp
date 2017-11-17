@@ -41,7 +41,7 @@ $(function () {
     },
 
     groupUsers: function () {
-      let groupName = sessionStorage.getItem('currentGroup')
+      let groupName = sessionStorage.getItem('currentGroup');
       let usersInGroup = app.userGroupCollection.filteredByGroup(groupName);
 
       app.userGroupCollection.groupUsers(usersInGroup);
