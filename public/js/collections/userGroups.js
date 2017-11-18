@@ -1,3 +1,6 @@
+// Collection for the relationships between users and groups.
+// Modify everything to search by id
+
 var app = app || {};
 
 $(function () {
@@ -15,15 +18,21 @@ $(function () {
       return this.where({groupName: nameId});
     },
 
+    // Do it by ID's.
+    findModel: function (collection, userGroupModel, userGroupKey, collectionKey) {
+      return _.find(collection.models, function (e) {
+        return e.get(userGroupKey) === userGroupModel.get(collectionKey);
+      });
+    },
+
     //Creates a new userCollection for users in each group.
     groupUsers: async function (usersInGroup) {
+      let that = this;
       let newUserCollection = [];
       await app.userCollection.fetch();
 
       _.each(usersInGroup, function (user) {
-        let model =_.find(app.userCollection.models, function (e) {
-          return e.get('name') === user.get('userName')
-        });
+        let model = that.findModel(app.userCollection ,user, 'name', 'userName');
 
         //sets the status of the user;
         if (user.get('online')) {
@@ -31,11 +40,10 @@ $(function () {
         } else if (user.get('pending')) {
           model.set({pending: true})
         }
+
         newUserCollection.push(model)
       })
-
       app.userCollection.reset(newUserCollection);
-
     },
     // Creates a new groupCollection for the groups the user has.
     userGroups: async function (belongingGroups) {
@@ -44,19 +52,17 @@ $(function () {
       await app.groupCollection.fetch();
 
       _.each(belongingGroups, function (group) {
-        let model =_.find(app.groupCollection.models, function (e) {
-          return e.get('title') === group.get('groupName')
-        });
+        let model = that.findModel(app.groupCollection, group, 'title', 'groupName');
 
-        // Return an array of online users.
+        // returns an array of users models that belong to a group.
         let filterType = that.filteredByGroup(group.get('groupName'));
+        // returns an array of only the users models that are online.
         let filterOnline = filterType.filter(function (e) {
-          return e.get('online') === true;
-        })
+          return e.get('online');
+        });
+        // Return an array of online users.
         let showOnline = filterOnline.map(function (e) {
-            if (e.get('online')) {
-              return e.get('userName')
-            }
+            return e.get('userName')
         });
 
         // Sets the status of the group pending if no online users.
@@ -67,7 +73,6 @@ $(function () {
         newGroupCollection.push(model);
       });
       app.groupCollection.reset(newGroupCollection);
-
     }
   })
   app.userGroupCollection = new UserGroupCollection();

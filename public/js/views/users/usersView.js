@@ -22,7 +22,7 @@ $(function () {
 
       new app.UserList();
 
-      this.listenTo(app.userCollection, 'all', _.debounce(this.render, 0));
+      this.listenTo(app.userCollection, 'reset', _.debounce(this.render, 0));
     },
 
     // Gathers data from database and then renders it to the view.
@@ -32,8 +32,6 @@ $(function () {
       let offlineUsers = app.userCollection.offlineUsers().length;
       let isOnline = app.userCollection.isStatus(currentGroup, 'isOnline');
       let isPending = app.userCollection.isStatus(currentGroup, 'pending');
-
-      console.log('why is everything rendering twice?')
 
       this.$onlineUsers.html(this.userCountTemplate({
         isOnline: true,
