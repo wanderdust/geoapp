@@ -21,7 +21,7 @@ $(function () {
       this.$header = $('#group-title-container');
 
       new app.UserList();
-      
+
       this.listenTo(app.userCollection, 'all', _.debounce(this.render, 0));
     },
 
@@ -30,8 +30,10 @@ $(function () {
       let currentGroup = sessionStorage.getItem('currentGroup');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
-      let isOnline = app.userCollection.isOnline(currentGroup).isOnline;
-      let pending = app.userCollection.isOnline(currentGroup).pending;
+      let isOnline = app.userCollection.isStatus(currentGroup, 'isOnline');
+      let isPending = app.userCollection.isStatus(currentGroup, 'pending');
+
+      console.log('why is everything rendering twice?')
 
       this.$onlineUsers.html(this.userCountTemplate({
         isOnline: true,
@@ -46,7 +48,7 @@ $(function () {
       this.$header.html(this.headerTemplate({
         groupName: currentGroup,
         isOnline,
-        pending
+        isPending
       }))
     },
 

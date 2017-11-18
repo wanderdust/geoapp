@@ -39,7 +39,7 @@
       {{#if isOnline}}
         <p>Estado: online</p>
       {{else}}
-        {{#if pending}}
+        {{#if isPending}}
             <p>Estado: pendiente</p>
         {{else}}
             <p>Estado: offline</p>
@@ -50,9 +50,9 @@
 
   <script id="user-count-template" type="text/template">
     {{#if isOnline}}
-      <span>Usuarios online ({{onlineUsers}})</span>
+      <span class="list-of-users">Usuarios online ({{onlineUsers}})</span>
     {{else}}
-      <span>Usuarios offline ({{offlineUsers}})</span>
+      <span class="list-of-users">Usuarios offline ({{offlineUsers}})</span>
     {{/if}}
   </script>
 
@@ -65,6 +65,9 @@
           </div>
           <div class="group-header">
             <p class="group-title">{{name}}</p>
+            {{#if pending}}
+              <p class="group-status">{{name}} va a ir.</p>
+            {{/if}}
           </div>
         </div>
       </li>

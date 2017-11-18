@@ -20,7 +20,7 @@ $(function () {
     // Filters and returns a collection instance with pending users.
     pending: function () {
       let filtered = this.filter(function (e) {
-        return e.get("pending") === true;
+        return e.get("pending");
       })
 
       return new GroupCollection(filtered);

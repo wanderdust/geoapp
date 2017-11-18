@@ -13,7 +13,7 @@ $(function () {
       },
       activeUsers: [],
       groupImage: '',
-      pending: false,
+      pending: '',
       _id: ''
     }
   })

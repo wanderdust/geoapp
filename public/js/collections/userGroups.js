@@ -16,58 +16,58 @@ $(function () {
     },
 
     //Creates a new userCollection for users in each group.
-    groupUsers: function (usersInGroup) {
+    groupUsers: async function (usersInGroup) {
       let newUserCollection = [];
-      app.userCollection.fetch()
-        .done(function () {
-          _.each(usersInGroup, function (user) {
-            let model =_.find(app.userCollection.models, function (e) {
-              return e.get('name') === user.get('userName')
-            })
+      await app.userCollection.fetch();
 
-            if (user.get('online')) {
-              model.set({isOnline: true})
-            }
+      _.each(usersInGroup, function (user) {
+        let model =_.find(app.userCollection.models, function (e) {
+          return e.get('name') === user.get('userName')
+        });
 
-            newUserCollection.push(model)
-          })
-          app.userCollection.reset(newUserCollection);
-        })
+        //sets the status of the user;
+        if (user.get('online')) {
+          model.set({isOnline: true})
+        } else if (user.get('pending')) {
+          model.set({pending: true})
+        }
+        newUserCollection.push(model)
+      })
+
+      app.userCollection.reset(newUserCollection);
+
     },
-
-    userGroups: function (belongingGroups) {
+    // Creates a new groupCollection for the groups the user has.
+    userGroups: async function (belongingGroups) {
       let that = this;
       let newGroupCollection = [];
-      app.groupCollection.fetch()
-        .done(function () {
-          _.each(belongingGroups, function (group) {
-            let model =_.find(app.groupCollection.models, function (e) {
-              return e.get('title') === group.get('groupName')
-            });
+      await app.groupCollection.fetch();
 
-            // Return an array of online users.
-            let filterType = that.filteredByGroup(group.get('groupName'));
-            let filterOnline = filterType.filter(function (e) {
-              return e.get('online') === true;
-            })
-            let showOnline = filterOnline.map(function (e) {
-                if (e.get('online')) {
-                  return e.get('userName')
-                }
-            });
-            model.set({activeUsers: showOnline});
+      _.each(belongingGroups, function (group) {
+        let model =_.find(app.groupCollection.models, function (e) {
+          return e.get('title') === group.get('groupName')
+        });
 
-            // If there are no online users in the group,
-            //checks if anyone has a pending status, and
-            //it is notified to the model.
-            if (group.get('pending') && showOnline.length === 0) {
-              model.set({pending: true})
-            }
-
-            newGroupCollection.push(model);
-          });
-          app.groupCollection.reset(newGroupCollection);
+        // Return an array of online users.
+        let filterType = that.filteredByGroup(group.get('groupName'));
+        let filterOnline = filterType.filter(function (e) {
+          return e.get('online') === true;
         })
+        let showOnline = filterOnline.map(function (e) {
+            if (e.get('online')) {
+              return e.get('userName')
+            }
+        });
+
+        // Sets the status of the group pending if no online users.
+        if (group.get('pending') && !showOnline.length) {
+          model.set({pending:  `${group.get('userName')} va a ir.`})
+        }
+        model.set({activeUsers: showOnline});
+        newGroupCollection.push(model);
+      });
+      app.groupCollection.reset(newGroupCollection);
+
     }
   })
   app.userGroupCollection = new UserGroupCollection();

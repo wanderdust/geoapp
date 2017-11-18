@@ -19,17 +19,17 @@ $(function () {
       return this.where({isOnline: false});
     },
 
-    // Returns boolean of the online status of the current group.
+    // Returns boolean of the online/pending status of the current group.
     //Do it by _id.
-    isOnline: function (name) {
-      let model = this.where({isOnline: true});
+    isStatus: function (name, filterType) {
+      let model;
 
-      let isOnline = model.length > 0;
-
-      // Undefined for the moment
-      let pending;
-
-      return {isOnline, pending}
+      if (filterType === 'isOnline') {
+        model = this.where({isOnline: true})
+      } else {
+        model = this.where({pending: true})
+      }
+      return model.length > 0;
     }
   })
 

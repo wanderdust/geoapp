@@ -57,6 +57,10 @@
             {{#if activeUsers.[0]}}
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
             {{/if}}
+
+            {{#if pending}}
+              <p class="group-status">{{pending}}</p>
+            {{/if}}
           </div>
         </div>
       </li>

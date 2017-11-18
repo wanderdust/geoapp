@@ -8,7 +8,7 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-    
+
       "swipe #tabs-header": "swipeTabs"
     },
 
@@ -26,7 +26,6 @@ $(function () {
       this.listenTo(app.groupCollection, 'showPending', this.showPending);
       this.listenTo(app.groupCollection, 'reset', this.appendAll);
       this.listenTo(app.userGroupCollection, 'all', _.debounce(this.render, 0));
-
     },
 
     render: function () {

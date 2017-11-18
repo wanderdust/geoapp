@@ -255,13 +255,13 @@ html, body {
 }
 
 
-/* Styles for groups.html*/
+/* Styles for users.html*/
 
 #header-nav {
   position: relative;
   height: 8%;
   width: 100%;
-  background-color: #596059;
+  background: linear-gradient(to right, #516062, #5c6e70)
 }
 
 #header-nav #back-arrow-container {
@@ -350,4 +350,13 @@ html, body {
 
 .tabs-content.status-users-content ul:last-child {
   margin-bottom: 20px;
+}
+
+.tabs-content .list-of-users {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.group-title {
+  font-weight: 600;
 }
