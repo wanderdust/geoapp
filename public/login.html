@@ -22,21 +22,13 @@
     <h1>User list</h1>
 
     <ul>
-      <li onClick="sessionStorage.setItem('usrName','Pablo');   window.location.href = '/'">Pablo</li>
-      <li onClick="sessionStorage.setItem('usrName','Wilson');   window.location.href = '/'">Wilson</li>
-      <li onClick="sessionStorage.setItem('usrName','Meg');   window.location.href = '/'">Meg</li>
-      <li onClick="sessionStorage.setItem('usrName','Juan');   window.location.href = '/'">Juan</li>
+      <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d74');   window.location.href = '/'">Pablo</li>
+      <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d77');   window.location.href = '/'">Wilson</li>
+      <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d76');   window.location.href = '/'">Meg</li>
+      <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d75');   window.location.href = '/'">Juan</li>
     </ul>
 
     <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
-    <script type="text/javascript">
-      $('.form-field button').on('click', (e) => {
-        e.preventDefault();
-        let name = $('[name=user]').val();
-        sessionStorage.setItem('userId', name);
-        window.location.href = '/'
-      })
-    </script>
   </body>
 </html>

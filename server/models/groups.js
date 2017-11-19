@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 let GroupSchema = mongoose.Schema({
   title: String,
   groupImage: String,
-  coords: [{
+  coords: {
     lat: String,
     lng: String
-  }]
+  }
 });
 
 let Group = mongoose.model('Group', GroupSchema);

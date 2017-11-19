@@ -13,7 +13,7 @@ $(function () {
     },
 
     initialize: function () {
-      
+
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
