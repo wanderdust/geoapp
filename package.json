@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/wanderdust/geoapp.git"
   },
+  "engines": "8.9.1",
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,11 +20,15 @@
   "homepage": "https://github.com/wanderdust/geoapp#readme",
   "dependencies": {
     "backbone": "^1.3.3",
+    "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
     "hammerjs": "^2.0.8",
     "handlebars": "^4.0.11",
     "jquery": "^3.2.1",
-    "path": "^0.12.7"
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.4",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4"
   }
 }

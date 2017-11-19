@@ -28,12 +28,13 @@
       <li onClick="sessionStorage.setItem('usrName','Juan');   window.location.href = '/'">Juan</li>
     </ul>
 
+    <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script type="text/javascript">
       $('.form-field button').on('click', (e) => {
         e.preventDefault();
         let name = $('[name=user]').val();
-        sessionStorage.setItem('usrName', name);
+        sessionStorage.setItem('userId', name);
         window.location.href = '/'
       })
     </script>
