@@ -16,22 +16,31 @@ $(function () {
     },
 
     initialize: function () {
+      this.socket = io();
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');
 
+      this.listenTo(app.userCollection, 'update', this.render);
+      
       new app.UserList();
+      this.socket.emit('createUsersCollection', {
+        groupId: sessionStorage.getItem('currentGroupId')
+      }, (err, collection) => {
+        if (err)
+          return console.log(err)
 
-      this.listenTo(app.userCollection, 'reset', _.debounce(this.render, 0));
+        app.userCollection.add(collection);
+      })
     },
 
     // Gathers data from database and then renders it to the view.
     render: function () {
-      let currentGroup = sessionStorage.getItem('currentGroup');
+      let currentGroupName = sessionStorage.getItem('currentGroupName');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
-      let isOnline = app.userCollection.isStatus(currentGroup, 'isOnline');
-      let isPending = app.userCollection.isStatus(currentGroup, 'pending');
+      let isOnline = app.userCollection.isStatus('online');
+      let isPending = app.userCollection.isStatus('pending');
 
       this.$onlineUsers.html(this.userCountTemplate({
         isOnline: true,
@@ -41,13 +50,13 @@ $(function () {
       this.$offlineUsers.html(this.userCountTemplate({
         isOnline: false,
         offlineUsers
-      }))
+      }));
 
       this.$header.html(this.headerTemplate({
-        groupName: currentGroup,
+        groupName: currentGroupName,
         isOnline,
         isPending
-      }))
+      }));
     },
 
     backToMain: function () {

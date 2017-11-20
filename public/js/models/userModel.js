@@ -8,7 +8,9 @@ $(function () {
     defaults: {
       name: '',
       isOnline: false,
-      userImage: ''
+      isPending: false,
+      userImage: '',
+      _id: ''
     }
   })
 

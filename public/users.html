@@ -65,8 +65,8 @@
           </div>
           <div class="group-header">
             <p class="group-title">{{name}}</p>
-            {{#if pending}}
-              <p class="group-status">{{name}} va a ir.</p>
+            {{#if isPending}}
+              <p class="group-status">{{name}} ira pronto.</p>
             {{/if}}
           </div>
         </div>
@@ -81,12 +81,10 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-    <script src="./js/models/userGroupModel.js"></script>
     <script src="./js/models/userModel.js"></script>
     <script src="./js/models/groupModel.js"></script>
     <script src="./js/collections/users.js"></script>
     <script src="./js/collections/groups.js"></script>
-    <script src="./js/collections/userGroups.js"></script>
     <script src="./js/views/users/userView.js"></script>
     <script src="./js/views/users/userList.js"></script>
     <script src="./js/views/users/usersView.js"></script>

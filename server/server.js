@@ -26,6 +26,7 @@ io.on('connection', (socket) => {
       let newModel = {};
       let onlineUsersArray = [];
       let pendingUsersArray = [];
+
       let groupModel = await Group.findById(cursor.groupId);
       let onlineUsersInGroup = await UserGroup.find({
         groupId: groupModel._id,
@@ -59,8 +60,24 @@ io.on('connection', (socket) => {
     callback(null, groupCollection)
   });
 
-  socket.on('createUsersCollection', (groupId, callback) => {
+  socket.on('createUsersCollection', async (groupId, callback) => {
+    let userCollection = [];
+    let userCursors = await UserGroup.find(groupId);
 
+    for (let userCursor of userCursors) {
+      let newModel = {};
+
+      let userModel = await User.findById(userCursor.userId);
+
+      newModel.name = userModel.name;
+      newModel.isOnline = userCursor.online;
+      newModel.isPending = userCursor.pending;
+      newModel.userImage = userModel.userImage;
+      newModel._id = userModel._id;
+
+      userCollection.push(newModel);
+    };
+    callback(null, userCollection)
   })
 })
 

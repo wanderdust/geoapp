@@ -9,25 +9,24 @@ $(function () {
 
     url: './json/usersDB.json',
 
-    // filters and return collection with online users.
+    // filters and returns collection with online users.
     onlineUsers: function () {
       return this.where({isOnline: true});
     },
 
-      // filters and return collection with offline users.
+      // filters and returns collection with offline users.
     offlineUsers: function () {
       return this.where({isOnline: false});
     },
 
-    // Returns boolean of the online/pending status of the current group.
-    //Do it by _id.
-    isStatus: function (name, filterType) {
+    // looks for online/pending users. If it finds one returns true.
+    isStatus: function (filterType) {
       let model;
 
-      if (filterType === 'isOnline') {
+      if (filterType === 'online') {
         model = this.where({isOnline: true})
       } else {
-        model = this.where({pending: true})
+        model = this.where({isPending: true})
       }
       return model.length > 0;
     }

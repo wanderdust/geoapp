@@ -26,7 +26,6 @@ $(function () {
 
         app.groupCollection.add(collection);
       })
-
     }
   })
 })

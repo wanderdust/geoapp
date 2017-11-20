@@ -53,7 +53,7 @@
           <div class="image-animation {{#if activeUsers.[0]}} online-group {{/if}}"></div>
           <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
           <div class="group-header">
-            <p class="group-title">{{title}}</p>
+            <p class="group-title user-name">{{title}}</p>
             {{#if activeUsers.[0]}}
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
             {{/if}}
@@ -75,12 +75,10 @@
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC89Vl3jrZksJ3JwQU4RSPflJ2TuW4yz5Y"></script>
-    <script src="./js/models/userGroupModel.js"></script>
     <script src="./js/models/groupModel.js"></script>
     <script src="./js/models/userModel.js"></script>
     <script src="./js/collections/groups.js"></script>
     <script src="./js/collections/users.js"></script>
-    <script src="./js/collections/userGroups.js"></script>
     <script src="./js/views/groups/groupView.js"></script>
     <script src="./js/views/groups/mapsContent.js"></script>
     <script src="./js/views/groups/tabsContent.js"></script>

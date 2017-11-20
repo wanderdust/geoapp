@@ -80,7 +80,7 @@ $(function () {
       }
     },
 
-    showOnlineMarkers: function () {
+    showOnlineMarkers: function (foo) {
       let filteredCollection = app.groupCollection.online();
       this.appendAll(filteredCollection);
     },
