@@ -24,8 +24,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'showAll', this.showAll);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
       this.listenTo(app.groupCollection, 'showPending', this.showPending);
-      this.listenTo(app.groupCollection, 'reset', this.appendAll);
-      this.listenTo(app.userGroupCollection, 'all', _.debounce(this.render, 0));
+      this.listenTo(app.groupCollection, 'add', this.appendOne);
     },
 
     render: function () {
@@ -43,13 +42,6 @@ $(function () {
     appendAll: function (collection) {
       this.$list.html('');
       collection.each(this.appendOne, this);
-    },
-
-    groupsForUser: function () {
-      let userName = sessionStorage.getItem('usrName');
-      let belongingGroups = app.userGroupCollection.filteredByUser(userName);
-
-      app.userGroupCollection.userGroups(belongingGroups);
     },
 
     showOnline: function () {

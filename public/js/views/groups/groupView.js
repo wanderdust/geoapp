@@ -27,8 +27,8 @@ $(function () {
 
     // Saves data in session storage and sends you to users.html.
     showUsers: function () {
-      let currentGroup = this.model.get('title');
-      sessionStorage.setItem('currentGroup', currentGroup);
+      let groupId = this.model.get('_id');
+      sessionStorage.setItem('currentGroupId', groupId);
       window.location.href = '/users.html';
     }
   })

@@ -4,8 +4,8 @@ let GroupSchema = mongoose.Schema({
   title: String,
   groupImage: String,
   coords: {
-    lat: String,
-    lng: String
+    lat: Number,
+    lng: Number
   }
 });
 

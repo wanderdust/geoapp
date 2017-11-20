@@ -75,6 +75,7 @@ $(function () {
       app.groupCollection.reset(newGroupCollection);
     }
   })
-  app.userGroupCollection = new UserGroupCollection();
-  app.userGroupCollection.fetch();
+
+  // app.userGroupCollection = new UserGroupCollection();
+  // app.userGroupCollection.fetch();
 })

@@ -48,6 +48,7 @@ io.on('connection', (socket) => {
         }
       };
       newModel.title = groupModel.title;
+      newModel.groupImage = groupModel.groupImage;
       newModel.coords = groupModel.coords;
       newModel.activeUsers = onlineUsersArray;
       newModel.pendingUsers =  pendingUsersArray;
@@ -55,7 +56,11 @@ io.on('connection', (socket) => {
 
       groupCollection.push(newModel)
     }
-    callback(groupCollection)
+    callback(null, groupCollection)
+  });
+
+  socket.on('createUsersCollection', (groupId, callback) => {
+
   })
 })
 

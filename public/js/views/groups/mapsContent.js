@@ -22,7 +22,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
       this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
-      this.listenTo(app.groupCollection, 'reset', this.appendMarkers);
+      this.listenTo(app.groupCollection, 'add', this.appendMarkerByColor);
 
       this.render();
 
@@ -51,27 +51,27 @@ $(function () {
     },
 
     // Creates and renders new Markers.
-    appendMarker: function (coords, icon) {
+    appendMarker: function (model, icon) {
       let marker = new google.maps.Marker({
-          position: {lat: coords.get('coords').lat, lng: coords.get('coords').lng},
+          position: {lat: model.get('coords').lat, lng: model.get('coords').lng},
           map: this.map,
-          icon: icon
+          icon
       });
       this.currentMarkers.push(marker)
     },
 
-    appendMarkers: function (collection) {
-      this.removeMarkers();
+    appendMarkerByColor: function (model) {
+      if (model.get('activeUsers').length) {
+        return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/green.png');
+      } else if (model.get('pending')) {
+        return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+      }
+      return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/red.png');
+    },
 
-      collection.each(function (e) {
-        if (e.get('activeUsers').length) {
-          // Online users
-          return this.appendMarker(e, 'http://maps.google.com/mapfiles/ms/icons/green.png');
-        } else if (e.get('pending')) {
-          return this.appendMarker(e, 'http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-        }
-        return this.appendMarker(e, 'http://maps.google.com/mapfiles/ms/icons/red.png');
-      }, this);
+    appendAll: function (collection) {
+      this.removeMarkers();
+      collection.each(this.appendMarkerByColor, this)
     },
 
     removeMarkers: function () {
@@ -82,16 +82,16 @@ $(function () {
 
     showOnlineMarkers: function () {
       let filteredCollection = app.groupCollection.online();
-      this.appendMarkers(filteredCollection);
+      this.appendAll(filteredCollection);
     },
 
     showPendingMarkers: function () {
       let filteredCollection = app.groupCollection.pending();
-      this.appendMarkers(filteredCollection);
+      this.appendAll(filteredCollection);
     },
 
     showAllMarkers: function () {
-      this.appendMarkers(app.groupCollection);
+      this.appendAll(app.groupCollection);
     }
   })
 

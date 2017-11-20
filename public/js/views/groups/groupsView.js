@@ -24,8 +24,7 @@ $(function () {
         if(err)
           return console.log(err);
 
-        // app.groupCollection.add(collection)
-        console.log(collection)
+        app.groupCollection.add(collection);
       })
 
     }
