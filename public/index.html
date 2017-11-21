@@ -34,7 +34,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation" class="online-tab tab col-xs-4"><a href="#/online">Activos</a></li>
             <li role="presentation" class="pending-tab tab col-xs-4"><a href="#/pending">Pendientes</a></li>
-            <li role="presentation" class="all-tab tab col-xs-4"><a href="#/">Todos</a></li>
+            <li role="presentation" class="all-tab tab col-xs-4"><a href="#/all">Todos</a></li>
           </ul>
         </div>
 
@@ -54,17 +54,19 @@
       <li>
         <div class="group-container">
           <!-- If there are no active users it shows as offline -->
-          <div class="image-animation {{#if activeUsers.[0]}} online-group {{/if}}"></div>
+          <div class="image-animation"></div>
           <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
           <div class="group-header">
             <p class="group-title user-name">{{title}}</p>
             {{#if activeUsers.[0]}}
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
+            {{else}}
+              {{#if pendingUsers}}
+                <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
+              {{/if}}
             {{/if}}
 
-            {{#if pendingUsers}}
-              <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
-            {{/if}}
+
           </div>
         </div>
       </li>

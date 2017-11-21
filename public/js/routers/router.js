@@ -4,7 +4,7 @@ $(function () {
 
   let GroupsRouter = Backbone.Router.extend({
     routes: {
-      "": "showAll",
+      "all": "showAll",
       "pending": "showPending",
       "online": "showOnline"
     },

@@ -24,7 +24,6 @@ $(function () {
       this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
       this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
-      // this.listenTo(app.groupCollection, 'add', _.debounce(this.appendMarkerByColor, 0));
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
 
@@ -33,7 +32,6 @@ $(function () {
 
     render: function () {
       this.$sideNav.hammer();
-      this.listenTo(app.groupCollection, 'add', this.appendMarkerByColor);
     },
 
     openSidebar: function () {
@@ -88,9 +86,9 @@ $(function () {
     },
 
     appendMarkerByColor: function (model) {
-      if (model.get('activeUsers').length) {
+      if (model.get('activeUsers').length > 0) {
         return this.appendMarker(model, '../../css/assets/green_marker.png');
-      } else if (model.get('pending')) {
+      } else if (model.get('pendingUsers').length > 0) {
         return this.appendMarker(model, '../../css/assets/red_pending_marker.png');
       }
       return this.appendMarker(model, '../../css/assets/red_marker.png');
