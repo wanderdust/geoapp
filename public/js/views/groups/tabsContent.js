@@ -13,14 +13,15 @@ $(function () {
     },
 
     initialize: function () {
-
+      _.bindAll(this, 'render');
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
       this.listenTo(app.groupCollection, 'showAll', this.showAll);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
       this.listenTo(app.groupCollection, 'showPending', this.showPending);
-      this.listenTo(app.groupCollection, 'add', this.appendOne);
+      //this.listenTo(app.groupCollection, 'add',this.appendOne);
+      this.listenToOnce(app.groupCollection, 'update', this.showOnline);
 
       this.render();
     },
@@ -29,6 +30,7 @@ $(function () {
       // Swipe Events;
       let mc = this.$tabsHeader.hammer()
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+      return this.listenTo(app.groupCollection, 'add', this.appendOne);
     },
 
     // Appends a model every time there is an 'add' event.

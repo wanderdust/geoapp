@@ -16,21 +16,24 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'closeSidebar');
+      _.bindAll(this, 'render', 'closeSidebar');
       this.$sideNav = $('#sidebar-container');
       this.currentMarkers = [];
-      this.map = this.initMap();
+      //this.map = this.initMap();
 
       this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
       this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
-      this.listenTo(app.groupCollection, 'add', this.appendMarkerByColor);
+      // this.listenTo(app.groupCollection, 'add', _.debounce(this.appendMarkerByColor, 0));
+      this.listenToOnce(app.groupCollection, 'update', this.initMap);
+      this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
 
       this.render();
     },
 
     render: function () {
       this.$sideNav.hammer();
+      this.listenTo(app.groupCollection, 'add', this.appendMarkerByColor);
     },
 
     openSidebar: function () {
@@ -41,13 +44,32 @@ $(function () {
       this.$sideNav.removeClass('swipeIt');
     },
 
+    getCenter: function (collection) {
+      let locations = collection.pluck('coords');
+      let bound = new google.maps.LatLngBounds();
+
+      for (let i = 0; i < locations.length; i++) {
+        let myLatLng = new google.maps.LatLng(locations[i].lat, locations[i].lng)
+        bound.extend(myLatLng);
+      };
+      return {
+        coords: bound.getCenter(),
+        bound
+      };
+    },
+
     // Inits google maps.
     initMap: function () {
-      return new google.maps.Map(document.getElementById('map-frame'), {
-          zoom: 13,
-          center: {lat: 55.948597, lng: -3.198781},
+      let center = this.getCenter(app.groupCollection).coords;
+      let bounds = this.getCenter(app.groupCollection).bound;
+      let coords = {lat: center.lat(), lng: center.lng()}
+
+      let map = new google.maps.Map(document.getElementById('map-frame'), {
+          center: coords,
           disableDefaultUI: true
         });
+      map.fitBounds(bounds);
+      this.map = map;
     },
 
     // Creates and renders new Markers.
@@ -59,9 +81,10 @@ $(function () {
       });
       this.currentMarkers.push(marker);
 
-      new google.maps.InfoWindow({
+      let infoWindow = new google.maps.InfoWindow({
           content: this.infoWindowTemplate({title: model.get('title')})
-        }).open(this.map, marker);
+        });
+      infoWindow.open(this.map, marker);
     },
 
     appendMarkerByColor: function (model) {
@@ -81,7 +104,8 @@ $(function () {
 
     appendAll: function (collection) {
       this.removeMarkers();
-      collection.each(this.appendMarkerByColor, this)
+      this.currentMarkers = [];
+      collection.each(this.appendMarkerByColor, this);
     },
 
     showOnlineMarkers: function (foo) {

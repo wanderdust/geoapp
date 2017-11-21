@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
 
       groupCollection.push(newModel)
     }
-    callback(null, groupCollection)
+    callback(null, groupCollection);
   });
 
   socket.on('createUsersCollection', async (groupId, callback) => {
