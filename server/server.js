@@ -49,11 +49,11 @@ io.on('connection', (socket) => {
         }
       };
       newModel.title = groupModel.title;
-      newModel.groupImage = groupModel.groupImage;
       newModel.coords = groupModel.coords;
       newModel.activeUsers = onlineUsersArray;
       newModel.pendingUsers =  pendingUsersArray;
       newModel._id = groupModel._id;
+      groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
 
       groupCollection.push(newModel)
     }
@@ -72,8 +72,8 @@ io.on('connection', (socket) => {
       newModel.name = userModel.name;
       newModel.isOnline = userCursor.online;
       newModel.isPending = userCursor.pending;
-      newModel.userImage = userModel.userImage;
       newModel._id = userModel._id;
+      userModel.userImage ? newModel.userImage = userModel.userImage : "";
 
       userCollection.push(newModel);
     };

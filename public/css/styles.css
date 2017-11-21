@@ -360,3 +360,9 @@ html, body {
 .group-title {
   font-weight: 600;
 }
+
+.info-window {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.2em;
+}

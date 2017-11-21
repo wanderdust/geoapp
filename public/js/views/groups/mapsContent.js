@@ -7,6 +7,8 @@ $(function () {
   app.MapsContent = Backbone.View.extend({
     el: '#map-container',
 
+    infoWindowTemplate: Handlebars.compile($('#info-window-template').html()),
+
     events: {
       "click .openbtn": "openSidebar",
       "click .closebtn": "closeSidebar",
@@ -16,8 +18,8 @@ $(function () {
     initialize: function () {
       _.bindAll(this, 'closeSidebar');
       this.$sideNav = $('#sidebar-container');
-      this.map = this.initMap();
       this.currentMarkers = [];
+      this.map = this.initMap();
 
       this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
       this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
@@ -25,7 +27,6 @@ $(function () {
       this.listenTo(app.groupCollection, 'add', this.appendMarkerByColor);
 
       this.render();
-
     },
 
     render: function () {
@@ -41,11 +42,10 @@ $(function () {
     },
 
     // Inits google maps.
-    //Plantearse crear un modelo aparte para Maps.
     initMap: function () {
       return new google.maps.Map(document.getElementById('map-frame'), {
           zoom: 13,
-          center: {lat: 40.472841, lng: -3.868697},
+          center: {lat: 55.948597, lng: -3.198781},
           disableDefaultUI: true
         });
     },
@@ -57,27 +57,31 @@ $(function () {
           map: this.map,
           icon
       });
-      this.currentMarkers.push(marker)
+      this.currentMarkers.push(marker);
+
+      new google.maps.InfoWindow({
+          content: this.infoWindowTemplate({title: model.get('title')})
+        }).open(this.map, marker);
     },
 
     appendMarkerByColor: function (model) {
       if (model.get('activeUsers').length) {
-        return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/green.png');
+        return this.appendMarker(model, '../../css/assets/green_marker.png');
       } else if (model.get('pending')) {
-        return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        return this.appendMarker(model, '../../css/assets/red_pending_marker.png');
       }
-      return this.appendMarker(model, 'http://maps.google.com/mapfiles/ms/icons/red.png');
-    },
-
-    appendAll: function (collection) {
-      this.removeMarkers();
-      collection.each(this.appendMarkerByColor, this)
+      return this.appendMarker(model, '../../css/assets/red_marker.png');
     },
 
     removeMarkers: function () {
       for(let i = 0; i < this.currentMarkers.length; i++){
         this.currentMarkers[i].setMap(null);
       }
+    },
+
+    appendAll: function (collection) {
+      this.removeMarkers();
+      collection.each(this.appendMarkerByColor, this)
     },
 
     showOnlineMarkers: function (foo) {

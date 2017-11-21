@@ -12,7 +12,7 @@ $(function () {
         lng: undefined
       },
       activeUsers: [],
-      groupImage: '',
+      groupImage: '../../css/assets/group_placeholder.png',
       pending: [],
       _id: ''
     }
