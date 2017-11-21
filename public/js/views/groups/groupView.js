@@ -14,7 +14,8 @@ $(function () {
     },
 
     initialize: function () {
-      this.listenTo(this.model, 'change', this.render)
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'visible', this.toggleVisible);
     },
 
     render: function () {
@@ -24,8 +25,29 @@ $(function () {
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
-      this.$('.image-animation').toggleClass('online-group', isOnline)
+      this.$('li').toggleClass('online', isOnline);
+      this.toggleVisible();
       return this;
+    },
+
+    toggleVisible: function () {
+      this.$('li').toggleClass('hidden', this.isHidden());
+    },
+
+    isHidden: function () {
+      if (app.GroupFilter === "all") {
+        return false;
+      } else if (app.GroupFilter === "online") {
+        if (this.model.get('activeUsers').length > 0) {
+          return false
+        }
+        return true
+      } else if (app.GroupFilter === "pending") {
+        if (this.model.get('activeUsers').length === 0 && this.model.get('pendingUsers').length > 0) {
+          return false
+        }
+        return true
+      };
     },
 
     // Saves data in session storage and sends you to users.html.

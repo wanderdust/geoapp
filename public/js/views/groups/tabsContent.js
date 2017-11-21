@@ -17,11 +17,13 @@ $(function () {
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
-      this.listenTo(app.groupCollection, 'showAll', this.showAll);
-      this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
-      this.listenTo(app.groupCollection, 'showPending', this.showPending);
-      this.listenToOnce(app.groupCollection, 'update', this.showOnline);
-      //this.listenTo(app.groupCollection, 'change', this.filterOne);
+      // this.listenTo(app.groupCollection, 'showAll', this.showAll);
+      // this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
+      // this.listenTo(app.groupCollection, 'showPending', this.showPending);
+      //this.listenToOnce(app.groupCollection, 'update', this.showOnline);
+      this.listenTo(app.groupCollection, 'add', this.appendOne);
+      this.listenTo(app.groupCollection, 'filter', this.filterAll);
+      this.listenTo(app.groupCollection, 'change', this.filterOne)
 
       this.render();
     },
@@ -42,6 +44,14 @@ $(function () {
     appendAll: function (collection) {
       this.$list.html('');
       collection.each(this.appendOne, this);
+    },
+
+    filterOne: function (group) {
+      group.trigger('visible');
+    },
+
+    filterAll: function () {
+      app.groupCollection.each(this.filterOne, this);
     },
 
     showOnline: function () {

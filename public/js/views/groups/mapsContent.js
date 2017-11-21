@@ -21,11 +21,13 @@ $(function () {
       this.currentMarkers = [];
       //this.map = this.initMap();
 
-      this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
-      this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
-      this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
+      // this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
+      // this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
+      // this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
-      this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
+      this.listenTo(app.groupCollection, 'filter', this.filterAll);
+      //this.listenTo(app.groupCollection, 'change', this.filterOne)
+      // this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
 
       this.render();
     },

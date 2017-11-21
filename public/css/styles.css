@@ -144,7 +144,7 @@ html, body {
   background-color: gray;
 }
 
-.tabs-content .group-container .image-animation.online-group {
+.tabs-content .online .group-container .image-animation{
   background-color: #64db64;
   -webkit-animation: gradient 2s 3;
   -moz-animation: gradient 2s 3;
