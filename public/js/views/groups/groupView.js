@@ -5,7 +5,7 @@ var app = app || {};
 $(function () {
 
   app.GroupView = Backbone.View.extend({
-    tagname: 'li',
+    tagName: 'li',
 
     template: $('#group-template').html(),
 
@@ -20,18 +20,17 @@ $(function () {
 
     render: function () {
       let isOnline = (this.model.get('activeUsers').length > 0 ? true : false);
-
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
-      this.$('li').toggleClass('online', isOnline);
+      this.$el.toggleClass('online', isOnline);
       this.toggleVisible();
       return this;
     },
 
     toggleVisible: function () {
-      this.$('li').toggleClass('hidden', this.isHidden());
+      this.$el.toggleClass('hidden', this.isHidden());
     },
 
     isHidden: function () {

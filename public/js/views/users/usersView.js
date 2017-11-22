@@ -22,7 +22,8 @@ $(function () {
       this.$header = $('#group-title-container');
 
       this.listenTo(app.userCollection, 'update', this.render);
-      
+      this.listenTo(app.userCollection, 'change', this.render)
+
       new app.UserList();
       this.socket.emit('createUsersCollection', {
         groupId: sessionStorage.getItem('currentGroupId')
@@ -60,7 +61,7 @@ $(function () {
     },
 
     backToMain: function () {
-      window.location.href = '/';
+      window.location.href = '/#/online';
     }
   })
 

@@ -5,7 +5,7 @@ var app = app || {};
 $(function () {
 
   app.UserView = Backbone.View.extend({
-    tagname: 'li',
+    tagName: 'li',
 
     template: $('#user-template').html(),
 
@@ -14,14 +14,16 @@ $(function () {
     },
 
     initialize: function () {
-
+      this.listenTo(this.model, 'change', this.render);
     },
 
     render: function () {
+      let isOnline = (this.model.get('isOnline'));
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
+      this.$el.toggleClass('online', isOnline);
       return this;
     }
   })

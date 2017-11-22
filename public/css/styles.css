@@ -366,3 +366,7 @@ html, body {
   margin: 0;
   font-size: 1.2em;
 }
+
+.hidden {
+  display: none;
+}

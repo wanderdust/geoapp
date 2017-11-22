@@ -19,10 +19,13 @@ $(function () {
 
     // Filters and returns a collection instance with pending users.
     pending: function () {
-      let filtered = this.filter(function (e) {
+      let filteredOne = this.filter(function (e) {
         return e.get("pendingUsers").length > 0;
       })
-      return new GroupCollection(filtered);
+      let filteredTwo = filteredOne.filter(function (e) {
+        return e.get("activeUsers").length === 0;
+      })
+      return new GroupCollection(filteredTwo);
     }
   })
 

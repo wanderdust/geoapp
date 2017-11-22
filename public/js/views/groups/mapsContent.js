@@ -25,7 +25,9 @@ $(function () {
       // this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
       // this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
+      this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
+      this.listenTo(app.groupCollection, 'change', this.filterAll)
       //this.listenTo(app.groupCollection, 'change', this.filterOne)
       // this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
 
@@ -42,6 +44,15 @@ $(function () {
 
     closeSidebar: function () {
       this.$sideNav.removeClass('swipeIt');
+    },
+
+    filterAll: function (collection) {
+      if (app.GroupFilter === "online") {
+        return this.showOnlineMarkers();
+      } else if (app.GroupFilter === "pending") {
+        return this.showPendingMarkers();
+      }
+      return this.showAllMarkers();
     },
 
     getCenter: function (collection) {
@@ -85,6 +96,8 @@ $(function () {
           content: this.infoWindowTemplate({title: model.get('title')})
         });
       infoWindow.open(this.map, marker);
+
+      return marker
     },
 
     appendMarkerByColor: function (model) {
@@ -108,7 +121,7 @@ $(function () {
       collection.each(this.appendMarkerByColor, this);
     },
 
-    showOnlineMarkers: function (foo) {
+    showOnlineMarkers: function () {
       let filteredCollection = app.groupCollection.online();
       this.appendAll(filteredCollection);
     },
