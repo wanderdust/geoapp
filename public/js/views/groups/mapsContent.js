@@ -77,7 +77,8 @@ $(function () {
 
       let map = new google.maps.Map(document.getElementById('map-frame'), {
           center: coords,
-          disableDefaultUI: true
+          disableDefaultUI: true,
+          styles: mapStyle
         });
       map.fitBounds(bounds);
       this.map = map;

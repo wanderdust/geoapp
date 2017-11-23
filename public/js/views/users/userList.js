@@ -7,8 +7,6 @@ $(function () {
   app.UserList = Backbone.View.extend({
     el: '.tabs-content',
 
-    template: $('#user-template').html(),
-
     initialize: function () {
         this.$onlineUsers = $('.online-users-list ul');
         this.$offlineUsers = $('.offline-users-list ul');
@@ -20,9 +18,14 @@ $(function () {
     render: function () {
 
     },
+    
+    filterOne: function (model) {
+      model.trigger('updateOne', model);
+    },
 
     // Appends a model every time there is an 'add' event.
     appendOne: function (user) {
+
       let view = new app.UserView({model: user});
 
       if(user.get('isOnline')) {
