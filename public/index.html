@@ -1,78 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Geo App</title>
+<html lang="en">
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
 
-  </head>
-  <body>
-    <div id="app-container">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
-      <div id="map-container">
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-        <div id="sidebar-icon">
-          <span class="openbtn glyphicon glyphicon-align-justify"></span>
-        </div>
+		<title>Sign in | GeoApp</title>
+	</head>
+	<body class="login">
+		<div class="container">
+			<div class="row main sign-in">
 
-        <div id="sidebar-container" class="sidenav">
-          <a href="#" class="closebtn">&times;</a>
-          <a href="#">Nuevo</a>
-          <a href="#">Amigos</a>
-        </div>
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="post" action="submit">
 
-        <div id="map-frame">
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+								</div>
+							</div>
+						</div>
 
-        </div>
-      </div>
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+								</div>
+							</div>
+						</div>
 
-      <div id="tabs-container">
-        <div id="tabs-header">
-          <ul class="nav nav-tabs">
-            <li role="presentation" class="online-tab tab col-xs-4"><a href="#/online">Activos</a></li>
-            <li role="presentation" class="pending-tab tab col-xs-4"><a href="#/pending">Pendientes</a></li>
-            <li role="presentation" class="all-tab tab col-xs-4"><a href="#/all">Todos</a></li>
-          </ul>
-        </div>
+						<div class="form-group ">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+						</div>
+						<div class="login-register">
+				            <a href="login.html">Register</a>
+				         </div>
+					</form>
+				</div>
+			</div>
+		</div>
 
-        <div class="tabs-content">
-          <ul id="group-list">
-
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <script id="info-window-template" type="text/template">
-      <p class='info-window'>{{title}}</p>
-    </script>
-
-    <script id="group-template" type="text/template">
-
-        <div class="group-container">
-          <!-- If there are no active users it shows as offline -->
-          <div class="image-animation"></div>
-          <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
-          <div class="group-header">
-            <p class="group-title user-name">{{title}}</p>
-            {{#if activeUsers.[0]}}
-            <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
-            {{else}}
-              {{#if pendingUsers}}
-                <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
-              {{/if}}
-            {{/if}}
-
-
-          </div>
-        </div>
-
-    </script>
-
-    <script src="/socket.io/socket.io.js/"></script>
+    <!-- <script src="/socket.io/socket.io.js/"></script> -->
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
@@ -80,20 +58,35 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC89Vl3jrZksJ3JwQU4RSPflJ2TuW4yz5Y"></script>
-    <script src ="./js/utils/map-styles.js"></script>
-    <script src="./js/models/groupModel.js"></script>
-    <script src="./js/models/userModel.js"></script>
-    <script src="./js/collections/groups.js"></script>
-    <script src="./js/collections/users.js"></script>
-    <script src="./js/views/groups/groupView.js"></script>
-    <script src="./js/views/groups/mapsContent.js"></script>
-    <script src="./js/views/groups/tabsContent.js"></script>
-    <script src="./js/views/groups/groupsView.js"></script>
-    <script src="./js/routers/router.js"></script>
 
-    <script src="./js/app-groups.js"></script>
+    <script type="text/javascript">
 
 
-  </body>
+      $('.btn-primary').on('click', () => {
+        let $inputName = $('#email').val();
+        if ($inputName === 'Pablo') {
+          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d74');
+          window.location.href = 'main.html#/online';
+        } else if ($inputName === 'Wilson') {
+          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d77');
+          window.location.href = 'main.html#/online';
+        } else if ($inputName === 'Meg') {
+          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d76');
+          window.location.href = 'main.html#/online';
+        } else if ($inputName === 'Juan') {
+          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d75');
+          window.location.href = 'main.html#/online';
+        }
+      })
+
+      // Make the users available on login.
+        // <ul>
+        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d74');   window.location.href = '/#/online'">Pablo</li>
+        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d77');   window.location.href = '/#/online'">Wilson</li>
+        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d76');   window.location.href = '/#/online'">Meg</li>
+        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d75');   window.location.href = '/#/online'">Juan</li>
+        // </ul>
+
+    </script>
+	</body>
 </html>

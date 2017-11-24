@@ -61,7 +61,7 @@ $(function () {
     },
 
     backToMain: function () {
-      window.location.href = '/#/online';
+      window.location.href = 'main.html#/online';
     }
   })
 
