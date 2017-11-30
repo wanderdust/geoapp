@@ -1,4 +1,4 @@
-//Executes the User List view
+//Executes the Users view
 
 var app = app || {};
 

@@ -18,7 +18,7 @@ $(function () {
     render: function () {
 
     },
-    
+
     filterOne: function (model) {
       model.trigger('updateOne', model);
     },

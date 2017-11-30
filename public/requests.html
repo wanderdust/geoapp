@@ -19,7 +19,7 @@
             <p>Invitaciones</p>
           </div>
           <div id="group-sub-title">
-            <p>Pendientes (1)</p>
+            <p class="requests-length"></p>
           </div>
         </div>
       </nav>
@@ -28,57 +28,40 @@
 
         <div class="invitations-list">
           <ul>
-            <li>
 
-              <div class="group-container invitation-container">
-                <div class="image-animation"></div>
-                <div class="image">
-                  <img src="" class="img-responive img-fluid">
-                </div>
-                <div class="group-header request-header">
-                  <p class="group-title">Group Example</p>
-                  <p class="group-status invited-by">Te ha invitado Wilson</p>
-                </div>
-                <div class="accept-reject-container">
-                  <div class="accept-btn invitation-btn">
-                    <p>Aceptar</p>
-                  </div>
-                  <div class="reject-btn invitation-btn">
-                    <p>Rechazar</p>
-                  </div>
 
-                </div>
-              </div>
-            </li>
-
-            <li>
-
-              <div class="group-container invitation-container">
-                <div class="image-animation"></div>
-                <div class="image">
-                  <img src="" class="img-responive img-fluid">
-                </div>
-                <div class="group-header request-header">
-                  <p class="group-title">Group Foo</p>
-                  <p class="group-status invited-by">Te ha invitado Meg</p>
-                </div>
-                <div class="accept-reject-container">
-                  <div class="accept-btn invitation-btn">
-                    <p>Aceptar</p>
-                  </div>
-                  <div class="reject-btn invitation-btn">
-                    <p>Rechazar</p>
-                  </div>
-                </div>
-              </div>
-
-            </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- <script src="/socket.io/socket.io.js/"></script>
+    <script id="number-of-requests" type="text/template">
+      <p>Pendientes ({{requestsLength}})</p>
+    </script>
+
+    <script id="request-template" type="text/template">
+      <div class="group-container invitation-container">
+        <div class="image-animation"></div>
+        <div class="image">
+          <img src="{{image}}" class="img-responive img-fluid">
+        </div>
+        <div class="group-header request-header">
+          <p class="group-title">{{title}}</p>
+          <p class="group-status invited-by">Te ha invitado {{sentBy}}</p>
+        </div>
+        <div class="accept-reject-container">
+          <div class="accept-btn invitation-btn">
+            <p>Aceptar</p>
+          </div>
+          <div class="reject-btn invitation-btn">
+            <p>Rechazar</p>
+          </div>
+
+        </div>
+      </div>
+    </script>
+
+    <!-- <script src="/socket.io/socket.io.js/"></script> -->
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
@@ -86,8 +69,11 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-
-    <script src="./js/routers/router.js"></script>
-    <script src="./js/app-users.js"></script> -->
+    <script src="./js/models/requestModel.js"></script>
+    <script src="./js/collections/requests.js"></script>
+    <script src="./js/views/requests/requestView.js"></script>
+    <script src="./js/views/requests/requestList.js"></script>
+    <script src="./js/views/requests/requestsView.js"></script>
+    <script src="./js/app-requests.js"></script>
   </body>
 </html>
