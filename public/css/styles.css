@@ -439,3 +439,67 @@ input::-webkit-input-placeholder {
 	font-size: 11px;
 	text-align: center;
 }
+
+/* Requests */
+
+.tabs-content .group-container.invitation-container {
+  height: 120px;
+}
+
+.tabs-content .group-container.invitation-container:hover {
+  background-color: white;
+}
+
+.invitations-list ul li {
+  margin-top: 20px;
+}
+
+.tabs-content .group-container .group-header.request-header {
+  position: absolute;
+  left: 105px;
+  width: 65%;
+  height: 50%;
+}
+
+.group-container.invitation-container .accept-reject-container {
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  bottom: 0px;
+}
+
+.group-container.invitation-container .image-animation {
+  height: 50%
+}
+
+.group-container.invitation-container .image {
+  height: 40%
+}
+
+.accept-reject-container .invitation-btn {
+  position: absolute;
+  bottom: 0px;
+  width: 45%;
+  height: 80%;
+  border-bottom: solid 0.1px gray;
+  border-top: solid 0.1px gray;
+}
+
+.accept-reject-container .invitation-btn:hover {
+  background-color: #D8D8D8;
+}
+
+.accept-reject-container .accept-btn {
+  left: 5%;
+}
+
+.accept-reject-container .reject-btn {
+  right: 5%;
+}
+
+.accept-reject-container .invitation-btn p {
+  text-align: center;
+  line-height: 180%;
+  font-size: 20px;
+  margin: 0px;
+}
