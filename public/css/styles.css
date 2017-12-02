@@ -259,7 +259,7 @@ html, body {
 
 #header-nav {
   position: relative;
-  height: 8%;
+  height: 9%;
   width: 100%;
   background: linear-gradient(to right, #516062, #5c6e70)
 }
@@ -281,7 +281,7 @@ html, body {
 #header-nav #back-arrow-container a span {
   font-size: 35px;
   color: white;
-  line-height: 50px;
+  line-height: 55px;
   text-align: center;
 }
 
@@ -468,12 +468,9 @@ input::-webkit-input-placeholder {
   bottom: 0px;
 }
 
-.group-container.invitation-container .image-animation {
-  height: 50%
-}
-
 .group-container.invitation-container .image {
-  height: 40%
+  height: 45%;
+  border: solid gray;
 }
 
 .accept-reject-container .invitation-btn {

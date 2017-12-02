@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
 
       requestModel.title = groupModel.title;
       requestModel.sentBy = senderModel.name;
-      requestModel.groupImage = groupModel.groupImage;
+      groupModel.groupImage ? requestModel.groupImage = groupModel.groupImage : "";
 
       requestCollection.push(requestModel);
     }

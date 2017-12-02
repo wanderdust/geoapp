@@ -7,7 +7,7 @@ $(function () {
   app.RequestModel = Backbone.Model.extend({
     defaults: {
       title: "",
-      groupImage: "../../css/assets/user_placeholder.png",
+      groupImage: "../../css/assets/group_placeholder.png",
       sentBy: "",
       timeStamp: 0,
       _id: ''
