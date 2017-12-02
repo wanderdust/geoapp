@@ -14,16 +14,48 @@ $(function () {
     },
 
     initialize: function () {
+      _.bindAll(this, 'userCoords');
       this.currentMarkers = [];
+      this.socket = io();
 
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
       this.listenTo(app.groupCollection, 'change', this.filterAll);
+
+      this.userCoords();
+      setInterval(this.userCoords, 10000);
     },
 
     render: function () {
 
+    },
+
+    userCoords: async function () {
+      if (!navigator.geolocation)
+        return console.log('Geolocation not supported by your browser');
+
+      return await navigator.geolocation.getCurrentPosition((position) => {
+        let groups = app.groupCollection;
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+
+        for (let i = 0; app.groupCollection.length > i; i++) {
+          let model = app.groupCollection.models[i];
+          let groupLat = model.get('coords').lat;
+          let groupLng = model.get('coords').lng;
+          let groupLatLng = new google.maps.LatLng(groupLat, groupLng);
+          let userLatLng = new google.maps.LatLng(lat, lng)
+
+          let distance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng, groupLatLng);
+
+          if (distance <= 1715145) {
+            console.log('User online in group ' + model.get('title'));
+
+            this.socket.emit('userInRange', model);
+          }
+        }
+      })
     },
 
     filterAll: function (collection) {

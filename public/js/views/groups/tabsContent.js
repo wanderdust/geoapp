@@ -17,13 +17,9 @@ $(function () {
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
-      // this.listenTo(app.groupCollection, 'showAll', this.showAll);
-      // this.listenTo(app.groupCollection, 'showOnline', this.showOnline);
-      // this.listenTo(app.groupCollection, 'showPending', this.showPending);
-      //this.listenToOnce(app.groupCollection, 'update', this.showOnline);
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
-      this.listenTo(app.groupCollection, 'change', this.filterOne)
+      this.listenTo(app.groupCollection, 'change', this.filterOne);
 
       this.render();
     },
@@ -52,20 +48,6 @@ $(function () {
 
     filterAll: function () {
       app.groupCollection.each(this.filterOne, this);
-    },
-
-    showOnline: function () {
-      let filteredCollection = app.groupCollection.online();
-      this.appendAll(filteredCollection);
-    },
-
-    showPending: function () {
-      let filteredCollection = app.groupCollection.pending();
-      this.appendAll(filteredCollection);
-    },
-
-    showAll: function () {
-      this.appendAll(app.groupCollection);
     },
 
     swipeTabs: function (e) {
