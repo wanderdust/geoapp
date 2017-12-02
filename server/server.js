@@ -7,6 +7,7 @@ const socketIO = require('socket.io');
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
+const {Request} = require('./models/requests.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -16,8 +17,8 @@ let io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-
 io.on('connection', (socket) => {
+
   socket.on('createGroupCollection', async (userId, callback) => {
     let groupCollection = [];
     let groupCursors = await UserGroup.find(userId);
@@ -78,6 +79,25 @@ io.on('connection', (socket) => {
       userCollection.push(newModel);
     };
     callback(null, userCollection)
+  });
+
+  socket.on('createRequestCollection', async (userId, callBack) => {
+    let requestCollection = [];
+    let requestCursors = await Request.find({recipientId: userId});
+
+    for (let requestCursor of requestCursors) {
+      let requestModel = {};
+
+      let senderModel = await User.findById(requestCursor.senderId);
+      let groupModel = await Group.findById(requestCursor.groupId);
+
+      requestModel.title = groupModel.title;
+      requestModel.sentBy = senderModel.name;
+      requestModel.groupImage = groupModel.groupImage;
+
+      requestCollection.push(requestModel);
+    }
+    callBack(null, requestCollection);
   })
 })
 

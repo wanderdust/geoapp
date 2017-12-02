@@ -9,8 +9,6 @@ $(function () {
       title: "",
       groupImage: "../../css/assets/user_placeholder.png",
       sentBy: "",
-      senderId: "",
-      recipient: "",
       timeStamp: 0,
       _id: ''
     }

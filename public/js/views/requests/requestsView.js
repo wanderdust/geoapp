@@ -10,16 +10,23 @@ $(function () {
     template: Handlebars.compile($('#number-of-requests').html()),
 
     events: {
-
+      "click #back-arrow-container": "backToMain"
     },
 
     initialize: function () {
-
+      let userId = sessionStorage.getItem('userId');
+      this.socket = io();
       this.$numberOfRequests = $('.requests-length');
 
       this.listenTo(app.requestCollection, 'update', this.render);
-
       new app.RequestList();
+
+      this.socket.emit('createRequestCollection', userId, (err, collection) => {
+        if (err)
+          return console.log(err);
+
+        app.requestCollection.add(collection)
+      });
 
       this.render();
     },
@@ -28,6 +35,10 @@ $(function () {
       let requestsLength = app.requestCollection.length;
 
       this.$numberOfRequests.html(this.template({requestsLength}));
+    },
+
+    backToMain: function () {
+      window.location.href = 'main.html#/online';
     }
   })
 

@@ -10,40 +10,20 @@ $(function () {
     infoWindowTemplate: Handlebars.compile($('#info-window-template').html()),
 
     events: {
-      "click .openbtn": "openSidebar",
-      "click .closebtn": "closeSidebar",
-      "swipeleft #sidebar-container": "closeSidebar"
+
     },
 
     initialize: function () {
-      _.bindAll(this, 'render', 'closeSidebar');
-      this.$sideNav = $('#sidebar-container');
       this.currentMarkers = [];
-      //this.map = this.initMap();
 
-      // this.listenTo(app.groupCollection, 'showAll', this.showAllMarkers);
-      // this.listenTo(app.groupCollection, 'showOnline', this.showOnlineMarkers);
-      // this.listenTo(app.groupCollection, 'showPending', this.showPendingMarkers);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
-      this.listenTo(app.groupCollection, 'change', this.filterAll)
-      //this.listenTo(app.groupCollection, 'change', this.filterOne)
-      // this.listenToOnce(app.groupCollection, 'update', this.showOnlineMarkers);
-
-      this.render();
+      this.listenTo(app.groupCollection, 'change', this.filterAll);
     },
 
     render: function () {
-      this.$sideNav.hammer();
-    },
 
-    openSidebar: function () {
-      this.$sideNav.addClass('swipeIt');
-    },
-
-    closeSidebar: function () {
-      this.$sideNav.removeClass('swipeIt');
     },
 
     filterAll: function (collection) {

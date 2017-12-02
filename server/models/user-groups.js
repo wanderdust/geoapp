@@ -9,5 +9,4 @@ let UserGroupSchema = mongoose.Schema({
 
 let UserGroup = mongoose.model('UserGroup', UserGroupSchema);
 
-
 module.exports = {UserGroup};
