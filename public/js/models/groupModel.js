@@ -13,7 +13,7 @@ $(function () {
       },
       activeUsers: [],
       groupImage: '../../css/assets/group_placeholder.png',
-      pending: [],
+      pendingUsers: [],
       _id: ''
     }
   })

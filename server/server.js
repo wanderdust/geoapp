@@ -118,18 +118,17 @@ io.on('connection', (socket) => {
         }
       }, {new: true});
 
-      // Finds if he is pending in another group and updates.
+      // Finds if he is pending in another group and sets it to false.
       let findIfPendingAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
         $set: {
           pending: false
         }
       }, {new: true});
 
-      //Find the userGroup with the userId and groupId and update.
+      //Finds the userGroup with the userId and groupId and updates the data in database.
       let updateNewLocation = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
         $set: {
           online: true,
-          pending: false
         }
       }, {new: true});
 
@@ -139,7 +138,6 @@ io.on('connection', (socket) => {
       for (let doc of updatedDocuments) {
         if (doc === null)
           continue;
-
 
         let updatedProperties = {};
 

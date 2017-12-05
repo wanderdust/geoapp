@@ -25,7 +25,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdate);
 
       setTimeout(this.userCoords, 2500);
-      setInterval(this.userCoords, 6000);
+      setInterval(this.userCoords, 5000);
     },
 
     render: function () {
@@ -46,7 +46,7 @@ $(function () {
 
         let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
         console.log(distance)
-        if (distance <= 0.05) {
+        if (distance <= 0.5) {
           this.socket.emit('userInArea', {
             userId: sessionStorage.getItem('userId'),
             groupId: model.get('_id')
@@ -100,24 +100,27 @@ $(function () {
     },
 
     findAndUpdateOne: function (data) {
+
       // Updates the activeUsers and pending arrays in the models.
       let model = app.groupCollection.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
-      let pendingUsersArray = model.get('pending');
+      let pendingUsersArray = model.get('pendingUsers');
 
       let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
       let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
+      console.log(data.userOnline, pendingUserIndex, pendingUsersArray);
 
-      if (onlineUserIndex === -1) {
-        onlineUsersArray.push(data.userOnline);
-        model.set({activeUsers: onlineUsersArray});
-      } else if (pendingUserIndex !== -1) {
-        pendingUsersArray.splice(pendingUsersIndex, 1);
-        model.set({pending: pendingUsersArray});
-      } else {
+      if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
         model.set({activeUsers: onlineUsersArray});
+      } else if (pendingUserIndex !== -1) {
+        pendingUsersArray.splice(pendingUserIndex, 1);
+        model.set({pendingUsers: pendingUsersArray});
+      } else {
+        onlineUsersArray.push(data.userOnline);
+        model.set({activeUsers: onlineUsersArray});
       }
+
       app.groupCollection.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
