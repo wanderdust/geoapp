@@ -111,10 +111,17 @@ io.on('connection', (socket) => {
       if (checkLocation.online)
         return console.log('User location has already been updated')
 
-      // Finds if he is online in another Group and sets it to false. Returns modified document.
+      // Finds if he is online in another Group and sets it to false.
       let findIfOnlineAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
         $set: {
           online: false
+        }
+      }, {new: true});
+
+      // Finds if he is pending in another group and updates.
+      let findIfPendingAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
+        $set: {
+          pending: false
         }
       }, {new: true});
 
@@ -126,7 +133,7 @@ io.on('connection', (socket) => {
         }
       }, {new: true});
 
-      updatedDocuments.push(findIfOnlineAndUpdate, updateNewLocation);
+      updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
 
       // Return all the models that have been updated.
       for (let doc of updatedDocuments) {

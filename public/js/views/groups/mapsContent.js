@@ -24,7 +24,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'change', this.filterAll);
       this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdate);
 
-      setTimeout(this.userCoords, 4500);
+      setTimeout(this.userCoords, 2500);
       setInterval(this.userCoords, 6000);
     },
 
@@ -46,7 +46,7 @@ $(function () {
 
         let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
         console.log(distance)
-        if (distance <= 0.30) {
+        if (distance <= 0.05) {
           this.socket.emit('userInArea', {
             userId: sessionStorage.getItem('userId'),
             groupId: model.get('_id')
@@ -54,7 +54,7 @@ $(function () {
             if (err)
               return console.log(err);
 
-            app.groupCollection.trigger('modelUpdate', data)
+            app.groupCollection.trigger('modelUpdate', data);
           })
         }
       }
@@ -100,21 +100,30 @@ $(function () {
     },
 
     findAndUpdateOne: function (data) {
-      // Updates the activeUsers array in the models.
+      // Updates the activeUsers and pending arrays in the models.
       let model = app.groupCollection.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
+      let pendingUsersArray = model.get('pending');
 
-      let index = onlineUsersArray.indexOf(data.userOnline);
+      let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
+      let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
 
-      if (index === -1) {
+      if (onlineUserIndex === -1) {
         onlineUsersArray.push(data.userOnline);
         model.set({activeUsers: onlineUsersArray});
+      } else if (pendingUserIndex !== -1) {
+        pendingUsersArray.splice(pendingUsersIndex, 1);
+        model.set({pending: pendingUsersArray});
       } else {
-        onlineUsersArray.splice(index, 1);
+        onlineUsersArray.splice(onlineUserIndex, 1);
         model.set({activeUsers: onlineUsersArray});
       }
       app.groupCollection.set({model}, {add: false, remove: false, merge: true});
+
+      // Renders the changed model and the updates markers.
       model.trigger('render');
+      this.appendAll(app.groupCollection);
+      this.filterAll(app.groupCollection);
     },
 
     findAndUpdate: function (elements) {
