@@ -15,6 +15,7 @@ $(function () {
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'render', this.render);
       this.listenTo(this.model, 'visible', this.toggleVisible);
     },
 
