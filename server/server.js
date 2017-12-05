@@ -21,84 +21,96 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
 
   socket.on('createGroupCollection', async (userId, callback) => {
-    let groupCollection = [];
-    let groupCursors = await UserGroup.find(userId);
+    try {
+      let groupCollection = [];
+      let groupCursors = await UserGroup.find(userId);
 
-    for (let cursor of groupCursors) {
-      let newModel = {};
-      let onlineUsersArray = [];
-      let pendingUsersArray = [];
+      for (let cursor of groupCursors) {
+        let newModel = {};
+        let onlineUsersArray = [];
+        let pendingUsersArray = [];
 
-      let groupModel = await Group.findById(cursor.groupId);
-      let onlineUsersInGroup = await UserGroup.find({
-        groupId: groupModel._id,
-        online: true
-      });
+        let groupModel = await Group.findById(cursor.groupId);
+        let onlineUsersInGroup = await UserGroup.find({
+          groupId: groupModel._id,
+          online: true
+        });
 
-      for (let onlineUser of onlineUsersInGroup) {
-        let userName = await User.findById(onlineUser.userId);
-        onlineUsersArray.push(userName.name)
-      };
-      let pendingUsersInGroup = await UserGroup.find({
-        groupId: groupModel._id,
-        pending: true
-      });
+        for (let onlineUser of onlineUsersInGroup) {
+          let userName = await User.findById(onlineUser.userId);
+          onlineUsersArray.push(userName.name)
+        };
+        let pendingUsersInGroup = await UserGroup.find({
+          groupId: groupModel._id,
+          pending: true
+        });
 
-      if (!onlineUsersArray.length) {
-        for (let pendingUser of pendingUsersInGroup) {
-          let userName = await User.findById(pendingUser.userId);
-          pendingUsersArray.push(userName.name)
-        }
-      };
-      newModel.title = groupModel.title;
-      newModel.coords = groupModel.coords;
-      newModel.activeUsers = onlineUsersArray;
-      newModel.pendingUsers =  pendingUsersArray;
-      newModel._id = groupModel._id;
-      groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
+        if (!onlineUsersArray.length) {
+          for (let pendingUser of pendingUsersInGroup) {
+            let userName = await User.findById(pendingUser.userId);
+            pendingUsersArray.push(userName.name)
+          }
+        };
+        newModel.title = groupModel.title;
+        newModel.coords = groupModel.coords;
+        newModel.activeUsers = onlineUsersArray;
+        newModel.pendingUsers =  pendingUsersArray;
+        newModel._id = groupModel._id;
+        groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
 
-      groupCollection.push(newModel)
+        groupCollection.push(newModel);
+      }
+      callback(null, groupCollection);
+    } catch (e) {
+      callback(e);
     }
-    callback(null, groupCollection);
   });
 
   socket.on('createUsersCollection', async (groupId, callback) => {
-    let userCollection = [];
-    let userCursors = await UserGroup.find(groupId);
+    try {
+      let userCollection = [];
+      let userCursors = await UserGroup.find(groupId);
 
-    for (let userCursor of userCursors) {
-      let newModel = {};
+      for (let userCursor of userCursors) {
+        let newModel = {};
 
-      let userModel = await User.findById(userCursor.userId);
+        let userModel = await User.findById(userCursor.userId);
 
-      newModel.name = userModel.name;
-      newModel.isOnline = userCursor.online;
-      newModel.isPending = userCursor.pending;
-      newModel._id = userModel._id;
-      userModel.userImage ? newModel.userImage = userModel.userImage : "";
+        newModel.name = userModel.name;
+        newModel.isOnline = userCursor.online;
+        newModel.isPending = userCursor.pending;
+        newModel._id = userModel._id;
+        userModel.userImage ? newModel.userImage = userModel.userImage : "";
 
-      userCollection.push(newModel);
-    };
-    callback(null, userCollection)
+        userCollection.push(newModel);
+      };
+      callback(null, userCollection)
+    } catch (e) {
+      callback(e);
+    }
   });
 
   socket.on('createRequestCollection', async (userId, callBack) => {
-    let requestCollection = [];
-    let requestCursors = await Request.find({recipientId: userId});
+    try {
+      let requestCollection = [];
+      let requestCursors = await Request.find({recipientId: userId});
 
-    for (let requestCursor of requestCursors) {
-      let requestModel = {};
+      for (let requestCursor of requestCursors) {
+        let requestModel = {};
 
-      let senderModel = await User.findById(requestCursor.senderId);
-      let groupModel = await Group.findById(requestCursor.groupId);
+        let senderModel = await User.findById(requestCursor.senderId);
+        let groupModel = await Group.findById(requestCursor.groupId);
 
-      requestModel.title = groupModel.title;
-      requestModel.sentBy = senderModel.name;
-      groupModel.groupImage ? requestModel.groupImage = groupModel.groupImage : "";
+        requestModel.title = groupModel.title;
+        requestModel.sentBy = senderModel.name;
+        groupModel.groupImage ? requestModel.groupImage = groupModel.groupImage : "";
 
-      requestCollection.push(requestModel);
+        requestCollection.push(requestModel);
+      }
+      callBack(null, requestCollection);
+    } catch (e) {
+      callback(e);
     }
-    callBack(null, requestCollection);
   });
 
   socket.on('userInArea', async (data, callback) => {

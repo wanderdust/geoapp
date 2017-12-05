@@ -25,7 +25,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdate);
 
       setTimeout(this.userCoords, 2500);
-      setInterval(this.userCoords, 5000);
+      // setInterval(this.userCoords, 5000);
     },
 
     render: function () {
@@ -34,59 +34,65 @@ $(function () {
 
     userCoords: async function () {
 
-      // Provisional fixed coords for testing.
-      let groups = app.groupCollection;
-      let userLat = randomCoords().lat;
-      let userLng = randomCoords().lng;
-
-      for (let i = 0; groups.length > i; i++) {
-        let model = app.groupCollection.models[i];
-        let groupLat = model.get('coords').lat;
-        let groupLng = model.get('coords').lng;
-
-        let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-        console.log(distance)
-        if (distance <= 0.5) {
-          this.socket.emit('userInArea', {
-            userId: sessionStorage.getItem('userId'),
-            groupId: model.get('_id')
-          }, (err, data) => {
-            if (err)
-              return console.log(err);
-
-            app.groupCollection.trigger('modelUpdate', data);
-          })
-        }
-      }
-
-      // // Geolocation is broken??
-      // if (!navigator.geolocation)
-      //   return console.log('Geolocation not supported by your browser');
-
-      // await navigator.geolocation.getCurrentPosition((position) => {
-      //   let groups = app.groupCollection;
-      //   let userLat = position.coords.latitude;
-      //   let userLng = position.coords.longitude;
+      // // Provisional fixed coords for testing.
+      // let groups = app.groupCollection;
+      // let userLat = randomCoords().lat;
+      // let userLng = randomCoords().lng;
       //
-      //   for (let i = 0;groups.length > i; i++) {
-      //     let model = app.groupCollection.models[i];
-      //     let groupLat = model.get('coords').lat;
-      //     let groupLng = model.get('coords').lng;
+      // for (let i = 0; groups.length > i; i++) {
+      //   let model = app.groupCollection.models[i];
+      //   let groupLat = model.get('coords').lat;
+      //   let groupLng = model.get('coords').lng;
       //
-      //     let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-      //     console.log(distance);
-      //     if (distance <= 20) {
-      //       this.socket.emit('userInArea', {
-      //         userId: sessionStorage.getItem('userId'),
-      //         groupId: model.get('_id')
-      //       }, (err, collection) => {
+      //   let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
+      //   console.log(distance)
+      //   if (distance <= 0.5) {
+      //     this.socket.emit('userInArea', {
+      //       userId: sessionStorage.getItem('userId'),
+      //       groupId: model.get('_id')
+      //     }, (err, data) => {
+      //       if (err)
+      //         return console.log(err);
       //
-      //       })
-      //     }
+      //       app.groupCollection.trigger('modelUpdate', data);
+      //     })
       //   }
-      // }, function (err) {
-      //   console.log(err.message);
-      // })
+      // }
+
+
+      try {
+        if (!navigator.geolocation)
+          return console.log('Geolocation not supported by your browser');
+
+        // await navigator.geolocation.watchPosition
+        await navigator.geolocation.getCurrentPosition((position) => {
+        let groups = app.groupCollection;
+        let userLat = position.coords.latitude;
+        let userLng = position.coords.longitude;
+
+        for (let i = 0; groups.length > i; i++) {
+          let model = app.groupCollection.models[i];
+          let groupLat = model.get('coords').lat;
+          let groupLng = model.get('coords').lng;
+
+          let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
+          console.log(distance)
+          if (distance <= 0.5) {
+            this.socket.emit('userInArea', {
+              userId: sessionStorage.getItem('userId'),
+              groupId: model.get('_id')
+            }, (err, data) => {
+              if (err)
+                return console.log(err);
+
+              app.groupCollection.trigger('modelUpdate', data);
+            })
+          }
+        }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     getDistanceFromLatLonInKm: function (lat1,lon1,lat2,lon2) {
