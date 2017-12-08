@@ -1,6 +1,7 @@
 // View for the map container.
 
 var app = app || {};
+var socket  = socket || io();
 
 $(function () {
 
@@ -16,16 +17,20 @@ $(function () {
     initialize: function () {
       _.bindAll(this, 'userCoords');
       this.currentMarkers = [];
-      this.socket = io();
+      this.socket = socket;
 
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
       this.listenTo(app.groupCollection, 'change', this.filterAll);
-      this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdate);
+      this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdateOne);
+      // this.listenToOnce(app.groupCollection, 'update', this.userCoords);
 
-      setTimeout(this.userCoords, 2500);
-      // setInterval(this.userCoords, 5000);
+      this.socket.on('newGroupUpdates', (data) => {
+        app.groupCollection.trigger('modelUpdate', data);
+      })
+
+      setInterval(this.userCoords, 4000);
     },
 
     render: function () {
@@ -34,65 +39,60 @@ $(function () {
 
     userCoords: async function () {
 
-      // // Provisional fixed coords for testing.
-      // let groups = app.groupCollection;
-      // let userLat = randomCoords().lat;
-      // let userLng = randomCoords().lng;
-      //
-      // for (let i = 0; groups.length > i; i++) {
-      //   let model = app.groupCollection.models[i];
-      //   let groupLat = model.get('coords').lat;
-      //   let groupLng = model.get('coords').lng;
-      //
-      //   let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-      //   console.log(distance)
-      //   if (distance <= 0.5) {
-      //     this.socket.emit('userInArea', {
-      //       userId: sessionStorage.getItem('userId'),
-      //       groupId: model.get('_id')
-      //     }, (err, data) => {
-      //       if (err)
-      //         return console.log(err);
-      //
-      //       app.groupCollection.trigger('modelUpdate', data);
-      //     })
-      //   }
-      // }
+      // Provisional fixed coords for testing.
+      let groups = app.groupCollection;
+      let userLat = randomCoords().lat;
+      let userLng = randomCoords().lng;
 
+      for (let i = 0; groups.length > i; i++) {
+        let model = app.groupCollection.models[i];
+        let groupLat = model.get('coords').lat;
+        let groupLng = model.get('coords').lng;
 
-      try {
-        if (!navigator.geolocation)
-          return console.log('Geolocation not supported by your browser');
-
-        // await navigator.geolocation.watchPosition
-        await navigator.geolocation.getCurrentPosition((position) => {
-        let groups = app.groupCollection;
-        let userLat = position.coords.latitude;
-        let userLng = position.coords.longitude;
-
-        for (let i = 0; groups.length > i; i++) {
-          let model = app.groupCollection.models[i];
-          let groupLat = model.get('coords').lat;
-          let groupLng = model.get('coords').lng;
-
-          let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-          console.log(distance)
-          if (distance <= 0.5) {
-            this.socket.emit('userInArea', {
-              userId: sessionStorage.getItem('userId'),
-              groupId: model.get('_id')
-            }, (err, data) => {
-              if (err)
-                return console.log(err);
-
-              app.groupCollection.trigger('modelUpdate', data);
-            })
-          }
+        let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
+        console.log(distance)
+        if (distance <= 0.5) {
+          this.socket.emit('userInArea', {
+            userId: sessionStorage.getItem('userId'),
+            groupId: model.get('_id')
+          })
         }
-        })
-      } catch (e) {
-        console.log(e)
       }
+
+
+      // try {
+      //   if (!navigator.geolocation)
+      //     return console.log('Geolocation not supported by your browser');
+      //
+      //   // await navigator.geolocation.getCurrentPosition
+      //   await navigator.geolocation.watchPosition((position) => {
+      //   let groups = app.groupCollection;
+      //   let userLat = position.coords.latitude;
+      //   let userLng = position.coords.longitude;
+      //
+      //   for (let i = 0; groups.length > i; i++) {
+      //     let model = app.groupCollection.models[i];
+      //     let groupLat = model.get('coords').lat;
+      //     let groupLng = model.get('coords').lng;
+      //
+      //     let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
+      //     console.log(distance)
+      //     if (distance <= 0.05) {
+      //       this.socket.emit('userInArea', {
+      //         userId: sessionStorage.getItem('userId'),
+      //         groupId: model.get('_id')
+      //       }, (err, data) => {
+      //         if (err)
+      //           return console.log(err);
+      //
+      //         app.groupCollection.trigger('modelUpdate', data);
+      //       })
+      //     }
+      //   }
+      //   })
+      // } catch (e) {
+      //   console.log(e)
+      // }
     },
 
     getDistanceFromLatLonInKm: function (lat1,lon1,lat2,lon2) {
@@ -106,15 +106,16 @@ $(function () {
     },
 
     findAndUpdateOne: function (data) {
-
       // Updates the activeUsers and pending arrays in the models.
+      // First checks if user is online and deletes him from array.
+      // Second checks if user is pending and deletes him from array.
+      // Third if the first ones don't apply it means he is online, and adds him to array.
       let model = app.groupCollection.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
       let pendingUsersArray = model.get('pendingUsers');
 
       let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
       let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
-      console.log(data.userOnline, pendingUserIndex, pendingUsersArray);
 
       if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
@@ -133,10 +134,6 @@ $(function () {
       model.trigger('render');
       this.appendAll(app.groupCollection);
       this.filterAll(app.groupCollection);
-    },
-
-    findAndUpdate: function (elements) {
-      elements.forEach(this.findAndUpdateOne, this)
     },
 
     filterAll: function (collection) {

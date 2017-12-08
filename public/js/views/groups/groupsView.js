@@ -1,6 +1,8 @@
 // View of the entire groups window.
 
 var app = app || {};
+var socket  = socket || io();
+
 
 $(function () {
   app.GroupsView = Backbone.View.extend({
@@ -15,7 +17,7 @@ $(function () {
 
     initialize: function () {
       _.bindAll(this, 'render', 'closeSidebar');
-      this.socket = io();
+      this.socket = socket;
       this.$sideNav = $('#sidebar-container');
 
       this.render();

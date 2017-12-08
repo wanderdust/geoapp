@@ -16,9 +16,12 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
+let openSockets = [];
+
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
+  console.log('hi')
 
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
@@ -59,6 +62,12 @@ io.on('connection', (socket) => {
         groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
 
         groupCollection.push(newModel);
+
+        openSockets.push({
+          groupId: groupModel._id,
+          socketId: socket.id
+        });
+
       }
       callback(null, groupCollection);
     } catch (e) {
@@ -113,10 +122,9 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('userInArea', async (data, callback) => {
+  socket.on('userInArea', async (data) => {
     try {
       let updatedDocuments = [];
-      let updatedModels = [];
       // Check if he has been updated already.
       let checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
 
@@ -158,11 +166,16 @@ io.on('connection', (socket) => {
         updatedProperties._id = doc.groupId;
         updatedProperties.userOnline = userName.name;
 
-        updatedModels.push(updatedProperties)
+        let socketsToUpdate = openSockets.filter((data) => {
+          return data.groupId == doc.groupId;
+        })
+
+        socketsToUpdate.forEach((data) => {
+          io.to(data.socketId).emit('newGroupUpdates', updatedProperties);
+        })
       }
-      callback(null, updatedModels);
     } catch (e) {
-      return callback(e);
+      console.log(e)
     }
   })
 })
