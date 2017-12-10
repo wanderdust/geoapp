@@ -9,6 +9,8 @@ const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
+const {OpenSockets} = require('./utils/openSockets.js');
+const {createGroupModel} = require('./utils/createGroupModel.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -16,61 +18,28 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-let openSockets = [];
+let openSockets = new OpenSockets();
 
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-  console.log('hi')
-
+console.log(openSockets.openSockets);
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
       let groupCollection = [];
       let groupCursors = await UserGroup.find(userId);
 
       for (let cursor of groupCursors) {
-        let newModel = {};
-        let onlineUsersArray = [];
-        let pendingUsersArray = [];
+        // Returns an object with the model properties.
+        let newModel = await createGroupModel(cursor);
 
-        let groupModel = await Group.findById(cursor.groupId);
-        let onlineUsersInGroup = await UserGroup.find({
-          groupId: groupModel._id,
-          online: true
-        });
-
-        for (let onlineUser of onlineUsersInGroup) {
-          let userName = await User.findById(onlineUser.userId);
-          onlineUsersArray.push(userName.name)
-        };
-        let pendingUsersInGroup = await UserGroup.find({
-          groupId: groupModel._id,
-          pending: true
-        });
-
-        if (!onlineUsersArray.length) {
-          for (let pendingUser of pendingUsersInGroup) {
-            let userName = await User.findById(pendingUser.userId);
-            pendingUsersArray.push(userName.name)
-          }
-        };
-        newModel.title = groupModel.title;
-        newModel.coords = groupModel.coords;
-        newModel.activeUsers = onlineUsersArray;
-        newModel.pendingUsers =  pendingUsersArray;
-        newModel._id = groupModel._id;
-        groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
-
+        // Adds a new element mapping groupId with socketId.
+        openSockets.addSockets(newModel._id, socket.id);
         groupCollection.push(newModel);
-
-        openSockets.push({
-          groupId: groupModel._id,
-          socketId: socket.id
-        });
-
       }
       callback(null, groupCollection);
     } catch (e) {
+      console.log(e)
       callback(e);
     }
   });
@@ -155,6 +124,7 @@ io.on('connection', (socket) => {
       updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
 
       // Return all the models that have been updated.
+      // Sends data to respective sockets.
       for (let doc of updatedDocuments) {
         if (doc === null)
           continue;
@@ -166,17 +136,21 @@ io.on('connection', (socket) => {
         updatedProperties._id = doc.groupId;
         updatedProperties.userOnline = userName.name;
 
-        let socketsToUpdate = openSockets.filter((data) => {
-          return data.groupId == doc.groupId;
-        })
+        // Finds the sockets in the  array that contain an updated group.
+        let socketsToUpdate = openSockets.findSockets(doc);
 
-        socketsToUpdate.forEach((data) => {
-          io.to(data.socketId).emit('newGroupUpdates', updatedProperties);
+        socketsToUpdate.forEach((e) => {
+          io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
         })
       }
     } catch (e) {
       console.log(e)
     }
+  });
+
+  socket.on('disconnect', () => {
+    // Removes from array the groups from the disconnected socket.
+    openSockets.removeSockets(socket);
   })
 })
 

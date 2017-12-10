@@ -24,7 +24,7 @@ $(function () {
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
       this.listenTo(app.groupCollection, 'change', this.filterAll);
       this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdateOne);
-      // this.listenToOnce(app.groupCollection, 'update', this.userCoords);
+      this.listenToOnce(app.groupCollection, 'update', this.userCoords);
 
       this.socket.on('newGroupUpdates', (data) => {
         app.groupCollection.trigger('modelUpdate', data);
@@ -51,11 +51,12 @@ $(function () {
 
         let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
         console.log(distance)
-        if (distance <= 0.5) {
+        if (distance <= 1.05) {
           this.socket.emit('userInArea', {
             userId: sessionStorage.getItem('userId'),
             groupId: model.get('_id')
-          })
+          });
+          break;
         }
       }
 
