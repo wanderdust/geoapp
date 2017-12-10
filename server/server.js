@@ -11,6 +11,8 @@ const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
 const {OpenSockets} = require('./utils/openSockets.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
+const {createUserModel} = require('./utils/createUserModel.js');
+const {createRequestModel} = require('./utils/createRequestModel.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -23,23 +25,23 @@ let openSockets = new OpenSockets();
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-console.log(openSockets.openSockets);
+
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
       let groupCollection = [];
       let groupCursors = await UserGroup.find(userId);
 
       for (let cursor of groupCursors) {
-        // Returns an object with the model properties.
+        // Returns an object with the group model properties.
         let newModel = await createGroupModel(cursor);
 
         // Adds a new element mapping groupId with socketId.
         openSockets.addSockets(newModel._id, socket.id);
         groupCollection.push(newModel);
-      }
+      };
+      // Sends an array with all the group Models.
       callback(null, groupCollection);
     } catch (e) {
-      console.log(e)
       callback(e);
     }
   });
@@ -50,18 +52,12 @@ console.log(openSockets.openSockets);
       let userCursors = await UserGroup.find(groupId);
 
       for (let userCursor of userCursors) {
-        let newModel = {};
-
-        let userModel = await User.findById(userCursor.userId);
-
-        newModel.name = userModel.name;
-        newModel.isOnline = userCursor.online;
-        newModel.isPending = userCursor.pending;
-        newModel._id = userModel._id;
-        userModel.userImage ? newModel.userImage = userModel.userImage : "";
+        // Returns an object with the user model properties.
+        let newModel = await createUserModel(userCursor);
 
         userCollection.push(newModel);
       };
+      // Sends an array with all the user Models.
       callback(null, userCollection)
     } catch (e) {
       callback(e);
@@ -74,17 +70,12 @@ console.log(openSockets.openSockets);
       let requestCursors = await Request.find({recipientId: userId});
 
       for (let requestCursor of requestCursors) {
-        let requestModel = {};
-
-        let senderModel = await User.findById(requestCursor.senderId);
-        let groupModel = await Group.findById(requestCursor.groupId);
-
-        requestModel.title = groupModel.title;
-        requestModel.sentBy = senderModel.name;
-        groupModel.groupImage ? requestModel.groupImage = groupModel.groupImage : "";
+        // Returns an object with the request model properties.
+        let requestModel = await createRequestModel(requestCursor);
 
         requestCollection.push(requestModel);
       }
+      // Sends an array with the request Models.
       callBack(null, requestCollection);
     } catch (e) {
       callback(e);
