@@ -113,14 +113,13 @@ io.on('connection', (socket) => {
       }, {new: true});
 
       updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
-
       // Return all the models that have been updated.
       // Sends data to respective sockets.
       for (let doc of updatedDocuments) {
+        let updatedProperties = {};
+
         if (doc === null)
           continue;
-
-        let updatedProperties = {};
 
         let userName = await User.findOne({_id: ObjectID(doc.userId)});
 

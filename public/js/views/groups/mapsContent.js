@@ -51,7 +51,7 @@ $(function () {
 
         let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
         console.log(distance)
-        if (distance <= 1.05) {
+        if (distance <= 0.05) {
           this.socket.emit('userInArea', {
             userId: sessionStorage.getItem('userId'),
             groupId: model.get('_id')
@@ -117,6 +117,7 @@ $(function () {
 
       let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
       let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
+      console.log(pendingUserIndex, '****')
 
       if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
@@ -128,6 +129,7 @@ $(function () {
         onlineUsersArray.push(data.userOnline);
         model.set({activeUsers: onlineUsersArray});
       }
+      console.log('hey')
 
       app.groupCollection.set({model}, {add: false, remove: false, merge: true});
 

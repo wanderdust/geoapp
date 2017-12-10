@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app-container">
+      <nav id="header-nav">
+        <div id="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container">
+          <div id="group-title-group">
+            <p>¿A cuál vas a ir?</p>
+          </div>
+          <div id="group-sub-title">
+            <p class="groups-length"></p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="tabs-content status-users-content">
+
+        <div class="groups-list">
+          <ul>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script id="number-of-groups" type="text/template">
+      <p>Grupos ({{groupsLength}})</p>
+    </script>
+
+    <script id="group-template" type="text/template">
+
+        <div class="group-container">
+          <!-- If there are no active users it shows as offline -->
+          <div class="image-animation"></div>
+          <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
+          <div class="group-header">
+            <p class="group-title user-name">{{title}}</p>
+            {{#if activeUsers.[0]}}
+            <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
+            {{else}}
+              {{#if pendingUsers}}
+                <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
+    </script>
+
+    <script src="/socket.io/socket.io.js/"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+
+    <script src="./js/models/groupModel.js"></script>
+    <script src="./js/collections/groups.js"></script>
+    <script src="./js/views/pending/pendingView.js"></script>
+    <script src="./js/views/pending/pendingList.js"></script>
+    <script src="./js/views/pending/pendingsView.js"></script>
+    <script src="./js/app-pending.js"></script>
+  </body>
+</html>
