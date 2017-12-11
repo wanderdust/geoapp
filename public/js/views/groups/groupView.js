@@ -21,11 +21,13 @@ $(function () {
 
     render: function () {
       let isOnline = (this.model.get('activeUsers').length > 0 ? true : false);
+      let isPending = (this.model.get('activeUsers').length === 0 && this.model.get('pendingUsers').length > 0 ? true : false);
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
       this.$el.toggleClass('online', isOnline);
+      this.$el.toggleClass('pending', isPending);
       this.toggleVisible();
       return this;
     },

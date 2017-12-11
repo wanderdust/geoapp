@@ -79,7 +79,7 @@ html, body {
   height: 60px;
 }
 
-.tabs-content .group-container:hover {
+.tabs-content .group-container.main:hover {
   background-color: #D8D8D8;
 }
 
@@ -131,6 +131,12 @@ html, body {
   100%   {background-color:#64db64;}
 }
 
+@-webkit-keyframes gradient-pending {
+  0%   {background-color:#6db3e9;}
+  50%   {background-color:#ffffff;}
+  100%   {background-color:#6db3e9;}
+}
+
 .tabs-content .group-container .image-animation {
   position: absolute;
   top: 0%;
@@ -141,7 +147,7 @@ html, body {
   overflow: hidden;
   border-radius: 50px;
   z-index: 0;
-  background-color: gray;
+  background-color: #cccccc;
 }
 
 .tabs-content .online .group-container .image-animation{
@@ -151,18 +157,28 @@ html, body {
   -o-animationn: gradient 2s 3;
 }
 
+.tabs-content .pending .group-container .image-animation{
+  background-color: #6db3e9;
+  -webkit-animation: gradient-pending 2s 2;
+}
+
 .tabs-content .group-container .group-header {
   position: absolute;
   left: 105px;
   width: 65%;
   height: 100%;
+
+
 }
 
 .tabs-content .group-header .group-title {
   position: absolute;
-  width: 100%
+  width: 100%;
   top: 5px;
-  font-size: 20px
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tabs-content .group-header .group-status {
@@ -170,7 +186,10 @@ html, body {
   width: 100%;
   bottom: 5px;
   margin: 0px;
-  font-size: 15px
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -252,6 +271,8 @@ html, body {
 
 #sidebar-container.swipeIt {
   width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
@@ -298,7 +319,7 @@ html, body {
   position: absolute;
   top: 0;
   height: 60%;
-  width: 100%;
+  width: 90%;
 }
 
 #header-nav #group-title-container #group-title-group p {
@@ -310,7 +331,7 @@ html, body {
   position: absolute;
   bottom: 0;
   height:40%;
-  width: 100%;
+  width: 90%;
 }
 
 #header-nav #group-title-container #group-sub-title p {
@@ -470,7 +491,7 @@ input::-webkit-input-placeholder {
 
 .group-container.invitation-container .image {
   height: 45%;
-  border: solid gray;
+  border: solid #bfbfbf;
 }
 
 .accept-reject-container .invitation-btn {
@@ -504,7 +525,7 @@ input::-webkit-input-placeholder {
 /* ******PENDING ****** */
 
 .groups-list .group-container .group-header.pending {
-  width: 50%;
+  width: 45%;
 }
 
 .ok-tick {
@@ -534,5 +555,5 @@ input::-webkit-input-placeholder {
 }
 
 .selected .group-container .ok-tick {
-    background-color: #5edb5e;
+    background-color: #88e488;
 }

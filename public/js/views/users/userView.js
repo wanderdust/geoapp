@@ -20,11 +20,13 @@ $(function () {
 
     render: function () {
       let isOnline = (this.model.get('isOnline'));
+      let isPending = (this.model.get('isPending'));
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
       this.$el.toggleClass('online', isOnline);
+      this.$el.toggleClass('pending', isPending);
       return this;
     },
     // The view gets removed and re-appended to be on the correct column.

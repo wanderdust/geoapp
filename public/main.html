@@ -22,7 +22,7 @@
           <a href="#" class="closebtn">&times;</a>
           <a class="new-group-btn" href="#">Nuevo</a>
           <a class="requests-btn" href="#">Peticiones</a>
-          <a class="pending-btn" href="#">Asignar Pendiente</a>
+          <a class="pending-btn" href="#">Añadir Pendiente</a>
         </div>
 
         <div id="map-frame">
@@ -53,7 +53,7 @@
 
     <script id="group-template" type="text/template">
 
-        <div class="group-container">
+        <div class="group-container main">
           <!-- If there are no active users it shows as offline -->
           <div class="image-animation"></div>
           <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
@@ -63,7 +63,7 @@
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
             {{else}}
               {{#if pendingUsers}}
-                <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
+                <p class="group-status">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>
               {{/if}}
             {{/if}}
 

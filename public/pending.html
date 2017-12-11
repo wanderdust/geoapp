@@ -51,7 +51,7 @@
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
             {{else}}
               {{#if pendingUsers}}
-                <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
+                <p class="group-status">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>
               {{/if}}
             {{/if}}
           </div>
