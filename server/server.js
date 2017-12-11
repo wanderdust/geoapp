@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 
       for (let cursor of groupCursors) {
         // Returns an object with the group model properties.
-        let newModel = await createGroupModel(cursor);
+        let newModel = await createGroupModel(cursor, userId);
 
         // Adds a new element mapping groupId with socketId.
         openSockets.addSockets(newModel._id, socket.id);
@@ -46,14 +46,14 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('createUsersCollection', async (groupId, callback) => {
+  socket.on('createUsersCollection', async (data, callback) => {
     try {
       let userCollection = [];
-      let userCursors = await UserGroup.find(groupId);
+      let userCursors = await UserGroup.find({groupId: data.groupId});
 
       for (let userCursor of userCursors) {
         // Returns an object with the user model properties.
-        let newModel = await createUserModel(userCursor);
+        let newModel = await createUserModel(userCursor, data.userId);
 
         userCollection.push(newModel);
       };
@@ -152,21 +152,32 @@ io.on('connection', (socket) => {
 
   socket.on('updatePending', async (data, callback) => {
     try {
+      // Checks if user is already online in that group.
+      let userIsOnline = await UserGroup.findOne({
+        userId: data.userId,
+        groupId: data.groupId,
+        online: true
+      });
+      if (userIsOnline !== null)
+        callback('User is already online in that group');
+
+      // Finds if he is pending in another group and sets to false.
       await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
         $set: {
           pending: false
         }
       });
+      // Finds new group and sets pending to true.
       await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
         $set: {
           pending: true
         }
       });
-      
+
       callback(null, true)
     } catch (e) {
       console.log(e)
-      callback(e)
+      callback('Could not set model to Pending')
     }
   })
 

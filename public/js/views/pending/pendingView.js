@@ -43,10 +43,9 @@ $(function () {
 
       this.socket.emit('updatePending', {groupId, userId}, (err, res) => {
         if (err)
-          return console.log('Could not set model to Pending');
+          return console.log(err);
 
         that.addPending();
-        that.render();
       });
     }
   })

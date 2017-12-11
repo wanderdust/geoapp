@@ -26,7 +26,8 @@ $(function () {
 
       new app.UserList();
       this.socket.emit('createUsersCollection', {
-        groupId: sessionStorage.getItem('currentGroupId')
+        groupId: sessionStorage.getItem('currentGroupId'),
+        userId: sessionStorage.getItem('userId')
       }, (err, collection) => {
         if (err)
           return console.log(err)

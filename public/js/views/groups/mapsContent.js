@@ -115,9 +115,8 @@ $(function () {
       let onlineUsersArray = model.get('activeUsers');
       let pendingUsersArray = model.get('pendingUsers');
 
-      let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
-      let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
-      console.log(pendingUserIndex, '****')
+      let onlineUserIndex = onlineUsersArray.indexOf('Yo');
+      let pendingUserIndex = pendingUsersArray.indexOf('Yo');
 
       if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
@@ -126,7 +125,7 @@ $(function () {
         pendingUsersArray.splice(pendingUserIndex, 1);
         model.set({pendingUsers: pendingUsersArray});
       } else {
-        onlineUsersArray.push(data.userOnline);
+        onlineUsersArray.push('Yo');
         model.set({activeUsers: onlineUsersArray});
       }
 
