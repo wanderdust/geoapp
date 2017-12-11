@@ -12,7 +12,8 @@ $(function () {
       "click .openbtn": "openSidebar",
       "click .closebtn": "closeSidebar",
       "swipeleft #sidebar-container": "closeSidebar",
-      "click .requests-btn": "getRequests"
+      "click .requests-btn": "getRequests",
+      "click .pending-btn": "getPending"
     },
 
     initialize: function () {
@@ -49,6 +50,10 @@ $(function () {
 
     getRequests: function () {
       window.location.href = "/requests.html"
+    },
+
+    getPending: function () {
+      window.location.href = "/pending.html"
     }
   })
 })

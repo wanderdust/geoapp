@@ -129,7 +129,6 @@ $(function () {
         onlineUsersArray.push(data.userOnline);
         model.set({activeUsers: onlineUsersArray});
       }
-      console.log('hey')
 
       app.groupCollection.set({model}, {add: false, remove: false, merge: true});
 

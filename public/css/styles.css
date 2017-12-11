@@ -251,7 +251,7 @@ html, body {
 }
 
 #sidebar-container.swipeIt {
-  width: 220px;
+  width: 260px;
 }
 
 
@@ -499,4 +499,40 @@ input::-webkit-input-placeholder {
   line-height: 180%;
   font-size: 20px;
   margin: 0px;
+}
+
+/* ******PENDING ****** */
+
+.groups-list .group-container .group-header.pending {
+  width: 50%;
+}
+
+.ok-tick {
+  position: absolute;
+  top: 5%;
+  right: 20px;
+  display: inline-block;
+  width: 51px;
+  height: 84%;
+  overflow: hidden;
+  border-radius: 50px;
+  z-index: 2;
+  border: solid 2px gray;
+}
+
+.ok-tick .img-fluid {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+}
+
+.tabs-content .group-container:hover {
+  background-color: white;
+}
+
+.selected .group-container .ok-tick {
+    background-color: #5edb5e;
 }

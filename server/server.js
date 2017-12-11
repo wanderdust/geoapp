@@ -138,6 +138,38 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('findIfPending', async (data, callback) => {
+    try {
+      let pendingUser = await UserGroup.findOne({userId: data.userId, pending: true});
+
+      if (pendingUser !== null)
+          callback(null, pendingUser)
+
+    } catch (e) {
+      callback(e)
+    }
+  });
+
+  socket.on('updatePending', async (data, callback) => {
+    try {
+      await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
+        $set: {
+          pending: false
+        }
+      });
+      await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
+        $set: {
+          pending: true
+        }
+      });
+      
+      callback(null, true)
+    } catch (e) {
+      console.log(e)
+      callback(e)
+    }
+  })
+
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.
     openSockets.removeSockets(socket);

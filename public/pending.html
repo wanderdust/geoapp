@@ -41,11 +41,11 @@
 
     <script id="group-template" type="text/template">
 
-        <div class="group-container">
+        <div class="group-container pending">
           <!-- If there are no active users it shows as offline -->
           <div class="image-animation"></div>
           <div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>
-          <div class="group-header">
+          <div class="group-header pending">
             <p class="group-title user-name">{{title}}</p>
             {{#if activeUsers.[0]}}
             <p class="group-status">{{#each activeUsers}} {{this}}.  {{/each}}</p>
@@ -54,6 +54,8 @@
                 <p class="group-status">{{pendingUsers.[0]}} ira pronto.</p>
               {{/if}}
             {{/if}}
+          </div>
+          <div class="ok-tick"><image class="img-responive img-fluid " src="./css/fonts/ok-tick.svg">
           </div>
         </div>
 
