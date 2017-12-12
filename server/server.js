@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
         online: true
       });
       if (userIsOnline !== null)
-        callback('User is already online in that group');
+        throw Error ('El usuario ya está online en este grupo');
 
       // Finds if he is pending in another group and sets to false.
       await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
@@ -176,8 +176,7 @@ io.on('connection', (socket) => {
 
       callback(null, true)
     } catch (e) {
-      console.log(e)
-      callback('Could not set model to Pending')
+      callback(e.message);
     }
   })
 

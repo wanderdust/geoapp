@@ -44,9 +44,10 @@ $(function () {
       let userId = sessionStorage.getItem('userId');
 
       this.socket.emit('updatePending', {groupId, userId}, (err, res) => {
-        if (err)
-          return console.log(err);
-
+        if (err) {
+          app.groupCollection.trigger('showAlert', err);
+          return;
+        }
         that.addPending();
       });
     }

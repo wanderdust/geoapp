@@ -8,7 +8,6 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-
       "swipe #tabs-header": "swipeTabs"
     },
 

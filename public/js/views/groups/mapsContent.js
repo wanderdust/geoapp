@@ -30,7 +30,7 @@ $(function () {
         app.groupCollection.trigger('modelUpdate', data);
       })
 
-      setInterval(this.userCoords, 4000);
+      // setInterval(this.userCoords, 4000);
     },
 
     render: function () {
