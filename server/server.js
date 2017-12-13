@@ -162,7 +162,7 @@ io.on('connection', (socket) => {
         online: true
       });
       if (userIsOnline !== null)
-        throw Error ('El usuario ya está online en este grupo');
+        throw Error ('Ya estás online en este grupo');
 
       // Finds if he is pending in another group and sets to false.
       let oldPending = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
@@ -189,7 +189,7 @@ io.on('connection', (socket) => {
         let userName = await User.findOne({_id: ObjectID(doc.userId)});
 
         updatedProperties._id = doc.groupId;
-        updatedProperties.userPending = userName.name;
+        updatedProperties.userName = userName.name;
         updatedProperties.userId = userName._id;
 
         let socketsToUpdate = openSockets.findSockets(doc);
@@ -199,7 +199,7 @@ io.on('connection', (socket) => {
         })
       }
 
-      // If operation succesfull sends data to pendingsView.
+      // If operation succesfull tells the model to set button to green.
       callback(null, true)
     } catch (e) {
       callback(e.message);

@@ -18,6 +18,7 @@ $(function () {
       this.socket = socket;
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateSelected', this.addPending);
+      this.listenTo(this.model, 'render', this.render);
     },
 
     render: function () {

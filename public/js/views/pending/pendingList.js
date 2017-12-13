@@ -1,6 +1,7 @@
 // View of all the pending views.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 
@@ -12,10 +13,19 @@ $(function () {
     },
 
     initialize: function () {
-      this.$requestList = $('.groups-list ul')
+      this.socket = socket;
+      this.$requestList = $('.groups-list ul');
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'removeClassSelected', this.removeAndUpdate)
+
+      socket.on('newGroupUpdates', (data) => {
+        app.groupCollection.findAndUpdateOneOnline(data);
+      })
+
+      socket.on('newPendingUpdates', (data) => {
+        app.groupCollection.findAndUpdateOnePending(data)
+      })
     },
 
     render: function () {
