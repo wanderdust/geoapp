@@ -125,6 +125,7 @@ io.on('connection', (socket) => {
 
         updatedProperties._id = doc.groupId;
         updatedProperties.userOnline = userName.name;
+        updatedProperties.userId = userName._id;
 
         // Finds the sockets in the  array that contain an updated group.
         let socketsToUpdate = openSockets.findSockets(doc);
@@ -138,6 +139,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Finds user's selected pending group for the pending view.
   socket.on('findIfPending', async (data, callback) => {
     try {
       let pendingUser = await UserGroup.findOne({userId: data.userId, pending: true});
@@ -152,6 +154,7 @@ io.on('connection', (socket) => {
 
   socket.on('updatePending', async (data, callback) => {
     try {
+      let updatedDocuments = [];
       // Checks if user is already online in that group.
       let userIsOnline = await UserGroup.findOne({
         userId: data.userId,
@@ -162,18 +165,41 @@ io.on('connection', (socket) => {
         throw Error ('El usuario ya está online en este grupo');
 
       // Finds if he is pending in another group and sets to false.
-      await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
+      let oldPending = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
         $set: {
           pending: false
         }
       });
       // Finds new group and sets pending to true.
-      await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
+      let newPending = await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
         $set: {
           pending: true
         }
       });
 
+      updatedDocuments.push(oldPending, newPending);
+
+      // Loops trough the updated docs and sends info to the mapsContentView.
+      for (let doc of updatedDocuments) {
+        let updatedProperties = {};
+
+        if (doc === null)
+          continue;
+
+        let userName = await User.findOne({_id: ObjectID(doc.userId)});
+
+        updatedProperties._id = doc.groupId;
+        updatedProperties.userPending = userName.name;
+        updatedProperties.userId = userName._id;
+
+        let socketsToUpdate = openSockets.findSockets(doc);
+
+        socketsToUpdate.forEach((e) => {
+          io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
+        })
+      }
+
+      // If operation succesfull sends data to pendingsView.
       callback(null, true)
     } catch (e) {
       callback(e.message);

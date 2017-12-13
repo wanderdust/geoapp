@@ -23,14 +23,19 @@ $(function () {
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'filter', this.filterAll);
       this.listenTo(app.groupCollection, 'change', this.filterAll);
-      this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdateOne);
+      this.listenTo(app.groupCollection, 'modelUpdate', this.findAndUpdateOneOnline);
+      this.listenTo(app.groupCollection, 'pendingUpdate', this.findAndUpdateOnePending)
       this.listenToOnce(app.groupCollection, 'update', this.userCoords);
 
       this.socket.on('newGroupUpdates', (data) => {
         app.groupCollection.trigger('modelUpdate', data);
+      });
+
+      this.socket.on('newPendingUpdates', (data) => {
+        app.groupCollection.trigger('pendingUpdate', data)
       })
 
-      // setInterval(this.userCoords, 4000);
+      setInterval(this.userCoords, 4000);
     },
 
     render: function () {
@@ -106,17 +111,23 @@ $(function () {
       return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     },
 
-    findAndUpdateOne: function (data) {
+    findAndUpdateOneOnline: function (data) {
       // Updates the activeUsers and pending arrays in the models.
       // First checks if user is online and deletes him from array.
       // Second checks if user is pending and deletes him from array.
       // Third if the first ones don't apply it means he is online, and adds him to array.
+
+      // Checks if the user being updated is currentUser and changes userName for 'Me'
+      if (data.userId === sessionStorage.getItem('userId'))
+        data.userOnline = 'Yo'
+
+
       let model = app.groupCollection.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
       let pendingUsersArray = model.get('pendingUsers');
+      let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
+      let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
 
-      let onlineUserIndex = onlineUsersArray.indexOf('Yo');
-      let pendingUserIndex = pendingUsersArray.indexOf('Yo');
 
       if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
@@ -125,7 +136,7 @@ $(function () {
         pendingUsersArray.splice(pendingUserIndex, 1);
         model.set({pendingUsers: pendingUsersArray});
       } else {
-        onlineUsersArray.push('Yo');
+        onlineUsersArray.push(data.userOnline);
         model.set({activeUsers: onlineUsersArray});
       }
 
@@ -133,6 +144,30 @@ $(function () {
 
       // Renders the changed model and the updates markers.
       model.trigger('render');
+      // Updates the markers.
+      this.appendAll(app.groupCollection);
+      this.filterAll(app.groupCollection);
+    },
+
+    findAndUpdateOnePending: function (data) {
+      if (data.userId === sessionStorage.getItem('userId'))
+        data.userOnline = 'Yo'
+
+      let model = app.groupCollection.findWhere({_id: data._id});
+      let pendingUsersArray = model.get('pendingUsers');
+      let pendingUserIndex = pendingUsersArray.indexOf(data.userPending);
+
+      if (pendingUserIndex !== -1) {
+        pendingUsersArray.splice(pendingUserIndex, 1);
+        model.set({pendingUsers: pendingUsersArray});
+      } else {
+        pendingUsersArray.push(data.userPending);
+        model.set({pendingUsers: pendingUsersArray});
+      }
+
+      // Renders the changed model.
+      model.trigger('render');
+      // Updates the Markers.
       this.appendAll(app.groupCollection);
       this.filterAll(app.groupCollection);
     },
