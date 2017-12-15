@@ -155,6 +155,7 @@ io.on('connection', (socket) => {
   socket.on('updatePending', async (data, callback) => {
     try {
       let updatedDocuments = [];
+      let groupName = await Group.findOne({_id: ObjectID(data.groupId)});
       // Checks if user is already online in that group.
       let userIsOnline = await UserGroup.findOne({
         userId: data.userId,
@@ -200,7 +201,7 @@ io.on('connection', (socket) => {
       }
 
       // If operation succesfull tells the model to set button to green.
-      callback(null, true)
+      callback(null, `Vas a ir a ${groupName.title}`);
     } catch (e) {
       callback(e.message);
     }

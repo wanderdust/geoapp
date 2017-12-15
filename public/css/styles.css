@@ -199,7 +199,7 @@ html, body {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 5;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: #191919;
@@ -601,3 +601,128 @@ input::-webkit-input-placeholder {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+/* **** Create New Group****** */
+
+#app-container .map-container {
+  height: 50%;
+  width: 100%;
+}
+
+#app-container .tabs-content.create-group {
+  height: 41%;
+  width: 100%;
+  box-shadow: 0 -10px 20px -10px #888888;
+}
+
+.tabs-content.create-group .add-title {
+  position: relative;
+  width: 100%;
+  height: 33%;
+}
+
+.tabs-content.create-group .add-friends{
+  width: 100%;
+  height: 33%;
+}
+
+.tabs-content.create-group .create-group {
+  width: 100%;
+  height: 34%;
+}
+
+.new-group-image {
+  border: solid 2px gray;
+  position: absolute;
+  top: 15%;
+  left: 20px;
+  display: inline-block;
+  width: 19%;
+  height: 79%;
+  overflow: hidden;
+  border-radius: 50px;
+  z-index: 100;
+  }
+
+.new-group-image img {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+}
+
+.new-group-title {
+  position: absolute;
+  margin-left: 30%;
+  margin-top: 2px;
+  width: 60%;
+  height: 85%;
+}
+
+.new-group-title input{
+  position: absolute;
+  font-family: inherit;
+  font-size: 25px;
+  width: 100%;
+  height: 30px;
+  bottom: 10px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid gray;
+}
+
+.new-group-title input::placeholder {
+  font-family: inherit;
+  font-size: 25px;
+  bottom: 0px;
+}
+
+.add-friends {
+  position: relative;
+}
+
+.add-friends-btn {
+  position: absolute;
+  top: 20%;
+  left: 27px;
+  display: inline-block;
+  width: 15%;
+  height: 60%;
+  overflow: hidden;
+  border-radius: 50px;
+  z-index: 100;
+  background-color: #00be00;
+  }
+
+  .add-friends-btn img {
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 100%;
+    z-index: 1;
+    left: 5px;
+  }
+
+  .add-friends .add-friends-title {
+    position: absolute;
+    top: 25px;
+    text-align: left;
+    font-size: 25px;
+    margin-left: 110px;
+  }
+
+  .tabs-content .create-group {
+    text-align: center;
+  }
+
+  .tabs-content .create-group button {
+    border-radius: 20px;
+    margin-top: 25px;
+    height: 50%;
+    width: 80%;
+    font-size: 20px;
+  }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+
+  </head>
+  <body>
+    <div id="app-container">
+      <nav id="header-nav">
+        <div id="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container">
+          <div id="group-title-group">
+            <p>Crear Grupo</p>
+          </div>
+          <div id="group-sub-title"></div>
+        </div>
+      </nav>
+
+      <div class="map-container">
+
+      </div>
+      <div class="tabs-content create-group">
+        <div class="add-title">
+          <div class="new-group-image">
+            <img src="css/assets/group_placeholder.png" alt="">
+          </div>
+          <div class="new-group-title">
+            <input type="text" placeholder="Nombre del grupo...">
+          </div>
+        </div>
+        <div class="add-friends">
+          <div class="add-friends-btn">
+            <img src="./css/assets/group-add.svg" alt="">
+          </div>
+          <p class="add-friends-title">Añadir amigos</p>
+        </div>
+        <div class="create-group">
+          <button type="button" class="btn btn-success">Crear Grupo</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="sidebar-container" class="sidenav">
+      <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+    </div>
+
+  <script id="number-of-friends" type="text/template">
+    <p>{{friendsLength}} amigos</p>
+  </script>
+
+  <script id="user-template" type="text/template">
+      <div class="group-container user-container">
+        <div class="image-animation"></div>
+        <div class="image">
+          <img src={{userImage}} class="img-responive img-fluid">
+        </div>
+        <div class="group-header">
+          <p class="group-title">{{name}}</p>
+          <p class="group-status"></p>
+        </div>
+      </div>
+
+    </script>
+
+    <script type="text/javascript">
+      function open () {
+        document.getElementById("sidebar-container").style.width = "100%";
+        document.getElementById("app-container").style.marginLeft = "100%";
+      }
+
+    function closeNav() {
+      document.getElementById("sidebar-container").style.width = "0";
+      document.getElementById("app-container").style.marginLeft = "0";
+    }
+    open();
+
+    </script>
+
+    <!-- <script src="/socket.io/socket.io.js/"></script> -->
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <!-- <script src="./js/models/userModel.js"></script>
+    <script src="./js/collections/users.js"></script>
+    <script src="./js/views/users/userView.js"></script>
+    <script src="./js/views/users/userList.js"></script>
+    <script src="./js/views/users/usersView.js"></script>
+    <script src="./js/routers/router.js"></script>
+    <script src="./js/app-users.js"></script> -->
+  </body>
+</html>

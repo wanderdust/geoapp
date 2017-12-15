@@ -50,6 +50,7 @@ $(function () {
           return;
         }
         that.addPending();
+        app.groupCollection.trigger('showAlert', res);
       });
     }
   })
