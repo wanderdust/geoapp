@@ -208,6 +208,19 @@ html, body {
     transition: 0.5s;
 }
 
+.sidenav.new-group-sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0 !important;
+    background-color: white;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
 /* The navigation menu links */
 .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -634,11 +647,11 @@ input::-webkit-input-placeholder {
 .new-group-image {
   border: solid 2px gray;
   position: absolute;
-  top: 15%;
+  top: 25%;
   left: 20px;
   display: inline-block;
-  width: 19%;
-  height: 79%;
+  width: 17%;
+  height: 69%;
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
@@ -687,7 +700,7 @@ input::-webkit-input-placeholder {
 .add-friends-btn {
   position: absolute;
   top: 20%;
-  left: 27px;
+  left: 22px;
   display: inline-block;
   width: 15%;
   height: 60%;
@@ -695,34 +708,139 @@ input::-webkit-input-placeholder {
   border-radius: 50px;
   z-index: 100;
   background-color: #00be00;
-  }
+}
 
-  .add-friends-btn img {
-    position: absolute;
-    width: 80%;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 100%;
-    z-index: 1;
-    left: 5px;
-  }
+.add-friends-btn img {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+  left: 5px;
+}
 
-  .add-friends .add-friends-title {
-    position: absolute;
-    top: 25px;
-    text-align: left;
-    font-size: 25px;
-    margin-left: 110px;
-  }
+.add-friends .add-friends-title {
+  position: absolute;
+  top: 25px;
+  text-align: left;
+  font-size: 25px;
+  margin-left: 110px;
+}
 
-  .tabs-content .create-group {
-    text-align: center;
-  }
+.tabs-content .create-group {
+  text-align: center;
+}
 
-  .tabs-content .create-group button {
-    border-radius: 20px;
-    margin-top: 25px;
-    height: 50%;
-    width: 80%;
-    font-size: 20px;
-  }
+.tabs-content .create-group button {
+  border-radius: 20px;
+  margin-top: 25px;
+  height: 50%;
+  width: 80%;
+  font-size: 20px;
+}
+
+.new-group-sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#app-container.group-add {
+  transition: margin-right .5s;
+}
+
+/* Position and style the close button */
+.new-group-sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#sidebar-container.active {
+  width: 100%;
+}
+
+#app-container.group-add.active {
+  margin-right: 100%;
+}
+
+/***** Styles for sidebar ****/
+
+#sidebar-container.new-group-sidenav #header-nav.search-tab {
+  color: black;
+  background: white;
+  background-color: white;
+  border-bottom: #939393 solid 0.5px;
+  box-shadow: 0px 1px 15px 0px #888888;
+}
+
+#sidebar-container.new-group-sidenav #back-arrow-container .glyphicon {
+  color: gray;
+}
+
+#sidebar-container.new-group-sidenav #group-title-container {
+  padding: 0;
+}
+
+#sidebar-container.new-group-sidenav #group-title-container input {
+  font-size: 25px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+#sidebar-container.new-group-sidenav #group-title-container input::placeholder {
+  font-size: 25px;
+}
+
+#sidebar-container.new-group-sidenav .ok-tick {
+  border: none;
+}
+
+#sidebar-container.new-group-sidenav .ok-tick img{
+  height: 40px;
+  width: auto;
+}
+
+#sidebar-container.new-group-sidenav .group-container.user-container {
+  background: linear-gradient(to right, white 50%, #7fbf7f 50%);
+  background-size: 200% 100%;
+  background-position:left bottom;
+}
+
+#sidebar-container.new-group-sidenav .group-container.user-container.active {
+  transition:all .4s ease;
+  background-position:right bottom;
+}
+
+.continue-btn {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  background: #00be00;
+  border-radius: 50px;
+  z-index: 9999;
+}
+
+.continue-btn img {
+  height: 70%;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+}

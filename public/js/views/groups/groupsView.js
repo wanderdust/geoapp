@@ -13,7 +13,8 @@ $(function () {
       "click .closebtn": "closeSidebar",
       "swipeleft #sidebar-container": "closeSidebar",
       "click .requests-btn": "getRequests",
-      "click .pending-btn": "getPending"
+      "click .pending-btn": "getPending",
+      "click .new-group-btn": "getNewGroup"
     },
 
     initialize: function () {
@@ -54,6 +55,10 @@ $(function () {
 
     getPending: function () {
       window.location.href = "/pending.html"
+    },
+
+    getNewGroup: function () {
+      window.location.href = "/create-group.html"
     }
   })
 })

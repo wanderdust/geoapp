@@ -10,7 +10,7 @@
 
   </head>
   <body>
-    <div id="app-container">
+    <div id="app-container" class="group-add">
       <nav id="header-nav">
         <div id="back-arrow-container">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
@@ -32,11 +32,11 @@
             <img src="css/assets/group_placeholder.png" alt="">
           </div>
           <div class="new-group-title">
-            <input type="text" placeholder="Nombre del grupo...">
+            <input type="text" placeholder="Nombre...">
           </div>
         </div>
         <div class="add-friends">
-          <div class="add-friends-btn">
+          <div class="add-friends-btn" onclick="openNav()">
             <img src="./css/assets/group-add.svg" alt="">
           </div>
           <p class="add-friends-title">Añadir amigos</p>
@@ -48,8 +48,24 @@
       </div>
     </div>
 
-    <div id="sidebar-container" class="sidenav">
-      <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+    <div id="sidebar-container" class="new-group-sidenav">
+      <nav id="header-nav" class="search-tab">
+        <div id="back-arrow-container" onclick="closeNav()">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container">
+          <input type="text" name="" placeholder="Buscar...">
+        </div>
+      </nav>
+
+      <div class="tabs-content status-users-content">
+        <div class="groups-list">
+          <ul></ul>
+        </div>
+      </div>
+      <div class="continue-btn">
+        <img src="./css/fonts/ok-tick.svg" alt="" onclick="closeNav()">
+      </div>
     </div>
 
   <script id="number-of-friends" type="text/template">
@@ -66,21 +82,10 @@
           <p class="group-title">{{name}}</p>
           <p class="group-status"></p>
         </div>
+        <div class="ok-tick">
+          <image class="img-responive img-fluid " src="./css/assets/add-icon.png">
+        </div>
       </div>
-
-    </script>
-
-    <script type="text/javascript">
-      function open () {
-        document.getElementById("sidebar-container").style.width = "100%";
-        document.getElementById("app-container").style.marginLeft = "100%";
-      }
-
-    function closeNav() {
-      document.getElementById("sidebar-container").style.width = "0";
-      document.getElementById("app-container").style.marginLeft = "0";
-    }
-    open();
 
     </script>
 
@@ -92,12 +97,20 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-    <!-- <script src="./js/models/userModel.js"></script>
+    <script src="./js/models/userModel.js"></script>
     <script src="./js/collections/users.js"></script>
-    <script src="./js/views/users/userView.js"></script>
-    <script src="./js/views/users/userList.js"></script>
-    <script src="./js/views/users/usersView.js"></script>
-    <script src="./js/routers/router.js"></script>
-    <script src="./js/app-users.js"></script> -->
+
+    <script type="text/javascript">
+      function openNav () {
+        $('#sidebar-container').addClass('active');
+        $('#app-container.group-add').addClass('active');
+      }
+
+    function closeNav() {
+      $('#sidebar-container').removeClass('active');
+      $('#app-container.group-add').removeClass('active');
+    }
+
+    </script>
   </body>
 </html>
