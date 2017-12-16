@@ -38,6 +38,7 @@ html, body {
   width: 100%;
   transition: height 0.5s;
   text-align: left;
+  box-shadow: 0 -10px 20px -10px #888888;
 }
 
 #tabs-container .nav li {
@@ -295,10 +296,11 @@ html, body {
   position: relative;
   height: 9%;
   width: 100%;
-  background: linear-gradient(to right, #516062, #5c6e70)
+  background: linear-gradient(to right, #516062, #5c6e70);
+  box-shadow: 0px 1px 15px 0px #888888;
 }
 
-#header-nav #back-arrow-container {
+#header-nav #back-arrow-container, .back-arrow-container {
   position: absolute;
   display: inline-block;
   height: 100%;
@@ -306,13 +308,13 @@ html, body {
   width: 15%;
 }
 
-#header-nav #back-arrow-container a {
+#header-nav #back-arrow-container a, .back-arrow-container a {
   position: absolute;
   height: 100%;
   width: 100%;
 }
 
-#header-nav #back-arrow-container a span {
+#header-nav #back-arrow-container a span, .back-arrow-container a span {
   font-size: 35px;
   color: white;
   line-height: 55px;
@@ -617,7 +619,7 @@ input::-webkit-input-placeholder {
 
 /* **** Create New Group****** */
 
-#app-container .map-container {
+#app-container #map-container-friends {
   height: 50%;
   width: 100%;
 }
@@ -655,15 +657,13 @@ input::-webkit-input-placeholder {
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
+  text-align: center;
+  line-height: 55px;
   }
 
 .new-group-image img {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 100%;
-  z-index: 1;
+
+  height: 40px;
 }
 
 .new-group-title {
@@ -708,6 +708,7 @@ input::-webkit-input-placeholder {
   border-radius: 50px;
   z-index: 100;
   background-color: #00be00;
+  box-shadow: 0px 1px 15px 0px #888888;
 }
 
 .add-friends-btn img {
@@ -783,7 +784,7 @@ input::-webkit-input-placeholder {
   box-shadow: 0px 1px 15px 0px #888888;
 }
 
-#sidebar-container.new-group-sidenav #back-arrow-container .glyphicon {
+#sidebar-container.new-group-sidenav .back-arrow-container .glyphicon {
   color: gray;
 }
 
@@ -819,7 +820,7 @@ input::-webkit-input-placeholder {
   background-position:left bottom;
 }
 
-#sidebar-container.new-group-sidenav .group-container.user-container.active {
+#sidebar-container.new-group-sidenav .group-container.user-container.selected {
   transition:all .4s ease;
   background-position:right bottom;
 }
@@ -833,6 +834,7 @@ input::-webkit-input-placeholder {
   background: #00be00;
   border-radius: 50px;
   z-index: 9999;
+  box-shadow: 0px 1px 15px 0px #888888;
 }
 
 .continue-btn img {

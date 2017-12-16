@@ -19,24 +19,26 @@
           <div id="group-title-group">
             <p>Crear Grupo</p>
           </div>
-          <div id="group-sub-title"></div>
+          <div id="group-sub-title">
+            <p>Crea un nuevo punto de encuentro.</p>
+          </div>
         </div>
       </nav>
 
-      <div class="map-container">
+      <div id="map-container-friends">
 
       </div>
       <div class="tabs-content create-group">
         <div class="add-title">
           <div class="new-group-image">
-            <img src="css/assets/group_placeholder.png" alt="">
+            <img src="css/assets/add-photo-icon.png" alt="">
           </div>
           <div class="new-group-title">
             <input type="text" placeholder="Nombre...">
           </div>
         </div>
         <div class="add-friends">
-          <div class="add-friends-btn" onclick="openNav()">
+          <div class="add-friends-btn">
             <img src="./css/assets/group-add.svg" alt="">
           </div>
           <p class="add-friends-title">Añadir amigos</p>
@@ -50,11 +52,11 @@
 
     <div id="sidebar-container" class="new-group-sidenav">
       <nav id="header-nav" class="search-tab">
-        <div id="back-arrow-container" onclick="closeNav()">
+        <div class="back-arrow-container">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
         </div>
         <div id="group-title-container">
-          <input type="text" name="" placeholder="Buscar...">
+          <input class="friends-query" type="text" placeholder="Buscar...">
         </div>
       </nav>
 
@@ -64,13 +66,9 @@
         </div>
       </div>
       <div class="continue-btn">
-        <img src="./css/fonts/ok-tick.svg" alt="" onclick="closeNav()">
+        <img src="./css/fonts/ok-tick.svg">
       </div>
     </div>
-
-  <script id="number-of-friends" type="text/template">
-    <p>{{friendsLength}} amigos</p>
-  </script>
 
   <script id="user-template" type="text/template">
       <div class="group-container user-container">
@@ -89,7 +87,7 @@
 
     </script>
 
-    <!-- <script src="/socket.io/socket.io.js/"></script> -->
+    <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
@@ -97,19 +95,15 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBooVb92OtWzkNoGO2J2744yiwOpKaF6NI"></script>
+    <script src ="./js/utils/map-styles.js"></script>
     <script src="./js/models/userModel.js"></script>
     <script src="./js/collections/users.js"></script>
-
-    <script type="text/javascript">
-      function openNav () {
-        $('#sidebar-container').addClass('active');
-        $('#app-container.group-add').addClass('active');
-      }
-
-    function closeNav() {
-      $('#sidebar-container').removeClass('active');
-      $('#app-container.group-add').removeClass('active');
-    }
+    <script src="./js/views/create-group/friendView.js"></script>
+    <script src="./js/views/create-group/friendList.js"></script>
+    <script src="./js/views/create-group/friendsMap.js"></script>
+    <script src="./js/views/create-group/friendsView.js"></script>
+    <script src="./js/app-create-group.js"></script>
 
     </script>
   </body>
