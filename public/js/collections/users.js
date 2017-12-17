@@ -7,14 +7,12 @@ $(function () {
   let UserCollection = Backbone.Collection.extend({
     model: app.UserModel,
 
-    url: './json/usersDB.json',
-
     // filters and returns collection with online users.
     onlineUsers: function () {
       return this.where({isOnline: true});
     },
 
-      // filters and returns collection with offline users.
+    // filters and returns collection with offline users.
     offlineUsers: function () {
       return this.where({isOnline: false});
     },

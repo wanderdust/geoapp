@@ -820,9 +820,13 @@ input::-webkit-input-placeholder {
   background-position:left bottom;
 }
 
-#sidebar-container.new-group-sidenav .group-container.user-container.selected {
+#sidebar-container.new-group-sidenav .selected .group-container.user-container{
   transition:all .4s ease;
   background-position:right bottom;
+}
+
+#sidebar-container.new-group-sidenav .selected .ok-tick {
+  background: #7fbf7f;
 }
 
 .continue-btn {

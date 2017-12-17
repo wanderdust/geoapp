@@ -10,7 +10,7 @@ $(function () {
     template: $('#user-template').html(),
 
     events: {
-      "click .ok-tick": "changeStatus"
+      "click .ok-tick": "updateStatus"
     },
 
     initialize: function () {
@@ -25,10 +25,17 @@ $(function () {
       return this;
     },
 
-    changeStatus: function () {
-      let $friend = this.$('.user-container');
-      let isSelected = $friend.hasClass('selected')
+    updateStatus: function () {
+      let $friend = this.$el;
+      let isSelected = $friend.hasClass('selected');
+
       $friend.toggleClass('selected', !isSelected);
+
+      if(!isSelected) {
+        app.userCollection.trigger('addFriend', this.model)
+      } else {
+        app.userCollection.trigger('removeFriend', this.model)
+      }
     }
   })
 

@@ -12,13 +12,20 @@ $(function () {
       "click #back-arrow-container": "backToMain",
       "click .back-arrow-container": "closeNavBar",
       "click .continue-btn": "closeNavAndSave",
-      "click .add-friends-btn": "openNavBar"
+      "click .add-friends-btn": "openNavBar",
+      "keyup .friends-query" : "search",
+      "click #create-group-btn": "createNewGroup"
     },
 
     initialize: function () {
       this.socket = socket;
+      this.groupCoords;
+      this.groupFriends;
+      this.groupImage = "";
 
-      this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
+      this.listenTo(app.userCollection, 'showAlert', this.snackBar);
+      this.listenTo(app.userCollection, 'groupCoords', this.updateCoords);
+      this.listenTo(app.userCollection, 'groupFriends', this.updateFriends);
       new app.FriendsMap();
       new app.FriendList();
 
@@ -33,9 +40,11 @@ $(function () {
       this.$('.friends-query').val("");
       this.$('#sidebar-container').addClass('active');
       this.$('#app-container.group-add').addClass('active');
+      app.userCollection.trigger('search');
     },
 
     closeNavBar: function () {
+      app.userCollection.trigger('clearArray')
       this.$(".selected").removeClass('selected');
       this.$('#sidebar-container').removeClass('active');
       this.$('#app-container.group-add').removeClass('active');
@@ -55,6 +64,36 @@ $(function () {
       x.html(message);
       x.addClass('show');
       setTimeout(function(){ x.removeClass('show'); }, 3000);
+    },
+
+    search: function () {
+      app.userCollection.trigger('search');
+    },
+
+    updateCoords: function (coords) {
+      this.groupCoords = coords;
+    },
+
+    updateFriends: function (friends) {
+      this.groupFriends = friends;
+    },
+
+    createNewGroup: function () {
+      let that = this;
+      let groupData = {};
+      groupData.coords = this.groupCoords;
+      groupData.title = $('.title-input').val();
+      groupData.friends = this.groupFriends;
+      groupData.image = this.groupImage;
+      groupData.currentUser = sessionStorage.getItem('userId')
+
+      this.socket.emit('addGroup', groupData, (err, data) => {
+        if (err)
+          return err;
+
+        that.socket.emit('addGroupRequests', data)
+      });
+
     }
   })
 

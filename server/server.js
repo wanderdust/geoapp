@@ -31,9 +31,9 @@ io.on('connection', (socket) => {
       let groupCollection = [];
       let groupCursors = await UserGroup.find(userId);
 
-      for (let cursor of groupCursors) {
+      for (let currentGroup of groupCursors) {
         // Returns an object with the group model properties.
-        let newModel = await createGroupModel(cursor, userId);
+        let newModel = await createGroupModel(currentGroup.groupId, userId.userId);
 
         // Adds a new element mapping groupId with socketId.
         openSockets.addSockets(newModel._id, socket.id);
@@ -205,7 +205,37 @@ io.on('connection', (socket) => {
     } catch (e) {
       callback(e.message);
     }
-  })
+  });
+  // Creates a new group in the database and a new userGroup reference.
+  socket.on('addGroup', async (data, callback) => {
+    try {
+      let groupModel;
+      let userGroup;
+      let group;
+
+      group = {
+        title: data.title,
+        groupImage: data.image,
+        coords: {
+          lat: data.coords.lat,
+          lng: data.coords.lng
+        }
+      };
+
+      groupModel = await new Group(group).save();
+
+      userGroup = {
+        groupId: groupModel._id,
+        userId: data.currentUser,
+        online: false,
+        pending: false
+      };
+
+      userGroup = await new UserGroup(userGroup).save();
+    } catch (e) {
+      callback(e)
+    }
+  });
 
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.

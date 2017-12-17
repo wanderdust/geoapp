@@ -1,6 +1,7 @@
 // View of the group list.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 
@@ -13,6 +14,7 @@ $(function () {
 
     initialize: function () {
       _.bindAll(this, 'render');
+      this.socket = socket;
       this.$list = $('#group-list');
       this.$tabsHeader = $('#tabs-header');
 
