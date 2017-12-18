@@ -1,6 +1,7 @@
 // View of a single group model.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 

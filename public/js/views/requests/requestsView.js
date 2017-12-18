@@ -1,6 +1,7 @@
 // View of the whole requests app.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 
@@ -15,7 +16,7 @@ $(function () {
 
     initialize: function () {
       let userId = sessionStorage.getItem('userId');
-      this.socket = io();
+      this.socket = socket;
       this.$numberOfRequests = $('.requests-length');
 
       this.listenTo(app.requestCollection, 'update', this.render);

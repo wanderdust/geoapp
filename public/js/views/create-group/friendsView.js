@@ -89,9 +89,15 @@ $(function () {
 
       this.socket.emit('addGroup', groupData, (err, data) => {
         if (err)
-          return err;
+          return console.log(err);
 
-        that.socket.emit('addGroupRequests', data)
+        groupData.groupId = data._id;
+        that.socket.emit('addGroupRequests', groupData, (err, res) => {
+          if (err)
+            return console.log(err)
+
+          window.location.href = '/main.html'
+        })
       });
 
     }

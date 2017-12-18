@@ -1,11 +1,11 @@
-let OpenSockets = class {
+let OpenSocketsGroups = class {
 	constructor () {
   	this.openSockets = [];
   }
 
   addSockets (groupId, socketId) {
     let newSocket = {groupId, socketId};
-    
+
   	this.openSockets.push(newSocket);
     return newSocket;
   }
@@ -25,4 +25,4 @@ let OpenSockets = class {
   }
 };
 
-module.exports = {OpenSockets}
+module.exports = {OpenSocketsGroups}

@@ -69,11 +69,11 @@ $(function () {
   	},
     // Adds a friend to the friends array.
     addFriendToArray: function (model) {
-      this.friendsArray.push(model);
+      this.friendsArray.push(model.get('_id'));
     },
     // Removes a friend from the friends array.
     removeFriendFromArray: function (model) {
-      let index = this.friendsArray.indexOf(model.get('name'));
+      let index = this.friendsArray.indexOf(model.get('_id'));
       this.friendsArray.splice(index, 1);
     },
     // Sends the friends array data to the main view.

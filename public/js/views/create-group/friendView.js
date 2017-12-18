@@ -1,6 +1,7 @@
 // View for a single user-friend.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 

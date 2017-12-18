@@ -31,6 +31,10 @@ $(function () {
       new app.MapsContent();
       new app.TabsContent();
 
+      this.socket.emit('userConnected', {
+        userId: sessionStorage.getItem('userId')
+      })
+
       this.socket.emit('createGroupCollection', {
         userId: sessionStorage.getItem('userId')
       }, (err, collection) => {

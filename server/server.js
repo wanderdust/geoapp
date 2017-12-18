@@ -9,7 +9,8 @@ const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
-const {OpenSockets} = require('./utils/openSockets.js');
+const {OpenSocketsGroups} = require('./utils/openSocketsGroups.js');
+const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
@@ -20,11 +21,13 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-let openSockets = new OpenSockets();
+let openSocketsGroups = new OpenSocketsGroups();
+let openSocketsUsers = new OpenSocketsUsers();
 
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
+
 
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
@@ -36,9 +39,10 @@ io.on('connection', (socket) => {
         let newModel = await createGroupModel(currentGroup.groupId, userId.userId);
 
         // Adds a new element mapping groupId with socketId.
-        openSockets.addSockets(newModel._id, socket.id);
+        openSocketsGroups.addSockets(newModel._id, socket.id);
         groupCollection.push(newModel);
       };
+
       // Sends an array with all the group Models.
       callback(null, groupCollection);
     } catch (e) {
@@ -75,12 +79,15 @@ io.on('connection', (socket) => {
 
         requestCollection.push(requestModel);
       }
+      // Updates the current openSockets Users array.
+      openSocketsUsers.addSockets(userId, socket.id);
       // Sends an array with the request Models.
       callBack(null, requestCollection);
     } catch (e) {
       callback(e);
     }
   });
+
 
   socket.on('userInArea', async (data) => {
     try {
@@ -128,7 +135,7 @@ io.on('connection', (socket) => {
         updatedProperties.userId = userName._id;
 
         // Finds the sockets in the  array that contain an updated group.
-        let socketsToUpdate = openSockets.findSockets(doc);
+        let socketsToUpdate = openSocketsGroups.findSockets(doc);
 
         socketsToUpdate.forEach((e) => {
           io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
@@ -193,7 +200,7 @@ io.on('connection', (socket) => {
         updatedProperties.userName = userName.name;
         updatedProperties.userId = userName._id;
 
-        let socketsToUpdate = openSockets.findSockets(doc);
+        let socketsToUpdate = openSocketsGroups.findSockets(doc);
 
         socketsToUpdate.forEach((e) => {
           io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
@@ -209,6 +216,7 @@ io.on('connection', (socket) => {
   // Creates a new group in the database and a new userGroup reference.
   socket.on('addGroup', async (data, callback) => {
     try {
+
       let groupModel;
       let userGroup;
       let group;
@@ -232,14 +240,46 @@ io.on('connection', (socket) => {
       };
 
       userGroup = await new UserGroup(userGroup).save();
+      return callback(null, groupModel)
     } catch (e) {
-      callback(e)
+      console.log(e, e.message)
+      callback(e.message)
     }
   });
 
+  socket.on('addGroupRequests', async (data, callback) => {
+    try {
+      let currentUser = data.currentUser;
+      let friends = data.friends;
+
+      for (let friend of friends) {
+        let newRequest;
+        let newRequestModel;
+        let socketsToUpdate = openSocketsUsers.findSockets(friend);
+
+        let request = {
+            senderId: data.currentUser,
+            recipientId: friend,
+            groupId: data.groupId
+          };
+
+        newRequest = await new Request(request).save();
+        newRequestModel = await createRequestModel(newRequest);
+
+        io.to(socketsToUpdate[0].socketId).emit('addNewRequest', newRequestModel);
+      }
+
+      callback(null, 'Group created succesfully')
+    } catch (e) {
+      console.log(e, e.message)
+      callback(e)
+    }
+  })
+
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.
-    openSockets.removeSockets(socket);
+    openSocketsGroups.removeSockets(socket);
+    openSocketsUsers.removeSockets(socket);
   })
 })
 
