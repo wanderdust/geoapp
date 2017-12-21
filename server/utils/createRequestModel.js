@@ -10,6 +10,7 @@ let createRequestModel = async function (requestCursor) {
 
     requestModel.title = groupModel.title;
     requestModel.sentBy = senderModel.name;
+    requestModel._id = requestCursor._id,
     groupModel.groupImage ? requestModel.groupImage = groupModel.groupImage : "";
 
     return requestModel;

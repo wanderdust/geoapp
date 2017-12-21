@@ -52,9 +52,9 @@ $(function () {
       window.location.href = 'main.html#/online';
     },
 
-    snackBar: function (err) {
+    snackBar: function (message) {
       let x = this.$("#snackbar");
-      x.html(err);
+      x.html(message);
       x.addClass('show');
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }

@@ -13,10 +13,11 @@ $(function () {
       this.$requestList = $('.invitations-list ul')
 
       this.listenTo(app.requestCollection, 'add', this.appendOne);
+      this.listenTo(app.requestCollection, 'addGroup', this.addUserToGroup);
+      this.listenTo(app.requestCollection, 'rejectGroup', this.removeGroup);
 
       this.socket.on('addNewRequest', (data) => {
-        app.requestCollection.add(data)
-        console.log('hi')
+        app.requestCollection.add(data);
       })
     },
 
@@ -33,6 +34,32 @@ $(function () {
     appendAll: function (collection) {
       this.$requestList.html('');
       collection.each(this.appendOne, this);
+    },
+
+    addUserToGroup: function (model) {
+      let requestId = model.get('_id');
+
+      this.socket.emit('joinGroup', requestId, (err, res) => {
+        if (err)
+          return console.log(err);
+
+        // Remove the model and update the view.
+        app.requestCollection.remove(model);
+        app.requestCollection.trigger('showAlert', res)
+      })
+    },
+
+    removeGroup: function (model) {
+      let requestId = model.get('_id');
+
+      this.socket.emit('rejectGroup', requestId, (err, res) => {
+        if (err)
+          return console.log(err);
+
+        // Remove the model and update the view.
+        app.requestCollection.remove(model);
+        app.requestCollection.trigger('showAlert', res);
+      })
     }
   })
 

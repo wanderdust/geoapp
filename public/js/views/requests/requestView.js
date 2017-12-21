@@ -10,11 +10,13 @@ $(function () {
     template: $('#request-template').html(),
 
     events: {
-
+      "click .accept-btn": "addUserToGroup",
+      "click .reject-btn": "rejectGroup"
     },
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'remove', this.remove)
     },
 
     render: function () {
@@ -23,6 +25,14 @@ $(function () {
 
       this.$el.html(html);
       return this;
+    },
+
+    addUserToGroup: function () {
+      app.requestCollection.trigger('addGroup', this.model);
+    },
+
+    rejectGroup: function () {
+      app.requestCollection.trigger('rejectGroup', this.model)
     }
   })
 

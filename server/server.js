@@ -266,12 +266,53 @@ io.on('connection', (socket) => {
         newRequest = await new Request(request).save();
         newRequestModel = await createRequestModel(newRequest);
 
-        io.to(socketsToUpdate[0].socketId).emit('addNewRequest', newRequestModel);
+        if (socketsToUpdate !== undefined)
+          io.to(socketsToUpdate[0].socketId).emit('addNewRequest', newRequestModel);
       }
 
       callback(null, 'Group created succesfully')
     } catch (e) {
       console.log(e, e.message)
+      callback(e)
+    }
+  });
+
+  // Creates a new UserGroup document and removes the request document.
+  socket.on('joinGroup', async (data, callback) => {
+    try {
+      // 1st We create a new userGroup.
+      let request = await Request.findById(data);
+      let newUserGroup = {
+        groupId: request.groupId ,
+        userId: request.recipientId,
+        online: false,
+        pending: false,
+      };
+
+      await new UserGroup(newUserGroup).save();
+
+      // We find out what is the name of the new Group.
+      let groupName = await Group.findById(newUserGroup.groupId);
+
+      // 2nd We remove the request from db.
+      let deletedDocument = await Request.deleteOne({_id: ObjectID(data)});
+
+      callback(null, `Has entrado en ${groupName.title}`)
+    } catch (e) {
+      console.log(e)
+      callback(e)
+    }
+  });
+
+  // Finds the request document and deletes it.
+  socket.on('rejectGroup', async (data, callback) => {
+    try {
+      let deletedDocument = await Request.findOneAndRemove({_id: ObjectID(data)});
+      let groupName = await Group.findById(deletedDocument.groupId);
+
+      callback(null, `Has rechazado ${groupName.title}`)
+    } catch (e) {
+      console.log(e.message)
       callback(e)
     }
   })

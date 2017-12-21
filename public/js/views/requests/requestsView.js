@@ -20,6 +20,7 @@ $(function () {
       this.$numberOfRequests = $('.requests-length');
 
       this.listenTo(app.requestCollection, 'update', this.render);
+      this.listenTo(app.requestCollection, 'showAlert', this.snackBar);
       new app.RequestList();
 
       this.socket.emit('createRequestCollection', userId, (err, collection) => {
@@ -40,6 +41,13 @@ $(function () {
 
     backToMain: function () {
       window.location.href = 'main.html#/online';
+    },
+
+    snackBar: function (message) {
+      let x = this.$("#snackbar");
+      x.html(message);
+      x.addClass('show');
+      setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
 

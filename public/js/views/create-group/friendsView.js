@@ -96,7 +96,7 @@ $(function () {
           if (err)
             return console.log(err)
 
-          window.location.href = '/main.html'
+          window.location.href = '/main.html#/all'
         })
       });
 
