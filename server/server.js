@@ -9,6 +9,7 @@ const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
+const {Friend} = require('./models/friends.js')
 const {OpenSocketsGroups} = require('./utils/openSocketsGroups.js');
 const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
@@ -313,6 +314,31 @@ io.on('connection', (socket) => {
       callback(null, `Has rechazado ${groupName.title}`)
     } catch (e) {
       console.log(e.message)
+      callback(e)
+    }
+  });
+
+  socket.on('searchFriends', async(data, callback) => {
+    try {
+      let searchResults = await User.find({name: {$regex : `.*${data.query}.*`}});
+      let searchCollection = [];
+
+      for (let result of searchResults) {
+        let model = {};
+
+        model.name = result.name;
+        model._id = result._id;
+        result.userImage ? model.userImage = result.userImage : "";
+
+        searchCollection.push(model);
+
+        if (searchCollection.length > 20)
+          break;
+      };
+
+      callback(null, searchCollection)
+    } catch (e) {
+      console.log(e)
       callback(e)
     }
   })

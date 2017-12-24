@@ -14,7 +14,8 @@ $(function () {
       "swipeleft #sidebar-container": "closeSidebar",
       "click .requests-btn": "getRequests",
       "click .pending-btn": "getPending",
-      "click .new-group-btn": "getNewGroup"
+      "click .new-group-btn": "getNewGroup",
+      "click .friends-add-btn": "getAddFriends"
     },
 
     initialize: function () {
@@ -30,10 +31,6 @@ $(function () {
 
       new app.MapsContent();
       new app.TabsContent();
-
-      this.socket.emit('userConnected', {
-        userId: sessionStorage.getItem('userId')
-      })
 
       this.socket.emit('createGroupCollection', {
         userId: sessionStorage.getItem('userId')
@@ -63,6 +60,10 @@ $(function () {
 
     getNewGroup: function () {
       window.location.href = "/create-group.html"
+    },
+
+    getAddFriends: function () {
+      window.location.href = "/add-friends.html"
     }
   })
 })

@@ -20,9 +20,9 @@ $(function () {
       this.socket = socket;
       this.$groupsLength = $('.groups-length');
 
+      new app.PendingList();
       this.listenTo(app.groupCollection, 'update', this.render);
       this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
-      new app.PendingList();
 
       this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
         if(err)
