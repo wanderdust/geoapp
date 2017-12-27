@@ -13,6 +13,8 @@ $(function () {
     },
 
     initialize: function () {
+      let userId = sessionStorage.getItem('userId');
+      
       this.socket = socket;
       this.$requestList = $('.groups-list ul');
       this.friendsArray = [];
@@ -23,10 +25,7 @@ $(function () {
       this.listenTo(app.userCollection, 'removeFriend', this.removeFriendFromArray);
       this.listenTo(app.userCollection, 'clearArray', this.removeAllFriends);
 
-      this.socket.emit('createUsersCollection', {
-        groupId: sessionStorage.getItem('currentGroupId'),
-        userId: sessionStorage.getItem('userId')
-      }, (err, collection) => {
+      this.socket.emit('createFriendsCollection', userId, (err, collection) => {
         if (err)
           return console.log(err)
 
@@ -84,7 +83,7 @@ $(function () {
     saveFriendsArray: function () {
       app.userCollection.trigger('groupFriends', this.friendsArray)
     },
-    
+
     // Clears the friendsArray. Fired when user clicks return button.
     removeAllFriends: function () {
       this.friendsArray = [];

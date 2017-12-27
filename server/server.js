@@ -16,6 +16,7 @@ const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
 const {createFriendRequestModel} = require('./utils/createFriendRequestModel.js');
+const {createFriendModel} = require('./utils/createFriendModel.js')
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -106,7 +107,23 @@ io.on('connection', (socket) => {
       // Sends an array with the friend request Models.
       callback(null, requestCollection);
     } catch (e) {
-      callback(e)
+      callback(e.message)
+    }
+  });
+
+  socket.on('createFriendsCollection', async (userId, callback) => {
+    try {
+      let friendsCollection = [];
+      let friends = await Friend.find({userId: userId, status: "accepted"});
+
+      for (let friend of friends) {
+        let friendModel = await createFriendModel(friend);
+        friendsCollection.push(friendModel);
+      }
+
+      callback(null, friendsCollection)
+    } catch (e) {
+      callback(e.message)
     }
   })
 
@@ -288,14 +305,14 @@ io.on('connection', (socket) => {
         newRequest = await new Request(request).save();
         newRequestModel = await createRequestModel(newRequest);
 
-        if (socketsToUpdate !== undefined)
+        if (socketsToUpdate[0] !== undefined)
           io.to(socketsToUpdate[0].socketId).emit('addNewRequest', newRequestModel);
       }
 
       callback(null, 'Group created succesfully')
     } catch (e) {
       console.log(e, e.message)
-      callback(e)
+      callback(e.message)
     }
   });
 
@@ -380,7 +397,7 @@ io.on('connection', (socket) => {
       newFriendModel = await createFriendRequestModel(newFriend);
 
       // Sends data to that friend.
-      if (socketsToUpdate !== undefined)
+      if (socketsToUpdate[0] !== undefined)
         io.to(socketsToUpdate[0].socketId).emit('addNewFriendRequest', newFriendModel);
 
       callback(null, 'Request sent succesfully')
@@ -423,8 +440,12 @@ io.on('connection', (socket) => {
 
   socket.on('rejectFriend', async (data, callback) => {
     try {
-      let deletedDocument = await Friend.findOneAndRemove({_id: ObjectID(data), status: "pending"});
-      let userName = await User.findById(deletedDocument.userId);
+      let userName;
+      let deletedDocument = await Friend.findOneAndRemove({
+        _id: ObjectID(data),
+        status: "pending"
+      });
+      userName = await User.findById(deletedDocument.userId);
 
       callback(null, `Has rechazado a ${userName.name}`)
     } catch (e) {
