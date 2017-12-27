@@ -13,6 +13,7 @@ $(function () {
     },
 
     initialize: function () {
+
       this.getUserLocation();
       this.currentMarkers = [];
     },
@@ -44,13 +45,16 @@ $(function () {
     getUserLocation: function () {
       let that = this;
       if (!navigator.geolocation)
-        return
+        return console.log('Geolocation not supported');
 
       navigator.geolocation.getCurrentPosition(function(position) {
         let coords = {};
         coords.lat = position.coords.latitude;
         coords.lng = position.coords.longitude;
         that.initMap(coords);
+      }, function (err) {
+        let coords = {lat: 55.948638, lng: -3.201244}
+        that.initMap(coords)
       });
     },
     // Places a marker.

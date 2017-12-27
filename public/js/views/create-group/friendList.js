@@ -42,14 +42,15 @@ $(function () {
     appendOne: function (friend) {
       let view = new app.FriendView({model: friend});
       this.$requestList.append(view.render().el);
-
     },
+
     // Clears the view and appends all.
     appendAll: function (collection) {
       this.$requestList.html('');
       collection.each(this.appendOne, this);
     },
-    // Shows/hides users for search bar.
+
+    // Shows/hides users when introducing a query.
     search: function() {
       let input, filter, ul, li, a, i;
       input = $('.friends-query');
@@ -67,19 +68,23 @@ $(function () {
           }
       }
   	},
+
     // Adds a friend to the friends array.
     addFriendToArray: function (model) {
       this.friendsArray.push(model.get('_id'));
     },
+
     // Removes a friend from the friends array.
     removeFriendFromArray: function (model) {
       let index = this.friendsArray.indexOf(model.get('_id'));
       this.friendsArray.splice(index, 1);
     },
+
     // Sends the friends array data to the main view.
     saveFriendsArray: function () {
       app.userCollection.trigger('groupFriends', this.friendsArray)
     },
+    
     // Clears the friendsArray. Fired when user clicks return button.
     removeAllFriends: function () {
       this.friendsArray = [];
