@@ -15,7 +15,8 @@ $(function () {
       "click .requests-btn": "getRequests",
       "click .pending-btn": "getPending",
       "click .new-group-btn": "getNewGroup",
-      "click .friends-add-btn": "getAddFriends"
+      "click .friends-add-btn": "getAddFriends",
+      "click .friend-requests-btn": "getFriendRequests"
     },
 
     initialize: function () {
@@ -64,6 +65,10 @@ $(function () {
 
     getAddFriends: function () {
       window.location.href = "/add-friends.html"
+    },
+
+    getFriendRequests: function () {
+      window.location.href = "/friend-requests.html"
     }
   })
 })

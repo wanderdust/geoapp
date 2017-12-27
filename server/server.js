@@ -15,6 +15,7 @@ const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
+const {createFriendRequestModel} = require('./utils/createFriendRequestModel.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -89,6 +90,25 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Creates a new friend Request
+  socket.on('createFriendRequestCollection', async (userId, callback) => {
+    try {
+      let requestCollection = [];
+      let requestCursors = await Friend.find({friendId: userId, status: "pending"});
+
+      for (let requestCursor of requestCursors) {
+        // Returns an object with the request model properties
+        let requestModel = await createFriendRequestModel(requestCursor);
+        requestCollection.push(requestModel);
+      }
+      // Updates the current openSockets Users array.
+      openSocketsUsers.addSockets(userId, socket.id);
+      // Sends an array with the friend request Models.
+      callback(null, requestCollection);
+    } catch (e) {
+      callback(e)
+    }
+  })
 
   socket.on('userInArea', async (data) => {
     try {
@@ -248,6 +268,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Creates the request in the database.
   socket.on('addGroupRequests', async (data, callback) => {
     try {
       let currentUser = data.currentUser;
@@ -318,7 +339,7 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('searchFriends', async(data, callback) => {
+  socket.on('searchFriends', async (data, callback) => {
     try {
       let searchResults = await User.find({name: {$regex : `.*${data.query}.*`}});
       let searchCollection = [];
@@ -341,6 +362,74 @@ io.on('connection', (socket) => {
       console.log(e)
       callback(e)
     }
+  });
+
+  // Creates a pending request to be sent to the friend to accept/reject.
+  socket.on('sendFriendRequest', async (data, callback) => {
+    try {
+      let newFriend;
+      let newFriendModel;
+      let socketsToUpdate = openSocketsUsers.findSockets(data.recipientId);
+      let request = {
+        userId: data.senderId,
+        friendId: data.recipientId,
+        status: 'pending'
+      };
+
+      newFriend = await new Friend(request).save();
+      newFriendModel = await createFriendRequestModel(newFriend);
+
+      // Sends data to that friend.
+      if (socketsToUpdate !== undefined)
+        io.to(socketsToUpdate[0].socketId).emit('addNewFriendRequest', newFriendModel);
+
+      callback(null, 'Request sent succesfully')
+
+    } catch (e) {
+      callback('Unable to send request');
+    }
+  });
+
+  socket.on('addFriend', async (data, callback) => {
+    try {
+      let addFriendAB;
+      let addFriendBA;
+      let friendRequest;
+      let friendName;
+
+      // 1st we change the friendRequest id to accepted.
+      addFriendAB = await Friend.findOneAndUpdate({
+        _id: data
+      }, {
+        $set: {status: "accepted"}
+      });
+
+      // 2nd we create a new friendship BA for the other user.
+      friendRequest = {
+        userId: addFriendAB.friendId,
+        friendId: addFriendAB.userId,
+        status: 'accepted'
+      }
+      addFriendBA = await new Friend(friendRequest).save();
+
+      // We find out the name of the added user.
+      friendName = await User.findById(addFriendBA.friendId);
+
+      callback(null, `${friendName.name} ha sido añadido a tu lista de amigos`)
+    } catch (e) {
+      callback('No se ha podido añadir a este usuario')
+    }
+  })
+
+  socket.on('rejectFriend', async (data, callback) => {
+    try {
+      let deletedDocument = await Friend.findOneAndRemove({_id: ObjectID(data), status: "pending"});
+      let userName = await User.findById(deletedDocument.userId);
+
+      callback(null, `Has rechazado a ${userName.name}`)
+    } catch (e) {
+
+    }
   })
 
   socket.on('disconnect', () => {
@@ -348,7 +437,8 @@ io.on('connection', (socket) => {
     openSocketsGroups.removeSockets(socket);
     openSocketsUsers.removeSockets(socket);
   })
-})
+});
+
 
 server.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`)

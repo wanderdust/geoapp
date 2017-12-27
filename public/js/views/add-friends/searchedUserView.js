@@ -28,12 +28,14 @@ $(function () {
 
     // Adds a new friend document to the database.
     sendFriendRequest: function () {
+      let recipientId = this.model.get('_id');
+      let senderId = sessionStorage.getItem('userId');
 
-      this.socket.emit('sendFriendRequest', {}, (data, callback) => {
+      this.socket.emit('sendFriendRequest', {recipientId, senderId}, (err, res) => {
         if (err)
-          app.userCollection.trigger('showAlert', 'Unable to send request');
+          console.log(err)
 
-        app.userCollection.trigger('showAlert', 'Request sent succesfully')
+        console.log(res)
       })
     }
   })

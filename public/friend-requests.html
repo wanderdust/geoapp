@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app-container">
+      <nav id="header-nav">
+        <div id="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container">
+          <div id="group-title-group">
+            <p>Invitaciones</p>
+          </div>
+          <div id="group-sub-title">
+            <p class="requests-length"></p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="tabs-content status-users-content">
+
+        <div class="invitations-list">
+          <ul>
+
+
+          </ul>
+        </div>
+      </div>
+      <div id="snackbar"></div>
+    </div>
+
+    <script id="number-of-requests" type="text/template">
+      <p>Invitaciones de amistad ({{requestsLength}})</p>
+    </script>
+
+    <script id="request-template" type="text/template">
+      <div class="group-container invitation-container">
+
+        <div class="image">
+          <img src="{{groupImage}}" class="img-responive img-fluid">
+        </div>
+        <div class="group-header request-header">
+          <p class="group-title">{{title}}</p>
+          <p class="group-status user-status"></p>
+        </div>
+        <div class="accept-reject-container">
+          <div class="accept-btn invitation-btn">
+            <p>Aceptar</p>
+          </div>
+          <div class="reject-btn invitation-btn">
+            <p>Rechazar</p>
+          </div>
+
+        </div>
+      </div>
+    </script>
+
+    <script src="/socket.io/socket.io.js/"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/models/requestModel.js"></script>
+    <script src="./js/collections/requests.js"></script>
+    <script src="./js/views/friend-requests/friendRequestView.js"></script>
+    <script src="./js/views/friend-requests/friendRequestList.js"></script>
+    <script src="./js/views/friend-requests/friendRequestsView.js"></script> -->
+    <script src="./js/app-friend-requests.js"></script>
+  </body>
+</html>

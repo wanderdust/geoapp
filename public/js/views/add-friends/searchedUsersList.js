@@ -10,8 +10,6 @@ $(function () {
     initialize: function () {
         this.listenTo(app.userCollection, 'add', this.appendOne);
         this.$list = $('.groups-list ul');
-
-        
     },
 
     render: function () {
