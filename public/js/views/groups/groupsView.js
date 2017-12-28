@@ -39,7 +39,12 @@ $(function () {
         if(err)
           return console.log(err);
 
-        app.groupCollection.add(collection);
+        // If it is a new user with no groups it triggers blankMap event.
+        if (collection.length === 0) {
+          app.groupCollection.trigger('blankMap')
+        } else {
+          app.groupCollection.add(collection);
+        }
       })
     },
 

@@ -19,12 +19,12 @@
 				<div class="main-login main-center">
 					<form class="form-horizontal" method="post" action="submit">
 
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Email</label>
+            <div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Nombre</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Introduce tu email"/>
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Introduce tu nombre"/>
 								</div>
 							</div>
 						</div>
@@ -43,14 +43,14 @@
 							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Acceder</button>
 						</div>
 						<div class="login-register">
-				            <a href="login.html">Regístrate</a>
+				            <a href="sign-in.html">Regístrate</a>
 				         </div>
 					</form>
 				</div>
 			</div>
 		</div>
 
-    <!-- <script src="/socket.io/socket.io.js/"></script> -->
+    <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
@@ -58,35 +58,6 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-
-    <script type="text/javascript">
-
-
-      $('.btn-primary').on('click', () => {
-        let $inputName = $('#email').val();
-        if ($inputName === 'Pablo') {
-          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d74');
-          window.location.href = 'main.html#/online';
-        } else if ($inputName === 'Wilson') {
-          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d77');
-          window.location.href = 'main.html#/online';
-        } else if ($inputName === 'Meg') {
-          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d76');
-          window.location.href = 'main.html#/online';
-        } else if ($inputName === 'Juan') {
-          sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d75');
-          window.location.href = 'main.html#/online';
-        }
-      })
-
-      // Make the users available on login.
-        // <ul>
-        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d74');   window.location.href = '/#/online'">Pablo</li>
-        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d77');   window.location.href = '/#/online'">Wilson</li>
-        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d76');   window.location.href = '/#/online'">Meg</li>
-        //   <li onClick="sessionStorage.setItem('userId','5a11bb91f6ab5154f4bf0d75');   window.location.href = '/#/online'">Juan</li>
-        // </ul>
-
-    </script>
+    <script src="./js/views/sign-in/sign-in.js"></script>
 	</body>
 </html>

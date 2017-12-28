@@ -19,6 +19,7 @@ $(function () {
       this.currentMarkers = [];
       this.socket = socket;
 
+      this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll)
@@ -34,7 +35,7 @@ $(function () {
         app.groupCollection.findAndUpdateOnePending(data);
       })
 
-      setInterval(this.userCoords, 4000);
+      this.userCoords();
     },
 
     render: function () {
@@ -52,13 +53,13 @@ $(function () {
           let userLat = position.coords.latitude;
           let userLng = position.coords.longitude;
 
+          // For each marker calculates the distance from the user.
           for (let i = 0; groups.length > i; i++) {
             let model = app.groupCollection.models[i];
             let groupLat = model.get('coords').lat;
             let groupLng = model.get('coords').lng;
-
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-            console.log(distance)
+
             if (distance <= 0.05) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
@@ -106,19 +107,42 @@ $(function () {
       };
     },
 
+    newMap: function (coords) {
+      let map =  new google.maps.Map(document.getElementById('map-frame'), {
+          center: coords,
+          zoom: 8,
+          disableDefaultUI: true,
+          styles: mapStyle
+        });
+      this.map = map;
+      return map;
+    },
+
+    // Creates a new map with the center at the user's current location.
+    blankMap: async function () {
+      let that = this;
+      if (!navigator.geolocation)
+        return console.log('Geolocation not supported by your browser');
+
+      await navigator.geolocation.getCurrentPosition(function (position) {
+        let coords = {};
+        coords.lat = position.coords.latitude;
+        coords.lng = position.coords.longitude;
+        that.initMap(coords);
+      }, function (err) {
+        let coords = {lat: 55.948638, lng: -3.201244}
+        that.newMap(coords)
+      })
+    },
+
     // Inits google maps.
     initMap: function () {
       let center = this.getCenter(app.groupCollection).coords;
       let bounds = this.getCenter(app.groupCollection).bound;
       let coords = {lat: center.lat(), lng: center.lng()}
 
-      let map = new google.maps.Map(document.getElementById('map-frame'), {
-          center: coords,
-          disableDefaultUI: true,
-          styles: mapStyle
-        });
+      let map = this.newMap(coords);
       map.fitBounds(bounds);
-      this.map = map;
     },
 
     // Creates and renders new Markers.

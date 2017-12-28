@@ -31,6 +31,41 @@ app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
 
+  // Creates a new user in the database.
+  socket.on('createUser', async (data, callback) => {
+    try {
+      let user;
+      let newUser = {
+        name: data.name,
+        userImage: "",
+        email: data.email,
+        password: data.password
+      };
+
+      if (data.password !== data.confirmPassword) {
+        throw Error ('Passwords do not match');
+      }
+
+      user = await new User(newUser).save();
+
+      callback(null, user._id)
+    } catch (e) {
+      callback(e.message)
+    }
+  });
+
+  socket.on('loginUser', async (data, callback) => {
+    try {
+      let user = await User.findOne({name: data.name, password: data.password});
+
+      if (user === null)
+        throw Error('No user found');
+
+      callback(null, user._id)
+    } catch (e) {
+      callback(e.message)
+    }
+  })
 
   socket.on('createGroupCollection', async (userId, callback) => {
     try {

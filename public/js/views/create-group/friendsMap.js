@@ -47,7 +47,7 @@ $(function () {
       if (!navigator.geolocation)
         return console.log('Geolocation not supported');
 
-      navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(function (position) {
         let coords = {};
         coords.lat = position.coords.latitude;
         coords.lng = position.coords.longitude;
