@@ -33,6 +33,15 @@ $(function () {
           return console.log(err)
 
         app.userCollection.add(collection);
+      });
+
+      // Listens for server if user is online/offline in a group to update it.
+      this.socket.on('updateUserStatus', (data) => {
+        app.userCollection.updateOnlineUser(data.userId, data.groupId);
+      });
+
+      this.socket.on('updatePendingStatus', (data) => {
+        app.userCollection.updatePendingUser(data.userId, data.groupId);
       })
     },
 

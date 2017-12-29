@@ -1,6 +1,7 @@
 // View of all the user views.
 
 var app = app || {};
+var socket = socket || io();
 
 $(function () {
 
@@ -8,11 +9,12 @@ $(function () {
     el: '.tabs-content',
 
     initialize: function () {
-        this.$onlineUsers = $('.online-users-list ul');
-        this.$offlineUsers = $('.offline-users-list ul');
+      this.socket = socket;
+      this.$onlineUsers = $('.online-users-list ul');
+      this.$offlineUsers = $('.offline-users-list ul');
 
-        this.listenTo(app.userCollection, 'add', this.appendOne);
-        this.listenTo(app.userCollection, 'change', this.filterOne);
+      this.listenTo(app.userCollection, 'add', this.appendOne);
+      this.listenTo(app.userCollection, 'change', this.filterOne);
     },
 
     render: function () {

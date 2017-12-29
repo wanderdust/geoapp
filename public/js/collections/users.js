@@ -27,6 +27,37 @@ $(function () {
         model = this.where({isPending: true})
       }
       return model.length > 0;
+    },
+
+    // Updates the user online/offline status.
+    updateOnlineUser: function (userId, groupId) {
+      let currentGroup = sessionStorage.getItem('currentGroupId');
+      let model = this.findWhere({_id: userId});
+
+      if (currentGroup === groupId) {
+        model.set({isOnline: true});
+        model.set({isPending: false})
+      } else {
+        model.set({isOnline: false})
+      };
+
+      // Saves the new model updates in the collection.
+      this.set({model}, {add: false, remove: false, merge: true});
+    },
+
+    // Updates the user pending status.
+    updatePendingUser: function (userId, groupId) {
+      let currentGroup = sessionStorage.getItem('currentGroupId');
+      let model = this.findWhere({_id: userId});
+
+      if (currentGroup === groupId) {
+        model.set({isPending: true})
+      } else {
+        model.set({isPending: false})
+      };
+
+      // Saves the new model updates in the collection.
+      this.set({model}, {add: false, remove: false, merge: true});
     }
   })
 

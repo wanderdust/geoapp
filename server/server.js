@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Finds all the users belonging to a group
   socket.on('createUsersCollection', async (data, callback) => {
     try {
       let userCollection = [];
@@ -97,15 +98,18 @@ io.on('connection', (socket) => {
         // Returns an object with the user model properties.
         let newModel = await createUserModel(userCursor, data.userId);
 
+        // Adds a new element mapping groupId with socketId.
+        openSocketsUsers.addSockets(newModel._id, socket.id);
         userCollection.push(newModel);
       };
       // Sends an array with all the user Models.
-      callback(null, userCollection)
+      callback(null, userCollection);
     } catch (e) {
       callback(e);
     }
   });
 
+  // FInds all the requests for each user.
   socket.on('createRequestCollection', async (userId, callBack) => {
     try {
       let requestCollection = [];
@@ -126,7 +130,7 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Creates a new friend Request
+  // Creates a new friend Request collection
   socket.on('createFriendRequestCollection', async (userId, callback) => {
     try {
       let requestCollection = [];
@@ -146,6 +150,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // FInds all the friends for each user and creates a collection.
   socket.on('createFriendsCollection', async (userId, callback) => {
     try {
       let friendsCollection = [];
@@ -162,64 +167,81 @@ io.on('connection', (socket) => {
     }
   })
 
+  // Updates user data when he changes location.
   socket.on('userInArea', async (data) => {
     try {
       let updatedDocuments = [];
+      let checkLocation;
+      let findIfOnlineAndUpdate;
+      let findIfPendingAndUpdate;
+      let updateNewLocation;
+      let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+
       // Check if he has been updated already.
-      let checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
+      checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
 
       if (checkLocation.online)
-        return console.log('User location has already been updated')
+        return false
 
       // Finds if he is online in another Group and sets it to false.
-      let findIfOnlineAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
+      findIfOnlineAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
         $set: {
           online: false
         }
       }, {new: true});
 
       // Finds if he is pending in another group and sets it to false.
-      let findIfPendingAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
+      findIfPendingAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
         $set: {
           pending: false
         }
       }, {new: true});
 
       //Finds the userGroup with the userId and groupId and updates the data in database.
-      let updateNewLocation = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
+      updateNewLocation = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
         $set: {
           online: true,
         }
       }, {new: true});
 
       updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
+
       // Return all the models that have been updated.
       // Sends data to respective sockets.
       for (let doc of updatedDocuments) {
         let updatedProperties = {};
+        let username;
+        let socketsToUpdateGroups;
 
         if (doc === null)
           continue;
 
-        let userName = await User.findOne({_id: ObjectID(doc.userId)});
+        // Finds out the name of the user who is now online.
+        userName = await User.findOne({_id: ObjectID(doc.userId)});
 
         updatedProperties._id = doc.groupId;
         updatedProperties.userOnline = userName.name;
         updatedProperties.userId = userName._id;
 
         // Finds the sockets in the  array that contain an updated group.
-        let socketsToUpdate = openSocketsGroups.findSockets(doc);
+        socketsToUpdateGroups = openSocketsGroups.findSockets(doc);
 
-        socketsToUpdate.forEach((e) => {
+        socketsToUpdateGroups.forEach((e) => {
           io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
-        })
-      }
+        });
+      };
+
+      // Sends data to the online/offline users group view.
+      socketsToUpdateUsers.forEach((e) => {
+        io.to(e.socketId).emit('updateUserStatus', data);
+      });
+
     } catch (e) {
       console.log(e)
     }
   });
 
-  // Finds user's selected pending group for the pending view.
+  // Finds user's already selected pending group for the pending view.
   socket.on('findIfPending', async (data, callback) => {
     try {
       let pendingUser = await UserGroup.findOne({userId: data.userId, pending: true});
@@ -232,9 +254,12 @@ io.on('connection', (socket) => {
     }
   });
 
+  // When user clicks on a group, sets that group to pending in the database
+  // and unsets other groups that were pending for that user.
   socket.on('updatePending', async (data, callback) => {
     try {
       let updatedDocuments = [];
+      let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
       let groupName = await Group.findOne({_id: ObjectID(data.groupId)});
       // Checks if user is already online in that group.
       let userIsOnline = await UserGroup.findOne({
@@ -278,7 +303,12 @@ io.on('connection', (socket) => {
         socketsToUpdate.forEach((e) => {
           io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
         })
-      }
+      };
+
+      // Sends the new data to the users view to update the pending status.
+      socketsToUpdateUsers.forEach((e) => {
+        io.to(e.socketId).emit('updatePendingStatus', data);
+      });
 
       // If operation succesfull tells the model to set button to green.
       callback(null, `Vas a ir a ${groupName.title}`);
@@ -351,9 +381,11 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Creates a new UserGroup document and removes the request document.
+  // Creates a new UserGroup document when user accepts a group-request.
   socket.on('joinGroup', async (data, callback) => {
     try {
+      let groupName;
+      let deletedDocument;
       // 1st We create a new userGroup.
       let request = await Request.findById(data);
       let newUserGroup = {
@@ -366,10 +398,10 @@ io.on('connection', (socket) => {
       await new UserGroup(newUserGroup).save();
 
       // We find out what is the name of the new Group.
-      let groupName = await Group.findById(newUserGroup.groupId);
+      groupName = await Group.findById(newUserGroup.groupId);
 
       // 2nd We remove the request from db.
-      let deletedDocument = await Request.deleteOne({_id: ObjectID(data)});
+      deletedDocument = await Request.deleteOne({_id: ObjectID(data)});
 
       callback(null, `Has entrado en ${groupName.title}`)
     } catch (e) {

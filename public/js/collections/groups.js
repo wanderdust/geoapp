@@ -57,12 +57,13 @@ $(function () {
         model.set({activeUsers: onlineUsersArray});
       }
 
+      // Saves the new model updates in the collection.
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
       model.trigger('render');
       // Updates the markers.
-      this.trigger('updateMarkers')
+      this.trigger('updateMarkers');
     },
 
     findAndUpdateOnePending: function (data) {
