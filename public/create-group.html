@@ -41,7 +41,9 @@
           <div class="add-friends-btn">
             <img src="./css/assets/group-add.svg" alt="">
           </div>
-          <p class="add-friends-title">Añadir amigos</p>
+          <div id="added-friends">
+            <ul id="added-friends-list"></ul>
+          </div>
         </div>
         <div class="create-group">
           <button type="button" id="create-group-btn" class="btn btn-success">Crear Grupo</button>
@@ -70,6 +72,20 @@
         </div>
       </div>
     </div>
+
+  <script id="added-user-template" type="text/template">
+    <div class="added-friend">
+      <div class="eliminate-button">
+        <img class="centered-image" src="css/assets/icon_close_16dp.svg">
+      </div>
+      <div class="added-friend-image">
+        <img class="centered-image" src={{userImage}}>
+      </div>
+      <div class="added-friend-name">
+        <p>{{name}}</p>
+      </div>
+    </div>
+  </script>
 
   <script id="user-template" type="text/template">
       <div class="group-container user-container">
@@ -100,6 +116,8 @@
     <script src ="./js/utils/map-styles.js"></script>
     <script src="./js/models/userModel.js"></script>
     <script src="./js/collections/users.js"></script>
+    <script src="./js/views/create-group/added-friends/addedFriendView.js"></script>
+    <script src="./js/views/create-group/added-friends/addedFriendsList.js"></script>
     <script src="./js/views/create-group/friendView.js"></script>
     <script src="./js/views/create-group/friendList.js"></script>
     <script src="./js/views/create-group/friendsMap.js"></script>

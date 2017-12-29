@@ -10,7 +10,7 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
-      "click .back-arrow-container": "closeNavBar",
+      "click .back-arrow-container": "closeNavAndSave",
       "click .continue-btn": "closeNavAndSave",
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
@@ -28,6 +28,7 @@ $(function () {
       this.listenTo(app.userCollection, 'groupFriends', this.updateFriends);
       new app.FriendsMap();
       new app.FriendList();
+      new app.AddedFriendList();
 
     },
 
@@ -42,14 +43,6 @@ $(function () {
       this.$('#sidebar-container').addClass('active');
       this.$('#app-container.group-add').addClass('active');
       app.userCollection.trigger('search');
-    },
-
-    // Closes the sidebar. If back button clicked friends array is cleared.
-    closeNavBar: function () {
-      app.userCollection.trigger('clearArray')
-      this.$(".selected").removeClass('selected');
-      this.$('#sidebar-container').removeClass('active');
-      this.$('#app-container.group-add').removeClass('active');
     },
 
     // In the sidebar when clicked the green button saves the friends selected.

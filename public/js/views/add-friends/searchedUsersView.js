@@ -29,6 +29,9 @@ $(function () {
     searchFriends: function () {
       let query = $('.search-friends').val();
 
+      if (query.trim() === "")
+        return this.snackBar('Introduce un nombre para empezar a buscar')
+
       this.$list.html("");
       this.socket.emit('searchFriends', {
         query

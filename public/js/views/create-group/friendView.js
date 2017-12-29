@@ -16,6 +16,7 @@ $(function () {
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'toggleSelected', this.updateStatus)
     },
 
     render: function () {
@@ -31,9 +32,10 @@ $(function () {
       let isSelected = $friend.hasClass('selected');
 
       $friend.toggleClass('selected', !isSelected);
+      this.model.trigger('addFriendView', isSelected);
 
       if(!isSelected) {
-        app.userCollection.trigger('addFriend', this.model)
+        app.userCollection.trigger('addFriend', this.model);
       } else {
         app.userCollection.trigger('removeFriend', this.model)
       }

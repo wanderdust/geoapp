@@ -425,7 +425,7 @@ io.on('connection', (socket) => {
 
   socket.on('searchFriends', async (data, callback) => {
     try {
-      let searchResults = await User.find({name: {$regex : `.*${data.query}.*`}});
+      let searchResults = await User.find({name: {$regex : `(?i).*${data.query}.*`}});
       let searchCollection = [];
 
       for (let result of searchResults) {
@@ -460,6 +460,13 @@ io.on('connection', (socket) => {
         status: 'pending'
       };
 
+      // Check if the user is alreay friends with that user. NOT WORKING
+      // let hasFriend = Friend.findOne({userId:data.senderId , friendId: data.recipientId});
+      //
+      // if (hasFriend !== null)
+      //   return callback ('y tu ya sois amigos');
+
+      // Adds the request to the database.
       newFriend = await new Friend(request).save();
       newFriendModel = await createFriendRequestModel(newFriend);
 
@@ -467,10 +474,10 @@ io.on('connection', (socket) => {
       if (socketsToUpdate[0] !== undefined)
         io.to(socketsToUpdate[0].socketId).emit('addNewFriendRequest', newFriendModel);
 
-      callback(null, 'Request sent succesfully')
+      callback(null, 'Invitación enviada con éxito')
 
     } catch (e) {
-      callback('Unable to send request');
+      callback(e.message);
     }
   });
 

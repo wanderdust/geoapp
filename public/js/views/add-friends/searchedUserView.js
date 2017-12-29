@@ -33,9 +33,9 @@ $(function () {
 
       this.socket.emit('sendFriendRequest', {recipientId, senderId}, (err, res) => {
         if (err)
-          console.log(err)
+          return app.userCollection.trigger('showAlert', `${this.model.get('name')} ${err}`)
 
-        console.log(res)
+        app.userCollection.trigger('showAlert', res)
       })
     }
   })

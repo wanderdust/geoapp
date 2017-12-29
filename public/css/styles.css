@@ -605,7 +605,7 @@ input::-webkit-input-placeholder {
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 500;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
@@ -672,8 +672,8 @@ input::-webkit-input-placeholder {
   top: 25%;
   left: 20px;
   display: inline-block;
-  width: 17%;
-  height: 69%;
+  width: 64px;
+  height: 64px;
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
@@ -722,8 +722,8 @@ input::-webkit-input-placeholder {
   top: 20%;
   left: 22px;
   display: inline-block;
-  width: 15%;
-  height: 60%;
+  width: 60px;
+  height: 60px;
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
@@ -741,12 +741,83 @@ input::-webkit-input-placeholder {
   left: 5px;
 }
 
-.add-friends .add-friends-title {
+.add-friends #added-friends {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    width: 69%;
+    padding-right: 10px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+}
+
+.add-friends #added-friends ul {
+  height: 100%;
+}
+
+.add-friends #added-friends li {
+  display: inline;
+  height: 100%;
+}
+
+#added-friends .added-friend {
+  position: relative;
+  display: inline-block;
+  margin-top: 6px;
+  margin-left: 5px;
+  margin-right: 8px;
+  height: 100%;
+  width: 50px;
+}
+
+#added-friends .added-friend .eliminate-button {
   position: absolute;
-  top: 25px;
-  text-align: left;
-  font-size: 25px;
-  margin-left: 110px;
+  width: 20px;
+  height: 20px;
+  border: solid white 2px;
+  border-radius: 50%;
+  right: -5px;
+  top: 3px;
+  z-index: 3;
+  background-color: gray;
+}
+
+#added-friends .added-friend .added-friend-image {
+  overflow: hidden;
+  position: relative;
+  top: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0px 1px 10px 0px #888888;
+}
+
+#added-friends .added-friend .centered-image {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+}
+
+#added-friends .added-friend .added-friend-name {
+  position: absolute;
+  top: 62px;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+}
+
+#added-friends .added-friend .added-friend-name p {
+  height: 25px;
+  margin: 0px;
+  font-weight: bold;
+  color: #197985;
+  font-size: 13px;
 }
 
 .tabs-content .create-group {
