@@ -461,10 +461,10 @@ io.on('connection', (socket) => {
       };
 
       // Check if the user is alreay friends with that user. NOT WORKING
-      // let hasFriend = Friend.findOne({userId:data.senderId , friendId: data.recipientId});
-      //
-      // if (hasFriend !== null)
-      //   return callback ('y tu ya sois amigos');
+      let hasFriend = await Friend.findOne({userId:data.senderId , friendId: data.recipientId});
+      
+      if (hasFriend)
+        return callback ('y tu ya sois amigos');
 
       // Adds the request to the database.
       newFriend = await new Friend(request).save();
