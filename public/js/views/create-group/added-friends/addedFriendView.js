@@ -11,7 +11,8 @@ $(function () {
     template: $('#added-user-template').html(),
 
     events: {
-      "click .added-friend-image": "removeFriend"
+      "click .added-friend-image": "removeFriend",
+      "click .eliminate-button": "removeFriend"
     },
 
     initialize: function () {

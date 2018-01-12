@@ -7,13 +7,27 @@ $(function () {
   app.SearchedUsersList = Backbone.View.extend({
     el: '.tabs-content',
 
+    template: $('#content-placeholder').html(),
+
     initialize: function () {
         this.listenTo(app.userCollection, 'add', this.appendOne);
+        this.listenTo(app.userCollection, 'add addPlaceHolder', this.render);
         this.$list = $('.groups-list ul');
     },
 
     render: function () {
+      let content = $('.groups-list ul');
+      let trimmedContent = content.html().trim();
+      // Placeholder.
+      if (trimmedContent === "") {
+        let template = Handlebars.compile(this.template);
+        let html = template({placeholder: 'No se han encontrado usuarios'});
 
+        $('.groups-list ul').html(html);
+        return this;
+      } else {
+        $('.empty-list-placeholder').remove();
+      }
     },
 
     // Appends a model every time there is an 'add' event.

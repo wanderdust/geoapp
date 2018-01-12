@@ -37,8 +37,11 @@ $(function () {
       this.socket.emit('searchFriends', {
         query, userId
       }, (err, collection) => {
-        if(err)
+        if(err){
           return console.log(err);
+        } else if (collection.length === 0) {
+          app.userCollection.trigger('addPlaceHolder')
+        }
 
         app.userCollection.add(collection);
       })
