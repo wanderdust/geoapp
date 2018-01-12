@@ -435,6 +435,10 @@ io.on('connection', (socket) => {
         model._id = result._id;
         result.userImage ? model.userImage = result.userImage : "";
 
+        // Doesn't show the current user in the search list
+        if (data.userId == model._id)
+          continue;
+
         searchCollection.push(model);
 
         if (searchCollection.length > 20)
@@ -460,11 +464,15 @@ io.on('connection', (socket) => {
         status: 'pending'
       };
 
-      // Check if the user is alreay friends with that user. NOT WORKING
-      let hasFriend = await Friend.findOne({userId:data.senderId , friendId: data.recipientId});
-      
-      if (hasFriend)
+      // Check if the user is alreay friends with that user or has sent already an invitation.
+      let hasFriend = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'accepted'});
+      let requestSent = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'pending'})
+      if (hasFriend) {
         return callback ('y tu ya sois amigos');
+      } else if (requestSent) {
+        return callback(null, 'Ya has enviado una petición a este usuario')
+      }
+
 
       // Adds the request to the database.
       newFriend = await new Friend(request).save();
@@ -474,6 +482,7 @@ io.on('connection', (socket) => {
       if (socketsToUpdate[0] !== undefined)
         io.to(socketsToUpdate[0].socketId).emit('addNewFriendRequest', newFriendModel);
 
+      // Success message.
       callback(null, 'Invitación enviada con éxito')
 
     } catch (e) {

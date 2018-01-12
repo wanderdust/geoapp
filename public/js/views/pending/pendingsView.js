@@ -25,8 +25,12 @@ $(function () {
       this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
 
       this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
-        if(err)
+        if(err){
           return console.log(err);
+        } else if (collection.length === 0) {
+          app.groupCollection.trigger('addPlaceHolder')
+        }
+
 
         app.groupCollection.add(collection);
 

@@ -28,13 +28,14 @@ $(function () {
     // Sends the query to the server and returns documents that match the query.
     searchFriends: function () {
       let query = $('.search-friends').val();
+      let userId = sessionStorage.getItem('userId')
 
       if (query.trim() === "")
         return this.snackBar('Introduce un nombre para empezar a buscar')
 
       this.$list.html("");
       this.socket.emit('searchFriends', {
-        query
+        query, userId
       }, (err, collection) => {
         if(err)
           return console.log(err);

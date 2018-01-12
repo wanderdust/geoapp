@@ -37,6 +37,7 @@ $(function () {
       this.$el.toggleClass('hidden', this.isHidden());
     },
 
+    // FIltering algorithm.
     isHidden: function () {
       if (app.GroupFilter === "all") {
         return false;

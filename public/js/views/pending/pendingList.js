@@ -8,6 +8,8 @@ $(function () {
   app.PendingList = Backbone.View.extend({
     el: '.tabs-content',
 
+    template: $('#content-placeholder').html(),
+
     events: {
 
     },
@@ -17,6 +19,7 @@ $(function () {
       this.$requestList = $('.groups-list ul');
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
+      this.listenTo(app.groupCollection, 'add addPlaceHolder', this.render);
       this.listenTo(app.groupCollection, 'removeClassSelected', this.removeAndUpdate)
 
       socket.on('newGroupUpdates', (data) => {
@@ -25,11 +28,21 @@ $(function () {
 
       socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data)
-      })
+      });
     },
 
     render: function () {
+      let content = $('.groups-list ul').html().trim();
+      // Placeholder.
+      if (content === "") {
+        let template = Handlebars.compile(this.template);
+        let html = template({placeholder: 'No estás en ningún grupo'});
 
+        this.$el.append(html);
+        return this;
+      } else {
+        $('.empty-list-placeholder').remove();
+      }
     },
 
     // Appends a model every time there is an 'add' event.

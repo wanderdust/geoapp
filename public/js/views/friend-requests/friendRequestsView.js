@@ -25,8 +25,11 @@ $(function () {
       new app.FriendRequestList();
 
       this.socket.emit('createFriendRequestCollection', userId, (err, collection) => {
-        if (err)
+        if(err){
           return console.log(err);
+        } else if (collection.length === 0) {
+          app.requestCollection.trigger('addPlaceHolder')
+        }
 
         app.requestCollection.add(collection)
       });

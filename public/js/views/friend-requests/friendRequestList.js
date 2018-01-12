@@ -8,22 +8,35 @@ $(function () {
   app.FriendRequestList = Backbone.View.extend({
     el: '.tabs-content',
 
+    template: $('#content-placeholder').html(),
+
     initialize: function () {
       this.socket = socket;
       this.$requestList = $('.invitations-list ul')
 
       this.listenTo(app.requestCollection, 'add', this.appendOne);
+      this.listenTo(app.requestCollection, 'add remove addPlaceHolder', this.render);
       this.listenTo(app.requestCollection, 'addFriend', this.addFriend);
       this.listenTo(app.requestCollection, 'rejectFriend', this.removeFriend);
 
       // Adds a new request in real time.
       this.socket.on('addNewFriendRequest', (data) => {
         app.requestCollection.add(data);
-      })
+      });
     },
 
     render: function () {
+      let content = $('.invitations-list ul').html().trim();
+      // Placeholder.
+      if (content === "") {
+        let template = Handlebars.compile(this.template);
+        let html = template({placeholder: 'No tienes peticiones de amistad'});
 
+        this.$el.append(html);
+        return this;
+      } else {
+        $('.empty-list-placeholder').remove();
+      }
     },
 
     // Appends a model every time there is an 'add' event.

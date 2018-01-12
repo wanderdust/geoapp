@@ -973,3 +973,11 @@ input::-webkit-input-placeholder {
   font-size: 2em;
   color: gray;
 }
+
+/* Styles for add friends placeholder */
+.empty-list-placeholder {
+  text-align: center;
+  size: 1em;
+  color: lightgray;
+  margin-top: 50%;
+}
