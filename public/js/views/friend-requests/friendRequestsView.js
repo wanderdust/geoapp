@@ -55,5 +55,6 @@ $(function () {
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
-
+  
+  new app.FriendRequests();
 })

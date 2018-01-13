@@ -75,6 +75,7 @@ $(function () {
     backToMain: function () {
       window.location.href = 'main.html#/online';
     }
-  })
-
+  });
+  
+  new app.UsersView();
 })

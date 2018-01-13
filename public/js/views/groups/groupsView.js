@@ -76,4 +76,6 @@ $(function () {
       window.location.href = "/friend-requests.html"
     }
   })
+  
+  new app.GroupsView();
 })

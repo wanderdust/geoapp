@@ -60,4 +60,5 @@ $(function () {
     }
   })
 
+  new app.SearchedUsersView();
 })

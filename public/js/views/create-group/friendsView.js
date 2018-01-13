@@ -124,4 +124,5 @@ $(function () {
     }
   })
 
+  new app.FriendsView();
 })

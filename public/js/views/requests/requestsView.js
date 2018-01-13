@@ -53,6 +53,7 @@ $(function () {
       x.addClass('show');
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
-  })
-
+  });
+  
+  new app.RequestsView();
 })
