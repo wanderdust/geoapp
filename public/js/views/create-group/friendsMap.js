@@ -117,7 +117,6 @@ $(function () {
       });
       map.panTo(position);
       this.currentMarkers.push(marker);
-      console.log(this.currentMarkers)
     },
 
     // Removes all markers.

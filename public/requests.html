@@ -29,41 +29,11 @@
           <ul></ul>
         </div>
       </div>
+
       <div id="snackbar"></div>
     </div>
 
-    <script id="number-of-requests" type="text/template">
-      <p>Pendientes ({{requestsLength}})</p>
-    </script>
-
-    <script id="request-template" type="text/template">
-      <div class="group-container invitation-container">
-
-        <div class="image">
-          <img src="{{groupImage}}" class="img-responive img-fluid">
-        </div>
-        <div class="group-header request-header">
-          <p class="group-title">{{title}}</p>
-          <p class="group-status invited-by">Te ha invitado {{sentBy}}</p>
-        </div>
-        <div class="accept-reject-container">
-          <div class="accept-btn invitation-btn">
-            <p>Aceptar</p>
-          </div>
-          <div class="reject-btn invitation-btn">
-            <p>Rechazar</p>
-          </div>
-
-        </div>
-      </div>
-    </script>
-
-    <script id="content-placeholder" type="text/template">
-      <div class="empty-list-placeholder">
-        <h2>{{placeholder}}</h2>
-      </div>
-    </script>
-
+    <script src="./js/templates/templates.js"></script>
     <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>

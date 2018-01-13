@@ -7,7 +7,7 @@ $(function () {
   app.RequestView = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#request-template').html(),
+    template: Templates.requestTemplateGroup,
 
     events: {
       "click .accept-btn": "addUserToGroup",

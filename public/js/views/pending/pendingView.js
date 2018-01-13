@@ -8,7 +8,7 @@ $(function () {
   app.PendingView = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#group-template').html(),
+    template: Templates.groupTemplatePending,
 
     events: {
       "click .ok-tick": "addPendingAndUpdate"

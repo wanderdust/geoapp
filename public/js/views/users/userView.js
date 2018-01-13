@@ -7,7 +7,7 @@ $(function () {
   app.UserView = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#user-template').html(),
+    template: Templates.userTemplateB,
 
     events: {
 

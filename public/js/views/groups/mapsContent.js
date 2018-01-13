@@ -8,7 +8,7 @@ $(function () {
   app.MapsContent = Backbone.View.extend({
     el: '#map-container',
 
-    infoWindowTemplate: Handlebars.compile($('#info-window-template').html()),
+    infoWindowTemplate: Templates.infoWindowMaps,
 
     events: {
 
@@ -173,8 +173,9 @@ $(function () {
       });
       this.currentMarkers.push(marker);
 
+      let infoWindowTemplate = Handlebars.compile(this.infoWindowTemplate);
       let infoWindow = new google.maps.InfoWindow({
-          content: this.infoWindowTemplate({title: model.get('title')})
+          content: infoWindowTemplate({title: model.get('title')})
         });
       infoWindow.open(this.map, marker);
 

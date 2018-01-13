@@ -8,7 +8,7 @@ $(function () {
   app.FriendView = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#user-template').html(),
+    template: Templates.userTemplateA,
 
     events: {
       "click .ok-tick": "updateStatus"

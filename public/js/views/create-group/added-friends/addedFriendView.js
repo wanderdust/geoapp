@@ -8,7 +8,7 @@ $(function () {
   app.AddedFriend = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#added-user-template').html(),
+    template: Templates.addedUser,
 
     events: {
       "click .added-friend-image": "removeFriend",

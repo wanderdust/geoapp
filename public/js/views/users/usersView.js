@@ -7,9 +7,9 @@ $(function () {
   app.UsersView = Backbone.View.extend({
     el: '#app-container',
 
-    headerTemplate: Handlebars.compile($('#header-template').html()),
+    headerTemplate: Templates.usersGroupHeader,
 
-    userCountTemplate: Handlebars.compile($('#user-count-template').html()),
+    userCountTemplate: Templates.userCount,
 
     events: {
       "click #back-arrow-container": "backToMain"
@@ -52,18 +52,20 @@ $(function () {
       let offlineUsers = app.userCollection.offlineUsers().length;
       let isOnline = app.userCollection.isStatus('online');
       let isPending = app.userCollection.isStatus('pending');
+      let headerTemplate = Handlebars.compile(this.headerTemplate);
+      let userCountTemplate = Handlebars.compile(this.userCountTemplate)
 
-      this.$onlineUsers.html(this.userCountTemplate({
+      this.$onlineUsers.html(userCountTemplate({
         isOnline: true,
         onlineUsers
       }));
 
-      this.$offlineUsers.html(this.userCountTemplate({
+      this.$offlineUsers.html(userCountTemplate({
         isOnline: false,
         offlineUsers
       }));
 
-      this.$header.html(this.headerTemplate({
+      this.$header.html(headerTemplate({
         groupName: currentGroupName,
         isOnline,
         isPending

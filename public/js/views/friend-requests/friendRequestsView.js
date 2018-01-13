@@ -8,7 +8,7 @@ $(function () {
   app.FriendRequests = Backbone.View.extend({
     el: '#app-container',
 
-    template: Handlebars.compile($('#number-of-requests').html()),
+    template: Templates.listCount,
 
     events: {
       "click #back-arrow-container": "backToMain"
@@ -38,9 +38,10 @@ $(function () {
     },
 
     render: function () {
-      let requestsLength = app.requestCollection.length;
+      let count = app.requestCollection.length;
 
-      this.$numberOfRequests.html(this.template({requestsLength}));
+      let template = Handlebars.compile(this.template);
+      this.$numberOfRequests.html(template({title:'Peticiones de amistad', count}));
     },
 
     backToMain: function () {

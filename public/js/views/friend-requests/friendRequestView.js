@@ -7,7 +7,7 @@ $(function () {
   app.FriendRequestView = Backbone.View.extend({
     tagName: 'li',
 
-    template: $('#request-template').html(),
+    template: Templates.requestTemplate,
 
     events: {
       "click .accept-btn": "addFriend",

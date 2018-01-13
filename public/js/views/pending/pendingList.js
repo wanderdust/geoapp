@@ -8,7 +8,7 @@ $(function () {
   app.PendingList = Backbone.View.extend({
     el: '.tabs-content',
 
-    template: $('#content-placeholder').html(),
+    template: Templates.contentPlaceholder,
 
     events: {
 

@@ -8,7 +8,7 @@ $(function () {
   app.RequestList = Backbone.View.extend({
     el: '.tabs-content',
 
-    template: $('#content-placeholder').html(),
+    template: Templates.contentPlaceholder,
 
     initialize: function () {
       this.socket = socket;

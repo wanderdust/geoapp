@@ -32,48 +32,7 @@
       </div>
     </div>
 
-  <script id="header-template" type="text/template">
-    <div id="group-title-group">
-      <p>{{groupName}}</p>
-    </div>
-    <div id="group-sub-title">
-      {{#if isOnline}}
-        <p>Estado: online</p>
-      {{else}}
-        {{#if isPending}}
-            <p>Estado: pendiente</p>
-        {{else}}
-            <p>Estado: offline</p>
-        {{/if}}
-      {{/if}}
-    </div>
-  </script>
-
-  <script id="user-count-template" type="text/template">
-    {{#if isOnline}}
-      <span class="list-of-users">Usuarios online ({{onlineUsers}})</span>
-    {{else}}
-      <span class="list-of-users">Usuarios offline ({{offlineUsers}})</span>
-    {{/if}}
-  </script>
-
-    <script id="user-template" type="text/template">
-
-        <div class="group-container user-container">
-          <div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>
-          <div class="image">
-            <img src={{userImage}} class="img-responive img-fluid">
-          </div>
-          <div class="group-header">
-            <p class="group-title">{{name}}</p>
-            {{#if isPending}}
-              <p class="group-status">{{name}} va a ir.</p>
-            {{/if}}
-          </div>
-        </div>
-
-    </script>
-
+    <script src="./js/templates/templates.js"></script>
     <script src="/socket.io/socket.io.js/"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="./js/libs/bootstrap.min.js"></script>

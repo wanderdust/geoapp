@@ -8,7 +8,7 @@ $(function () {
   app.PendingsView = Backbone.View.extend({
     el: '#app-container',
 
-    template: Handlebars.compile($('#number-of-groups').html()),
+    template: Templates.listCount,
 
     events: {
       "click #back-arrow-container": "backToMain"
@@ -31,9 +31,7 @@ $(function () {
           app.groupCollection.trigger('addPlaceHolder')
         }
 
-
         app.groupCollection.add(collection);
-
         that.socket.emit('findIfPending', {userId}, (err, status) => {
           if (err)
             return console.log(err);
@@ -42,14 +40,14 @@ $(function () {
           model.trigger('updateSelected')
         })
       })
-
       this.render();
     },
 
     render: function () {
-      let groupsLength = app.groupCollection.length;
+      let count = app.groupCollection.length;
 
-      this.$groupsLength.html(this.template({groupsLength}));
+      let template = Handlebars.compile(this.template);
+      this.$groupsLength.html(template({title:'Grupos' , count}));
     },
 
     backToMain: function () {
