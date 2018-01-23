@@ -39,6 +39,7 @@ html, body {
   transition: height 0.5s;
   text-align: left;
   box-shadow: 0 -10px 20px -10px #888888;
+  background-color: white;
 }
 
 #tabs-container .nav li {
@@ -671,6 +672,7 @@ input::-webkit-input-placeholder {
 
 
 #app-container #map-container-friends {
+  position: absolute;
   height: 50%;
   width: 100%;
 }
@@ -1017,8 +1019,11 @@ input::-webkit-input-placeholder {
 
 /* Styles for add friends placeholder */
 .empty-list-placeholder {
+  position: relative;
   text-align: center;
   size: 1em;
   color: lightgray;
-  margin-top: 50%;
+  margin-top: 45%;
+  padding-right: 10px;
+  padding-left: 10px;
 }

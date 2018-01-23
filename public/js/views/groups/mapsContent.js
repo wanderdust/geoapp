@@ -10,6 +10,8 @@ $(function () {
 
     infoWindowTemplate: Templates.infoWindowMaps,
 
+    template: Templates.contentPlaceholder,
+
     events: {
 
     },
@@ -19,6 +21,7 @@ $(function () {
       this.currentMarkers = [];
       this.socket = socket;
 
+      // Stops map from executing if offline.
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
@@ -62,7 +65,7 @@ $(function () {
       //     break;
       //   }
       // }
-      
+
       try {
         if (!navigator.geolocation)
           return console.log('Geolocation not supported by your browser');
@@ -128,14 +131,18 @@ $(function () {
     },
 
     newMap: function (coords) {
-      let map =  new google.maps.Map(document.getElementById('map-frame'), {
-          center: coords,
-          zoom: 8,
-          disableDefaultUI: true,
-          styles: mapStyle
-        });
-      this.map = map;
-      return map;
+      try {
+        let map =  new google.maps.Map(document.getElementById('map-frame'), {
+            center: coords,
+            zoom: 8,
+            disableDefaultUI: true,
+            styles: mapStyle
+          });
+        this.map = map;
+        return map;
+      } catch (e) {
+        this.connectionError();
+      }
     },
 
     // Creates a new map with the center at the user's current location.
@@ -157,30 +164,39 @@ $(function () {
 
     // Inits google maps.
     initMap: function () {
-      let center = this.getCenter(app.groupCollection).coords;
-      let bounds = this.getCenter(app.groupCollection).bound;
-      let coords = {lat: center.lat(), lng: center.lng()}
+      try {
+        let center = this.getCenter(app.groupCollection).coords;
+        let bounds = this.getCenter(app.groupCollection).bound;
+        let coords = {lat: center.lat(), lng: center.lng()}
 
-      let map = this.newMap(coords);
-      map.fitBounds(bounds);
+        let map = this.newMap(coords);
+        map.fitBounds(bounds);
+      } catch (e) {
+        this.connectionError();
+      }
     },
 
     // Creates and renders new Markers.
     appendMarker: function (model, icon) {
-      let marker = new google.maps.Marker({
-          position: {lat: model.get('coords').lat, lng: model.get('coords').lng},
-          map: this.map,
-          icon
-      });
-      this.currentMarkers.push(marker);
-
-      let infoWindowTemplate = Handlebars.compile(this.infoWindowTemplate);
-      let infoWindow = new google.maps.InfoWindow({
-          content: infoWindowTemplate({title: model.get('title')})
+      // Handles google is not defined error when offline.
+      if (typeof google !== 'undefined') {
+        let marker = new google.maps.Marker({
+            position: {lat: model.get('coords').lat, lng: model.get('coords').lng},
+            map: this.map,
+            icon
         });
-      infoWindow.open(this.map, marker);
+        this.currentMarkers.push(marker);
 
-      return marker
+        let infoWindowTemplate = Handlebars.compile(this.infoWindowTemplate);
+        let infoWindow = new google.maps.InfoWindow({
+            content: infoWindowTemplate({title: model.get('title')})
+          });
+        infoWindow.open(this.map, marker);
+
+        return marker
+      } else {
+        return
+      }
     },
 
     appendMarkerByColor: function (model) {
@@ -221,6 +237,13 @@ $(function () {
     updateAll: function () {
       this.appendAll(app.groupCollection);
       this.filterAll(app.groupCollection);
+    },
+
+    connectionError: function () {
+      let template = Handlebars.compile(this.template);
+      let html = template({placeholder: 'No tienes conexión a internet'});
+      this.$el.prepend(html);
+      return this;
     }
   })
 

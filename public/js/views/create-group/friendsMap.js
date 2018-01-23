@@ -8,6 +8,8 @@ $(function () {
   app.FriendsMap = Backbone.View.extend({
     el: '#map-container-friends',
 
+    template: Templates.contentPlaceholder,
+
     events: {
 
     },
@@ -25,24 +27,32 @@ $(function () {
 
     // Function to init google maps.
     initMap: function (userCoords) {
-      let coords = {};
-      let that = this;
-      let map = new google.maps.Map(document.getElementById('map-container-friends'), {
-        center: {lat: userCoords.lat, lng: userCoords.lng},
-        zoom: 8,
-        disableDefaultUI: true,
-        styles: mapStyle
-      });
-      this.map = map;
-      // Places the marker and sends coords to the main view.
-      this.map.addListener('click', function(e) {
-          that.placeMarker(e.latLng, map);
-          coords.lat = e.latLng.lat();
-          coords.lng = e.latLng.lng();
-          app.userCollection.trigger('groupCoords', coords);
-      });
+      // If offline google throws error.
+      try {
+        let coords = {};
+        let that = this;
+        let map = new google.maps.Map(document.getElementById('map-container-friends'), {
+          center: {lat: userCoords.lat, lng: userCoords.lng},
+          zoom: 8,
+          disableDefaultUI: true,
+          styles: mapStyle
+        });
+        this.map = map;
+        // Places the marker and sends coords to the main view.
+        this.map.addListener('click', function(e) {
+            that.placeMarker(e.latLng, map);
+            coords.lat = e.latLng.lat();
+            coords.lng = e.latLng.lng();
+            app.userCollection.trigger('groupCoords', coords);
+        });
 
-      this.searchbox(map);
+        this.searchbox(map);
+      } catch (e) {
+        let template = Handlebars.compile(this.template);
+        let html = template({placeholder: 'No tienes conexión a internet'});
+        this.$el.html(html);
+        return this;
+      }
     },
 
     searchbox: function (map) {
