@@ -57,25 +57,25 @@ $(function () {
     },
 
     getRequests: function () {
-      window.location.href = "/requests.html"
+      window.location.href = "requests.html"
     },
 
     getPending: function () {
-      window.location.href = "/pending.html"
+      window.location.href = "pending.html"
     },
 
     getNewGroup: function () {
-      window.location.href = "/create-group.html"
+      window.location.href = "create-group.html"
     },
 
     getAddFriends: function () {
-      window.location.href = "/add-friends.html"
+      window.location.href = "add-friends.html"
     },
 
     getFriendRequests: function () {
-      window.location.href = "/friend-requests.html"
+      window.location.href = "friend-requests.html"
     }
   })
-  
+
   new app.GroupsView();
 })
