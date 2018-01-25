@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+
+  </head>
+  <body>
+
+  <div id="app-container">
+    <div id="sidebar-container" class="new-group-sidenav add-friends">
+      <nav id="header-nav" class="search-tab">
+        <div class="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container">
+          <input class="search-friends" type="text" placeholder="Buscar...">
+          <div class="search-icon">
+            <span class="glyphicon glyphicon-search"></span>
+          </div>
+        </div>
+      </nav>
+
+      <div class="tabs-content status-users-content">
+        <div class="groups-list">
+          <ul></ul>
+        </div>
+      </div>
+    </div>
+    <div id="snackbar"></div>
+  </div>
+
+    <script src="./js/templates/templates.js"></script>
+    <script src="https://geo-app-amigos.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/models/userModel.js"></script>
+    <script src="./js/collections/users.js"></script>
+    <script src="./js/views/add-friends/searchedUserView.js"></script>
+    <script src="./js/views/add-friends/searchedUsersList.js"></script>
+    <script src="./js/views/add-friends/searchedUsersView.js"></script>
+
+  </body>
+</html>
