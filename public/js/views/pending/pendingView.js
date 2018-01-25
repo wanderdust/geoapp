@@ -1,7 +1,7 @@
 // View for one group in Pending.html.
 
 var app = app || {};
-var socket = socket || io();
+var socket = socket || io.connect('https://geo-app-amigos.herokuapp.com');
 
 $(function () {
 

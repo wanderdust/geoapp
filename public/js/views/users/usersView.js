@@ -16,7 +16,7 @@ $(function () {
     },
 
     initialize: function () {
-      this.socket = io();
+      this.socket = io.connect('https://geo-app-amigos.herokuapp.com');
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');

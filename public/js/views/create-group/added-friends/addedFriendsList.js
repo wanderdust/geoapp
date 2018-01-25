@@ -1,7 +1,7 @@
 // View of all the added-friends views.
 
 var app = app || {};
-var socket = socket || io();
+var socket = socket || io.connect('https://geo-app-amigos.herokuapp.com');
 
 $(function () {
 
