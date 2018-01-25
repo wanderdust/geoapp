@@ -27,7 +27,7 @@ let io = socketIO(server);
 let openSocketsGroups = new OpenSocketsGroups();
 let openSocketsUsers = new OpenSocketsUsers();
 
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
 
@@ -545,5 +545,5 @@ io.on('connection', (socket) => {
 
 
 server.listen(PORT, () => {
-  console.log(`Server is up on port ${PORT}`)
+  console.log(`Server is up on port ${PORT}`);
 });
