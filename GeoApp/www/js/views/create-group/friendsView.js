@@ -14,7 +14,8 @@ $(function () {
       "click .continue-btn": "closeNavAndSave",
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
-      "click #create-group-btn": "createNewGroup"
+      "click #create-group-btn": "createNewGroup",
+      "touchend .new-group-image" : "addGroupImage"
     },
 
     initialize: function () {
@@ -121,6 +122,22 @@ $(function () {
       }
 
       return true
+    },
+
+    addGroupImage: function () {
+      let options = {
+        'destinationType': 1,
+        'sourceType': 0,
+        'mediaType': 0,
+        'correctOrientation': true
+      };
+
+      navigator.camera.getPicture(function (imageData) {
+        this.groupImage = imageData;
+        $('.new-group-image').html(`<img src="${imageData}">`);
+      }, function (err) {
+        alert('Error: '+ errorMessage );
+      }, options);
     }
   })
 

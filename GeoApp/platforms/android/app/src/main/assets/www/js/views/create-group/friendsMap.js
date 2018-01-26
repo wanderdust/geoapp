@@ -113,8 +113,8 @@ $(function () {
         coords.lng = position.coords.longitude;
         that.initMap(coords);
       }, function (err) {
-        let coords = {lat: 55.948638, lng: -3.201244}
-        that.initMap(coords)
+        let coords = {lat: 40.472795, lng: -3.868239}
+        that.initMap(coords);
       });
     },
 

@@ -33,6 +33,11 @@ html, body {
   height: 50px;
 }
 
+#tabs-header li{
+  padding: 0px !important;
+  height: 50px;
+}
+
 #tabs-container {
   position: absolute;
   bottom: 0;
@@ -320,7 +325,7 @@ html, body {
   min-height: 61px;
   height: 9%;
   width: 100%;
-  background: linear-gradient(to right, #516062, #5c6e70);
+  background: #75a478;
   box-shadow: 0px 1px 15px 0px #888888;
 }
 
@@ -404,6 +409,13 @@ html, body {
   height: 90%;
 }
 
+@media only screen and (max-height: 585px) {
+  .tabs-content.status-users-content {
+    position: absolute;
+    top: 60px;
+  }
+}
+
 .tabs-content.status-users-content .group-header .group-title {
   padding-top: 5px;
 }
@@ -465,11 +477,6 @@ label{
 	margin-bottom: 15px;
 }
 
-input,
-input::-webkit-input-placeholder {
-    font-size: 11px;
-    padding-top: 3px;
-}
 
 .main-login{
  	background-color: #fff;
@@ -676,14 +683,15 @@ input::-webkit-input-placeholder {
 
 #app-container #map-container-friends {
   position: absolute;
-  height: 50%;
+  height: 46%;
   width: 100%;
 }
 
 #app-container .tabs-content.create-group {
-  height: 41%;
+  height: 44%;
   width: 100%;
   box-shadow: 0 -10px 20px -10px #888888;
+  overflow: hidden;
 }
 
 .tabs-content.create-group .add-title {
@@ -695,12 +703,31 @@ input::-webkit-input-placeholder {
 .tabs-content.create-group .add-friends{
   margin-top: 3%;
   width: 100%;
-  height: 30%;
+  height: 35%;
 }
 
-.tabs-content.create-group .create-group {
+.tabs-content.create-group #create-group-btn {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  bottom: 5%;
+  right: 20px;
+  background: #00be00;
+  border-radius: 50px;
+  z-index: 2;
+  box-shadow: 0px 1px 15px 0px #888888;
+  display: flex;
+  align-items: center;
+}
+
+#create-group-btn img {
+  height: 70%;
+  position: absolute;
   width: 100%;
-  height: 34%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
 }
 
 .new-group-image {
@@ -716,11 +743,20 @@ input::-webkit-input-placeholder {
   z-index: 100;
   text-align: center;
   line-height: 55px;
+  display: flex;
+  align-items: center;
+  margin: auto;
   }
 
 .new-group-image img {
 
-  height: 40px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
 }
 
 .new-group-title {
@@ -756,7 +792,7 @@ input::-webkit-input-placeholder {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #f3f3f3;
+  background-color: #d7ffd9;
   box-shadow: 0px 1px 15px 0px #f3f3f3;
 }
 
@@ -870,7 +906,6 @@ input::-webkit-input-placeholder {
 
 .tabs-content .create-group button {
   border-radius: 20px;
-  margin-top: 25px;
   height: 50%;
   width: 80%;
   font-size: 20px;
@@ -912,7 +947,8 @@ input::-webkit-input-placeholder {
 /***** Styles for sidebar ****/
 
 #sidebar-container.new-group-sidenav #header-nav.search-tab {
-
+  position: absolute;
+  top: 0px;
   color: black;
   background: white;
   background-color: white;
@@ -973,7 +1009,7 @@ input::-webkit-input-placeholder {
   height: 60px;
   width: 60px;
   position: absolute;
-  bottom: 70px;
+  bottom: 15%;
   right: 20px;
   background: #00be00;
   border-radius: 50px;

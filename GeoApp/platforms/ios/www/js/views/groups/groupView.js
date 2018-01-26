@@ -60,7 +60,7 @@ $(function () {
       let groupName = this.model.get('title');
       sessionStorage.setItem('currentGroupName', groupName);
       sessionStorage.setItem('currentGroupId', groupId);
-      window.location.href = '/users.html';
+      window.location.href = 'users.html';
     }
   })
 

@@ -203,9 +203,9 @@ $(function () {
       if (model.get('activeUsers').length > 0) {
         return this.appendMarker(model, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4aa710');
       } else if (model.get('pendingUsers').length > 0) {
-        return this.appendMarker(model, '../../css/assets/pending_marker.png');
+        return this.appendMarker(model, 'css/assets/pending_marker.png');
       }
-      return this.appendMarker(model, '../../css/assets/red_marker.png');
+      return this.appendMarker(model, 'css/assets/red_marker.png');
     },
 
     removeMarkers: function () {

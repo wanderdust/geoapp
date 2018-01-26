@@ -9,7 +9,7 @@ $(function () {
       name: '',
       isOnline: false,
       isPending: false,
-      userImage: '../../css/assets/user_placeholder.png',
+      userImage: 'css/assets/user_placeholder.png',
       _id: ''
     }
   })

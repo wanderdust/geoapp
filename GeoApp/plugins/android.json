@@ -9,6 +9,12 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
   "dependent_plugins": {}
