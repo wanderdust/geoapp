@@ -49,8 +49,11 @@
     <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
+      <key>NSExceptionDomains</key>
+      <dict>
+        <key>geo-app-amigos.herokuapp.com</key>
+        <dict/>
+      </dict>
     </dict>
   </dict>
 </plist>
