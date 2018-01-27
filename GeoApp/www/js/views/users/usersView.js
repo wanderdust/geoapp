@@ -1,6 +1,7 @@
 // View of the whole users app.
 
 var app = app || {};
+var socket = socket || io.connect('https://geo-app-amigos.herokuapp.com');
 
 $(function () {
 
@@ -12,11 +13,13 @@ $(function () {
     userCountTemplate: Templates.userCount,
 
     events: {
-      "click #back-arrow-container": "backToMain"
+      "click #back-arrow-container": "backToMain",
+      "click #exit-group-link": "exitGroup"
     },
 
     initialize: function () {
-      this.socket = io.connect('https://geo-app-amigos.herokuapp.com');
+      this.socket = socket;
+
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');
@@ -74,8 +77,20 @@ $(function () {
 
     backToMain: function () {
       window.location.href = 'main.html#/online';
+    },
+
+    exitGroup: function () {
+      this.socket.emit('exitGroup', {
+        groupId: sessionStorage.getItem('currentGroupId'),
+        userId: sessionStorage.getItem('userId')
+      }, (err, res) => {
+        if (err)
+          return console.log(err);
+
+        window.location.href = 'main.html#/online';
+      })
     }
   });
-  
+
   new app.UsersView();
 })

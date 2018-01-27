@@ -10,11 +10,20 @@
   </head>
   <body>
     <div id="app-container">
-      <nav id="header-nav">
+      <nav id="header-nav" class="group-view">
         <div id="back-arrow-container">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
         </div>
         <div id="group-title-container"></div>
+
+        <div class="dropdown">
+          <div class="options-icon dropdown-toggle" data-toggle="dropdown" >
+            <img src="css/assets/sidebar-icons/icon_vertical_options.svg" alt="">
+          </div>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="options-icon">
+             <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
+          </div>
+        </div>
       </nav>
 
       <div class="tabs-content status-users-content">

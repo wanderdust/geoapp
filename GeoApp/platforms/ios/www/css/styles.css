@@ -397,6 +397,22 @@ a:-webkit-any-link {
   margin: 0;
 }
 
+#header-nav.group-view #group-title-container{
+  width: 70%;
+  left: 69px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0px;
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .online-users-list {
   width: 100%;
   height: auto;
