@@ -19,6 +19,7 @@ $(function () {
     initialize: function () {
       _.bindAll(this, 'userCoords');
       this.currentMarkers = [];
+      this.userCurrentPosition = null;
       this.socket = socket;
 
       // Stops map from executing if offline.
@@ -38,7 +39,7 @@ $(function () {
         app.groupCollection.findAndUpdateOnePending(data);
       })
 
-      setInterval(this.userCoords, 2000);
+      // setInterval(this.userCoords, 2000);
     },
 
     render: function () {
@@ -65,16 +66,16 @@ $(function () {
       //     break;
       //   }
       // }
-
+      let that = this;
       try {
         if (!navigator.geolocation)
           return console.log('Geolocation not supported by your browser');
-
         // await navigator.geolocation.getCurrentPosition
         await navigator.geolocation.watchPosition((position) => {
           let groups = app.groupCollection;
           let userLat = position.coords.latitude;
           let userLng = position.coords.longitude;
+          that.updateUserLocation(userLat, userLng)
 
           // For each marker calculates the distance from the user.
           for (let i = 0; groups.length > i; i++) {
@@ -83,7 +84,7 @@ $(function () {
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
-            if (distance <= 0.05) {
+            if (distance <= 0.03) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
@@ -91,9 +92,23 @@ $(function () {
               break;
             }
           }
-        })
+        });
+
       } catch (e) {
         console.log(e)
+      }
+    },
+
+    updateUserLocation: function (lat, lng) {
+      let newPoint = new google.maps.LatLng(lat, lng);
+      if (this.userCurrentPosition == null) {
+        this.userCurrentPosition = new google.maps.Marker({
+          position: newPoint,
+          map: this.map,
+          icon: "css/assets/sidebar-icons/icon_current_pos.svg"
+        });
+      } else {
+        this.userCurrentPosition.setPosition(newPoint);
       }
     },
 
