@@ -521,6 +521,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Rejects friend invitation
   socket.on('rejectFriend', async (data, callback) => {
     try {
       let userName;
@@ -536,6 +537,7 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Deletes user from the Group.
   socket.on('exitGroup', async (data, callback) => {
     try {
       let deletedUserGroup = await UserGroup.findOneAndRemove({
