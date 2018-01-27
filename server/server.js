@@ -519,7 +519,7 @@ io.on('connection', (socket) => {
     } catch (e) {
       callback('No se ha podido añadir a este usuario')
     }
-  })
+  });
 
   socket.on('rejectFriend', async (data, callback) => {
     try {
@@ -532,9 +532,22 @@ io.on('connection', (socket) => {
 
       callback(null, `Has rechazado a ${userName.name}`)
     } catch (e) {
-
+      callback('No se ha podido completar la operación')
     }
-  })
+  });
+
+  socket.on('exitGroup', async (data, callback) => {
+    try {
+      let deletedUserGroup = await UserGroup.findOneAndRemove({
+        groupId: data.groupId,
+        userId: data.userId
+      });
+
+      callback(null, true);
+    } catch (e) {
+      callback('No se ha podido completar la operación')
+    }
+  });
 
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.
