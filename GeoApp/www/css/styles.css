@@ -355,6 +355,11 @@ html, body {
   text-align: center;
 }
 
+a:-webkit-any-link {
+  /* Removes default underline when clicking a link*/
+  text-decoration: none !important;
+}
+
 #header-nav #group-title-container {
   position: absolute;
   display: inline-block;
@@ -704,7 +709,7 @@ label{
 
 #app-container #map-container-friends {
   position: absolute;
-  height: 47%;
+  height: 46.5%;
   width: 100%;
 }
 

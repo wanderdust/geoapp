@@ -31,6 +31,7 @@ html, body {
 #tabs-header {
   width: auto;
   height: 50px;
+  background-color: #ffe97d;
 }
 
 #tabs-header li{
@@ -46,7 +47,7 @@ html, body {
   transition: height 0.5s;
   text-align: left;
   box-shadow: 0 -10px 20px -10px #888888;
-  background-color: white;
+  background-color: #fafafa;
 }
 
 #tabs-container .nav li {
@@ -156,7 +157,7 @@ html, body {
   overflow: hidden;
   border-radius: 50px;
   z-index: 0;
-  background-color: #cccccc;
+  background-color: #c88719;
 }
 
 .tabs-content .online .group-container .image-animation{
@@ -201,7 +202,9 @@ html, body {
   text-overflow: ellipsis;
 }
 
-
+.round-button {
+  background-color: #fb8c00;
+}
 
 /* The side navigation menu */
 #sidebar-container.sidenav {
@@ -211,7 +214,7 @@ html, body {
     z-index: 100;
     top: 0;
     left: 0;
-    background-color: #191919;
+    background-color: #fb8c00;
     overflow-x: hidden;
     transition: 0.5s;
     overflow: hidden;
@@ -266,7 +269,7 @@ html, body {
     padding: 8px 8px 8px 50px;
     text-decoration: none;
     font-size: 20px;
-    color: #D9D9D9;
+    color: white;
     display: block;
     transition: 0.3s
 }
@@ -292,7 +295,7 @@ html, body {
 
 #sidebar-icon .glyphicon-align-justify {
   font-size: 30px;
-  color: #4c4c4c;
+  color: #c25e00;
 }
 
 /* Add class for swipe Animation*/
@@ -325,7 +328,7 @@ html, body {
   min-height: 61px;
   height: 9%;
   width: 100%;
-  background: #75a478;
+  background: #c88719;
   box-shadow: 0px 1px 15px 0px #888888;
 }
 
@@ -339,6 +342,8 @@ html, body {
 
 #header-nav #back-arrow-container a, .back-arrow-container a {
   position: absolute;
+  display: flex;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -348,6 +353,11 @@ html, body {
   color: white;
   line-height: 55px;
   text-align: center;
+}
+
+a:-webkit-any-link {
+  /* Removes default underline when clicking a link*/
+  text-decoration: none !important;
 }
 
 #header-nav #group-title-container {
@@ -443,9 +453,25 @@ html, body {
   display: none;
 }
 
+/* Override bootstrap default styles for the pills */
 .filtering-tabs:hover {
-  border-bottom: solid #059994;
+  border-bottom: solid #fb8c00;
+  background-color: #ffbd45;
 }
+
+.filtering-tabs a {
+  color: #37474f !important;
+}
+
+.filtering-tabs a:hover {
+  background-color: inherit !important;
+}
+
+.nav-tabs>li>a:hover {
+  border-color: #ffbd45 !important;
+}
+
+
 
 
 /* Login */
@@ -584,7 +610,7 @@ label{
   overflow: hidden;
   border-radius: 50px;
   z-index: 2;
-  border: solid 2px gray;
+  border: solid 2px #fb8c00;
 }
 
 .ok-tick .img-fluid {
@@ -601,7 +627,7 @@ label{
 }
 
 .selected .group-container .ok-tick {
-    background-color: #88e488;
+    background-color: #ffb74d;
 }
 
 /* ******Alert Error Message **** */
@@ -683,15 +709,15 @@ label{
 
 #app-container #map-container-friends {
   position: absolute;
-  height: 46%;
+  height: 46.5%;
   width: 100%;
 }
 
 #app-container .tabs-content.create-group {
   height: 44%;
   width: 100%;
-  box-shadow: 0 -10px 20px -10px #888888;
   overflow: hidden;
+  background-color: #fafafa;
 }
 
 .tabs-content.create-group .add-title {
@@ -712,7 +738,6 @@ label{
   position: absolute;
   bottom: 5%;
   right: 20px;
-  background: #00be00;
   border-radius: 50px;
   z-index: 2;
   box-shadow: 0px 1px 15px 0px #888888;
@@ -731,7 +756,7 @@ label{
 }
 
 .new-group-image {
-  border: solid 2px gray;
+  border: solid 2px #c88719;
   position: absolute;
   top: 25%;
   left: 20px;
@@ -777,7 +802,7 @@ label{
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #c88719;
 }
 
 .new-group-title input::placeholder {
@@ -792,13 +817,12 @@ label{
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #d7ffd9;
+  background-color: #ffe97d;
   box-shadow: 0px 1px 15px 0px #f3f3f3;
 }
 
 .add-friends-btn {
   position: absolute;
-
   left: 22px;
   display: inline-block;
   width: 60px;
@@ -806,7 +830,6 @@ label{
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
-  background-color: #00be00;
   box-shadow: 0px 1px 15px 0px #888888;
 }
 
@@ -957,7 +980,7 @@ label{
 }
 
 #sidebar-container.new-group-sidenav .back-arrow-container .glyphicon {
-  color: gray;
+  color: #fb8c00;
 }
 
 #sidebar-container.new-group-sidenav #group-title-container {
@@ -987,7 +1010,7 @@ label{
 }
 
 #sidebar-container.new-group-sidenav .group-container.user-container {
-  background: linear-gradient(to right, white 50%, #7fbf7f 50%);
+  background: linear-gradient(to right, white 50%, #ffb74d 50%);
   background-size: 200% 100%;
   background-position:left bottom;
 }
@@ -1002,7 +1025,7 @@ label{
 }
 
 #sidebar-container.new-group-sidenav .selected .ok-tick {
-  background: #7fbf7f;
+  background: #ffb74d;
 }
 
 .continue-btn {
@@ -1011,7 +1034,6 @@ label{
   position: absolute;
   bottom: 15%;
   right: 20px;
-  background: #00be00;
   border-radius: 50px;
   z-index: 9999;
   box-shadow: 0px 1px 15px 0px #888888;
@@ -1057,7 +1079,7 @@ label{
   text-align: center;
   margin-top: 15px;
   font-size: 2em;
-  color: gray;
+  color: #fb8c00;
 }
 
 /* Styles for add friends placeholder */
