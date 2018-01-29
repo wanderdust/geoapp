@@ -14,7 +14,6 @@ $(function () {
 
     initialize: function () {
       let userId = sessionStorage.getItem('userId');
-      
       this.socket = socket;
       this.$requestList = $('.groups-list ul');
       this.friendsArray = [];
