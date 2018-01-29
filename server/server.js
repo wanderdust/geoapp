@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
       user.userImage ? userModel.userImage = user.userImage : "";
 
       callback(userModel);
-    } catch {
+    } catch (e) {
       callback(e, 'Unable to fetch user data');
     }
   });
