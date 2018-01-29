@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
     } catch (e) {
       callback(e.message)
     }
-  })
+  });
 
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
@@ -106,6 +106,24 @@ io.on('connection', (socket) => {
       callback(null, userCollection);
     } catch (e) {
       callback(e);
+    }
+  });
+
+  // Gets the current user and return the model.
+  socket.on('getUser', async (data, callback) => {
+    try {
+      let userModel = {};
+      let user = await User.findById(data.userId);
+
+      userModel.name = userModel.name;
+      userModel.isOnline = friend.online;
+      userModel.isPending = friend.pending;
+      userModel._id = userModel._id;
+      user.userImage ? userModel.userImage = user.userImage : "";
+
+      callback(userModel);
+    } catch {
+      callback(e, 'Unable to fetch user data');
     }
   });
 
