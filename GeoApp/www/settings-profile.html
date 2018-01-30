@@ -11,49 +11,37 @@
   <body>
     <div id="app-container">
 
-      <nav id="header-nav" class="settings-nav">
+      <nav id="header-nav">
         <div id="back-arrow-container">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
         </div>
         <div id="group-title-container" class="standalone-title">
           <div id="group-title-group">
-            <p>Ajustes</p>
+            <p>Profile</p>
           </div>
         </div>
       </nav>
 
       <div class="tabs-content settings-page">
-        <div id="user-dashboard">
-          <!-- UserTemplateB  -->
+        <div id="user-dashboard" class="user-image">
+          <div id="profile-image-container">
+            <div class="user-image">
+              <img src="">
+            </div>
+
+            <div class="add-photo-icon">
+              <img src="css/assets/sidebar-icons/icon_add_photo_white.svg">
+            </div>
+          </div>
         </div>
-        <div id="settings-list">
-          <ul>
+        <div id="settings-list" class="user-settings">
+          <div class="name-container">
+            <div class="name-input">Pablo Lopez</div>
 
-            <li>
-              <div class="settings-account settings-li">
-                <div class="icon">
-                  <img src="css/assets/sidebar-icons/icon_account_circle.svg">
-                </div>
-                <div class="title">
-                  <h4>Cuenta</h4>
-                </div>
-                <div class="border-bottom"></div>
-              </div>
-            </li>
-
-            <li>
-              <div class="settings-help settings-li">
-                <div class="icon">
-                  <img src="css/assets/sidebar-icons/icon_help.svg">
-                </div>
-                <div class="title">
-                  <h4>Ayuda</h4>
-                </div>
-                <div class="border-bottom"></div>
-              </div>
-            </li>
-
-          </ul>
+            <div class="edit-icon">
+              <img src="css/assets/sidebar-icons/icon_edit.svg">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +60,7 @@
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
     <script src="./js/models/userModel.js"></script>
-    <script src="./js/views/settings/settingsView.js">
+    <script src="./js/views/settings/profileSettings.js"></script>
 
     </script>
   </body>

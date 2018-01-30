@@ -12,9 +12,8 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
-      "click #user-dashboard" : "getUserSettings",
-      "click .settings-account": "getAccount",
-      "click .settings-help": "getHelp"
+      "click .edit-icon": "edit",
+      "blur .name-input": "closeEdit"
     },
 
     initialize: function () {
@@ -30,7 +29,8 @@ $(function () {
           return console.log(err);
 
         let model = new app.UserModel(res);
-        this.render(model);
+        console.log(model)
+        // this.render(model);
       })
     },
 
@@ -42,20 +42,17 @@ $(function () {
       return this;
     },
 
+    edit: function () {
+      $('.name-input').attr('contenteditable', 'true').focus();
+    },
+
+    closeEdit: function () {
+      $('.name-input').attr('contenteditable', 'false');
+      console.log($('.name-input').html())
+    },
+
     backToMain: function () {
-      window.location.href = 'main.html#/online';
-    },
-
-    getUserSettings: function () {
-      window.location.href = 'settings-profile.html'
-    },
-
-    getAccount: function () {
-      console.log('Account settings');
-    },
-
-    getHelp: function () {
-      console.log('Help settings');
+      window.location.href = 'settings.html';
     }
   })
 
