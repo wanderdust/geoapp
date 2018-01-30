@@ -20,6 +20,12 @@ let UserSchema = mongoose.Schema({
     required: true,
     trim: true,
     minlength: 6
+  },
+  userStatus: {
+    type: String,
+    required: false,
+    trim: true,
+    minlength: 1
   }
 });
 

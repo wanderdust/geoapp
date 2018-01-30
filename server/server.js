@@ -571,7 +571,7 @@ socket.on('getUser', async (data, callback) => {
   // Saves the profile data changed by the user.
   socket.on('saveProfileSettings', async(data, callback) => {
     try {
-      let user = await Friend.findByIdAndUpdate(data.userId, {
+      let user = await User.findByIdAndUpdate(data.userId, {
         $set: {
           userImage: data.userImage,
           userName: data.userName,
