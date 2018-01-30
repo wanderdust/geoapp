@@ -93,11 +93,13 @@ $(function () {
       let userImage = ""; //this.userImage
       let userName = this.userName;
       let userStatus = this.userStatus;
+      let userId = sessionStorage.getItem('userId');
 
       if (!this.verifyData(userStatus, userName))
         return this.snackBar('Nombre y estado tienen que contener al menos 1 caracter');
 
       this.socket.emit('saveProfileSettings', {
+        userId,
         userImage,
         userName,
         userStatus
