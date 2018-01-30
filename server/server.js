@@ -568,6 +568,22 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
+  // Saves the profile data changed by the user.
+  socket.on('saveProfileSettings', async(data, callback) => {
+    try {
+      let user = await Friend.findByIdAndUpdate(data.userId, {
+        $set: {
+          userImage: data.userImage,
+          userName: data.userName,
+          userStatus: data.userStatus
+        }
+      });
+      callback(null, true);
+    } catch (e) {
+      callback('Unable to save data')
+    }
+  })
+
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.
     openSocketsGroups.removeSockets(socket);
