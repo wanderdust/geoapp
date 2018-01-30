@@ -136,7 +136,7 @@ $(function () {
         this.groupImage = imageData;
         $('.new-group-image').html(`<img src="${imageData}">`);
       }, function (err) {
-        alert('Error: '+ errorMessage );
+        alert('Error: '+ err);
       }, options);
     }
   })

@@ -10,6 +10,7 @@ $(function () {
       isOnline: false,
       isPending: false,
       userImage: 'css/assets/user_placeholder.png',
+      userStatus: '¡Estoy usando GeoApp!',
       _id: ''
     }
   })

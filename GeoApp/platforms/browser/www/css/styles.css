@@ -324,12 +324,13 @@ html, body {
 /* Styles for users.html*/
 
 #header-nav {
-  position: relative;
+  position: fixed;
   min-height: 61px;
   height: 9%;
   width: 100%;
   background: #c88719;
   box-shadow: 0px 1px 15px 0px #888888;
+  z-index: 10;
 }
 
 #header-nav #back-arrow-container, .back-arrow-container {
@@ -369,11 +370,20 @@ a:-webkit-any-link {
   padding-left: 15px;
 }
 
+#header-nav #group-title-container.standalone-title #group-title-group{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  padding: 0px;
+}
+
 #header-nav #group-title-container #group-title-group {
   position: absolute;
   top: 0;
   height: 60%;
   width: 90%;
+  padding-top: 5px;
 }
 
 #header-nav #group-title-container #group-title-group p {
@@ -433,6 +443,7 @@ a:-webkit-any-link {
 
 .tabs-content.status-users-content {
   height: 90%;
+  padding-top: 15px;
 }
 
 @media only screen and (max-height: 585px) {
@@ -725,6 +736,7 @@ label{
 
 #app-container #map-container-friends {
   position: absolute;
+  top: 60px;
   height: 46.5%;
   width: 100%;
 }
@@ -749,8 +761,8 @@ label{
 }
 
 .tabs-content.create-group #create-group-btn {
-  height: 60px;
-  width: 60px;
+  height: 55px;
+  width: 55px;
   position: absolute;
   bottom: 5%;
   right: 20px;
@@ -841,8 +853,8 @@ label{
   position: absolute;
   left: 22px;
   display: inline-block;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
@@ -1107,4 +1119,178 @@ label{
   margin-top: 45%;
   padding-right: 10px;
   padding-left: 10px;
+}
+
+/* ****STYLES FOR SETTINGS PAGE ***** */
+
+@media only screen and (max-height: 684px) {
+  .tabs-content.settings-page {
+    position: absolute;
+    top: 60px;
+  }
+}
+
+.tabs-content.settings-page {
+  height: 90%;
+}
+
+.tabs-content.settings-page #user-dashboard {
+  position: absolute;
+  top: 0;
+  height: 20%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs-content.settings-page #settings-list {
+  position: absolute;
+  bottom: 0;
+  height: 80%;
+  width: 100%;
+}
+
+#settings-list li {
+  position: relative;
+  height: 75px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#settings-list .border-bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 80%;
+  height: 1px;
+  border-bottom: solid #e0e0e0 0.1px;
+}
+
+.settings-li {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.settings-li .icon {
+  position: absolute;
+  left: 0px;
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-li .title {
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile settings */
+
+.tabs-content.settings-page #user-dashboard.user-image {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.tabs-content.settings-page #settings-list.user-settings {
+  height: 60%;
+  background-color: #fafafa;
+}
+
+#user-dashboard #profile-image-container {
+  position: relative;
+  height: 100%;
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+#user-dashboard #profile-image-container .user-image {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border: solid #c88719 1px;
+  border-radius: 80px;
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-dashboard #profile-image-container .user-image img {
+  height: 100%;
+  position: absolute;
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+}
+
+#user-dashboard #profile-image-container .add-photo-icon {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  right: -20px;
+  bottom: 20%;
+  border: solid 0.5px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fb8c00;
+  z-index: 4;
+}
+
+#settings-list.user-settings .name-container {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  border-bottom: solid 0.1px #e0e0e0;
+  border-top: solid 0.1px #e0e0e0;
+  margin-bottom: 40px;
+  background-color: white;
+  box-shadow: 0px 6px 10px -8px #888888;
+}
+
+#settings-list.user-settings .name-container .status-input,
+#settings-list.user-settings .name-container .name-input {
+  position: absolute;
+  left: 0px;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+#settings-list.user-settings .name-container .edit-icon-status,
+#settings-list.user-settings .name-container .edit-icon {
+  position: absolute;
+  right: 0px;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#settings-list.user-settings .name-container .edit-icon-status img,
+#settings-list.user-settings .name-container .edit-icon img {
+  height: 24px;
+  width: auto;
 }

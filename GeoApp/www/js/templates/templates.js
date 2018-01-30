@@ -29,7 +29,7 @@ Templates.userTemplateB = [
       '{{#if isPending}}',
         '<p class="group-status">{{name}} va a ir.</p>',
         '{{else}}',
-        '<p class="group-status">{{status}}</p>',
+        '<p class="group-status">{{userStatus}}</p>',
       '{{/if}}',
     '</div>',
   '</div>'
