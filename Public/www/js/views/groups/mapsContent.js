@@ -21,6 +21,7 @@ $(function () {
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
+      this.userIsOnline = false;
 
       // Stops map from executing if offline.
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
@@ -84,12 +85,22 @@ $(function () {
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
-            if (distance <= 0.03) {
+            if (distance <= 0.075) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
               });
+              // keeps track if user is currently online in a group.
+              this.userIsOnline = true;
               break;
+            } else if (this.userIsOnline) {
+              // This means user is not near any place so it should be put
+              // as offline from every group.
+              this.userIsOnline = false;
+              this.socket.emit('userOffBounds', {
+                userId: sessionStorage.getItem('userId'),
+                groupId: model.get('_id')
+              })
             }
           }
         });

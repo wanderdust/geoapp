@@ -39,7 +39,7 @@ $(function () {
 
     logIn: function () {
       let data = {};
-      data.name = $('#name').val().trim();
+      data.email = $('#email').val().trim();
       data.password = $('#password').val().trim();
 
       this.socket.emit('loginUser', data, (err, res) => {

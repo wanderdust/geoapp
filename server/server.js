@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
 
   socket.on('loginUser', async (data, callback) => {
     try {
-      let user = await User.findOne({name: data.name, password: data.password});
+      let user = await User.findOne({email: data.email, password: data.password});
 
       if (user === null)
         throw Error('No user found');
@@ -257,6 +257,38 @@ socket.on('getUser', async (data, callback) => {
     } catch (e) {
       console.log(e)
     }
+  });
+
+  socket.on('userOffBounds', async (data) => {
+    let socketsToUpdateGroups;
+    let socketsToUpdateUsers;
+    let  setOffBounds = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
+      $set: {
+        online: false,
+      }
+    }, {new: true});
+
+    // Finds out the name of the user who is now online.
+    let userName = await User.findOne({_id: ObjectID(data.userId)});
+
+    let groupProperties = {
+      _id: data.groupId,
+      userOnline: userName.name,
+      userId: data.userId
+    };
+
+    socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
+
+    socketsToUpdateGroups.forEach((e) => {
+      io.to(e.socketId).emit('newGroupUpdates', groupProperties);
+    });
+
+    socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+
+    socketsToUpdateUsers.forEach((e) => {
+      io.to(e.socketId).emit('updateUserStatus', data);
+    });
+
   });
 
   // Finds user's already selected pending group for the pending view.
@@ -579,7 +611,7 @@ socket.on('getUser', async (data, callback) => {
           userStatus: data.userStatus
         }
       }, {new: true});
-      
+
       callback(null, user);
     } catch (e) {
       callback('Unable to save data')

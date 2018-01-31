@@ -36,8 +36,7 @@ $(function () {
 
       // Checks if the user being updated is currentUser and changes userName for 'Me'
       if (data.userId === sessionStorage.getItem('userId'))
-        data.userOnline = 'Yo'
-
+        data.userOnline = 'Yo';
 
       let model = this.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
