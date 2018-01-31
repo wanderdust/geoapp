@@ -262,6 +262,14 @@ socket.on('getUser', async (data, callback) => {
   socket.on('userOffBounds', async (data) => {
     let socketsToUpdateGroups;
     let socketsToUpdateUsers;
+
+    // Only for users that are online to be set offline. Otherwise returns.
+    checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
+
+    if (!checkLocation.online)
+      return false
+
+
     let  setOffBounds = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
       $set: {
         online: false,
