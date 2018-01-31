@@ -13,6 +13,7 @@ let createUserModel = async function (userCursor, userId) {
   newModel.isOnline = userCursor.online;
   newModel.isPending = userCursor.pending;
   newModel._id = userModel._id;
+  newModel.userStatus = userModel.userStatus;
   userModel.userImage ? newModel.userImage = userModel.userImage : "";
 
   return newModel;

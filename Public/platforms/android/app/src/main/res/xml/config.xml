@@ -18,7 +18,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <access origin="https://geo-app-amigos.herokuapp.com/" />
+    <access origin="http://192.168.0.30:3000/" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

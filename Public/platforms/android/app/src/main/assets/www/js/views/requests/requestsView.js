@@ -1,7 +1,7 @@
 // View of the whole requests app.
 
 var app = app || {};
-var socket = socket || io.connect('https://geo-app-amigos.herokuapp.com');
+var socket = socket || io.connect('http://192.168.0.30:3000');
 
 $(function () {
 

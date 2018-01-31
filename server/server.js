@@ -117,6 +117,7 @@ socket.on('getUser', async (data, callback) => {
 
     userModel.name = user.name;
     userModel._id = user._id;
+    userModel.userStatus = user.userStatus;
     user.userImage ? userModel.userImage = user.userImage : "";
 
     callback(null, userModel);
@@ -573,11 +574,12 @@ socket.on('getUser', async (data, callback) => {
     try {
       let user = await User.findOneAndUpdate({_id: data.userId}, {
         $set: {
-          userImage: data.userImage,
-          userName: data.userName,
+          usreImage: data.userImage,
+          name: data.userName,
           userStatus: data.userStatus
         }
       }, {new: true});
+      
       callback(null, user);
     } catch (e) {
       callback('Unable to save data')
