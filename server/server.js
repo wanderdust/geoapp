@@ -280,7 +280,7 @@ socket.on('getUser', async (data, callback) => {
     socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
 
     socketsToUpdateGroups.forEach((e) => {
-      io.to(e.socketId).emit('newGroupUpdates', groupProperties);
+      io.to(e.socketId).emit('userOffBounds', groupProperties);
     });
 
     socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);

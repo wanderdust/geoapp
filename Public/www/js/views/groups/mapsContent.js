@@ -21,7 +21,8 @@ $(function () {
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
-      this.userIsOnline = false;
+      // Starts with true to check all paths in the if/else statement.
+      this.userIsOnline = true;
 
       // Stops map from executing if offline.
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
@@ -36,11 +37,14 @@ $(function () {
         app.groupCollection.findAndUpdateOneOnline(data);
       });
 
+      this.socket.on('userOffBounds', (data) => {
+        app.groupCollection.userOffline(data);
+      });
+
       this.socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data);
       })
 
-      // setInterval(this.userCoords, 2000);
     },
 
     render: function () {
@@ -48,7 +52,7 @@ $(function () {
     },
 
     userCoords: async function () {
-      // // Provisional fixed coords for testing.
+      // // Provisional fixed coords fconsole.log('online')or testing.
       // let groups = app.groupCollection;
       // let userLat = randomCoords().lat;
       // let userLng = randomCoords().lng;
