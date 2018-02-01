@@ -220,7 +220,7 @@ $(function () {
       } else if (model.get('pendingUsers').length > 0) {
         return this.appendMarker(model, 'css/assets/pending_marker.png');
       }
-      return this.appendMarker(model, 'css/assets/red_marker.png');
+      return this.appendMarker(model, 'css/assets/offline_marker.png');
     },
 
     removeMarkers: function () {

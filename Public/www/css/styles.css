@@ -157,7 +157,7 @@ html, body {
   overflow: hidden;
   border-radius: 50px;
   z-index: 0;
-  background-color: #c88719;
+  background-color:#cccccc;
 }
 
 .tabs-content .online .group-container .image-animation{
@@ -345,6 +345,7 @@ html, body {
   position: absolute;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
 }
@@ -1142,6 +1143,10 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tabs-content.settings-page #user-dashboard.user-info-btn{
+  border-bottom: solid 0.5px lightgray;
 }
 
 .tabs-content.settings-page #settings-list {

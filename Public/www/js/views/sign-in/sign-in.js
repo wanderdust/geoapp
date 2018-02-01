@@ -47,7 +47,7 @@ $(function () {
           return console.log(err);
 
         sessionStorage.setItem('userId', res);
-        window.location.href = 'main.html#/online'
+        window.location.href = 'main.html#/all'
       })
     }
   })
