@@ -413,6 +413,27 @@ a:-webkit-any-link {
   left: 69px;
 }
 
+.tabs-content.status-users-content .user-container .group-header {
+  width: 60%;
+}
+
+.tabs-content.status-users-content .user-container .pending-icon {
+  position: absolute;
+  right: 0;
+  width: 12%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tabs-content.status-users-content .user-container .pending-icon img {
+  position: absolute;
+  height: 43%;
+  width: auto;
+  bottom: 20%;
+  /* border-radius: 50%; */
+}
+
 .dropdown {
   position: absolute;
   right: 0px;
