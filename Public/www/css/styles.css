@@ -29,6 +29,7 @@ html, body {
 }
 
 #tabs-header {
+  position: relative;
   width: auto;
   height: 50px;
   background-color: #ffe97d;
@@ -37,6 +38,29 @@ html, body {
 #tabs-header li{
   padding: 0px !important;
   height: 50px;
+}
+
+#tabs-header .tabs-underline {
+  position: absolute;
+  height: 3px;
+  width: 33.334%;
+  background: #c25e00;
+  bottom: 0px;
+  transition: 0.1s linear;
+}
+
+#tabs-header .tabs-underline.left {
+  left: 0%;
+}
+
+#tabs-header .tabs-underline.centre {
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#tabs-header .tabs-underline.right {
+  left: 100%;
+  transform: translate(-100%, 0)
 }
 
 #tabs-container {
@@ -503,21 +527,29 @@ a:-webkit-any-link {
 }
 
 /* Override bootstrap default styles for the pills */
-.filtering-tabs:hover {
-  border-bottom: solid #fb8c00;
-  background-color: #ffbd45;
+.filtering-tabs.active {
+  /* border-bottom: solid #fb8c00; */
+  background-color: #ffe97d;
+}
+
+.filtering-tabs.active {
+  /* border-bottom: solid #fb8c00; */
+  background-color: #ffe97d;
 }
 
 .filtering-tabs a {
   color: #37474f !important;
 }
 
-.filtering-tabs a:hover {
+.filtering-tabs.active a {
   background-color: inherit !important;
+  border: none !important;
 }
 
-.nav-tabs>li>a:hover {
+.nav-tabs li a:hover {
   border-color: #ffbd45 !important;
+  background-color: inherit !important;
+  border: none !important;
 }
 
 
