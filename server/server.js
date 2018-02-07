@@ -541,7 +541,7 @@ socket.on('getUser', async (data, callback) => {
       if (hasFriend) {
         return callback ('y tu ya sois amigos');
       } else if (requestSent) {
-        return callback(null, 'Ya has enviado una petición a este usuario')
+        return callback('está pendiente de aceptar tu invitación');
       }
 
 
