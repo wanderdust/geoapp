@@ -43,15 +43,28 @@ io.on('connection', (socket) => {
       };
 
       if (data.password !== data.confirmPassword) {
-        throw Error ('Passwords do not match');
+        return callback({Error: 0, Message: 'Passwords do not match'});
       }
 
       user = await new User(newUser).save();
 
-      callback(null, user._id)
+      callback(null, user._id);
     } catch (e) {
-      callback(e.message)
-    }
+      let duplicate = 11000;
+      let err = e.errors;
+
+      if (e.code === duplicate) {
+        callback({Error: 4, Message: 'Duplicate email'})
+      } else if (typeof(err.name) !== 'undefined' && err.name.$isValidatorError) {
+        callback({Error: 2, Message: 'Name required'})
+      } else if (typeof(err.email) !== 'undefined' && err.email.$isValidatorError) {
+        callback({Error: 3, Message: 'Email required'})
+      } else if (typeof(err.password) !== 'undefined' && err.password.$isValidatorError) {
+        callback({Error: 5, Message: 'Password required'})
+      } else if (err.type === 'minlength') {
+        callback({Error: 6, Message: 'Password is too short'})
+      }
+    };
   });
 
   socket.on('loginUser', async (data, callback) => {
@@ -59,11 +72,11 @@ io.on('connection', (socket) => {
       let user = await User.findOne({email: data.email, password: data.password});
 
       if (user === null)
-        throw Error('No user found');
+        return callback({Error: 1, Message: 'No user found'});
 
       callback(null, user._id)
     } catch (e) {
-      callback(e.message)
+      callback({Error: 99, Message: e})
     }
   });
 

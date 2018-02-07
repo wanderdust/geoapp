@@ -44,7 +44,7 @@ html, body {
   position: absolute;
   height: 3px;
   width: 33.334%;
-  background: #c25e00;
+  background: #c88719;
   bottom: 0px;
   transition: 0.1s linear;
 }
@@ -612,6 +612,11 @@ label{
 .login-register{
 	font-size: 11px;
 	text-align: center;
+}
+
+.error {
+  border: solid red 2px;
+  border-radius: 5px;
 }
 
 /* Requests */

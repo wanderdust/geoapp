@@ -29,8 +29,31 @@ $(function () {
       data.confirmPassword = $('#confirm').val().trim();
 
       this.socket.emit('createUser', data, (err, res) => {
-        if (err)
-          return console.log(err);
+        if (err) {
+          $('.input-group').removeClass('error');
+          if (err.Error === 2) {
+            // Name required
+            $('.input-group.name').addClass('error');
+          } else if (err.Error === 3) {
+            // Email required
+            $('.input-group.user-email').addClass('error');
+          } else if (err.Error === 4) {
+            // Duplicate email
+            $('.input-group.user-email').addClass('error');
+          } else if (err.Error === 5) {
+            // Password required
+            $('.input-group.password').addClass('error');
+          } else if (err.Error === 6) {
+            // Password is too short
+            $('.input-group.password').addClass('error');
+          } else if (err.Error === 0) {
+            // Passwords don't match
+            $('.input-group.password').addClass('error');
+            $('.input-group.repeat-password').addClass('error');
+          };
+          return
+        };
+
 
         sessionStorage.setItem('userId', res);
         window.location.href = 'main.html#/online'
@@ -43,8 +66,17 @@ $(function () {
       data.password = $('#password').val().trim();
 
       this.socket.emit('loginUser', data, (err, res) => {
-        if (err)
-          return console.log(err);
+        if (err) {
+          $('.input-group').removeClass('error');
+          if (err.Error === 1) {
+            // No user/password found
+            $('.input-group.email').addClass('error');
+            $('.input-group.password').addClass('error');
+          } else if (err.Error === 99) {
+            throw Error (err);
+          }
+          return;
+        }
 
         sessionStorage.setItem('userId', res);
         window.location.href = 'main.html#/all'

@@ -15,7 +15,8 @@ $(function () {
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
-      "touchend .new-group-image" : "addGroupImage"
+      "touchend .new-group-image" : "addGroupImage",
+      "swiperight .tabs-content": "closeNavAndSave"
     },
 
     initialize: function () {
@@ -23,6 +24,7 @@ $(function () {
       this.groupCoords;
       this.groupFriends = [];
       this.groupImage = "";
+      this.$sideNav = $('.status-users-content');
 
       this.listenTo(app.userCollection, 'showAlert', this.snackBar);
       this.listenTo(app.userCollection, 'groupCoords', this.updateCoords);
@@ -30,11 +32,11 @@ $(function () {
       new app.FriendsMap();
       new app.FriendList();
       new app.AddedFriendList();
-
+      this.render();
     },
 
     render: function () {
-
+      this.$sideNav.hammer();
     },
 
     // Adds the class active to the sidebar to open it.
