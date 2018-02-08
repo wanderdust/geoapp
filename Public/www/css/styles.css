@@ -70,7 +70,7 @@ html, body {
   width: 100%;
   transition: 0.5s;
   text-align: left;
-  box-shadow: 0 -10px 20px -10px #888888;
+  /* box-shadow: 0 -10px 20px -10px #888888; */
   background-color: #fafafa;
 }
 
@@ -1136,6 +1136,7 @@ label{
 #sidebar-container.add-friends {
   position: relative;
   width: 100%;
+  transform: translate3d(0, 0 , 0);
 }
 
 
