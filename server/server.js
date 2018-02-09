@@ -1,6 +1,7 @@
 const {mongoose} = require('./db/mongoose.js')
 const path = require('path');
 const http = require('http');
+const validator = require('validator');
 const express = require('express');
 const socketIO = require('socket.io');
 const {ObjectID} = require('mongodb');
@@ -627,7 +628,7 @@ socket.on('getUser', async (data, callback) => {
     try {
       let user = await User.findOneAndUpdate({_id: data.userId}, {
         $set: {
-          usreImage: data.userImage,
+          userImage: data.userImage,
           name: data.userName,
           userStatus: data.userStatus
         }
@@ -636,6 +637,59 @@ socket.on('getUser', async (data, callback) => {
       callback(null, user);
     } catch (e) {
       callback('Unable to save data')
+    }
+  });
+
+  // Changes the user's email
+  socket.on('changeEmail', async(data, callback) => {
+    try {
+      let email = validator.isEmail(data.newEmail);
+
+      // Verifies that the email format is valid
+      if (!email)
+        return callback({Error: 1, Message: 'Email no válido'})
+
+      let user = await User.findOneAndUpdate({_id: data._id, password: data.password}, {
+        $set: {
+          email: data.newEmail
+        }
+      }, {new: true});
+
+      if(user === null) {
+        return callback({Error: 0, Message: 'Contraseña incorrecta'})
+      }
+
+      callback(null, true)
+    } catch (e) {
+      callback({Error: 99, Message: 'Ha ocurrido un error'})
+    }
+  });
+
+  // Deletes user's account.
+  socket.on('deleteAccount', async(data, callback) => {
+    try {
+      // Verify password
+
+      let user = await User.findOne({_id: data._id, password: data.password});
+
+      if (user === null) {
+        return callback({Error: 0, Message: "Contraseña incorrecta"})
+      }
+
+      let delete1 = await Friend.deleteOne({userId: data._id});
+      let delete2 = await Friend.deleteOne({friendId: data._id});
+
+      let delete3 = await Request.deleteOne({recipientId: data._id});
+      let delete4 = await Request.deleteOne({senderId: data._id});
+
+      let delete5 = await UserGroup.deleteOne({userId: data._id});
+
+      let delete6 = await User.deleteOne({_id: ObjectID(data._id)});
+
+      callback(null, true)
+
+    } catch (e) {
+      callback({Error: 99, Message: 'Ha ocurrido un error'})
     }
   })
 
