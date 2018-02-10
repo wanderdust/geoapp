@@ -10,7 +10,7 @@ $(function () {
     template: Templates.userTemplateB,
 
     events: {
-
+      "click .pending-icon": "showPendingStatus"
     },
 
     initialize: function () {
@@ -33,6 +33,11 @@ $(function () {
     updateOne: function (model) {
       this.$el.remove();
       app.userCollection.trigger('add', model);
+    },
+
+    // toggles to show the pending status of the user instead of his status.
+    showPendingStatus: function () {
+      this.$('.group-status').toggleClass('hidden');
     }
   })
 

@@ -9,7 +9,10 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-      "swipe #tabs-header": "swipeTabs"
+      "swipe #tabs-header": "swipeTabs",
+      "click .online-tab": "toggleOnline",
+      "click .pending-tab": "togglePending",
+      "click .all-tab": "toggleAll"
     },
 
     initialize: function () {
@@ -59,6 +62,30 @@ $(function () {
       } else if (e.gesture.offsetDirection === 16) {
         $elements.removeClass('swipeUp');
       }
+    },
+
+    // Clears the classes for the tabs-toggle.
+    removeAllClasses: function () {
+      $('.filtering-tabs').removeClass("active");
+      $('.tabs-underline').removeClass("left right centre")
+    },
+    // toggle between tabs
+    toggle: function (tab, side) {
+      this.removeAllClasses();
+      tab.addClass('active');
+      $('.tabs-underline').addClass(side);
+    },
+    // left tab toggle
+    toggleOnline: function () {
+      this.toggle($('online-tab'), 'left')
+    },
+    // centre tab toggle
+    togglePending: function () {
+      this.toggle($('.pending-tab'), 'centre')
+    },
+    // right tab toggle
+    toggleAll: function () {
+      this.toggle($('.all-tab'), 'right')
     }
 
   })

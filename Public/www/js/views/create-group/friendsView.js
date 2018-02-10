@@ -138,7 +138,12 @@ $(function () {
         this.groupImage = imageData;
         $('.new-group-image').html(`<img src="${imageData}">`);
       }, function (err) {
-        alert('Error: '+ err);
+        // Native alerts from phonegap
+        navigator.notification.alert(
+          err,
+          (msg) => true,
+          'Error'
+        );
       }, options);
     }
   })

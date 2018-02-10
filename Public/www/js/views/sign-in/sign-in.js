@@ -79,7 +79,7 @@ $(function () {
         }
 
         sessionStorage.setItem('userId', res);
-        window.location.href = 'main.html#/all'
+        window.location.href = 'main.html#/online'
       })
     }
   })

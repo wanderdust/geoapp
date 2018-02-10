@@ -9,11 +9,13 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
-      "click .continue-btn": "deleteAccount"
+      "click .continue-btn": "confirmDelete"
     },
 
     initialize: function () {
       this.socket = socket;
+      _.bindAll(this, 'deleteAccount', 'confirmDelete');
+
     },
 
     render: function (model) {
@@ -24,10 +26,24 @@ $(function () {
       window.location.href = 'settings-account.html';
     },
 
-    deleteAccount: function () {
-      let $password = $('.change-mail-input.password').val();
+    confirmDelete () {
+      navigator.notification.confirm(
+        '¿Estás seguro de que quieres continuar?',
+        this.deleteAccount,
+        'Eliminar cuenta',
+        ['Si', 'No']
+      );
+    },
 
-      let remove = confirm("¿Estás seguro de que quieres continuar?");
+    deleteAccount: function (btn) {
+      let $password = $('.change-mail-input.password').val();
+      let remove;
+
+      if (btn === 1) {
+        remove = true;
+      } else {
+        remove = false;
+      }
 
       if(!remove)
         return
@@ -38,9 +54,9 @@ $(function () {
       }, (err, res) => {
         if (err) {
           if (err.Error === 0) {
-            this.snackBar('Contraseña incorrecta');
+            this.snackBar(err.Message);
           } else if (err.Error === 99) {
-            this.snackBar('Ha ocurrido un error');
+            this.snackBar(err.Message);
           }
           return
         }

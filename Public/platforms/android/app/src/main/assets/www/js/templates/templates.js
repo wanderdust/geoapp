@@ -27,11 +27,17 @@ Templates.userTemplateB = [
     '<div class="group-header">',
       '<p class="group-title">{{name}}</p>',
       '{{#if isPending}}',
-        '<p class="group-status">{{name}} va a ir.</p>',
+        '<p id="isNotGoing" class="group-status">{{userStatus}}</p>',
+        '<p id="isGoing" class="group-status hidden">{{name}} va a ir.</p>',
         '{{else}}',
         '<p class="group-status">{{userStatus}}</p>',
       '{{/if}}',
     '</div>',
+    '{{#if isPending}}',
+      '<div class="pending-icon">',
+        '<img src="css/assets/sidebar-icons/icon_walking.svg">',
+      '</div>',
+    '{{/if}}',
   '</div>'
 ].join('\n')
 

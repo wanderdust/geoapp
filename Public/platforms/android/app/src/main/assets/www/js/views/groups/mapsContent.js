@@ -21,6 +21,8 @@ $(function () {
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
+      // Starts with true to check all paths in the if/else statement.
+      this.userIsOnline = true;
 
       // Stops map from executing if offline.
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
@@ -35,11 +37,14 @@ $(function () {
         app.groupCollection.findAndUpdateOneOnline(data);
       });
 
+      this.socket.on('userOffBounds', (data) => {
+        app.groupCollection.userOffline(data);
+      });
+
       this.socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data);
       })
 
-      // setInterval(this.userCoords, 2000);
     },
 
     render: function () {
@@ -47,7 +52,7 @@ $(function () {
     },
 
     userCoords: async function () {
-      // // Provisional fixed coords for testing.
+      // // Provisional fixed coords fconsole.log('online')or testing.
       // let groups = app.groupCollection;
       // let userLat = randomCoords().lat;
       // let userLng = randomCoords().lng;
@@ -84,12 +89,23 @@ $(function () {
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
-            if (distance <= 0.03) {
+            if (distance <= 0.030) {
+              console.log('yup')
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
               });
+              // keeps track if user is currently online in a group.
+              this.userIsOnline = true;
               break;
+            } else if (this.userIsOnline) {
+              // This means user is not near any place so it should be put
+              // as offline from every group.
+              this.userIsOnline = false;
+              this.socket.emit('userOffBounds', {
+                userId: sessionStorage.getItem('userId'),
+                groupId: model.get('_id')
+              })
             }
           }
         });
@@ -216,7 +232,7 @@ $(function () {
 
     appendMarkerByColor: function (model) {
       if (model.get('activeUsers').length > 0) {
-        return this.appendMarker(model, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4aa710');
+        return this.appendMarker(model, 'css/assets/green_marker.png');
       } else if (model.get('pendingUsers').length > 0) {
         return this.appendMarker(model, 'css/assets/pending_marker.png');
       }

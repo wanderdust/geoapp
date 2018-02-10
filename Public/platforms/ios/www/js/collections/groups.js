@@ -36,15 +36,13 @@ $(function () {
 
       // Checks if the user being updated is currentUser and changes userName for 'Me'
       if (data.userId === sessionStorage.getItem('userId'))
-        data.userOnline = 'Yo'
-
+        data.userOnline = 'Yo';
 
       let model = this.findWhere({_id: data._id});
       let onlineUsersArray = model.get('activeUsers');
       let pendingUsersArray = model.get('pendingUsers');
       let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
       let pendingUserIndex = pendingUsersArray.indexOf(data.userOnline);
-
 
       if (onlineUserIndex !== -1) {
         onlineUsersArray.splice(onlineUserIndex, 1);
@@ -54,6 +52,32 @@ $(function () {
         model.set({pendingUsers: pendingUsersArray});
       } else {
         onlineUsersArray.push(data.userOnline);
+        model.set({activeUsers: onlineUsersArray});
+      }
+
+      // Saves the new model updates in the collection.
+      this.set({model}, {add: false, remove: false, merge: true});
+
+      // Renders the changed model and the updates markers.
+      model.trigger('render');
+      // Updates the markers.
+      this.trigger('updateMarkers');
+    },
+
+    // Same as findAndUpdateOnline but also checks users location
+    // as the user turn on the app.
+    userOffline: function (data) {
+      console.log('im here')
+      if (data.userId === sessionStorage.getItem('userId'))
+        data.userOnline = 'Yo';
+
+      let model = this.findWhere({_id: data._id});
+      let onlineUsersArray = model.get('activeUsers');
+      let onlineUserIndex = onlineUsersArray.indexOf(data.userOnline);
+
+      // If he wasnt online in the first place, nothing gets changed.
+      if (onlineUserIndex !== -1) {
+        onlineUsersArray.splice(onlineUserIndex, 1);
         model.set({activeUsers: onlineUsersArray});
       }
 

@@ -668,8 +668,8 @@ socket.on('getUser', async (data, callback) => {
   // Deletes user's account.
   socket.on('deleteAccount', async(data, callback) => {
     try {
+      console.log('foo')
       // Verify password
-
       let user = await User.findOne({_id: data._id, password: data.password});
 
       if (user === null) {

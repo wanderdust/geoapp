@@ -35,7 +35,8 @@ $(function () {
         if (err)
           return app.userCollection.trigger('showAlert', `${this.model.get('name')} ${err}`)
 
-        app.userCollection.trigger('showAlert', res)
+        app.userCollection.trigger('showAlert', res);
+        this.$el.remove();
       })
     }
   })

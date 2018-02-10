@@ -35,8 +35,12 @@ $(function () {
       let model = this.findWhere({_id: userId});
 
       if (currentGroup === groupId) {
-        model.set({isOnline: true});
-        model.set({isPending: false})
+        if (model.get('isOnline')) {
+          model.set({isOnline: false});
+        } else {
+          model.set({isOnline: true});
+          model.set({isPending: false});
+        }
       } else {
         model.set({isOnline: false})
       };

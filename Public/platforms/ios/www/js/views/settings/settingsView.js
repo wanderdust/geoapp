@@ -51,11 +51,11 @@ $(function () {
     },
 
     getAccount: function () {
-      console.log('Account settings');
+      window.location.href = 'settings-account.html'
     },
 
     getHelp: function () {
-      console.log('Help settings');
+      window.location.href = 'settings-help.html'
     }
   })
 

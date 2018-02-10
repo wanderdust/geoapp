@@ -104,8 +104,14 @@ $(function () {
         userName,
         userStatus
       }, (err, res) => {
-        if (err)
-          return alert('Error:' + err);
+        if (err) {
+          // Native alerts from phonegap
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
+        }
 
         window.location.href = 'settings.html';
       })

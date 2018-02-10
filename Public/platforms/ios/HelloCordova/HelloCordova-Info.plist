@@ -51,8 +51,11 @@
     <dict>
       <key>NSExceptionDomains</key>
       <dict>
-        <key>geo-app-amigos.herokuapp.com</key>
-        <dict/>
+        <key>192.168.0.30</key>
+        <dict>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
       </dict>
     </dict>
   </dict>
