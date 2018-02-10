@@ -665,6 +665,24 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
+  socket.on('changePassword', async(data, callback) => {
+    try {
+      let user = await User.findOneAndUpdate({_id: data._id, password: data.password}, {
+        $set: {
+          password: data.newPassword
+        }
+      }, {new: true});
+
+      if (user === null) {
+        return callback({Error: 0, Message: 'Contraseña incorrecta'});
+      }
+
+      callback(null, true)
+    } catch (e) {
+      callback({Error: 99, Message: 'Ha ocurrido un error'})
+    }
+  })
+
   // Deletes user's account.
   socket.on('deleteAccount', async(data, callback) => {
     try {
@@ -691,7 +709,7 @@ socket.on('getUser', async (data, callback) => {
     } catch (e) {
       callback({Error: 99, Message: 'Ha ocurrido un error'})
     }
-  })
+  });
 
   socket.on('disconnect', () => {
     // Removes from array the groups from the disconnected socket.
