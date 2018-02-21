@@ -52,25 +52,6 @@ $(function () {
     },
 
     userCoords: async function () {
-      // // Provisional fixed coords fconsole.log('online')or testing.
-      // let groups = app.groupCollection;
-      // let userLat = randomCoords().lat;
-      // let userLng = randomCoords().lng;
-      //
-      // for (let i = 0; groups.length > i; i++) {
-      //   let model = app.groupCollection.models[i];
-      //   let groupLat = model.get('coords').lat;
-      //   let groupLng = model.get('coords').lng;
-      //   let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-      //
-      //   if (distance <= 0.5) {
-      //     this.socket.emit('userInArea', {
-      //       userId: sessionStorage.getItem('userId'),
-      //       groupId: model.get('_id')
-      //     });
-      //     break;
-      //   }
-      // }
       let that = this;
       try {
         if (!navigator.geolocation)
@@ -111,7 +92,9 @@ $(function () {
               })
             }
           }
-        });
+        }, (err) => {
+          alert(err);
+        }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000});
 
       } catch (e) {
         return navigator.notification.alert(
@@ -197,7 +180,7 @@ $(function () {
       }, function (err) {
         let coords = {lat: 55.948638, lng: -3.201244}
         that.newMap(coords)
-      })
+      }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000})
     },
 
     // Inits google maps.

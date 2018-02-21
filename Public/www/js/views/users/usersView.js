@@ -89,11 +89,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, res) => {
         if (err)
-        return navigator.notification.alert(
-          err,
-          (msg) => true,
-          'Error'
-        );
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         window.location.href = 'main.html#/online';
       })

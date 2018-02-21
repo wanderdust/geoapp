@@ -123,7 +123,7 @@ $(function () {
       }, function (err) {
         let coords = {lat: 40.472795, lng: -3.868239}
         that.initMap(coords);
-      });
+      }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000});
     },
 
     // Places a marker.
