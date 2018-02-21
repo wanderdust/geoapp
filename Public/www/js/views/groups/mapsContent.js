@@ -186,7 +186,7 @@ $(function () {
         let coords = {};
         coords.lat = position.coords.latitude;
         coords.lng = position.coords.longitude;
-        that.initMap(coords);
+        that.newMap(coords);
       }, function (err) {
         let coords = {lat: 55.948638, lng: -3.201244}
         that.newMap(coords)
