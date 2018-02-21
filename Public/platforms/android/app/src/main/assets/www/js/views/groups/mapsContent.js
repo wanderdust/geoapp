@@ -93,9 +93,13 @@ $(function () {
             }
           }
         }, (err) => {
-          alert(err);
-        }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000});
-
+          return navigator.notification.alert(
+            'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS y pulsa OK para continuar',
+            this.userCoords,
+            'Activa el GPS'
+          );
+        }, {enableHighAccuracy: false, maximumAge: 5000, timeout: 5000});
+        
       } catch (e) {
         return navigator.notification.alert(
           e,
