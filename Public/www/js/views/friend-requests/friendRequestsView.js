@@ -26,7 +26,11 @@ $(function () {
 
       this.socket.emit('createFriendRequestCollection', userId, (err, collection) => {
         if(err){
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
         } else if (collection.length === 0) {
           app.requestCollection.trigger('addPlaceHolder')
         }
@@ -55,6 +59,6 @@ $(function () {
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
-  
+
   new app.FriendRequests();
 })

@@ -26,7 +26,11 @@ $(function () {
 
       this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
         if(err){
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
         } else if (collection.length === 0) {
           app.groupCollection.trigger('addPlaceHolder')
         }
@@ -34,7 +38,11 @@ $(function () {
         app.groupCollection.add(collection);
         that.socket.emit('findIfPending', {userId}, (err, status) => {
           if (err)
-            return console.log(err);
+            return navigator.notification.alert(
+              err,
+              (msg) => true,
+              'Error'
+            );
 
           let model = app.groupCollection.findWhere({_id: status.groupId});
           model.trigger('updateSelected')
@@ -61,6 +69,6 @@ $(function () {
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
-  
+
   new app.PendingsView();
 })

@@ -56,7 +56,11 @@ $(function () {
 
       this.socket.emit('addFriend', requestId, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         // Remove the model and update the view.
         app.requestCollection.remove(model);
@@ -70,7 +74,11 @@ $(function () {
 
       this.socket.emit('rejectFriend', requestId, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         // Remove the model and update the view.
         app.requestCollection.remove(model);

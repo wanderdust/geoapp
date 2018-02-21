@@ -82,7 +82,11 @@ $(function () {
         // For each place, get the icon, name and location.
         let bounds = new google.maps.LatLngBounds();
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
+          return navigator.notification.alert(
+            'Returned place contains no geometry',
+            (msg) => true,
+            'Error'
+          );
           return;
         };
 
@@ -105,7 +109,11 @@ $(function () {
     getUserLocation: function () {
       let that = this;
       if (!navigator.geolocation)
-        return console.log('Geolocation not supported');
+        return navigator.notification.alert(
+          'Geolocation not supported',
+          (msg) => true,
+          'Error'
+        );
 
       navigator.geolocation.getCurrentPosition(function (position) {
         let coords = {};

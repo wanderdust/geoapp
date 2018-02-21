@@ -54,7 +54,11 @@ $(function () {
 
       this.socket.emit('joinGroup', requestId, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         // Remove the model and update the view.
         app.requestCollection.remove(model);
@@ -67,7 +71,11 @@ $(function () {
 
       this.socket.emit('rejectGroup', requestId, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         // Remove the model and update the view.
         app.requestCollection.remove(model);

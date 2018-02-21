@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Geo App</title>
+    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app-container">
+
+      <nav id="header-nav">
+        <div id="back-arrow-container">
+          <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
+        </div>
+        <div id="group-title-container" class="standalone-title">
+          <div id="group-title-group">
+            <p>Perfil</p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="tabs-content settings-page">
+        <div id="user-dashboard" class="user-image">
+          <div id="profile-image-container">
+            <div class="user-image">
+              <img class="photo" src="">
+            </div>
+
+            <div class="add-photo-icon">
+              <img src="css/assets/sidebar-icons/icon_add_photo_white.svg">
+            </div>
+          </div>
+        </div>
+        <div id="settings-list" class="user-settings">
+          <div class="name-container">
+            <div class="name-input"></div>
+
+            <div class="edit-icon">
+              <img src="css/assets/sidebar-icons/icon_edit.svg">
+            </div>
+          </div>
+
+          <div class="name-container">
+            <div class="status-input"></div>
+
+            <div class="edit-icon-status">
+              <img src="css/assets/sidebar-icons/icon_edit.svg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="snackbar"></div>
+    </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/templates/templates.js"></script>
+    <script src="http://192.168.0.30:3000/socket.io/socket.io.js/"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/bootstrap.min.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/models/userModel.js"></script>
+    <script src="./js/views/settings/profileSettings.js"></script>
+
+    </script>
+  </body>
+</html>

@@ -38,7 +38,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, collection) => {
         if(err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         // If it is a new user with no groups it triggers blankMap event.
         if (collection.length === 0) {

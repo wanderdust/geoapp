@@ -96,12 +96,20 @@ $(function () {
       if (this.groupValidation(groupData.coords, groupData.title, groupData.friends)) {
         this.socket.emit('addGroup', groupData, (err, data) => {
           if (err)
-            return console.log(err);
+            return navigator.notification.alert(
+              err,
+              (msg) => true,
+              'Error'
+            );
 
           groupData.groupId = data._id;
           that.socket.emit('addGroupRequests', groupData, (err, res) => {
             if (err)
-              return console.log(err)
+              return navigator.notification.alert(
+                err,
+                (msg) => true,
+                'Error'
+              );
 
             window.location.href = 'main.html#/all'
           })

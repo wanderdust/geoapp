@@ -43,7 +43,7 @@ $(function () {
 
       this.socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data);
-      })
+      });
 
     },
 
@@ -74,7 +74,11 @@ $(function () {
       let that = this;
       try {
         if (!navigator.geolocation)
-          return console.log('Geolocation not supported by your browser');
+          return navigator.notification.alert(
+            'Geolocation not supported',
+            (msg) => true,
+            'Error'
+          );
         // await navigator.geolocation.getCurrentPosition
         await navigator.geolocation.watchPosition((position) => {
           let groups = app.groupCollection;
@@ -90,7 +94,6 @@ $(function () {
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
             if (distance <= 0.030) {
-              console.log('yup')
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
@@ -111,7 +114,11 @@ $(function () {
         });
 
       } catch (e) {
-        console.log(e)
+        return navigator.notification.alert(
+          e,
+          (msg) => true,
+          'Error'
+        );
       }
     },
 

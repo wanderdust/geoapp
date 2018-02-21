@@ -33,7 +33,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, collection) => {
         if (err)
-          return console.log(err)
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         app.userCollection.add(collection);
       });
@@ -85,7 +89,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, res) => {
         if (err)
-          return console.log(err);
+        return navigator.notification.alert(
+          err,
+          (msg) => true,
+          'Error'
+        );
 
         window.location.href = 'main.html#/online';
       })

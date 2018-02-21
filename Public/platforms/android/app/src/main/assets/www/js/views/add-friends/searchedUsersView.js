@@ -37,8 +37,12 @@ $(function () {
       this.socket.emit('searchFriends', {
         query, userId
       }, (err, collection) => {
-        if(err){
-          return console.log(err);
+        if(err) {
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
         } else if (collection.length === 0) {
           app.userCollection.trigger('addPlaceHolder')
         }

@@ -10,6 +10,9 @@
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
@@ -17,6 +20,9 @@
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },

@@ -417,7 +417,6 @@ socket.on('getUser', async (data, callback) => {
       userGroup = await new UserGroup(userGroup).save();
       return callback(null, groupModel)
     } catch (e) {
-      console.log(e, e.message)
       callback(e.message)
     }
   });
@@ -448,7 +447,6 @@ socket.on('getUser', async (data, callback) => {
 
       callback(null, 'Group created succesfully')
     } catch (e) {
-      console.log(e, e.message)
       callback(e.message)
     }
   });
@@ -477,7 +475,6 @@ socket.on('getUser', async (data, callback) => {
 
       callback(null, `Has entrado en ${groupName.title}`)
     } catch (e) {
-      console.log(e)
       callback(e)
     }
   });
@@ -490,7 +487,6 @@ socket.on('getUser', async (data, callback) => {
 
       callback(null, `Has rechazado ${groupName.title}`)
     } catch (e) {
-      console.log(e.message)
       callback(e)
     }
   });
@@ -519,7 +515,6 @@ socket.on('getUser', async (data, callback) => {
 
       callback(null, searchCollection)
     } catch (e) {
-      console.log(e)
       callback(e)
     }
   });
@@ -686,7 +681,6 @@ socket.on('getUser', async (data, callback) => {
   // Deletes user's account.
   socket.on('deleteAccount', async(data, callback) => {
     try {
-      console.log('foo')
       // Verify password
       let user = await User.findOne({_id: data._id, password: data.password});
 

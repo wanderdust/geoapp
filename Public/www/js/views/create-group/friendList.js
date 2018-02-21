@@ -26,7 +26,11 @@ $(function () {
 
       this.socket.emit('createFriendsCollection', userId, (err, collection) => {
         if (err)
-          return console.log(err)
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         app.userCollection.add(collection);
       });

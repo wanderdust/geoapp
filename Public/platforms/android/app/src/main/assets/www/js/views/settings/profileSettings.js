@@ -27,7 +27,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         let model = new app.UserModel(res);
         this.render(model);
@@ -105,12 +109,12 @@ $(function () {
         userStatus
       }, (err, res) => {
         if (err) {
-          // return alert('Error:' + err);
+          // Native alerts from phonegap
           return navigator.notification.alert(
             err,
-            (msg) => true),
+            (msg) => true,
             'Error'
-          )
+          );
         }
 
         window.location.href = 'settings.html';

@@ -27,7 +27,11 @@ $(function () {
         userId: sessionStorage.getItem('userId')
       }, (err, res) => {
         if (err)
-          return console.log(err);
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
 
         let model = new app.UserModel(res);
         this.render(model);

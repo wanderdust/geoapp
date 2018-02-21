@@ -11,14 +11,11 @@ $(function () {
     events: {
       "click #back-arrow-container": "backToMain",
       "click .settings-change-email": "getChangeEmail",
-      "click .settings-eliminate-account": "getDeleteAccount"
+      "click .settings-eliminate-account": "getDeleteAccount",
+      "click .settings-change-password": "getChangePassword"
     },
 
     initialize: function () {
-
-    },
-
-    render: function (model) {
 
     },
 
@@ -32,6 +29,10 @@ $(function () {
 
     getDeleteAccount: function () {
       window.location.href = 'settings-delete-account.html';
+    },
+
+    getChangePassword: function () {
+      window.location.href = 'settings-change-password.html';
     }
   })
 
