@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-google-play-services": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
@@ -22,7 +25,7 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova.plugins.diagnostic": {
+    "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },

@@ -31,18 +31,26 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova.plugins.diagnostic": {
-    "source": {
-      "type": "registry",
-      "id": "cordova.plugins.diagnostic@^3.9.2"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-console": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-console@^1.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-google-play-services": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-google-play-services"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-request-location-accuracy": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-request-location-accuracy"
     },
     "is_top_level": true,
     "variables": {}

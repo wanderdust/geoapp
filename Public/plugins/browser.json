@@ -1,0 +1,33 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-google-play-services": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-request-location-accuracy": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    }
+  },
+  "dependent_plugins": {}
+}
