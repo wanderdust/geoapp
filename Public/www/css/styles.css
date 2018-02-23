@@ -535,6 +535,34 @@ a:-webkit-any-link {
   display: none;
 }
 
+.add-friends-btn.invite-friends-btn {
+  position: absolute;
+  bottom: 15%;
+  left: 100%;
+  transform: translateX(-150%);
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  overflow: hidden;
+  border-radius: 50px;
+  z-index: 100;
+  box-shadow: 0px 1px 15px 0px #888888;
+  background-color: #fb8c00;
+}
+
+.add-friends-btn.invite-friends-btn img {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  z-index: 1;
+  left: 5px;
+}
+
+
+/* TABS FOR GROUPS */
+
 /* Override bootstrap default styles for the pills */
 .filtering-tabs.active {
   /* border-bottom: solid #fb8c00; */

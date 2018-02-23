@@ -7,43 +7,30 @@
     <title>Geo App</title>
     <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
+
   </head>
   <body>
-    <div id="app-container">
-      <nav id="header-nav" class="group-view">
-        <div id="back-arrow-container">
+    <div id="sidebar-container" class="new-group-sidenav active">
+      <nav id="header-nav" class="search-tab">
+        <div class="back-arrow-container af">
           <a href="#"><span class="glyphicon glyphicon-menu-left"></span></a>
         </div>
-        <div id="group-title-container"></div>
-
-        <div class="dropdown">
-          <div class="options-icon dropdown-toggle" data-toggle="dropdown" >
-            <img src="css/assets/sidebar-icons/icon_vertical_options.svg" alt="">
-          </div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="options-icon">
-             <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
-          </div>
+        <div id="group-title-container">
+          <input class="friends-query" type="text" placeholder="Buscar...">
         </div>
       </nav>
 
       <div class="tabs-content status-users-content">
-
-        <div class="online-users-list">
-          <p></p>
+        <div class="groups-list">
           <ul></ul>
         </div>
-
-        <div class="offline-users-list">
-          <p></p>
-          <ul></ul>
+        <div class="continue-btn af round-button">
+          <img src="./css/fonts/ok-tick.svg">
         </div>
       </div>
-
-      <div class="invite-friends-btn af add-friends-btn">
-        <img src="./css/assets/group-add.svg" alt="">
-      </div>
-
     </div>
+
+
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="./js/templates/templates.js"></script>
@@ -55,10 +42,15 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBooVb92OtWzkNoGO2J2744yiwOpKaF6NI&libraries=places"></script>
+    <script src ="./js/utils/map-styles.js"></script>
     <script src="./js/models/userModel.js"></script>
     <script src="./js/collections/users.js"></script>
-    <script src="./js/views/users/userView.js"></script>
-    <script src="./js/views/users/userList.js"></script>
-    <script src="./js/views/users/usersView.js"></script>
+    <script src="./js/views/create-group/added-friends/addedFriendView.js"></script>
+    <script src="./js/views/create-group/added-friends/addedFriendsList.js"></script>
+    <script src="./js/views/create-group/friendView.js"></script>
+    <script src="./js/views/create-group/friendList.js"></script>
+    <script src="./js/views/create-group/friendsMap.js"></script>
+    <script src="./js/views/create-group/friendsView.js"></script>
   </body>
 </html>

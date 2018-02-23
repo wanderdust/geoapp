@@ -1,4 +1,4 @@
-// View of the whole pending app.
+// View of the whole friends/users app.
 
 var app = app || {};
 var socket = socket || io.connect('http://192.168.0.30:3000');
@@ -10,8 +10,10 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
-      "click .back-arrow-container": "closeNavAndSave",
-      "click .continue-btn": "closeNavAndSave",
+      "click .back-arrow-container.cg": "closeNavAndSave",
+      "click .back-arrow-container.af": "backToUsers",
+      "click .continue-btn.cg": "closeNavAndSave",
+      "click .continue-btn.af": "sendInvitation",
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
@@ -29,14 +31,25 @@ $(function () {
       this.listenTo(app.userCollection, 'showAlert', this.snackBar);
       this.listenTo(app.userCollection, 'groupCoords', this.updateCoords);
       this.listenTo(app.userCollection, 'groupFriends', this.updateFriends);
-      new app.FriendsMap();
+
       new app.FriendList();
-      new app.AddedFriendList();
+
+      if (this.getUrl() === "create-group.html") {
+        new app.FriendsMap();
+        new app.AddedFriendList();
+      }
+
       this.render();
     },
 
     render: function () {
       this.$sideNav.hammer();
+    },
+
+    // Gets the url of the current document to use only some of the js/files
+    getUrl: function () {
+      let file = window.location.href.split('/').pop();
+      return file.split('#').shift();
     },
 
     // Adds the class active to the sidebar to open it.
@@ -52,6 +65,11 @@ $(function () {
     closeNavAndSave: function () {
       this.$('#sidebar-container').removeClass('active');
       this.$('#app-container.group-add').removeClass('active');
+    },
+
+    // go back to the users (users.html)
+    backToUsers: function () {
+      window.location.href = 'users.html';
     },
 
     // Back to home.
@@ -80,6 +98,26 @@ $(function () {
     // Saves the friends for the group in the array.
     updateFriends: function (friends) {
       this.groupFriends = friends;
+    },
+
+    sendInvitation: function () {
+      let groupData = {};
+      groupData.friends = this.groupFriends;
+      groupData.image = this.groupImage;
+      groupData.currentUser = sessionStorage.getItem('userId');
+      groupData.groupId = sessionStorage.getItem('currentGroupId');
+
+      this.socket.emit('addGroupRequests', groupData, (err, res) => {
+        if (err)
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
+
+        $('.selected').hide();
+        window.location.href = 'users.html';
+      })
     },
 
     // Creates a new Group in the database and sends the requests to the invited friends.

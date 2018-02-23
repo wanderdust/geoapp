@@ -428,6 +428,14 @@ socket.on('getUser', async (data, callback) => {
       let friends = data.friends;
 
       for (let friend of friends) {
+        let isExist = await UserGroup.findOne({groupId: data.groupId, userId: friend});
+
+        // if the user is already in the group, skips that user.
+        if (isExist !== null) {
+          continue;
+        }
+
+
         let newRequest;
         let newRequestModel;
         let socketsToUpdate = openSocketsUsers.findSockets(friend);

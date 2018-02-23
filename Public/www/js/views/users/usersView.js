@@ -14,6 +14,7 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
+      "click .invite-friends-btn": "addFriends",
       "click #exit-group-link": "exitGroup"
     },
 
@@ -28,6 +29,7 @@ $(function () {
       this.listenTo(app.userCollection, 'change', this.render)
 
       new app.UserList();
+
       this.socket.emit('createUsersCollection', {
         groupId: sessionStorage.getItem('currentGroupId'),
         userId: sessionStorage.getItem('userId')
@@ -77,6 +79,10 @@ $(function () {
         isOnline,
         isPending
       }));
+    },
+
+    addFriends: function () {
+      window.location.href = 'users-add-friends.html';
     },
 
     backToMain: function () {
