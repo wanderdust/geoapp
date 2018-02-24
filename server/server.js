@@ -388,6 +388,46 @@ socket.on('getUser', async (data, callback) => {
       callback(e.message);
     }
   });
+
+  // User cancels that he is going to a group.
+  socket.on('cancelPending', async (data, callback) => {
+    try {
+      let socketsToUpdateUsers;
+      let socketsToUpdateGroups;
+      let updatedProperties = {};
+
+      let userName = await User.findOne({_id: ObjectID(data.userId)});
+
+      let pendingUser = await UserGroup.findOneAndUpdate({
+        userId: data.userId,
+        groupId: data.groupId,
+        pending: true
+      }, {$set: {
+          pending: false
+        }
+      },{new: true});
+
+      socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+      socketsToUpdateGroups = openSocketsGroups.findSockets(pendingUser);
+
+      updatedProperties._id = pendingUser.groupId;
+      updatedProperties.userName = userName.name;
+      updatedProperties.userId = userName._id;
+
+      socketsToUpdateGroups.forEach((e) => {
+        io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
+      });
+
+      socketsToUpdateUsers.forEach((e) => {
+        io.to(e.socketId).emit('updatePendingStatus', data);
+      });
+
+      callback(null, true);
+    } catch (e) {
+      callback({error: 0, message: 'Ha ocurrido un error'})
+    }
+  });
+
   // Creates a new group in the database and a new userGroup reference.
   socket.on('addGroup', async (data, callback) => {
     try {

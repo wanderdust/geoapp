@@ -43,15 +43,27 @@ $(function () {
       let $okTick = $('.ok-tick');
       let groupId = this.model.get('_id');
       let userId = sessionStorage.getItem('userId');
+      let isSelected = this.$el.hasClass('selected');
 
-      this.socket.emit('updatePending', {groupId, userId}, (err, res) => {
-        if (err) {
-          app.groupCollection.trigger('showAlert', err);
-          return;
-        }
-        that.addPending();
-        app.groupCollection.trigger('showAlert', res);
-      });
+      if (!isSelected) {
+        this.socket.emit('updatePending', {groupId, userId}, (err, res) => {
+          if (err) {
+            app.groupCollection.trigger('showAlert', err);
+            return;
+          }
+          that.addPending();
+          app.groupCollection.trigger('showAlert', res);
+        });
+      } else {
+        this.socket.emit('cancelPending', {groupId, userId}, (err, callback) => {
+          if (err) {
+            app.groupCollection.trigger('showAlert', err);
+            return
+          }
+
+        this.$el.removeClass('selected');
+        })
+      }
     }
   })
 

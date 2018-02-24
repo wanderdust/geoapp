@@ -51,7 +51,7 @@ $(function () {
 
       this.socket.on('updatePendingStatus', (data) => {
         app.userCollection.updatePendingUser(data.userId, data.groupId);
-      })
+      });
     },
 
     // Gathers data from database and then renders it to the view.

@@ -11,7 +11,8 @@ $(function () {
     template: Templates.listCount,
 
     events: {
-      "click #back-arrow-container": "backToMain"
+      "click #back-arrow-container": "backToMain",
+      "click .delete": "cancelPending"
     },
 
     initialize: function () {

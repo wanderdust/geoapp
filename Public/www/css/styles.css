@@ -536,7 +536,7 @@ a:-webkit-any-link {
 }
 
 .add-friends-btn.invite-friends-btn {
-  position: absolute;
+  position: fixed;
   bottom: 15%;
   left: 100%;
   transform: translateX(-150%);
@@ -927,7 +927,7 @@ label{
 }
 
 .add-friends-btn {
-  position: absolute;
+  position: fixed;
   left: 22px;
   display: inline-block;
   width: 55px;
@@ -1137,7 +1137,7 @@ label{
 .continue-btn {
   height: 60px;
   width: 60px;
-  position: absolute;
+  position: fixed;
   bottom: 15%;
   right: 20px;
   border-radius: 50px;

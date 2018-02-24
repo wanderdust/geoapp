@@ -55,7 +55,7 @@ $(function () {
       let model = this.findWhere({_id: userId});
 
       if (currentGroup === groupId) {
-        model.set({isPending: true})
+        model.set({isPending: !model.get('isPending')})
       } else {
         model.set({isPending: false})
       };
@@ -63,7 +63,7 @@ $(function () {
       // Saves the new model updates in the collection.
       this.set({model}, {add: false, remove: false, merge: true});
     }
-  })
+  });
 
   // New instance of the collection and we grab data with fetch.
   app.userCollection = new UserCollection();
