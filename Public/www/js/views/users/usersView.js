@@ -1,7 +1,7 @@
 // View of the whole users app.
 
 var app = app || {};
-var socket = socket || io.connect('http://192.168.0.30:3000');
+var socket = socket || io.connect('http://127.0.0.1:3000');
 
 $(function () {
 
@@ -26,9 +26,12 @@ $(function () {
       this.$header = $('#group-title-container');
 
       this.listenTo(app.userCollection, 'update', this.render);
-      this.listenTo(app.userCollection, 'change', this.render)
+      this.listenTo(app.userCollection, 'change', this.render);
 
       new app.UserList();
+      
+      // When client connects sends user data to keep track of user.
+      socket.emit('connectedClient', sessionStorage.getItem('userId'))
 
       this.socket.emit('createUsersCollection', {
         groupId: sessionStorage.getItem('currentGroupId'),

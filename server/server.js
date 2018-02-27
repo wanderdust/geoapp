@@ -13,6 +13,7 @@ const {Request} = require('./models/requests.js');
 const {Friend} = require('./models/friends.js')
 const {OpenSocketsGroups} = require('./utils/openSocketsGroups.js');
 const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
+const {ConnectedUsers} = require('./utils/connectedUsers.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
@@ -27,10 +28,29 @@ let io = socketIO(server);
 
 let openSocketsGroups = new OpenSocketsGroups();
 let openSocketsUsers = new OpenSocketsUsers();
+let connectedUsers = new ConnectedUsers();
 
 // app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
+
+  socket.on('connectedClient', (id) => {
+    let users = connectedUsers.connectedUsers;
+    let found = false;
+    // checks if the user exists in the array. If it does it changes the socket.id,
+    // if it doesn't exist it add the user to the array.
+    for (let user of users) {
+      if (user.userId === id) {
+        user.takeHandshake();
+        user.socketId = socket.id;
+        found = true;
+        break;
+      };
+    };
+    if (!found) {
+      connectedUsers.addUser(id, socket.id);
+    }
+  })
 
   // Creates a new user in the database.
   socket.on('createUser', async (data, callback) => {
@@ -754,6 +774,21 @@ socket.on('getUser', async (data, callback) => {
   });
 
   socket.on('disconnect', () => {
+    let disconnectedUser = connectedUsers.findUser(socket.id);
+
+    if (typeof(disconnectedUser) !== 'undefined') {
+      let userId = disconnectedUser.userId;
+      let users = connectedUsers.connectedUsers;
+
+      for (let user of users) {
+        if (user.userId === userId) {
+          user.emitHandshake();
+        }
+      }
+    }
+    // After finding the user execute the countdown. If there is no response
+    // set the user as offline.
+
     // Removes from array the groups from the disconnected socket.
     openSocketsGroups.removeSockets(socket);
     openSocketsUsers.removeSockets(socket);

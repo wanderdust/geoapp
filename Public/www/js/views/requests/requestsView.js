@@ -1,7 +1,7 @@
 // View of the whole requests app.
 
 var app = app || {};
-var socket = socket || io.connect('http://192.168.0.30:3000');
+var socket = socket || io.connect('http://127.0.0.1:3000');
 
 $(function () {
 
@@ -22,6 +22,9 @@ $(function () {
       this.listenTo(app.requestCollection, 'update', this.render);
       this.listenTo(app.requestCollection, 'showAlert', this.snackBar);
       new app.RequestList();
+
+      // When client connects sends user data to keep track of user.
+      socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
       this.socket.emit('createRequestCollection', userId, (err, collection) => {
         if(err){

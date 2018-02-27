@@ -1,7 +1,7 @@
 // View of the settings.
 
 var app = app || {};
-var socket = socket || io.connect('http://192.168.0.30:3000');
+var socket = socket || io.connect('http://127.0.0.1:3000');
 
 $(function () {
 
@@ -20,6 +20,9 @@ $(function () {
     initialize: function () {
       let userId = sessionStorage.getItem('userId');
       this.socket = socket;
+
+      // When client connects sends user data to keep track of user.
+      socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
       // find the current user.
       // *creates a new user model with the data retrieved from db.
