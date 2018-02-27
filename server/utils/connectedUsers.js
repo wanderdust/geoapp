@@ -6,23 +6,34 @@ let ConnectedUsers = class {
   }
 
   addUser (userId, socketId) {
-    newSocket = {
+    let newSocket = {
       userId,
       socketId,
 			handshake: "",
 			emitHandshake: function () {
-				this.handshake = setTimeout(async () => {
-					 let foo = await UserGroup.findOneAndUpdate({
-						 userId: this.userId,
-						 online: true
-					 }, {
-						 $set: {
-							 online: false
-						 }
-					 }, {new: true});
+				let promise = new Promise((resolve, reject) => {
+					this.handshake = setTimeout( async () => {
+						let data = {};
+						 let userGroup = await UserGroup.findOneAndUpdate({
+							 userId: this.userId,
+							 online: true
+						 }, {
+							 $set: {
+								 online: false
+							 }
+						 }, {new: true});
 
-					 console.log(foo)
-				}, 1000);
+						 if (userGroup !== null) {
+							 data.userId = userGroup.userId;
+							 data.groupId = userGroup.groupId;
+						 }
+
+						 resolve(data)
+					}, 1000);
+				});
+				// returns the promise with the data to update other sockets.
+				return promise
+
 			},
 			takeHandshake: function () {
 				clearTimeout(this.handshake);

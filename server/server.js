@@ -10,10 +10,10 @@ const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
-const {Friend} = require('./models/friends.js')
+const {Friend} = require('./models/friends.js');
+const {ConnectedUsers} = require('./utils/connectedUsers.js');
 const {OpenSocketsGroups} = require('./utils/openSocketsGroups.js');
 const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
-const {ConnectedUsers} = require('./utils/connectedUsers.js');
 const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
@@ -774,20 +774,36 @@ socket.on('getUser', async (data, callback) => {
   });
 
   socket.on('disconnect', () => {
+    // Finds the user that disconnected and starts handshake to check if he is still online.
     let disconnectedUser = connectedUsers.findUser(socket.id);
 
     if (typeof(disconnectedUser) !== 'undefined') {
       let userId = disconnectedUser.userId;
       let users = connectedUsers.connectedUsers;
 
+      // Finds the users to update and updates.
       for (let user of users) {
         if (user.userId === userId) {
-          user.emitHandshake();
+          user.emitHandshake().then(async (data) => {
+            let updatedProperties = {};
+            let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+            let socketsToUpdateGroups = openSocketsGroups.findSockets(data);
+            let userName = await User.findOne({_id: ObjectID(data.userId)});
+            updatedProperties._id = data.groupId;
+            updatedProperties.userOnline = userName.name;
+            updatedProperties.userId = data.userId;
+
+    				socketsToUpdateUsers.forEach((e) => {
+    		      io.to(e.socketId).emit('updateUserStatus', data);
+    		    });
+
+            socketsToUpdateGroups.forEach((e) => {
+              io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
+            });
+          });
         }
       }
     }
-    // After finding the user execute the countdown. If there is no response
-    // set the user as offline.
 
     // Removes from array the groups from the disconnected socket.
     openSocketsGroups.removeSockets(socket);
