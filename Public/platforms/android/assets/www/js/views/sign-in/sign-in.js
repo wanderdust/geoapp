@@ -56,6 +56,8 @@ $(function () {
 
 
         sessionStorage.setItem('userId', res);
+        localStorage.setItem('password', data.password);
+        localStorage.setItem('email', data.email);
         window.location.href = 'main.html#/online'
       })
     },
@@ -79,6 +81,9 @@ $(function () {
         }
 
         sessionStorage.setItem('userId', res);
+        // Random strings to avoid localStorage collisions.
+        localStorage.setItem('passwordE1d9rg76397d11', data.password);
+        localStorage.setItem('userE1d9rg76397d11', data.email);
         window.location.href = 'main.html#/online'
       })
     }

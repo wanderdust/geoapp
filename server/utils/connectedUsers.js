@@ -11,28 +11,33 @@ let ConnectedUsers = class {
       socketId,
 			handshake: "",
 			emitHandshake: function () {
-				let promise = new Promise((resolve, reject) => {
-					this.handshake = setTimeout( async () => {
-						let data = {};
-						 let userGroup = await UserGroup.findOneAndUpdate({
-							 userId: this.userId,
-							 online: true
-						 }, {
-							 $set: {
-								 online: false
+				try {
+					let promise = new Promise((resolve, reject) => {
+						this.handshake = setTimeout( async () => {
+							let data = {};
+							 let userGroup = await UserGroup.findOneAndUpdate({
+								 userId: this.userId,
+								 online: true
+							 }, {
+								 $set: {
+									 online: false
+								 }
+							 }, {new: true});
+
+							 if (userGroup !== null) {
+								 data.userId = userGroup.userId;
+								 data.groupId = userGroup.groupId;
+								 resolve(data)
 							 }
-						 }, {new: true});
 
-						 if (userGroup !== null) {
-							 data.userId = userGroup.userId;
-							 data.groupId = userGroup.groupId;
-						 }
-
-						 resolve(data)
-					}, 1000);
-				});
-				// returns the promise with the data to update other sockets.
-				return promise
+							 resolve(false)
+						}, 3000);
+					});
+					// returns the promise with the data to update other sockets.
+					return promise
+				} catch (e) {
+					console.log(e)
+				}
 
 			},
 			takeHandshake: function () {

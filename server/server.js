@@ -783,24 +783,33 @@ socket.on('getUser', async (data, callback) => {
 
       // Finds the users to update and updates.
       for (let user of users) {
-        if (user.userId === userId) {
-          user.emitHandshake().then(async (data) => {
-            let updatedProperties = {};
-            let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
-            let socketsToUpdateGroups = openSocketsGroups.findSockets(data);
-            let userName = await User.findOne({_id: ObjectID(data.userId)});
-            updatedProperties._id = data.groupId;
-            updatedProperties.userOnline = userName.name;
-            updatedProperties.userId = data.userId;
+        try {
+          if (user.userId === userId) {
+            user.emitHandshake().then(async (data) => {
+              // If data is false it means the user wasnt online in any groups,
+              // therefore there is nothing to update.
+              if (data) {
+                let updatedProperties = {};
+                let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+                let socketsToUpdateGroups = openSocketsGroups.findSockets(data);
+                let userName = await User.findOne({_id: ObjectID(data.userId)});
+                updatedProperties._id = data.groupId;
+                updatedProperties.userOnline = userName.name;
+                updatedProperties.userId = data.userId;
 
-    				socketsToUpdateUsers.forEach((e) => {
-    		      io.to(e.socketId).emit('updateUserStatus', data);
-    		    });
+                socketsToUpdateUsers.forEach((e) => {
+                  io.to(e.socketId).emit('updateUserStatus', data);
+                });
 
-            socketsToUpdateGroups.forEach((e) => {
-              io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
-            });
-          });
+                socketsToUpdateGroups.forEach((e) => {
+                  io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
+                });
+              }
+              connectedUsers.removeSockets(socket);
+            }).catch((e) => console.log(e));
+          }
+        } catch (e) {
+          console.log(e)
         }
       }
     }

@@ -44,7 +44,6 @@ $(function () {
       this.socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data);
       });
-
     },
 
     render: function () {

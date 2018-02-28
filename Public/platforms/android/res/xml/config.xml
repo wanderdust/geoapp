@@ -34,4 +34,5 @@
     <gap:plugin name="org.apache.cordova.contacts" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="splashscreen" value="splash" />
 </widget>
