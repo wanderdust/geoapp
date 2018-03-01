@@ -67,7 +67,6 @@ $(function () {
     // Same as findAndUpdateOnline but also checks users location
     // as the user turn on the app.
     userOffline: function (data) {
-      console.log('im here')
       if (data.userId === sessionStorage.getItem('userId'))
         data.userOnline = 'Yo';
 

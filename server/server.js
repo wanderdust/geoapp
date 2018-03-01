@@ -64,9 +64,15 @@ io.on('connection', (socket) => {
         password: data.password
       };
 
+      let email = validator.isEmail(data.email);
+
       if (data.password !== data.confirmPassword) {
         return callback({Error: 0, Message: 'Passwords do not match'});
       }
+
+      if (!email) {
+      return callback({Error: 7, Message: 'Email no válido'})
+     }
 
       user = await new User(newUser).save();
 
@@ -354,6 +360,7 @@ socket.on('getUser', async (data, callback) => {
       let updatedDocuments = [];
       let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
       let groupName = await Group.findOne({_id: ObjectID(data.groupId)});
+
       // Checks if user is already online in that group.
       let userIsOnline = await UserGroup.findOne({
         userId: data.userId,

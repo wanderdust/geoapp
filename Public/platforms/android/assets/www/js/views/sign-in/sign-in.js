@@ -34,7 +34,7 @@ $(function () {
           if (err.Error === 2) {
             // Name required
             $('.input-group.name').addClass('error');
-          } else if (err.Error === 3) {
+          } else if (err.Error === 3 || err.Error === 7) {
             // Email required
             $('.input-group.user-email').addClass('error');
           } else if (err.Error === 4) {
@@ -56,8 +56,8 @@ $(function () {
 
 
         sessionStorage.setItem('userId', res);
-        localStorage.setItem('password', data.password);
-        localStorage.setItem('email', data.email);
+        localStorage.setItem('passwordE1d9rg76397d11', data.password);
+        localStorage.setItem('userE1d9rg76397d11', data.email);
         window.location.href = 'main.html#/online'
       })
     },
