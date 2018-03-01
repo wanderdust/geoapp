@@ -108,6 +108,12 @@ html, body {
   height: 34%;
 }
 
+.tabs-content ul.acc-settings {
+  list-style-type: none;
+  padding: 0px;
+  height: 100%;
+}
+
 .tabs-content li {
   margin-top: 10px;
 }

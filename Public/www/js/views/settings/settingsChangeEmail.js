@@ -51,6 +51,8 @@ $(function () {
           }
           return
         };
+
+        localStorage.setItem('userE1d9rg76397d11', res)
         window.location.href = 'main.html';
       })
     },

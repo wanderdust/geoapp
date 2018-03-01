@@ -32,7 +32,7 @@ $(function () {
         }, (err, res) => {
           if (err)
             return window.location.href = 'login.html';
-          sessionStorage.setItem('userId', res);
+          sessionStorage.setItem('userId', res._id);
           window.location.href = 'main.html#/online'
         })
       } else {

@@ -54,6 +54,8 @@ $(function () {
           }
           return
         };
+
+        localStorage.setItem('passwordE1d9rg76397d11', res);
         window.location.href = 'main.html';
       })
     },

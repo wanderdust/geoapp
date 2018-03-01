@@ -6,6 +6,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 const {ObjectID} = require('mongodb');
 const moment = require('moment');
+const bcrypt = require('bcryptjs');
 
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
@@ -57,11 +58,14 @@ io.on('connection', (socket) => {
   socket.on('createUser', async (data, callback) => {
     try {
       let user;
+      let salt = bcrypt.genSaltSync(10);
+      let hash = bcrypt.hashSync(data.password, salt);
+
       let newUser = {
         name: data.name,
         userImage: "",
         email: data.email,
-        password: data.password
+        password: hash
       };
 
       let email = validator.isEmail(data.email);
@@ -76,7 +80,7 @@ io.on('connection', (socket) => {
 
       user = await new User(newUser).save();
 
-      callback(null, user._id);
+      callback(null, {_id: user._id, password: user.password});
     } catch (e) {
       let duplicate = 11000;
       let err = e.errors;
@@ -97,13 +101,24 @@ io.on('connection', (socket) => {
 
   socket.on('loginUser', async (data, callback) => {
     try {
-      let user = await User.findOne({email: data.email, password: data.password});
+      let user = await User.findOne({email: data.email});
 
       if (user === null)
         return callback({Error: 1, Message: 'No user found'});
 
-      callback(null, user._id)
+      let verify = bcrypt.compareSync(data.password, user.password);
+
+      if (!verify) {
+        // if password is incorrect check if localStorage hash is the same as password.
+        let hash = await User.findOne({email: data.email, password: data.password});
+
+        if (hash === null)
+          return callback({Error: 1, Message: 'No password found'});
+      }
+
+      callback(null, {_id: user._id, password: user.password})
     } catch (e) {
+      console.log(e)
       callback({Error: 99, Message: e})
     }
   });
@@ -721,19 +736,22 @@ socket.on('getUser', async (data, callback) => {
 
       // Verifies that the email format is valid
       if (!email)
-        return callback({Error: 1, Message: 'Email no válido'})
+        return callback({Error: 1, Message: 'Email no válido'});
 
-      let user = await User.findOneAndUpdate({_id: data._id, password: data.password}, {
+      let user = await User.findOne({_id: data._id});
+
+      let verify = bcrypt.compareSync(data.password, user.password);
+
+      if (user === null || !verify)
+        return callback({Error: 0, Message: 'Contraseña incorrecta'});
+
+      await User.findOneAndUpdate({_id: data._id}, {
         $set: {
           email: data.newEmail
         }
       }, {new: true});
 
-      if(user === null) {
-        return callback({Error: 0, Message: 'Contraseña incorrecta'})
-      }
-
-      callback(null, true)
+      callback(null, data.newEmail)
     } catch (e) {
       callback({Error: 99, Message: 'Ha ocurrido un error'})
     }
@@ -741,17 +759,23 @@ socket.on('getUser', async (data, callback) => {
 
   socket.on('changePassword', async(data, callback) => {
     try {
-      let user = await User.findOneAndUpdate({_id: data._id, password: data.password}, {
-        $set: {
-          password: data.newPassword
-        }
-      }, {new: true});
+      let salt = bcrypt.genSaltSync(10);
+      let hash = bcrypt.hashSync(data.newPassword, salt);
+      let user = await User.findOne({_id: data._id});
 
-      if (user === null) {
+
+      let verify = bcrypt.compareSync(data.password, user.password);
+
+      if (user === null || !verify)
         return callback({Error: 0, Message: 'Contraseña incorrecta'});
-      }
 
-      callback(null, true)
+        await User.findOneAndUpdate({_id: data._id}, {
+          $set: {
+            password: hash
+          }
+        }, {new: true});
+
+      callback(null, hash)
     } catch (e) {
       callback({Error: 99, Message: 'Ha ocurrido un error'})
     }
@@ -761,9 +785,10 @@ socket.on('getUser', async (data, callback) => {
   socket.on('deleteAccount', async(data, callback) => {
     try {
       // Verify password
-      let user = await User.findOne({_id: data._id, password: data.password});
+      let user = await User.findOne({_id: data._id});
+      let verify = bcrypt.compareSync(data.password, user.password);
 
-      if (user === null) {
+      if (user === null || !verify) {
         return callback({Error: 0, Message: "Contraseña incorrecta"})
       }
 

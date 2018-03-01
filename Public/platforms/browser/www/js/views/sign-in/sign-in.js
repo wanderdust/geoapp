@@ -55,8 +55,8 @@ $(function () {
         };
 
 
-        sessionStorage.setItem('userId', res);
-        localStorage.setItem('passwordE1d9rg76397d11', data.password);
+        sessionStorage.setItem('userId', res._id);
+        localStorage.setItem('passwordE1d9rg76397d11', res.password);
         localStorage.setItem('userE1d9rg76397d11', data.email);
         window.location.href = 'main.html#/online'
       })
@@ -80,9 +80,9 @@ $(function () {
           return;
         }
 
-        sessionStorage.setItem('userId', res);
+        sessionStorage.setItem('userId', res._id);
         // Random strings to avoid localStorage collisions.
-        localStorage.setItem('passwordE1d9rg76397d11', data.password);
+        localStorage.setItem('passwordE1d9rg76397d11', res.password);
         localStorage.setItem('userE1d9rg76397d11', data.email);
         window.location.href = 'main.html#/online'
       })
