@@ -5,6 +5,7 @@ const validator = require('validator');
 const express = require('express');
 const socketIO = require('socket.io');
 const {ObjectID} = require('mongodb');
+const moment = require('moment');
 
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
@@ -18,7 +19,7 @@ const {createGroupModel} = require('./utils/createGroupModel.js');
 const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
 const {createFriendRequestModel} = require('./utils/createFriendRequestModel.js');
-const {createFriendModel} = require('./utils/createFriendModel.js')
+const {createFriendModel} = require('./utils/createFriendModel.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -371,7 +372,8 @@ socket.on('getUser', async (data, callback) => {
       // Finds new group and sets pending to true.
       let newPending = await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
         $set: {
-          pending: true
+          pending: true,
+          timeStamp: moment().valueOf()
         }
       });
 
@@ -471,7 +473,8 @@ socket.on('getUser', async (data, callback) => {
         groupId: groupModel._id,
         userId: data.currentUser,
         online: false,
-        pending: false
+        pending: false,
+        timeStamp: 0
       };
 
       userGroup = await new UserGroup(userGroup).save();
@@ -531,6 +534,7 @@ socket.on('getUser', async (data, callback) => {
         userId: request.recipientId,
         online: false,
         pending: false,
+        timeStamp:0
       };
 
       await new UserGroup(newUserGroup).save();

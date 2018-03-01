@@ -27,6 +27,9 @@
     },
     "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
   "dependent_plugins": {}

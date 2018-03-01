@@ -4,7 +4,8 @@ let UserGroupSchema = mongoose.Schema({
   groupId: String,
   userId: String,
   online: Boolean,
-  pending: Boolean
+  pending: Boolean,
+  timeStamp: Number
 });
 
 let UserGroup = mongoose.model('UserGroup', UserGroupSchema);

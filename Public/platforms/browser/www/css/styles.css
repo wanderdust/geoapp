@@ -75,7 +75,7 @@ html, body {
   transition: 0.5s;
   text-align: left;
   /* box-shadow: 0 -10px 20px -10px #888888; */
-  background-color: #fafafa;
+  background-color: #fffcf2;
 }
 
 #tabs-container .nav li {
@@ -1103,6 +1103,7 @@ label{
 
 #app-container.group-add {
   transition: margin-right .5s;
+  background-color: #fafafa;
 }
 
 /* Position and style the close button */

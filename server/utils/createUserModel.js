@@ -1,4 +1,5 @@
 const {User} = require('./../models/users.js');
+const moment = require('moment');
 
 let createUserModel = async function (userCursor, userId) {
   let newModel = {};
@@ -10,8 +11,12 @@ let createUserModel = async function (userCursor, userId) {
   } else {
     newModel.name = userModel.name;
   }
+  let timeStamp = userCursor.timeStamp;
+  let time = moment(moment(timeStamp).format()).locale('es').fromNow();
+
   newModel.isOnline = userCursor.online;
   newModel.isPending = userCursor.pending;
+  newModel.timeStamp = time;
   newModel._id = userModel._id;
   newModel.userStatus = userModel.userStatus;
   userModel.userImage ? newModel.userImage = userModel.userImage : "";

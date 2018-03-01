@@ -25,7 +25,6 @@ $(function () {
     },
 
     checkLocalStorage: function (user, password) {
-      console.log(user, password)
       if (user !== null && password !== null) {
         this.socket.emit('loginUser', {
           email: user,
@@ -33,7 +32,6 @@ $(function () {
         }, (err, res) => {
           if (err)
             return window.location.href = 'login.html';
-
           sessionStorage.setItem('userId', res);
           window.location.href = 'main.html#/online'
         })
