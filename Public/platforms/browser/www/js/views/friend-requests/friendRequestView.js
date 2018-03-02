@@ -16,7 +16,8 @@ $(function () {
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'remove', this.remove)
+      this.listenTo(this.model, 'remove', this.remove);
+      console.log(this.model)
     },
 
     render: function () {

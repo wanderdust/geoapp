@@ -10,6 +10,7 @@ $(function () {
       groupImage: "css/assets/group_placeholder.png",
       sentBy: "",
       timeStamp: 0,
+      userStatus: "¡Estoy usando GeoApp!",
       _id: ''
     }
   })
