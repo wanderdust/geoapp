@@ -28,7 +28,7 @@ Templates.userTemplateB = [
       '<p class="group-title">{{name}}</p>',
       '{{#if isPending}}',
         '<p id="isNotGoing" class="group-status">{{userStatus}}</p>',
-        '<p id="isGoing" class="group-status hidden">Va a ir: {{timeStamp}}</p>',
+        '<p id="isGoing" class="group-status hidden">Va a ir: {{time}}</p>',
         '{{else}}',
         '<p class="group-status">{{userStatus}}</p>',
       '{{/if}}',

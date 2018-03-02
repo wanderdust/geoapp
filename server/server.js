@@ -397,7 +397,7 @@ socket.on('getUser', async (data, callback) => {
           pending: true,
           timeStamp: moment().valueOf()
         }
-      });
+      }, {new: true});
 
       updatedDocuments.push(oldPending, newPending);
 
@@ -421,6 +421,8 @@ socket.on('getUser', async (data, callback) => {
         })
       };
 
+      // Gets the timeStamp of the last updated Pending status
+      data.timeStamp = newPending.timeStamp;
       // Sends the new data to the users view to update the pending status.
       socketsToUpdateUsers.forEach((e) => {
         io.to(e.socketId).emit('updatePendingStatus', data);

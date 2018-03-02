@@ -50,12 +50,20 @@ $(function () {
     },
 
     // Updates the user pending status.
-    updatePendingUser: function (userId, groupId) {
+    updatePendingUser: function (data) {
       let currentGroup = sessionStorage.getItem('currentGroupId');
-      let model = this.findWhere({_id: userId});
+      let model = this.findWhere({_id: data.userId});
+      let timeStamp;
+      let time;
 
-      if (currentGroup === groupId) {
-        model.set({isPending: !model.get('isPending')})
+      if (currentGroup === data.groupId) {
+        model.set({isPending: !model.get('isPending')});
+        if ((model.get('isPending'))) {
+          timeStamp = data.timeStamp;
+          time = moment(moment(timeStamp).format()).locale('es').fromNow();
+          model.set({timeStamp: data.timeStamp});
+          model.set({time: time});
+        }
       } else {
         model.set({isPending: false})
       };

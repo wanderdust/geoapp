@@ -29,7 +29,7 @@ $(function () {
       this.listenTo(app.userCollection, 'change', this.render);
 
       new app.UserList();
-      
+
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'))
 
@@ -53,7 +53,7 @@ $(function () {
       });
 
       this.socket.on('updatePendingStatus', (data) => {
-        app.userCollection.updatePendingUser(data.userId, data.groupId);
+        app.userCollection.updatePendingUser(data);
       });
     },
 
