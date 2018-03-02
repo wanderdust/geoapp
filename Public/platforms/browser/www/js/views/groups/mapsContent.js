@@ -231,11 +231,11 @@ $(function () {
 
     appendMarkerByColor: function (model) {
       if (model.get('activeUsers').length > 0) {
-        return this.appendMarker(model, 'css/assets/green_marker.png');
+        return this.appendMarker(model, 'css/assets/green_marker.svg');
       } else if (model.get('pendingUsers').length > 0) {
-        return this.appendMarker(model, 'css/assets/pending_marker.png');
+        return this.appendMarker(model, 'css/assets/pending_marker.svg');
       }
-      return this.appendMarker(model, 'css/assets/offline_marker.png');
+      return this.appendMarker(model, 'css/assets/offline_marker.svg');
     },
 
     removeMarkers: function () {

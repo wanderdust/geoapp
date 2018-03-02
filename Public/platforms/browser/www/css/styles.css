@@ -108,6 +108,13 @@ html, body {
   height: 34%;
 }
 
+.tabs-content ul#added-friends-list {
+  list-style-type: none;
+  padding: 0px;
+  overflow-y: hidden;
+  height: 34%;
+}
+
 .tabs-content ul.acc-settings {
   list-style-type: none;
   padding: 0px;
@@ -413,8 +420,7 @@ html, body {
 
 #header-nav {
   position: fixed;
-  min-height: 61px;
-  height: 9%;
+  height: 61px;
   width: 100%;
   background: #c88719;
   box-shadow: 0px 1px 15px 0px #888888;
@@ -554,6 +560,7 @@ a:-webkit-any-link {
 .tabs-content.status-users-content {
   height: 90%;
   padding-top: 15px;
+  overflow: scroll;
 }
 
 @media only screen and (max-height: 585px) {
@@ -653,8 +660,10 @@ a:-webkit-any-link {
  	background-repeat: no-repeat;
  	background-color: #d3d3d3;
  	font-family: 'Oxygen', sans-serif;
-  display: flex;
-  align-items: center;
+}
+
+.container {
+  padding-top: 30px;
 }
 
 h1.title {
@@ -835,6 +844,10 @@ label{
 
 /* **** Create New Group****** */
 
+body.active {
+  overflow: hidden;
+}
+
 .controls {
   margin-top: 10px;
   border: 1px solid transparent;
@@ -853,6 +866,7 @@ label{
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 80%;
+  margin-top: 18px;
   margin-left: 10%;
   border-radius: 2px;
 }
@@ -982,7 +996,7 @@ label{
 }
 
 .add-friends-btn {
-  position: fixed;
+  position: absolute;
   left: 22px;
   display: inline-block;
   width: 55px;
@@ -1103,7 +1117,7 @@ label{
   top: 0;
   right: 0;
   background-color: white;
-  overflow-x: hidden;
+  overflow: hidden;
   transition: 0.5s;
 }
 
@@ -1175,6 +1189,7 @@ label{
   background: linear-gradient(to right, white 50%, #ffb74d 50%);
   background-size: 200% 100%;
   background-position:left bottom;
+  margin-bottom: 15px;
 }
 
 #sidebar-container.new-group-sidenav .selected .group-container.user-container {

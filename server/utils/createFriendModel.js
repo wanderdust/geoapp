@@ -9,6 +9,7 @@ let createFriendModel = async function (friend) {
   newModel.isOnline = friend.online;
   newModel.isPending = friend.pending;
   newModel._id = userModel._id;
+  newModel.userStatus = userModel.userStatus;
   userModel.userImage ? newModel.userImage = userModel.userImage : "";
 
   return newModel;

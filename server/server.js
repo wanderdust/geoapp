@@ -597,6 +597,7 @@ socket.on('getUser', async (data, callback) => {
 
         model.name = result.name;
         model._id = result._id;
+        model.userStatus = result.userStatus;
         result.userImage ? model.userImage = result.userImage : "";
 
         // Doesn't show the current user in the search list

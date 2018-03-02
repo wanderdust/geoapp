@@ -68,6 +68,7 @@ $(function () {
     closeNavAndSave: function () {
       this.$('#sidebar-container').removeClass('active');
       this.$('#app-container.group-add').removeClass('active');
+      this.$('.friends-query').blur();
     },
 
     // go back to the users (users.html)

@@ -131,10 +131,13 @@ $(function () {
       this.removeMarkers();
       let marker = new google.maps.Marker({
           position: position,
-          map: map
+          map: map,
+          icon: 'css/assets/red_marker.svg'
       });
       map.panTo(position);
       this.currentMarkers.push(marker);
+      // Gets the focus out the searchBox to hide the keyboard.
+      $('#pac-input').blur();
     },
 
     // Removes all markers.
