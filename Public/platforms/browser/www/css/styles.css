@@ -937,7 +937,6 @@ body.active {
   position: absolute;
   top: 25%;
   left: 20px;
-  display: inline-block;
   width: 64px;
   height: 64px;
   overflow: hidden;
@@ -947,16 +946,11 @@ body.active {
   line-height: 55px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: auto;
   }
 
 .new-group-image img {
-
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
   max-width: 100%;
   z-index: 1;
 }

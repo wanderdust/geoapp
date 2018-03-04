@@ -27,6 +27,7 @@ $(function () {
       this.groupFriends = [];
       this.groupImage = "";
       this.$sideNav = $('.status-users-content');
+      _.bindAll(this, 'addGroupImage')
 
       this.listenTo(app.userCollection, 'showAlert', this.snackBar);
       this.listenTo(app.userCollection, 'groupCoords', this.updateCoords);
@@ -180,6 +181,7 @@ $(function () {
     },
 
     addGroupImage: function () {
+      let that = this;
       let options = {
         'destinationType': 1,
         'sourceType': 0,
@@ -187,17 +189,46 @@ $(function () {
         'correctOrientation': true
       };
 
-      navigator.camera.getPicture(function (imageData) {
-        this.groupImage = imageData;
-        $('.new-group-image').html(`<img src="${imageData}">`);
+      let addImage = navigator.camera.getPicture(function (image_URI) {
+        that.getFileContentAsBase64(image_URI, (base64Image) => {
+          that.groupImage = base64Image;
+        })
+        $('.new-group-image').html(`<img src="${image_URI}">`);
+
       }, function (err) {
-        // Native alerts from phonegap
+      // Native alerts from phonegap
         navigator.notification.alert(
           err,
           (msg) => true,
           'Error'
         );
       }, options);
+
+      document.addEventListener("deviceready", addImage, false);
+    },
+
+    getFileContentAsBase64: function (path,callback) {
+        window.resolveLocalFileSystemURL(path, gotFile, fail);
+
+        function fail(e) {
+          navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Cannot find requested file'
+          );
+        };
+
+        function gotFile(fileEntry) {
+          fileEntry.file(function(file) {
+            let reader = new FileReader();
+            reader.onloadend = function(e) {
+              let content = this.result;
+              callback(content);
+            };
+            // The most important point, use the readAsDatURL Method from the file plugin
+            reader.readAsDataURL(file);
+          });
+        }
     }
   })
 

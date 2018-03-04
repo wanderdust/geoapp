@@ -7,6 +7,7 @@ const socketIO = require('socket.io');
 const {ObjectID} = require('mongodb');
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
+const multer  = require('multer');
 
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');

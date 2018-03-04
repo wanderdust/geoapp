@@ -97,18 +97,18 @@ $(function () {
 
     // Saves data before going to settings view.
     backToMain: function () {
-      let userImage = ""; //this.userImage
       let userName = this.userName;
       let userStatus = this.userStatus;
       let userId = sessionStorage.getItem('userId');
+      let userImage = this.userImage;
 
       if (!this.verifyData(userStatus, userName))
         return this.snackBar('Nombre y estado tienen que contener al menos 1 caracter');
 
       this.socket.emit('saveProfileSettings', {
         userId,
-        userImage,
         userName,
+        userImage,
         userStatus
       }, (err, res) => {
         if (err) {
@@ -133,12 +133,39 @@ $(function () {
         'correctOrientation': true
       };
 
-      navigator.camera.getPicture(function (imageData) {
-        that.updateData(imageData);
-        $('.user-image .photo').attr('src', imageData);
+      navigator.camera.getPicture(function (image_URI) {
+        that.updateData(image_URI);
+        that.getFileContentAsBase64(image_URI, (base64Image) => {
+          that.userImage = base64Image;
+        })
+        $('.user-image .photo').attr('src', image_URI);
       }, (err) => {
         alert('Error:' + err)
       }, options)
+    },
+
+    getFileContentAsBase64: function (path,callback) {
+        window.resolveLocalFileSystemURL(path, gotFile, fail);
+
+        function fail(e) {
+          navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Cannot find requested file'
+          );
+        };
+
+        function gotFile(fileEntry) {
+          fileEntry.file(function(file) {
+            let reader = new FileReader();
+            reader.onloadend = function(e) {
+              let content = this.result;
+              callback(content);
+            };
+            // The most important point, use the readAsDatURL Method from the file plugin
+            reader.readAsDataURL(file);
+          });
+        }
     },
 
     snackBar: function (message) {
