@@ -61,6 +61,7 @@ $(function () {
       this.$('.friends-query').val("");
       this.$('#sidebar-container').addClass('active');
       this.$('#app-container.group-add').addClass('active');
+      this.$el.addClass('scroll-fix');
       app.userCollection.trigger('search');
     },
 
@@ -69,6 +70,8 @@ $(function () {
       this.$('#sidebar-container').removeClass('active');
       this.$('#app-container.group-add').removeClass('active');
       this.$('.friends-query').blur();
+      // sets overflow to hidden
+      this.$el.removeClass('scroll-fix');
     },
 
     // go back to the users (users.html)

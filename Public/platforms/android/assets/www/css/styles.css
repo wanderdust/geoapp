@@ -8,6 +8,10 @@ html, body {
   padding: 0;
 }
 
+.scroll-fix {
+  position: fixed;
+}
+
 #app-container {
   position: absolute;
   height: 100%;
@@ -660,10 +664,9 @@ a:-webkit-any-link {
  	background-repeat: no-repeat;
  	background-color: #d3d3d3;
  	font-family: 'Oxygen', sans-serif;
-}
-
-.container {
-  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  min-height: 431px;
 }
 
 h1.title {
