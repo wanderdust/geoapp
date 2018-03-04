@@ -30,6 +30,7 @@ $(function () {
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
       this.toggleVisible();
+      app.groupCollection.fitImage('.image img');
       return this;
     },
 

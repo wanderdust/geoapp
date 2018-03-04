@@ -46,6 +46,7 @@ $(function () {
       let html = template(model.toJSON());
 
       this.$('#user-dashboard').html(html);
+      app.userCollection.fitImage('.image img')
       return this;
     },
 

@@ -17,7 +17,7 @@ $(function () {
       this.user = localStorage.getItem('userE1d9rg76397d11');
       this.password = localStorage.getItem('passwordE1d9rg76397d11');
 
-      this.checkLocalStorage(this.user, this.password)
+      this.checkLocalStorage(this.user, this.password);
     },
 
     render: function () {

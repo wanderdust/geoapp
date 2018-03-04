@@ -23,11 +23,12 @@ $(function () {
       let isPending = (this.model.get('isPending'));
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
-      
+
 
       this.$el.html(html);
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
+      app.userCollection.fitImage('.image img');
       return this;
     },
     // The view gets removed and re-appended to be on the correct column.

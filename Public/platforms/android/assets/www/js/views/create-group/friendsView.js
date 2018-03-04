@@ -192,8 +192,9 @@ $(function () {
       let addImage = navigator.camera.getPicture(function (image_URI) {
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.groupImage = base64Image;
+          $('.new-group-image').html(`<img src="${base64Image}">`);
+          app.userCollection.fitImage('.new-group-image img');
         })
-        $('.new-group-image').html(`<img src="${image_URI}">`);
 
       }, function (err) {
       // Native alerts from phonegap

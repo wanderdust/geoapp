@@ -70,6 +70,17 @@ $(function () {
 
       // Saves the new model updates in the collection.
       this.set({model}, {add: false, remove: false, merge: true});
+    },
+
+    fitImage: async function (className) {
+      let i = new Image();
+
+      i.onload = await function () {
+        if (this.height > this.width)
+          return $(className).addClass('fit-vertically');
+        $(className).addClass('fit-horizontally');
+      }
+      i.src = $(className).attr('src');
     }
   });
 

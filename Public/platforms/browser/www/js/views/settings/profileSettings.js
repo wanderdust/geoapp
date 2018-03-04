@@ -51,6 +51,7 @@ $(function () {
       $('.user-image .photo').attr('src', userImage);
       $('.name-input').html(userName);
       $('.status-input').html(userStatus);
+      app.userCollection.fitImage('.user-image .photo');
     },
 
     // Sets the name in edit mode.
@@ -137,8 +138,8 @@ $(function () {
         that.updateData(image_URI);
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.userImage = base64Image;
+          $('.user-image .photo').attr('src', base64Image);
         })
-        $('.user-image .photo').attr('src', image_URI);
       }, (err) => {
         alert('Error:' + err)
       }, options)

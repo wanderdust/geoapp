@@ -119,7 +119,7 @@ Templates.addedUser = [
     '<div class="eliminate-button">',
       '<img class="centered-image" src="css/assets/icon_close_16dp.svg">',
     '</div>',
-    '<div class="added-friend-image">',
+    '<div class="added-friend-image image">',
       '<img class="centered-image" src={{userImage}}>',
     '</div>',
     '<div class="added-friend-name">',

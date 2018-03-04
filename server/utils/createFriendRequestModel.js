@@ -12,7 +12,7 @@ let createFriendRequestModel = async function (requestCursor) {
     requestModel.sentBy = senderModel.name;
     requestModel._id = requestCursor._id;
     requestModel.userStatus = senderModel.userStatus;
-    recipientModel.userImage ? requestModel.groupImage = recipientModel.userImage : "";
+    senderModel.userImage ? requestModel.groupImage = senderModel.userImage : "";
 
     return requestModel;
   } catch (e) {

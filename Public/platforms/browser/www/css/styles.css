@@ -152,7 +152,9 @@ html, body {
   position: absolute;
   top: 5%;
   left: 20px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 55px;
   height: 90%;
   overflow: hidden;
@@ -162,11 +164,21 @@ html, body {
 
 .tabs-content .group-container .image img {
   position: absolute;
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 100%;
   z-index: 1;
+}
+
+.fit-horizontally {
+    height: 100%;
+    width: auto;
+}
+
+.fit-vertically {
+  width: 100%;
+  height: auto;
 }
 
 @-webkit-keyframes gradient {
@@ -1381,12 +1393,11 @@ body.active {
 }
 
 #user-dashboard #profile-image-container .user-image img {
-  height: 100%;
   position: absolute;
-  width: auto;
+  min-width: 100%;
+  min-height: 100%;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 100%;
   z-index: 1;
 }
 

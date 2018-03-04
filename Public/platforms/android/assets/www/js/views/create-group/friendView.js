@@ -24,6 +24,7 @@ $(function () {
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
+      app.userCollection.fitImage('.image img');
       return this;
     },
 
