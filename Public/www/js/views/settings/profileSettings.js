@@ -1,7 +1,7 @@
 // View of the settings.
 
 var app = app || {};
-var socket = socket || io.connect('http://192.168.0.30:3000');
+var socket = socket || io.connect('http://10.40.40.54:3000');
 
 $(function () {
 
@@ -51,7 +51,7 @@ $(function () {
       $('.user-image .photo').attr('src', userImage);
       $('.name-input').html(userName);
       $('.status-input').html(userStatus);
-      app.userCollection.fitImage('.user-image .photo');
+      app.userCollection.fitImage(this.$('.user-image .photo'));
     },
 
     // Sets the name in edit mode.

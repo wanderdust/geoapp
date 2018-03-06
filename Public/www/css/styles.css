@@ -953,17 +953,16 @@ body.active {
   height: 64px;
   overflow: hidden;
   border-radius: 50px;
-  z-index: 100;
-  text-align: center;
-  line-height: 55px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin: auto;
   }
 
 .new-group-image img {
-  max-width: 100%;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 

@@ -1,5 +1,0 @@
-// GENERATED FILE - DO NOT EDIT
-include ":"
-include ":CordovaLib"
-include ":cordova-google-play-services:google-play-services_lib"
-project(":cordova-google-play-services:google-play-services_lib").projectDir = new File("cordova-google-play-services/geoapp-google-play-services_lib")

@@ -111,8 +111,9 @@ $(function () {
       this.trigger('updateMarkers')
     },
 
-    fitImage: async function (className) {
+    fitImage: async function (className, view) {
       let i = new Image();
+      console.log('view')
 
       i.onload = await function () {
         if (this.height > this.width)

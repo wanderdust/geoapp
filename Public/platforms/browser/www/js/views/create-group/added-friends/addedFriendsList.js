@@ -1,7 +1,7 @@
 // View of all the added-friends views.
 
 var app = app || {};
-var socket = socket || io.connect('http://192.168.0.30:3000');
+var socket = socket || io.connect('http://10.40.40.54:3000');
 
 $(function () {
 

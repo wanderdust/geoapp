@@ -72,15 +72,15 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
     },
 
-    fitImage: async function (className) {
+    fitImage: async function (view) {
       let i = new Image();
 
       i.onload = await function () {
         if (this.height > this.width)
-          return $(className).addClass('fit-vertically');
-        $(className).addClass('fit-horizontally');
+          return view.addClass('fit-vertically');
+        view.addClass('fit-horizontally');
       }
-      i.src = $(className).attr('src');
+      i.src = view.attr('src');
     }
   });
 

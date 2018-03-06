@@ -28,7 +28,7 @@ $(function () {
       this.$el.html(html);
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
-      app.userCollection.fitImage('.image img');
+      app.userCollection.fitImage(this.$('.image img'));
       return this;
     },
     // The view gets removed and re-appended to be on the correct column.
