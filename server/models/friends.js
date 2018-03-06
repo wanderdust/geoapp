@@ -1,3 +1,5 @@
+// Requests between friends
+
 const mongoose = require('mongoose');
 
 let FriendSchema = mongoose.Schema({

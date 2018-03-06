@@ -631,11 +631,16 @@ socket.on('getUser', async (data, callback) => {
 
       // Check if the user is alreay friends with that user or has sent already an invitation.
       let hasFriend = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'accepted'});
-      let requestSent = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'pending'})
+      let requestSent = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'pending'});
+      // Check if the other user has already sent an invitation to him.
+      let invited = await Friend.findOne({friendId: data.senderId, userId: data.recipientId, status: 'pending'});
+
       if (hasFriend) {
         return callback ('y tu ya sois amigos');
       } else if (requestSent) {
         return callback('está pendiente de aceptar tu invitación');
+      } else if (invited) {
+        return callback('ya te ha enviado una petición de amistad')
       }
 
 
