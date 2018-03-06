@@ -1,11 +1,13 @@
 // View of the sign-in.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
   app.Splash = Backbone.View.extend({
+    el: 'body',
+
     events: {
 
     },
@@ -18,6 +20,10 @@ $(function () {
       this.password = localStorage.getItem('passwordE1d9rg76397d11');
 
       this.checkLocalStorage(this.user, this.password);
+      if (socket.isOnline !== undefined) {
+        console.log(!socket.isOnline)
+        this.snackBar('Comprueba tu conexión a internet')
+      }
     },
 
     render: function () {
@@ -38,6 +44,13 @@ $(function () {
       } else {
         window.location.href = 'login.html';
       }
+    },
+
+    snackBar: function (message) {
+      let x = this.$("#snackbar");
+      x.html(message);
+      x.addClass('show');
+      setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
   new app.Splash();

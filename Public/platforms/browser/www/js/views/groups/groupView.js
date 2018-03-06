@@ -1,7 +1,7 @@
 // View of a single group model.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
@@ -30,7 +30,7 @@ $(function () {
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
       this.toggleVisible();
-      app.groupCollection.fitImage('.image img', this.$('.image img'));
+      app.groupCollection.fitImage(this.$('.image img'));
       return this;
     },
 

@@ -1,7 +1,7 @@
 // View for one group in Pending.html.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
@@ -30,7 +30,7 @@ $(function () {
       this.$el.html(html);
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
-      app.groupCollection.fitImage('.image img');
+      app.groupCollection.fitImage(this.$('.image img'));
       return this;
     },
 

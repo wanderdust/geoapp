@@ -434,6 +434,10 @@ html, body {
 
 /* Styles for users.html*/
 
+#timeStamp {
+  color: gray;
+}
+
 #header-nav {
   position: fixed;
   height: 61px;
@@ -1289,7 +1293,7 @@ body.active {
 }
 
 .tabs-content.settings-page {
-  height: 91%;
+  height: 90%;
 }
 
 .tabs-content.settings-page #user-dashboard {

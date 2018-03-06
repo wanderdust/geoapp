@@ -1,7 +1,7 @@
 // View of the settings.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
@@ -46,7 +46,7 @@ $(function () {
       let html = template(model.toJSON());
 
       this.$('#user-dashboard').html(html);
-      app.userCollection.fitImage('.image img')
+      app.userCollection.fitImage(this.$('.image img'));
       return this;
     },
 

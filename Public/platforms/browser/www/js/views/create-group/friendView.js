@@ -1,7 +1,7 @@
 // View for a single user-friend.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
@@ -24,7 +24,7 @@ $(function () {
       let html = template(this.model.toJSON());
 
       this.$el.html(html);
-      app.userCollection.fitImage('.image img');
+      app.userCollection.fitImage(this.$('.image img'));
       return this;
     },
 

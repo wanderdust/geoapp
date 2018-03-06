@@ -1,7 +1,7 @@
 // View of the whole friends/users app.
 
 var app = app || {};
-var socket = socket || io.connect('http://10.40.40.54:3000');
+var socket = loadSocket();
 
 $(function () {
 
@@ -193,7 +193,7 @@ $(function () {
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.groupImage = base64Image;
           $('.new-group-image').html(`<img src="${base64Image}">`);
-          app.userCollection.fitImage('.new-group-image img');
+          app.userCollection.fitImage($('.new-group-image img'));
         })
 
       }, function (err) {

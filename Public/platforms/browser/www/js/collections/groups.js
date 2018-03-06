@@ -111,16 +111,15 @@ $(function () {
       this.trigger('updateMarkers')
     },
 
-    fitImage: async function (className, view) {
+    fitImage: async function (view) {
       let i = new Image();
-      console.log('view')
 
       i.onload = await function () {
         if (this.height > this.width)
-          return $(className).addClass('fit-vertically');
-        $(className).addClass('fit-horizontally');
+          return view.addClass('fit-vertically');
+        view.addClass('fit-horizontally');
       }
-      i.src = $(className).attr('src');
+      i.src = view.attr('src');
     }
   })
 
