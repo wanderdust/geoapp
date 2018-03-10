@@ -13,7 +13,7 @@ $(function () {
     template: Templates.contentPlaceholder,
 
     events: {
-
+      "click .my-location": "pointToUserLocation"
     },
 
     initialize: function () {
@@ -52,6 +52,7 @@ $(function () {
 
     userCoords: async function () {
       let that = this;
+
       try {
         if (!navigator.geolocation)
           return navigator.notification.alert(
@@ -59,12 +60,13 @@ $(function () {
             (msg) => true,
             'Error'
           );
+
         // await navigator.geolocation.getCurrentPosition
         await navigator.geolocation.watchPosition((position) => {
           let groups = app.groupCollection;
           let userLat = position.coords.latitude;
           let userLng = position.coords.longitude;
-          that.updateUserLocation(userLat, userLng)
+          that.updateUserLocation(userLat, userLng);
 
           // For each marker calculates the distance from the user.
           for (let i = 0; groups.length > i; i++) {
@@ -100,6 +102,7 @@ $(function () {
         }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000});
 
       } catch (e) {
+        console.log(e.message)
         return navigator.notification.alert(
           e,
           (msg) => true,
@@ -180,12 +183,14 @@ $(function () {
         coords.lat = position.coords.latitude;
         coords.lng = position.coords.longitude;
         that.newMap(coords);
+        that.userCoords();
       }, function (err) {
         navigator.notification.alert(
           'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
           () => {
             let coords = {lat: 55.948638, lng: -3.201244}
-            that.newMap(coords)
+            that.newMap(coords);
+            that.userCoords();
           },
           'Activa el GPS'
         );
@@ -269,11 +274,35 @@ $(function () {
       this.filterAll(app.groupCollection);
     },
 
+    // Shows placeholder if there is no internet connection.
     connectionError: function () {
       let template = Handlebars.compile(this.template);
       let html = template({placeholder: 'No tienes conexión a internet'});
       this.$el.prepend(html);
       return this;
+    },
+
+    // Centers the map in the user location.
+    pointToUserLocation: async function () {
+      try {
+        let that = this;
+
+        if (this.userCurrentPosition === null) {
+          app.groupCollection.trigger('showSnackBar', {message: 'Buscando...'});
+          return await navigator.geolocation.getCurrentPosition((position) => {
+            let userLat = position.coords.latitude;
+            let userLng = position.coords.longitude;
+            let latLng = new google.maps.LatLng(userLat, userLng);
+            that.map.panTo(latLng);
+            console.log(userLat);
+          }, (err) => {
+            app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
+          }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 3500} )
+        }
+        this.map.panTo(this.userCurrentPosition.getPosition());
+      } catch (e) {
+        app.groupCollection.trigger('showSnackBar', {message: 'Ha ocurrido un error'})
+      }
     }
   })
 

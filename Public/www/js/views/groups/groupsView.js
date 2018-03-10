@@ -25,6 +25,8 @@ $(function () {
       this.socket = socket;
       this.$sideNav = $('#sidebar-container');
 
+      this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar)
+
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'))
 
@@ -86,6 +88,13 @@ $(function () {
 
     getSettings: function () {
       window.location.href = "settings.html"
+    },
+
+    snackBar: function (message) {
+      let x = this.$("#snackbar");
+      x.html(message.message);
+      x.addClass('show');
+      setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
   })
 

@@ -37,16 +37,28 @@ html, body {
   width: 100%;
 }
 
+.my-location {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  right: 7px;
+  width: 65px;
+  height: 65px;
+  bottom: 7px;
+}
+
+.my-location img {
+  height: 35px;
+  width: auto;
+}
+
 #tabs-header {
   position: relative;
   width: auto;
   height: 50px;
   background-color: #ffe97d;
-}
-
-#tabs-header li{
-  padding: 0px !important;
-  height: 50px;
 }
 
 #tabs-header .tabs-underline {
@@ -80,6 +92,7 @@ html, body {
   text-align: left;
   /* box-shadow: 0 -10px 20px -10px #888888; */
   background-color: #fffcf2;
+  z-index: 3;
 }
 
 #tabs-container .nav li {
@@ -499,6 +512,8 @@ a:-webkit-any-link {
   height: 60%;
   width: 90%;
   padding-top: 5px;
+  display: flex;
+  align-items: center;
 }
 
 #header-nav #group-title-container #group-title-group p {
@@ -511,6 +526,8 @@ a:-webkit-any-link {
   bottom: 0;
   height:40%;
   width: 90%;
+  display: flex;
+  align-items: center;
 }
 
 #header-nav #group-title-container #group-sub-title p {
@@ -622,7 +639,9 @@ a:-webkit-any-link {
   bottom: 15%;
   left: 100%;
   transform: translateX(-150%);
-  display: inline-block;
+  display: flex;
+  align-items:center;
+  justify-content: center;
   width: 55px;
   height: 55px;
   overflow: hidden;
@@ -634,12 +653,8 @@ a:-webkit-any-link {
 
 .add-friends-btn.invite-friends-btn img {
   position: absolute;
-  width: 80%;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 100%;
-  z-index: 1;
-  left: 5px;
+  width: 60%;
+  height: auto;
 }
 
 
@@ -936,14 +951,13 @@ body.active {
   box-shadow: 0px 1px 15px 0px #888888;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 #create-group-btn img {
   height: 70%;
   position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 70%;
   max-width: 100%;
   z-index: 1;
 }
@@ -1010,7 +1024,9 @@ body.active {
 .add-friends-btn {
   position: absolute;
   left: 22px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 55px;
   height: 55px;
   overflow: hidden;
@@ -1020,13 +1036,8 @@ body.active {
 }
 
 .add-friends-btn img {
-  position: absolute;
-  width: 80%;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 100%;
-  z-index: 1;
-  left: 5px;
+  height: 60%;
+  width: auto;
 }
 
 .add-friends #added-friends {
@@ -1225,6 +1236,7 @@ body.active {
   right: 20px;
   border-radius: 50px;
   z-index: 499;
+  display:flex;
   box-shadow: 0px 1px 15px 0px #888888;
 }
 

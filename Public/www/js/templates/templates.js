@@ -2,7 +2,7 @@ let Templates = {};
 
 // Template for a user container
 Templates.userTemplateA = [
-  '<div class="group-container user-container">',
+  '<div class="group-container user-container waves-effect waves-light">',
     '<div class="image-animation"></div>',
     '<div class="image">',
       '<img src={{userImage}} class="img-responive img-fluid">',
@@ -19,7 +19,7 @@ Templates.userTemplateA = [
 
 // Template for a user container
 Templates.userTemplateB = [
-  '<div class="group-container user-container">',
+  '<div class="group-container user-container waves-effect waves-light">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
       '<img src="{{userImage}}" class="img-responive img-fluid">',
@@ -43,7 +43,7 @@ Templates.userTemplateB = [
 
 // Template for a group container
 Templates.groupTemplateA = [
-  '<div class="group-container main">',
+  '<div class="group-container main waves-effect waves-orange">',
     '<div class="image-animation"></div>',
     '<div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>',
     '<div class="group-header">',
