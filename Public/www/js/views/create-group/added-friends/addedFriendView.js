@@ -26,6 +26,7 @@ $(function () {
 
       this.$el.html(html);
       this.$el.addClass('hidden');
+      app.userCollection.fitImage(this.$('.added-friend img'));
       return this;
     },
 
