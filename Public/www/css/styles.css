@@ -90,7 +90,6 @@ html, body {
   width: 100%;
   transition: 0.5s;
   text-align: left;
-  /* box-shadow: 0 -10px 20px -10px #888888; */
   background-color: #fffcf2;
   z-index: 3;
 }
@@ -292,34 +291,22 @@ html, body {
   position: absolute;
   top: 25%;
   width: 100%;
+  display:flex;
+  justify-content: center;
 }
 
 .loading-box h1{
   text-align: center;
+  display:block;
   font-size: 4em;
   color: white;
   margin-bottom: 40px;
 }
 
 .loading-box .loader{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* GIF */
-
-.loader {
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid orange; /* Blue */
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  position:absolute;
+  margin-top: 20px;
+  top: 70%;
 }
 
 /* The side navigation menu */
@@ -650,7 +637,6 @@ a:-webkit-any-link {
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
-  box-shadow: 0px 1px 15px 0px #888888;
   background-color: #fb8c00;
 }
 
@@ -948,7 +934,6 @@ body.active {
   right: 20px;
   border-radius: 50px;
   z-index: 2;
-  box-shadow: 0px 1px 15px 0px #888888;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1024,7 +1009,6 @@ body.active {
   overflow: hidden;
   border-radius: 50px;
   z-index: 100;
-  box-shadow: 0px 1px 15px 0px #888888;
 }
 
 .add-friends-btn img {
@@ -1085,7 +1069,6 @@ body.active {
   width: 50px;
   border-radius: 50%;
   z-index: 2;
-  box-shadow: 0px 1px 10px 0px #888888;
 }
 
 #added-friends .added-friend .centered-image {
@@ -1227,7 +1210,6 @@ body.active {
   border-radius: 50px;
   z-index: 499;
   display:flex;
-  box-shadow: 0px 1px 15px 0px #888888;
 }
 
 .continue-btn img {
