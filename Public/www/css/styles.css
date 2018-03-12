@@ -568,13 +568,16 @@ a:-webkit-any-link {
 .dropdown {
   position: absolute;
   right: 0px;
-  width: 10%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
+.dropdown img {
+  position: absolute;
+  right: 3px;
+}
 
 .online-users-list {
   width: 100%;
@@ -834,6 +837,14 @@ label{
   border-radius: 50px;
   z-index: 2;
   border: solid 2px #fb8c00;
+}
+
+.ok-tick img {
+  width: 70%;
+}
+
+.pending.selected .ok-tick {
+  background-color: #fb8c00;
 }
 
 .tabs-content .group-container:hover {

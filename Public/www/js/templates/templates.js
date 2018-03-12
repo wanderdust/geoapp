@@ -19,7 +19,7 @@ Templates.userTemplateA = [
 
 // Template for a user container
 Templates.userTemplateB = [
-  '<div class="group-container user-container waves-effect waves-light">',
+  '<div class="group-container user-container">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
       '<img src="{{userImage}}" class="img-responive img-fluid">',
@@ -34,7 +34,7 @@ Templates.userTemplateB = [
       '{{/if}}',
     '</div>',
     '{{#if isPending}}',
-      '<div class="pending-icon">',
+      '<div class="pending-icon waves-effect waves-light">',
         '<img src="css/assets/sidebar-icons/icon_walking.svg">',
       '</div>',
     '{{/if}}',

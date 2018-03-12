@@ -14,7 +14,7 @@ $(function () {
 
     events: {
       "click #back-arrow-container": "backToMain",
-      "click .invite-friends-btn": "addFriends",
+      "click #invite-friends-btn.af": "addFriends",
       "click #exit-group-link": "exitGroup"
     },
 
@@ -24,6 +24,12 @@ $(function () {
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');
+
+      $('.dropdown-btn').dropdown({
+        contraintWidth: false,
+        belowOrigin: true,
+        stopPropagation: true
+      });
 
       this.listenTo(app.userCollection, 'update', this.render);
       this.listenTo(app.userCollection, 'change', this.render);
@@ -86,6 +92,7 @@ $(function () {
 
     addFriends: function () {
       window.location.href = 'users-add-friends.html';
+
     },
 
     backToMain: function () {

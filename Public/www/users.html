@@ -17,14 +17,13 @@
         </div>
         <div id="group-title-container"></div>
 
-        <div class="dropdown">
-          <div class="options-icon dropdown-toggle" data-toggle="dropdown" >
-            <img src="css/assets/sidebar-icons/icon_vertical_options.svg" alt="">
-          </div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="options-icon">
-             <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
-          </div>
-        </div>
+        <ul id="dropdown-menu" class="dropdown-content">
+          <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
+        </ul>
+
+        <a class="dropdown-btn dropdown" data-activates="dropdown-menu">
+          <img src="css/assets/sidebar-icons/icon_vertical_options.svg" alt="">
+        </a>
       </nav>
 
       <div class="tabs-content status-users-content">
@@ -40,7 +39,7 @@
         </div>
       </div>
 
-       <a class="btn-floating btn-large waves-effect waves-light invite-friends-btn af add-friends-btn">
+       <a id="invite-friends-btn" class="z-depth-3 btn-floating btn-large waves-effect waves-light invite-friends-btn af add-friends-btn">
          <img src="./css/assets/group-add.svg">
        </a>
     </div>
@@ -51,8 +50,7 @@
     <script src="./js/utils/loadSocket.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
-    <script src="./js/libs/bootstrap.min.js"></script>
-    <script src="./js/libs/bootstrap.min.js"></script>
+    <!-- <script src="./js/libs/bootstrap.min.js"></script> -->
     <script src="./js/libs/hammer.min.js"></script>
     <script src="./js/libs/jquery.hammer.js"></script>
     <script src="./js/libs/handlebars.min.js"></script>
