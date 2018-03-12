@@ -73,16 +73,14 @@
 
       <div id="tabs-container">
         <div id="tabs-header">
-          <ul class="nav nav-tabs">
-            <li role="presentation" class="filtering-tabs online-tab tab col-xs-4 active"><a href="#/online">Activos</a></li>
-            <li role="presentation" class="filtering-tabs pending-tab tab col-xs-4"><a href="#/pending">Pendientes</a></li>
-            <li role="presentation" class="filtering-tabs all-tab tab col-xs-4"><a href="#/all">Todos</a></li>
+          <ul id="tabs-swipe-demo" class="tabs">
+            <li class="tab col s3"><a class="active" href="#swipe-1">Activos</a></li>
+            <li class="tab col s3"><a href="#swipe-2">Pendientes</a></li>
+            <li class="tab col s3"><a href="#swipe-3">Offline</a></li>
           </ul>
-          <div class="tabs-underline left"></div>
-        </div>
-
-        <div class="tabs-content">
-          <ul id="group-list"></ul>
+          <div id="swipe-1" class="col s12 "><ul class="group-list activos"></ul></div>
+          <div id="swipe-2" class="col s12 "><ul class="group-list pendientes"></ul></div>
+          <div id="swipe-3" class="col s12 "><ul class="group-list desconectado"></ul></div>
         </div>
       </div>
       <div id="snackbar"></div>
@@ -94,7 +92,6 @@
     <script src="./js/utils/loadSocket.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
-    <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
     <script src="./js/libs/jquery.hammer.js"></script>
     <script src="./js/libs/handlebars.min.js"></script>

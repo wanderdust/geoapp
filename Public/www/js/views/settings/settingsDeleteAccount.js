@@ -29,7 +29,7 @@ $(function () {
       window.location.href = 'settings-account.html';
     },
 
-    confirmDelete () {
+    confirmDelete: function () {
       navigator.notification.confirm(
         '¿Estás seguro de que quieres continuar?',
         this.deleteAccount,

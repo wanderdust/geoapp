@@ -15,7 +15,7 @@ $(function () {
     events: {
       "click #back-arrow-container": "backToMain",
       "click #invite-friends-btn.af": "addFriends",
-      "click #exit-group-link": "exitGroup"
+      "click #exit-group-link": "confirmExit"
     },
 
     initialize: function () {
@@ -25,10 +25,10 @@ $(function () {
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');
 
-      $('.dropdown-btn').dropdown({
-        contraintWidth: false,
-        belowOrigin: true,
-        stopPropagation: true
+      var elem = document.querySelector('.fixed-action-btn');
+      var instance = M.FloatingActionButton.init(elem, {
+        direction: 'bottom',
+        hoverEnabled: false
       });
 
       this.listenTo(app.userCollection, 'update', this.render);
@@ -99,7 +99,27 @@ $(function () {
       window.location.href = 'main.html#/online';
     },
 
-    exitGroup: function () {
+    confirmExit: function () {
+      navigator.notification.confirm(
+        '¿Estás seguro de que quieres salir permanentemente de este grupo?',
+        this.exitGroup,
+        'Eliminar cuenta',
+        ['Si', 'No']
+      );
+    },
+
+    exitGroup: function (btn) {
+      let remove;
+
+      if (btn === 1) {
+        remove = true;
+      } else {
+        remove = false;
+      }
+
+      if(!remove)
+        return
+
       this.socket.emit('exitGroup', {
         groupId: sessionStorage.getItem('currentGroupId'),
         userId: sessionStorage.getItem('userId')

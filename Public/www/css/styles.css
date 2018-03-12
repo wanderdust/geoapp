@@ -57,9 +57,14 @@ html, body {
 #tabs-header {
   position: relative;
   width: auto;
-  height: 50px;
+  height: 40%;
   background-color: #ffe97d;
 }
+
+.carousel.carousel-slider .carousel-item {
+  min-height: 0px !important;
+}
+
 
 #tabs-header .tabs-underline {
   position: absolute;
@@ -105,6 +110,8 @@ html, body {
   text-align: center;
 }
 
+
+
 .tabs-content::-webkit-scrollbar {
     display: none;
 }
@@ -113,15 +120,21 @@ html, body {
   position:absolute;
   bottom: 0px;
   width: 100%;
-  height: 91%;
+  height: 85%;
   min-height: 25%;
 }
 
-.tabs-content ul {
+.tabs-content {
+  margin-top: 50px;
+}
+
+.tabs-content ul.group-list {
+  position: absolute;
   list-style-type: none;
-  padding: 0px;
+  padding-bottom: 10%;
   overflow: scroll;
-  height: 34%;
+  width: 100%;
+  max-height: 100%;
 }
 
 .tabs-content ul#added-friends-list {
@@ -552,18 +565,20 @@ a:-webkit-any-link {
   /* border-radius: 50%; */
 }
 
-.dropdown {
+.fixed-action-btn {
   position: absolute;
-  right: 0px;
-  width: 50%;
+  top: 0;
+  right: 0;
+  width: 20%;
   height: 100%;
+  padding-bottom: 0px !important;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.dropdown img {
-  position: absolute;
-  right: 3px;
+.fixed-action-btn img {
+
 }
 
 .online-users-list {
@@ -1205,6 +1220,9 @@ body.active {
   height: 60px;
   width: 60px;
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   bottom: 15%;
   right: 20px;
   border-radius: 50px;
@@ -1213,9 +1231,8 @@ body.active {
 }
 
 .continue-btn img {
-  height: 70%;
+  width: 60%;
   position: absolute;
-  width: 100%;
   top: 50%;
   transform: translateY(-50%);
   max-width: 100%;

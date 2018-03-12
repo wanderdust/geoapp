@@ -39,7 +39,7 @@ $(function () {
           if (err)
             return window.location.href = 'login.html';
           sessionStorage.setItem('userId', res._id);
-          // window.location.href = 'main.html#/online'
+          window.location.href = 'main.html#/online'
         })
       } else {
         window.location.href = 'login.html';

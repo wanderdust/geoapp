@@ -21,6 +21,7 @@ $(function () {
     },
 
     initialize: function () {
+      $('.group-container').on('click', () => console.log('foo'))
       _.bindAll(this, 'render', 'closeSidebar');
       this.socket = socket;
       this.$sideNav = $('#sidebar-container');

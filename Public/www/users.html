@@ -17,13 +17,24 @@
         </div>
         <div id="group-title-container"></div>
 
-        <ul id="dropdown-menu" class="dropdown-content">
-          <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
-        </ul>
+        <div class="fixed-action-btn dropdown-btn click-to-toggle">
+          <img src="css/assets/sidebar-icons/icon_vertical_options.svg">
+          <ul>
+            <li>
+              <a id="exit-group-link" class="btn-floating red">
+                <img src="css/assets/sidebar-icons/icon_delete.svg">
+              </a>
+            </li>
+          </ul>
+        </div>
 
-        <a class="dropdown-btn dropdown" data-activates="dropdown-menu">
+        <!-- <a class="dropdown-btn dropdown" data-activates="dropdown-menu">
           <img src="css/assets/sidebar-icons/icon_vertical_options.svg" alt="">
         </a>
+
+        <ul id="dropdown-menu" class="dropdown-content">
+          <li><a href="#" id="exit-group-link">Salir del grupo</a></li>
+        </ul> -->
       </nav>
 
       <div class="tabs-content status-users-content">
