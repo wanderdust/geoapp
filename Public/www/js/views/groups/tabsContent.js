@@ -9,7 +9,7 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-      "swipe #tabs-swipe-demo": "swipeTabs",
+      "swipe #tabs-header": "swipeTabs",
       "click .activos": "toggleOnline",
       "click .pendientes": "togglePending",
       "click .desconectado": "toggleAll",
@@ -73,7 +73,6 @@ $(function () {
     },
 
     updateRouter: function (data) {
-      console.log(data);
       let el = $(data)
       if (el.is('#swipe-1')) {
         window.location.href = 'main.html#/online'
@@ -93,6 +92,7 @@ $(function () {
     },
 
     swipeTabs: function (e) {
+      console.log('foo')
       let $elements =   $("#tabs-container ,#map-container ,#sidebar-icon ,.tabs-content");
 
       if (e.gesture.offsetDirection === 8) {
