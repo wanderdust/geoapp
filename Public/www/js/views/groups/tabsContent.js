@@ -9,7 +9,7 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-      "swipe #tabs-header": "swipeTabs"
+      "swipe #tabs-swipe-demo": "swipeTabs"
     },
 
     initialize: function () {

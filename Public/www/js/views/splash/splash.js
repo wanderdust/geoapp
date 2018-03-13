@@ -21,7 +21,6 @@ $(function () {
 
       this.checkLocalStorage(this.user, this.password);
       if (socket.isOnline !== undefined) {
-        console.log(!socket.isOnline)
         this.snackBar('Comprueba tu conexión a internet')
       }
     },

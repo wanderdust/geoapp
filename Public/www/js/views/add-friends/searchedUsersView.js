@@ -18,7 +18,7 @@ $(function () {
       this.$list = $('.groups-list ul');
 
       new app.SearchedUsersList();
-      
+
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
 

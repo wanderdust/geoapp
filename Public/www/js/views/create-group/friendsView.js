@@ -18,7 +18,8 @@ $(function () {
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
       "touchend .new-group-image" : "addGroupImage",
-      "swiperight .tabs-content": "closeNavAndSave"
+      "swiperight .tabs-content": "closeNavAndSave",
+      "click .search-icon": "toggleScaleOut"
     },
 
     initialize: function () {
@@ -58,7 +59,6 @@ $(function () {
 
     // Adds the class active to the sidebar to open it.
     openNavBar: function () {
-      this.$('.friends-query').focus();
       this.$('.friends-query').val("");
       this.$('#sidebar-container').addClass('active');
       this.$('#app-container.group-add').addClass('active');
@@ -73,6 +73,7 @@ $(function () {
       this.$('.friends-query').blur();
       // sets overflow to hidden
       this.$el.removeClass('scroll-fix');
+      this.toggleScaleOut(null, true)
     },
 
     // go back to the users (users.html)
@@ -230,6 +231,29 @@ $(function () {
             reader.readAsDataURL(file);
           });
         }
+    },
+
+    // Toggles the animation of the search bar. You can pass a boolean in 'isState'
+    // to go to the desired open/close state.
+    toggleScaleOut: function (defaultParam, isState) {
+      let isHasClass = $('.header-nav').hasClass('search-tab');
+
+      if (typeof(isState) !== 'undefined')
+        isHasClass = isState;
+
+      $('.header-nav').toggleClass('search-tab', !isHasClass);
+      $('.chevron-orange').toggleClass('scale-out', isHasClass);
+      $('.chevron-white').toggleClass('scale-out', !isHasClass);
+      $('.glass-orange').toggleClass('scale-out', !isHasClass);
+      $('.search-input').toggleClass('scale-out', isHasClass);
+      $('.title-container').toggleClass('scale-out', !isHasClass);
+
+      if (!isHasClass)
+        $('.friends-query').focus();
+
+      // $('.glass-orange').toggleClass('scale-out', !isHasClass);
+      // $('.glass-white').toggleClass('scale-out', isHasClass);
+      // $('.search-input').toggleClass('scale-out', !isHasClass);
     }
   })
 

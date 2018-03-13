@@ -8,6 +8,16 @@ html, body {
   padding: 0;
 }
 
+p {
+    margin: 0 0 10px;
+}
+
+h4 {
+  font-size: 1.3em;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
 .scroll-fix {
   position: fixed;
 }
@@ -58,11 +68,15 @@ html, body {
   position: relative;
   width: auto;
   height: 40%;
-  background-color: #ffe97d;
+  background-color: #fff6e5;
 }
 
 .carousel.carousel-slider .carousel-item {
   min-height: 0px !important;
+}
+
+.carousel.carousel-slider .carousel-item p.group-title {
+  font-size: 18px;
 }
 
 #tabs-container {
@@ -81,13 +95,25 @@ html, body {
   padding: 5px;
 }
 
-#tabs-container .tab a {
-  font-size: 1.2em;
-  padding-left: 0;
-  padding-right: 0;
-  text-align: center;
+#tabs-container .tab {
+  background-color: #ff9800;
 }
 
+#tabs-container .tab a {
+  font-size: 1.2em;
+}
+
+.tabs .tab a:hover, .tabs .tab a {
+  color: #ffe9b5;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+  color: white;
+}
+
+.tabs .indicator {
+  background-color: white;
+}
 
 
 .tabs-content::-webkit-scrollbar {
@@ -110,6 +136,7 @@ html, body {
   position: absolute;
   list-style-type: none;
   padding-bottom: 10%;
+  margin-top: 0px;
   overflow: scroll;
   width: 100%;
   max-height: 100%;
@@ -428,6 +455,24 @@ a:-webkit-any-link {
   text-decoration: none !important;
 }
 
+.title-container {
+  position: absolute;
+  display: inline-block;
+  width: 85%;
+  height: 100%;
+  left: 15%;
+  padding-left: 15px;
+}
+
+.title-container #group-title-group {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  padding: 0px;
+}
+
+
 #header-nav #group-title-container {
   position: absolute;
   display: inline-block;
@@ -437,7 +482,9 @@ a:-webkit-any-link {
   padding-left: 15px;
 }
 
-#header-nav #group-title-container.standalone-title #group-title-group{
+
+
+#header-nav #group-title-container.standalone-title #group-title-group {
   height: 100%;
   display: flex;
   align-items: center;
@@ -445,7 +492,7 @@ a:-webkit-any-link {
   padding: 0px;
 }
 
-#header-nav #group-title-container #group-title-group {
+#header-nav #group-title-container #group-title-group{
   position: absolute;
   top: 0;
   height: 60%;
@@ -455,7 +502,8 @@ a:-webkit-any-link {
   align-items: center;
 }
 
-#header-nav #group-title-container #group-title-group p {
+#header-nav #group-title-container #group-title-group p,
+.title-container #group-title-group {
   font-size: 25px;
   color: white;
 }
@@ -575,9 +623,14 @@ a:-webkit-any-link {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
 }
 
+.btn-floating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* TABS FOR GROUPS */
 
@@ -623,7 +676,7 @@ a:-webkit-any-link {
 
 h1.title {
 	font-size: 50px;
-	font-family: 'Passion One', cursive;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 }
 
@@ -914,11 +967,7 @@ body.active {
 .new-group-title .title-input{
   position: absolute;
   width: 100%;
-  font-size: 2rem !important;
-}
-
-.input-field label {
-  font-size: 1.5rem;
+  font-size: 1.3rem !important;
 }
 
 .add-friends {
@@ -1087,6 +1136,23 @@ body.active {
   box-shadow: 0px 1px 15px 0px #888888;
 }
 
+.search-icon {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.search-icon img {
+  height: 70%;
+  width: auto;
+}
+
 
 #sidebar-container.new-group-sidenav #group-title-container {
   padding: 0;
@@ -1097,7 +1163,7 @@ body.active {
   border: 0;
   outline: 0;
   background: transparent;
-  width: 100%;
+  width: 80%;
   height: 100%;
 }
 
@@ -1175,14 +1241,13 @@ body.active {
   right: 0px;
   width: 15%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#sidebar-container.add-friends .search-tab #group-title-container .search-icon span {
-  width: 100%;
-  text-align: center;
-  margin-top: 15px;
-  font-size: 2em;
-  color: #fb8c00;
+#sidebar-container.add-friends .search-tab #group-title-container .search-icon img {
+  height: 70%;
 }
 
 /* Styles for add friends placeholder */
