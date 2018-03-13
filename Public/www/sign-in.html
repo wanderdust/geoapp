@@ -2,18 +2,15 @@
 <html lang="en">
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/libs/materialize.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="./css/libs/bootstrap.min.css">
+
     <link rel="stylesheet" href="./css/styles.css">
 
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
-		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
 		<title>Login | GeoApp</title>
 	</head>
-	<body class="login">
+	<!-- <body class="login">
 		<div class="container">
 			<div class="row main">
 
@@ -71,15 +68,72 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		</div> -->
+
+    <body class="login">
+      <main class="login-main">
+        <center>
+
+          <div class="container">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+              <form class="col s12" method="post">
+                <div class='row'>
+                  <div class='col s12'>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12 input-group name'>
+                    <input id="name" class='validate' type='email' name='email' />
+                    <label for='name'>Nombre</label>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12 input-group user-email'>
+                    <input id="email" class='validate' type='email' name='email' />
+                    <label for='email'>Email</label>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12 input-group password'>
+                    <input id="password" class='validate' type='password' name='password' />
+                    <label for='password'>Contraseña</label>
+                  </div>
+                  <!-- <label style='float: right;'>
+                    <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                  </label> -->
+                </div>
+
+                <div class="row">
+                  <div class='input-field col s12 input-group repeat-password'>
+                    <input id="confirm" class='validate' type='password' name='password' />
+                    <label for='confirm'>Repetir contraseña</label>
+                  </div>
+                </div>
+
+                <br />
+                <center>
+                  <div class='row'>
+                    <button type="button" class='sign-in-button col s12 btn btn-large waves-effect indigo'>Crear cuenta</button
+                  </div>
+
+                </center>
+                <a class="create-account" href="login.html">Ya tengo una cuenta</a>
+              </form>
+            </div>
+          </div>
+        </center>
+      </main>
+
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="http://127.0.0.1:3000/socket.io/socket.io.js/"></script>
     <script src="./js/utils/loadSocket.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
-    <script src="./js/libs/bootstrap.min.js"></script>
-    <script src="./js/libs/bootstrap.min.js"></script>
     <script src="./js/libs/hammer.min.js"></script>
     <script src="./js/libs/jquery.hammer.js"></script>
     <script src="./js/libs/handlebars.min.js"></script>
