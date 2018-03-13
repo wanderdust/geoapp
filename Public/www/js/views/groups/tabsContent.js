@@ -9,11 +9,7 @@ $(function () {
     el: '#tabs-container',
 
     events: {
-      "swipe #tabs-header": "swipeTabs",
-      "click .activos": "toggleOnline",
-      "click .pendientes": "togglePending",
-      "click .desconectado": "toggleAll",
-      "click .group-container": "foo"
+      "swipe #tabs-header": "swipeTabs"
     },
 
     initialize: function () {
@@ -35,8 +31,7 @@ $(function () {
        });
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
-      // this.listenTo(app.groupCollection, 'filter', this.filterAll);
-      // this.listenTo(app.groupCollection, 'change', this.filterOne);
+      this.listenTo(app.groupCollection, 'change', this.filterOne);
 
       this.render();
     },
@@ -54,13 +49,10 @@ $(function () {
       let view = new app.GroupView({model: group});
 
       if (isOnline) {
-        console.log('online')
         this.$listOnline.append(view.render().el);
       } else if (isPending) {
-        console.log('pending')
         this.$listPending.append(view.render().el);
       } else {
-        console.log('all')
         this.$listAll.append(view.render().el);
       }
 
@@ -84,7 +76,8 @@ $(function () {
     },
 
     filterOne: function (group) {
-      group.trigger('visible');
+      console.log('"changed" event fired');
+      group.trigger('updateOne', group);
     },
 
     filterAll: function () {
@@ -92,7 +85,6 @@ $(function () {
     },
 
     swipeTabs: function (e) {
-      console.log('foo')
       let $elements =   $("#tabs-container ,#map-container ,#sidebar-icon ,.tabs-content");
 
       if (e.gesture.offsetDirection === 8) {
@@ -100,18 +92,6 @@ $(function () {
       } else if (e.gesture.offsetDirection === 16) {
         $elements.removeClass('swipeUp');
       }
-    },
-
-    // Clears the classes for the tabs-toggle.
-    removeAllClasses: function () {
-      $('.filtering-tabs').removeClass("active");
-      $('.tabs-underline').removeClass("left right centre")
-    },
-    // toggle between tabs
-    toggle: function (tab, side) {
-      this.removeAllClasses();
-      tab.addClass('active');
-      $('.tabs-underline').addClass(side);
     }
 
   })

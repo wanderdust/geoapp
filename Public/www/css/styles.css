@@ -65,28 +65,6 @@ html, body {
   min-height: 0px !important;
 }
 
-
-#tabs-header .tabs-underline {
-  position: absolute;
-  height: 3px;
-  width: 33.334%;
-  background: #c88719;
-  bottom: 0px;
-  transition: 0.1s linear;
-}
-
-#tabs-header .tabs-underline.left {
-  transform: translate(0%, 0);
-}
-
-#tabs-header .tabs-underline.centre {
-  transform: translate(100%, 0);
-}
-
-#tabs-header .tabs-underline.right {
-  transform: translate(200%, 0)
-}
-
 #tabs-container {
   position: absolute;
   bottom: 0;
@@ -135,13 +113,6 @@ html, body {
   overflow: scroll;
   width: 100%;
   max-height: 100%;
-}
-
-.tabs-content ul#added-friends-list {
-  list-style-type: none;
-  padding: 0px;
-  overflow-y: hidden;
-  height: 34%;
 }
 
 .tabs-content ul.acc-settings {
@@ -206,30 +177,6 @@ html, body {
   height: auto;
 }
 
-@-webkit-keyframes gradient {
-  0%   {background-color:#64db64;}
-  50%   {background-color:#ffffff;}
-  100%   {background-color:#64db64;}
-}
-
-@-moz-keyframes gradient {
-  0%   {background-color:#64db64;}
-  50%   {background-color:#ffffff;}
-  100%   {background-color:#64db64;}
-}
-
-@-o-keyframes gradient {
-  0%   {background-color:#64db64;}
-  50%   {background-color:#ffffff;}
-  100%   {background-color:#64db64;}
-}
-
-@-webkit-keyframes gradient-pending {
-  0%   {background-color:#4e81a8;}
-  50%   {background-color:#ffffff;}
-  100%   {background-color:#4e81a8;}
-}
-
 .tabs-content .group-container .image-animation {
   position: absolute;
   top: 0%;
@@ -245,14 +192,10 @@ html, body {
 
 .tabs-content .online .group-container .image-animation{
   background-color: #64db64;
-  /* -webkit-animation: gradient 2s 3;
-  -moz-animation: gradient 2s 3;
-  -o-animationn: gradient 2s 3; */
 }
 
 .tabs-content .pending .group-container .image-animation{
   background-color: #4e81a8;
-  /* -webkit-animation: gradient-pending 2s 2; */
 }
 
 .tabs-content .group-container .group-header {
@@ -260,8 +203,6 @@ html, body {
   left: 105px;
   width: 65%;
   height: 100%;
-
-
 }
 
 .tabs-content .group-header .group-title {

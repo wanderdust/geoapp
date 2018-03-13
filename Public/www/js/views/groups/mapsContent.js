@@ -266,7 +266,9 @@ $(function () {
     },
 
     showAllMarkers: function () {
-      this.appendAll(app.groupCollection);
+      let filteredCollection = app.groupCollection.offline();
+      this.appendAll(filteredCollection);
+      // this.appendAll(app.groupCollection);
     },
 
     updateAll: function () {

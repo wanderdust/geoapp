@@ -7,13 +7,11 @@ $(function () {
   let GroupCollection = Backbone.Collection.extend({
     model: app.GroupModel,
 
-    url: './json/groupsDB.json',
-
     // Filters and Returns a collection instance with online users.
     online: function () {
       let filtered = this.filter(function (e) {
         return e.get("activeUsers").length > 0;
-      })
+      });
       return new GroupCollection(filtered);
     },
 
@@ -21,11 +19,19 @@ $(function () {
     pending: function () {
       let filteredOne = this.filter(function (e) {
         return e.get("pendingUsers").length > 0;
-      })
+      });
       let filteredTwo = filteredOne.filter(function (e) {
         return e.get("activeUsers").length === 0;
-      })
+      });
       return new GroupCollection(filteredTwo);
+    },
+
+    offline: function () {
+      let filtered = this.filter(function (e) {
+        return e.get("activeUsers").length === 0 && e.get("pendingUsers").length === 0
+      });
+
+      return new GroupCollection(filtered);
     },
 
     findAndUpdateOneOnline: function (data) {
@@ -60,6 +66,7 @@ $(function () {
 
       // Renders the changed model and the updates markers.
       model.trigger('render');
+      model.trigger('change', model);
       // Updates the markers.
       this.trigger('updateMarkers');
     },
@@ -85,6 +92,7 @@ $(function () {
 
       // Renders the changed model and the updates markers.
       model.trigger('render');
+      model.trigger('change', model);
       // Updates the markers.
       this.trigger('updateMarkers');
     },
@@ -105,10 +113,13 @@ $(function () {
         model.set({pendingUsers: pendingUsersArray});
       }
 
+      this.set({model}, {add: false, remove: false, merge: true});
+
       // Renders the changed model.
       model.trigger('render');
+      model.trigger('change', model);
       // Updates the Markers.
-      this.trigger('updateMarkers')
+      this.trigger('updateMarkers');
     },
 
     fitImage: async function (view) {
