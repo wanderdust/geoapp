@@ -10,7 +10,7 @@ $(function () {
 
     events: {
       "click .openbtn": "openSidebar",
-      "click .closebtn": "closeSidebar",
+      "click .openbtn.closebtn": "closeSidebar",
       "swipeleft #sidebar-container": "closeSidebar",
       "click .requests-btn": "getRequests",
       "click .pending-btn": "getPending",
@@ -61,7 +61,8 @@ $(function () {
     },
 
     openSidebar: function () {
-      this.$sideNav.addClass('swipeIt');
+      let isHasClass =   this.$sideNav.hasClass('swipeIt');
+      this.$sideNav.toggleClass('swipeIt', !isHasClass);
     },
 
     closeSidebar: function () {

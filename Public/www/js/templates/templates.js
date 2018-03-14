@@ -53,6 +53,8 @@ Templates.groupTemplateA = [
       '{{else}}',
         '{{#if pendingUsers}}',
           '<p class="group-status">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>',
+        '{{else}}',
+            '<p class="group-status group-offline">No hay nadie en este grupo.</p>',
         '{{/if}}',
       '{{/if}}',
     '</div>',

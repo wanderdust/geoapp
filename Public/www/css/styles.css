@@ -97,6 +97,10 @@ h4 {
   background-color: #fff6e5;
 }
 
+.group-status.group-offline {
+  color: gray;
+}
+
 .carousel.carousel-slider .carousel-item {
   min-height: 0px !important;
 }
@@ -405,8 +409,6 @@ h4 {
   position: absolute;
   top: 2.5%;
   left: 2.5%;
-  width: 30px;
-  height: 30px;
   z-index: 1;
 }
 
@@ -604,6 +606,9 @@ a:-webkit-any-link {
 }
 
 .fixed-action-btn img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 
 }
 
@@ -1022,15 +1027,14 @@ body.active {
   border-radius: 50px;
   display: flex;
   justify-content: center;
-  }
+  z-index: 1;
+}
 
 .new-group-image img {
   position: absolute;
   min-width: 100%;
   min-height: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
+  z-index: 0;
 }
 
 .new-group-title {

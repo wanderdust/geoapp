@@ -28,9 +28,10 @@ $(function () {
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
-      this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll)
-      this.listenTo(app.groupCollection, 'filter', this.filterAll);
-      this.listenTo(app.groupCollection, 'change', this.filterAll);
+      this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll);
+      // Temporary disable the markers filtering
+      // this.listenTo(app.groupCollection, 'filter', this.filterAll);
+      // this.listenTo(app.groupCollection, 'change', this.filterAll);
       this.listenToOnce(app.groupCollection, 'update', this.userCoords);
 
       this.socket.on('newGroupUpdates', (data) => {
@@ -273,7 +274,9 @@ $(function () {
 
     updateAll: function () {
       this.appendAll(app.groupCollection);
-      this.filterAll(app.groupCollection);
+      
+      // temporary disable of the markers filtering.
+      // this.filterAll(app.groupCollection);
     },
 
     // Shows placeholder if there is no internet connection.
