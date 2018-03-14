@@ -302,7 +302,7 @@ describe('Camera tests iOS.', function () {
                 // when running against iOS 10 simulator on SauceLabs, 
                 // Appium cannot handle more than ~20 specs at one session
                 // the error would be as follows:
-                // "Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8100"
+                // "Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 192.168.3.183:8100"
                 checkSession(done);
                 return driver
                     .quit()

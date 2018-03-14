@@ -60,12 +60,34 @@ h4 {
   right: 7px;
   width: 65px;
   height: 65px;
-  bottom: 7px;
+  bottom: 80px;
 }
 
 .my-location img {
   height: 50%;
   width: auto;
+}
+
+.up-swipe-tabs {
+  transition: 0.5s ease;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  right: 7px;
+  width: 65px;
+  height: 65px;
+  top: -67px;
+}
+
+.up-swipe-tabs img {
+  height: 50%;
+  width: auto;
+}
+
+.up-swipe-tabs.swipeUp {
+  top: 80%;
 }
 
 #tabs-header {
@@ -91,7 +113,7 @@ h4 {
   width: 100%;
   transition: 0.5s;
   text-align: left;
-  background-color: #fffcf2;
+  background-color: #fff6e5;
   z-index: 3;
 }
 
@@ -127,9 +149,14 @@ h4 {
 .tabs-content {
   position:absolute;
   bottom: 0px;
+  top: 10px;
   width: 100%;
   height: 85%;
   min-height: 25%;
+}
+
+#group-tabs-content.tabs-content {
+  top: 49%;
 }
 
 .tabs-content {
@@ -163,7 +190,7 @@ h4 {
 }
 
 .tabs-content .group-container.main:hover {
-  background-color: #D8D8D8;
+  background-color: #fff6e5;
 }
 
 .tabs-content .group-container .group-active {
@@ -386,6 +413,14 @@ h4 {
 
 /* Add class for swipe Animation*/
 
+#tabs-header.swipeUp {
+  height: 100%;
+}
+
+.tabs-content.swipeUp {
+  height: 91% !important;
+}
+
 #tabs-container.swipeUp {
   transform: translateY(0%)
 }
@@ -596,13 +631,6 @@ a:-webkit-any-link {
   overflow: scroll;
 }
 
-@media only screen and (max-height: 585px) {
-  .tabs-content.status-users-content {
-    position: absolute;
-    top: 60px;
-  }
-}
-
 .tabs-content.status-users-content .group-header .group-title {
   padding-top: 5px;
 }
@@ -628,6 +656,7 @@ a:-webkit-any-link {
 
 .hidden {
   visibility: hidden;
+  display: none !important;
 }
 
 .btn-floating {
@@ -1059,6 +1088,7 @@ body.active {
 }
 
 .add-friends #added-friends ul {
+  margin-top: 0px;
   height: 100%;
 }
 
