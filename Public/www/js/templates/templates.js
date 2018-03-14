@@ -74,7 +74,7 @@ Templates.groupTemplatePending = [
         '{{/if}}',
       '{{/if}}',
     '</div>',
-    '<div class="ok-tick"><image class="img-responive img-fluid " src="./css/fonts/ok-tick.svg">',
+    '<div class="ok-tick"><image class="img-responive img-fluid " src="./css/assets/sidebar-icons/ok-tick.svg">',
     '</div>',
   '</div>',
 ].join('\n');

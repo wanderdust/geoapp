@@ -63,7 +63,6 @@ $(function () {
     },
 
     logIn: function () {
-      console.log('foo')
       let data = {};
       data.email = $('#email').val().trim();
       data.password = $('#password').val().trim();

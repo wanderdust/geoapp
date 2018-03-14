@@ -245,8 +245,10 @@ $(function () {
       $('.chevron-orange').toggleClass('scale-out', isHasClass);
       $('.chevron-white').toggleClass('scale-out', !isHasClass);
       $('.glass-orange').toggleClass('scale-out', !isHasClass);
-      $('.search-input').toggleClass('scale-out', isHasClass);
-      $('.title-container').toggleClass('scale-out', !isHasClass);
+      $('.search-input .friends-query').toggleClass('scale-out', isHasClass);
+      $('.search-input .search-icon').toggleClass('scale-out', isHasClass);
+      $('.title-container div').toggleClass('scale-out', !isHasClass);
+      $('.title-container p').toggleClass('scale-out', !isHasClass);
 
       if (!isHasClass)
         $('.friends-query').focus();
