@@ -74,7 +74,8 @@ $(function () {
 
     fitImage: async function (view) {
       let i = new Image();
-
+      view.removeClass('fit-vertically');
+      view.removeClass('fit-horizontally');
       i.onload = await function () {
         if (this.height > this.width)
           return view.addClass('fit-vertically');

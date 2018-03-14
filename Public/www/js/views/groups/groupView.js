@@ -11,13 +11,17 @@ $(function () {
     template: Templates.groupTemplateA,
 
     events: {
-      "click .group-container": "showUsers"
+      "click .group-header": "showUsers",
+      "click .image": "openImageModal",
     },
 
     initialize: function () {
       this.listenTo(this.model, 'render', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
       // this.listenTo(this.model, 'visible', this.toggleVisible);
+      this.listenToOnce(this.model, 'initModal', this.updateInstance);
+
+      this.instance;
     },
 
     render: function () {
@@ -51,6 +55,18 @@ $(function () {
       sessionStorage.setItem('currentGroupName', groupName);
       sessionStorage.setItem('currentGroupId', groupId);
       window.location.href = 'users.html';
+    },
+
+    updateInstance: function (instance) {
+      this.instance = instance;
+    },
+
+    // shows the group's image in a modal
+    openImageModal: function () {
+      let groupImage = this.$('.image img').attr('src');
+      app.userCollection.fitImage($('#modal1 img'));
+      $('#modal1 img').attr('src', groupImage);
+      this.instance.open();
     }
   })
 

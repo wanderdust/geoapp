@@ -22,7 +22,7 @@ Templates.userTemplateB = [
   '<div class="group-container user-container">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
-      '<img src="{{userImage}}" class="img-responive img-fluid">',
+      '<img src="{{userImage}}">',
     '</div>',
     '<div class="group-header">',
       '<p class="group-title">{{name}}</p>',

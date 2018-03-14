@@ -25,8 +25,16 @@ $(function () {
       this.$offlineUsers = $('.offline-users-list p');
       this.$header = $('#group-title-container');
 
-      var elem = document.querySelector('.fixed-action-btn');
-      var instance = M.FloatingActionButton.init(elem, {
+      // inits the modal
+      this.modalElem = document.querySelector('.modal');
+      this.modalInst = M.Modal.init(this.modalElem, {
+        dismissible:true,
+        preventScrolling: true
+      });
+
+      // menu options
+      let elem = document.querySelector('.fixed-action-btn');
+      let instance = M.FloatingActionButton.init(elem, {
         direction: 'bottom',
         hoverEnabled: false
       });
@@ -65,6 +73,9 @@ $(function () {
 
     // Gathers data from database and then renders it to the view.
     render: function () {
+      // initModal sends the modal intance to each model.
+      app.userCollection.trigger('initModal', this.modalInst);
+
       let currentGroupName = sessionStorage.getItem('currentGroupName');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;

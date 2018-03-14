@@ -29,7 +29,8 @@ $(function () {
       this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar)
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'))
+      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+
 
       this.render();
     },
@@ -56,7 +57,7 @@ $(function () {
         } else {
           app.groupCollection.add(collection);
         }
-      })
+      });
     },
 
     openSidebar: function () {

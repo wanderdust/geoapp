@@ -636,8 +636,28 @@ a:-webkit-any-link {
   align-items: center;
 }
 
+.modal.modal-fixed-footer {
+  height: 50%;
+  transform: translateY(25%) !important;
+}
 
 
+#modal1 .modal-content {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding:0px;
+}
+
+#modal1 .modal-content img {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.modal.modal-fixed-footer .modal-content {
+  overflow-y: hidden;
+}
 
 /* Login */
 .login-main {
@@ -902,6 +922,8 @@ body.active {
   margin-top: 18px;
   margin-left: 10%;
   border-radius: 2px;
+  border-bottom: none;
+  box-shadow: none;
 }
 
 #pac-input:focus {
@@ -1224,6 +1246,9 @@ body.active {
   width: 50%;
 }
 
+#sidebar-container input {
+  box-shadow: none;
+}
 .continue-btn {
   position: fixed;
   display: flex;
@@ -1238,11 +1263,6 @@ body.active {
 
 .continue-btn img {
   width: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 100%;
-  z-index: 1;
 }
 
 

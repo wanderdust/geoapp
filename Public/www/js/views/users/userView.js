@@ -10,12 +10,17 @@ $(function () {
     template: Templates.userTemplateB,
 
     events: {
-      "click .pending-icon": "showPendingStatus"
+      "click .pending-icon": "showPendingStatus",
+      "click .image": "openImageModal"
     },
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
+      this.listenTo(app.userCollection, 'initModal', this.updateInstance);
+
+      this.instance;
+
     },
 
     render: function () {
@@ -31,6 +36,10 @@ $(function () {
       app.userCollection.fitImage(this.$('.image img'));
       return this;
     },
+
+    updateInstance: function (instance) {
+      this.instance = instance;
+    },
     // The view gets removed and re-appended to be on the correct column.
     updateOne: function (model) {
       this.$el.remove();
@@ -40,6 +49,14 @@ $(function () {
     // toggles to show the pending status of the user instead of his status.
     showPendingStatus: function () {
       this.$('.group-status').toggleClass('hidden');
+    },
+
+    // shows the users image in a modal
+    openImageModal: function () {
+      let userImage = this.$('.image img').attr('src');
+      app.userCollection.fitImage($('#modal1 img'));
+      $('#modal1 img').attr('src', userImage);
+      this.instance.open();
     }
   })
 

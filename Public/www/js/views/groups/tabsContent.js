@@ -22,13 +22,20 @@ $(function () {
 
       this.$tabsHeader = $('#tabs-header');
 
-       $('ul.tabs').tabs({
-         onShow: (data) => {
-           this.updateRouter(data)
-         },
-         swipeable: true,
-         responsiveThreshold: Infinity
-       });
+      // inits the modal to view group's images
+      this.modalElem = document.querySelector('.modal');
+      this.modalInst = M.Modal.init(this.modalElem, {
+        dismissible:true,
+        preventScrolling: true
+      });
+
+      $('ul.tabs').tabs({
+        onShow: (data) => {
+          this.updateRouter(data)
+        },
+       swipeable: true,
+       responsiveThreshold: Infinity
+      });
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'change', this.filterOne);
@@ -44,6 +51,7 @@ $(function () {
 
     // Appends a model every time there is an 'add' event.
     appendOne: function (group) {
+
       let isOnline = (group.get('activeUsers').length > 0 ? true : false);
       let isPending = (group.get('activeUsers').length === 0 && group.get('pendingUsers').length > 0 ? true : false);
       let view = new app.GroupView({model: group});
@@ -55,6 +63,9 @@ $(function () {
       } else {
         this.$listAll.append(view.render().el);
       }
+
+      // initModal sends the modal intance to each model.
+      group.trigger('initModal', this.modalInst);
 
     },
 
