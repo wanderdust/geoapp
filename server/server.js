@@ -72,12 +72,19 @@ io.on('connection', (socket) => {
       let email = validator.isEmail(data.email);
 
       if (data.password !== data.confirmPassword) {
-        return callback({Error: 0, Message: 'Passwords do not match'});
+        return callback({Error: 0, Message: 'Las contraseñas no coinciden'});
       }
 
       if (!email) {
       return callback({Error: 7, Message: 'Email no válido'})
      }
+
+     if (data.password === "") {
+       callback({Error: 5, Message: 'Contraseña necesaria'})
+     } else if (data.password < 6) {
+       callback({Error: 6, Message: 'La contraseña es demasiado corta'})
+     }
+
 
       user = await new User(newUser).save();
 
@@ -87,15 +94,11 @@ io.on('connection', (socket) => {
       let err = e.errors;
 
       if (e.code === duplicate) {
-        callback({Error: 4, Message: 'Duplicate email'})
+        callback({Error: 4, Message: 'Este email ya está en uso'})
       } else if (typeof(err.name) !== 'undefined' && err.name.$isValidatorError) {
-        callback({Error: 2, Message: 'Name required'})
+        callback({Error: 2, Message: 'Introduce tu nombre'})
       } else if (typeof(err.email) !== 'undefined' && err.email.$isValidatorError) {
-        callback({Error: 3, Message: 'Email required'})
-      } else if (typeof(err.password) !== 'undefined' && err.password.$isValidatorError) {
-        callback({Error: 5, Message: 'Password required'})
-      } else if (err.type === 'minlength') {
-        callback({Error: 6, Message: 'Password is too short'})
+        callback({Error: 3, Message: 'Introduce tu email'})
       }
     };
   });
@@ -105,7 +108,7 @@ io.on('connection', (socket) => {
       let user = await User.findOne({email: data.email});
 
       if (user === null)
-        return callback({Error: 1, Message: 'No user found'});
+        return callback({Error: 1, Message: 'Usuario no válido'});
 
       let verify = bcrypt.compareSync(data.password, user.password);
 
@@ -114,7 +117,7 @@ io.on('connection', (socket) => {
         let hash = await User.findOne({email: data.email, password: data.password});
 
         if (hash === null)
-          return callback({Error: 1, Message: 'No password found'});
+          return callback({Error: 2, Message: 'Contraseña incorrecta'});
       }
 
       callback(null, {_id: user._id, password: user.password})

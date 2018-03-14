@@ -679,13 +679,20 @@ body.login {
   padding-top: 20px;
 }
 
-.error {
-  border: solid red 2px;
-  border-radius: 5px;
-}
-
 .row .input-field label {
   color: #4c4c4c
+}
+
+form.s12.col .input-field,
+form.s12.col input {
+  margin-bottom: 0px;
+}
+
+.error-message {
+  text-align: left;
+  padding-left: 0.75rem;
+  color: red;
+  font-size: 0.90rem;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) + label,
@@ -717,6 +724,14 @@ input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
   border-bottom: 1px solid #4c4c4c;
+}
+
+.error input {
+  border-bottom: 2px solid red !important;
+}
+
+.error label {
+  color: red !important;
 }
 
 input:not([type]):focus:not([readonly]),

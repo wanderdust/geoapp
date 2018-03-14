@@ -31,25 +31,33 @@ $(function () {
       this.socket.emit('createUser', data, (err, res) => {
         if (err) {
           $('.input-group').removeClass('error');
+          $('.error-message').addClass('hidden');
           if (err.Error === 2) {
             // Name required
             $('.input-group.name').addClass('error');
+            $('.error-name').removeClass('hidden').html(err.Message);
           } else if (err.Error === 3 || err.Error === 7) {
             // Email required
             $('.input-group.user-email').addClass('error');
+            $('.error-email').removeClass('hidden').html(err.Message);
           } else if (err.Error === 4) {
             // Duplicate email
             $('.input-group.user-email').addClass('error');
+            $('.error-email').removeClass('hidden').html(err.Message);
           } else if (err.Error === 5) {
             // Password required
             $('.input-group.password').addClass('error');
+            $('.error-password').removeClass('hidden').html(err.Message);
           } else if (err.Error === 6) {
             // Password is too short
             $('.input-group.password').addClass('error');
+            $('.error-password').removeClass('hidden').html(err.Message);
           } else if (err.Error === 0) {
             // Passwords don't match
             $('.input-group.password').addClass('error');
             $('.input-group.repeat-password').addClass('error');
+            $('.error-password').removeClass('hidden').html(err.Message);
+            $('.error-repeat').removeClass('hidden').html(err.Message);
           };
           return
         };
@@ -70,10 +78,15 @@ $(function () {
       this.socket.emit('loginUser', data, (err, res) => {
         if (err) {
           $('.input-group').removeClass('error');
+          $('.error-message').addClass('hidden');
           if (err.Error === 1) {
-            // No user/password found
+            // No user found
             $('.input-group.email').addClass('error');
+            $('.error-email').removeClass('hidden').html(err.Message);
+          } else if (err.Error === 2) {
+            // Wrong password
             $('.input-group.password').addClass('error');
+            $('.error-password').removeClass('hidden').html(err.Message);
           } else if (err.Error === 99) {
             throw Error (err);
           }
