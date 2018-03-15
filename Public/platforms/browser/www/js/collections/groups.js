@@ -26,12 +26,28 @@ $(function () {
       return new GroupCollection(filteredTwo);
     },
 
+    // returns a collection of offline users
     offline: function () {
       let filtered = this.filter(function (e) {
         return e.get("activeUsers").length === 0 && e.get("pendingUsers").length === 0
       });
 
       return new GroupCollection(filtered);
+    },
+
+    // Finds the group id for a group where the current user is online.
+    findGroupId: function () {
+      let userId = sessionStorage.getItem('userId');
+      let onlineGroups = this.online();
+      let onlineGroup = onlineGroups.filter((data) => {
+        return data.get('activeUsers').indexOf('Yo') !== -1
+      });
+      let groupId;
+      if (onlineGroup.length === 0)
+        return groupId = false;
+
+      groupId = onlineGroup[0].get('_id');
+      return groupId;
     },
 
     findAndUpdateOneOnline: function (data) {

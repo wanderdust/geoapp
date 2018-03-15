@@ -8,7 +8,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <access origin="http://192.168.3.183:3000/*" />
+    <access origin="http://192.168.3.149:3000/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -17,4 +17,5 @@
     <allow-intent href="geo:*" />
     <gap:plugin name="org.apache.cordova.contacts" />
     <preference name="splashscreen" value="splash" />
+    <preference name="Orientation" value="portrait" />
 </widget>

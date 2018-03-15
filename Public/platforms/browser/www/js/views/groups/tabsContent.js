@@ -87,7 +87,6 @@ $(function () {
     },
 
     filterOne: function (group) {
-      console.log('"changed" event fired');
       group.trigger('updateOne', group);
     },
 

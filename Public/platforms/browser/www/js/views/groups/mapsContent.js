@@ -28,9 +28,10 @@ $(function () {
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
-      this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll)
-      this.listenTo(app.groupCollection, 'filter', this.filterAll);
-      this.listenTo(app.groupCollection, 'change', this.filterAll);
+      this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll);
+      // Temporary disable the markers filtering
+      // this.listenTo(app.groupCollection, 'filter', this.filterAll);
+      // this.listenTo(app.groupCollection, 'change', this.filterAll);
       this.listenToOnce(app.groupCollection, 'update', this.userCoords);
 
       this.socket.on('newGroupUpdates', (data) => {
@@ -86,6 +87,7 @@ $(function () {
             } else if (this.userIsOnline) {
               // This means user is not near any place so it should be put
               // as offline from every group.
+
               this.userIsOnline = false;
               this.socket.emit('userOffBounds', {
                 userId: sessionStorage.getItem('userId'),
@@ -94,15 +96,29 @@ $(function () {
             }
           }
         }, (err) => {
+
+          let groupId = app.groupCollection.findGroupId();
+
           navigator.notification.alert(
             'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-            () => {},
+            function () {
+              // Searches the user to see if he is online. If he is and his location cant be found,
+              // we set the user offline.
+              let groupId = app.groupCollection.findGroupId();
+              let userId = sessionStorage.getItem('userId')
+
+              if (groupId) {
+                this.socket.emit('userOffBounds', {
+                  userId: userId,
+                  groupId: groupId
+                })
+              }
+            },
             'Activa el GPS'
           );
         }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000});
 
       } catch (e) {
-        console.log(e.message)
         return navigator.notification.alert(
           e,
           (msg) => true,
@@ -273,7 +289,9 @@ $(function () {
 
     updateAll: function () {
       this.appendAll(app.groupCollection);
-      this.filterAll(app.groupCollection);
+
+      // temporary disable of the markers filtering.
+      // this.filterAll(app.groupCollection);
     },
 
     // Shows placeholder if there is no internet connection.

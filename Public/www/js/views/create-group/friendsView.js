@@ -250,8 +250,12 @@ $(function () {
       $('.title-container div').toggleClass('scale-out', !isHasClass);
       $('.title-container p').toggleClass('scale-out', !isHasClass);
 
-      if (!isHasClass)
+      if (!isHasClass) {
         $('.friends-query').focus();
+      } else {
+        this.$('.friends-query').val('');
+        app.userCollection.trigger('search');
+      }
 
       // $('.glass-orange').toggleClass('scale-out', !isHasClass);
       // $('.glass-white').toggleClass('scale-out', isHasClass);

@@ -10,7 +10,7 @@ $(function () {
 
     events: {
       "click .openbtn": "openSidebar",
-      "click .closebtn": "closeSidebar",
+      "click .openbtn.closebtn": "closeSidebar",
       "swipeleft #sidebar-container": "closeSidebar",
       "click .requests-btn": "getRequests",
       "click .pending-btn": "getPending",
@@ -21,7 +21,6 @@ $(function () {
     },
 
     initialize: function () {
-      $('.group-container').on('click', () => console.log('foo'))
       _.bindAll(this, 'render', 'closeSidebar');
       this.socket = socket;
       this.$sideNav = $('#sidebar-container');
@@ -30,7 +29,6 @@ $(function () {
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
-
 
       this.render();
     },
@@ -61,7 +59,8 @@ $(function () {
     },
 
     openSidebar: function () {
-      this.$sideNav.addClass('swipeIt');
+      let isHasClass =   this.$sideNav.hasClass('swipeIt');
+      this.$sideNav.toggleClass('swipeIt', !isHasClass);
     },
 
     closeSidebar: function () {

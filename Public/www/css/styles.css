@@ -31,7 +31,7 @@ h4 {
   height: 100%;
   width: 100%;
   min-height: 537px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 #app-container.clearfix {
@@ -896,7 +896,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
   width: 70%;
 }
 
-.pending.selected .ok-tick {
+.pending.selected .ok-tick,
+.online.selected .ok-tick {
   background-color: #fb8c00;
 }
 
@@ -1345,15 +1346,7 @@ body.active {
 
 /* ****STYLES FOR SETTINGS PAGE ***** */
 
-@media only screen and (max-height: 684px) {
-  .tabs-content.settings-page {
-    position: absolute;
-    top: 60px;
-  }
-}
-
 .tabs-content.settings-page {
-  margin-top: 0px;
   height: 90%;
 }
 
