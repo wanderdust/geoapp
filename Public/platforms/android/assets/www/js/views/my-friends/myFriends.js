@@ -18,6 +18,8 @@ $(function () {
       this.socket = socket;
       let userId = sessionStorage.getItem('userId');
 
+      this.listenTo(app.userCollection, 'add', this.render)
+
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', userId);
 
@@ -36,9 +38,9 @@ $(function () {
       this.render();
     },
 
-    // Gathers data from database and then renders it to the view.
     render: function () {
-
+      let friendsLength = app.userCollection.length;
+      $('.friends-length span').html(friendsLength)
     },
 
     backToMain: function () {
