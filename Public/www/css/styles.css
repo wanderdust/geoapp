@@ -1218,7 +1218,7 @@ body.active {
 }
 
 .search-icon img {
-  height: 70%;
+  height: 60%;
   width: auto;
 }
 
@@ -1268,7 +1268,7 @@ body.active {
 #sidebar-container input {
   box-shadow: none;
 }
-.continue-btn {
+.continue-btn, .refresh-btn {
   position: fixed;
   display: flex;
   align-items: center;
@@ -1280,7 +1280,7 @@ body.active {
   display:flex;
 }
 
-.continue-btn img {
+.continue-btn img, .refresh-btn img{
   width: 50%;
 }
 
@@ -1624,4 +1624,28 @@ body.active {
 #settings-list li.contact-form.change-password-new {
   border-top: solid #e0e0e0 0.1px;
   height: 190px;
+}
+
+/* STYLES FOR MY FRIEND LIST / my-friends-list */
+
+.group-title {
+  position: absolute;
+  top: 0px;
+  height: 60%;
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.friends-length {
+  position: absolute;
+  bottom: 0px;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: white;
+  margin-bottom: 0px;
 }

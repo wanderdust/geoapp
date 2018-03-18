@@ -13,6 +13,24 @@ $(function () {
         this.listenTo(app.userCollection, 'add', this.appendOne);
         this.listenTo(app.userCollection, 'add addPlaceHolder', this.render);
         this.$list = $('.groups-list ul');
+
+      //   document.addEventListener("deviceready", function onDeviceReady() {
+      //     var options      = new ContactFindOptions();
+      //     options.filter   = "";
+      //     options.multiple = true;
+      //     var fields = ["phoneNumbers"];
+      //     let foo = navigator.contacts.find(fields, onSuccessContact, onErrorContact, options);
+      //   }, false);
+      //
+      // function onSuccessContact (e) {
+      //   console.log('First', JSON.stringify(e[2].phoneNumbers));
+      //   // console.log(JSON.stringify(e))
+      // }
+      //
+      // function onErrorContact (e) {
+      //   console.log(JSON.stringify(e))
+      // }
+
     },
 
     render: function () {

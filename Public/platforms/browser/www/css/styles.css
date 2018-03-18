@@ -40,7 +40,7 @@ h4 {
 
 #map-container {
   position:absolute;
-  top:0;
+  top:0px;
   height: 60%;
   width: 100%;
   transition: 0.5s;
@@ -271,7 +271,7 @@ h4 {
   position: absolute;
   width: 100%;
   top: 5px;
-  font-size: 20px;
+  font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -326,19 +326,19 @@ h4 {
 }
 
 /* The side navigation menu */
-#sidebar-container.sidenav {
-    height: 100%;
-    width: 300px;
-    transform: translateX(-100%);
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
+#logo-container {
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+
+#slide-out li {
+  margin-top: 10px;
+}
+
+
+.sidenav {
     background-color: #fb8c00;
-    overflow-x: hidden;
-    transition: 0.5s;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
 .sidenav.new-group-sidenav {
@@ -354,54 +354,38 @@ h4 {
     transition: 0.5s;
 }
 
-#sidebar-container #logo-container {
-  width: 100%;
-  height: 100px;
+.link-container {
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
-#sidebar-container #links .link-container {
-  position: relative;
-  height: 45px;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-#sidebar-container #links .link-container .link-icon {
+.link-icon {
   position: absolute;
   left: 0px;
   height: 100%;
-  width: 40px;
-  padding-left: 10px;
+  min-width: 40px;
+  padding-left: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#sidebar-container #links .link-container .link-icon img {
+.link-icon img {
   position: absolute;
   width: 60%;
-  top: 50%;
-  transform: translateY(-50%);
   max-width: 100%;
   z-index: 1;
 }
 
 /* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 50px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    display: block;
-    transition: 0.3s
-}
-
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+.sidenav p {
+  font-weight: 0;
+  margin: 0px;
+  padding-left: 40px;
+  font-size: 1.3rem;
+  color: white;
+  display: block;
 }
 
 #sidebar-icon {
@@ -413,7 +397,7 @@ h4 {
 }
 
 
-/* Add class for swipe Animation*/
+/* Add class for swipe Animation in tabs*/
 
 #tabs-header.swipeUp {
   height: 100%;
@@ -690,7 +674,7 @@ a:-webkit-any-link {
 }
 
 .modal.modal-fixed-footer .modal-content {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 /* Login */
@@ -1234,7 +1218,7 @@ body.active {
 }
 
 .search-icon img {
-  height: 70%;
+  height: 60%;
   width: auto;
 }
 
@@ -1284,7 +1268,7 @@ body.active {
 #sidebar-container input {
   box-shadow: none;
 }
-.continue-btn {
+.continue-btn, .refresh-btn {
   position: fixed;
   display: flex;
   align-items: center;
@@ -1296,7 +1280,7 @@ body.active {
   display:flex;
 }
 
-.continue-btn img {
+.continue-btn img, .refresh-btn img{
   width: 50%;
 }
 
@@ -1353,11 +1337,48 @@ body.active {
 .tabs-content.settings-page #user-dashboard {
   position: absolute;
   top: 0;
-  height: 20%;
+  height: 40%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tabs-content.settings-page #user-dashboard.dashboard {
+  height: 20%;
+}
+
+.tabs-content.settings-page #user-dashboard.dashboard {
+  height: 150px !important;
+}
+
+.dashboard .group-container.user-container {
+  height: 120px;
+}
+
+.dashboard .group-container.user-container .image {
+  height: 100px;
+  width: 100px;
+  left: 40px;
+}
+
+.dashboard .group-container.user-container .group-header {
+  left: 180px;
+}
+
+.dashboard .group-container.user-container .image-animation {
+  visibility: hidden;
+  display: none;
+}
+
+.dashboard .group-header .group-title {
+  color: #666666;
+  top: 20%;
+  font-size: 22px;
+}
+
+.dashboard .group-header .group-status {
+  bottom: 20%;
 }
 
 .tabs-content.settings-page #user-dashboard.user-info-btn{
@@ -1367,6 +1388,14 @@ body.active {
 .tabs-content.settings-page #settings-list {
   position: absolute;
   bottom: 0;
+  height: 80%;
+  width: 100%;
+}
+
+.tabs-content.settings-page .list-settings {
+  position: absolute;
+  bottom: 0;
+  top:150px;
   height: 80%;
   width: 100%;
 }
@@ -1415,7 +1444,7 @@ body.active {
 
 /* Profile settings */
 
-.tabs-content.settings-page #user-dashboard.user-image {
+.tabs-content.settings-page . dashboard.user-image {
   height: 40%;
   display: flex;
   align-items: center;
@@ -1595,4 +1624,28 @@ body.active {
 #settings-list li.contact-form.change-password-new {
   border-top: solid #e0e0e0 0.1px;
   height: 190px;
+}
+
+/* STYLES FOR MY FRIEND LIST / my-friends-list */
+
+.group-title {
+  position: absolute;
+  top: 0px;
+  height: 60%;
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.friends-length {
+  position: absolute;
+  bottom: 0px;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: white;
+  margin-bottom: 0px;
 }

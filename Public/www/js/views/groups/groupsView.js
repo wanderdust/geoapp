@@ -83,7 +83,7 @@ $(function () {
     },
 
     getAddFriends: function () {
-      window.location.href = "add-friends.html"
+      window.location.href = "my-friend-list.html"
     },
 
     getFriendRequests: function () {

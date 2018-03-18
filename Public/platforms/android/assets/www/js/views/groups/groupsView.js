@@ -25,7 +25,10 @@ $(function () {
       this.socket = socket;
       this.$sideNav = $('#sidebar-container');
 
-      this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar)
+      this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar);
+      var elem = document.querySelector('.sidenav');
+      var instance = M.Sidenav.init(elem, {});
+
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
@@ -59,12 +62,12 @@ $(function () {
     },
 
     openSidebar: function () {
-      let isHasClass =   this.$sideNav.hasClass('swipeIt');
-      this.$sideNav.toggleClass('swipeIt', !isHasClass);
+      // let isHasClass =   this.$sideNav.hasClass('swipeIt');
+      // this.$sideNav.toggleClass('swipeIt', !isHasClass);
     },
 
     closeSidebar: function () {
-      this.$sideNav.removeClass('swipeIt');
+      // this.$sideNav.removeClass('swipeIt');
     },
 
     getRequests: function () {
@@ -80,7 +83,7 @@ $(function () {
     },
 
     getAddFriends: function () {
-      window.location.href = "add-friends.html"
+      window.location.href = "my-friend-list.html"
     },
 
     getFriendRequests: function () {
