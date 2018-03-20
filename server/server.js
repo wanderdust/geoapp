@@ -617,6 +617,7 @@ socket.on('getUser', async (data, callback) => {
       // new friend model.
       for (let phoneNumber of data.phoneNumbers) {
         let existingFriendInDb = await User.findOne({phone: phoneNumber});
+        let user = {};
 
         if (existingFriendInDb !== null) {
 
@@ -635,10 +636,16 @@ socket.on('getUser', async (data, callback) => {
 
           let newFriendA = await new Friend(friendDataA).save();
           let newFriendB = await new Friend(friendDataB).save();
+
+          // Send the new user to append in the view.
+          user.name = existingFriendInDb.name;
+          existingFriendInDb.userImage ? user.userImage = existingFriendInDb.userImage : "";
+          user.userStatus = existingFriendInDb.userStatus;
+          user._id = existingFriendInDb._id;
+
+          callback(null, user)
         }
       };
-
-      callback(null, true)
 
     } catch (e) {
       console.log(e)

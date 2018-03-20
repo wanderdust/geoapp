@@ -24,7 +24,7 @@ $(function () {
     signIn: function () {
       let data = {};
       data.name = $('#name').val().trim();
-      data.phone = $('#email').val().trim();
+      data.phone = $('#email').val().replace(/\s+/g, '');
       data.password = $('#password').val().trim();
       data.confirmPassword = $('#confirm').val().trim();
 
@@ -72,7 +72,7 @@ $(function () {
 
     logIn: function () {
       let data = {};
-      data.phone = $('#email').val().trim();
+      data.phone = $('#email').val().replace(/\s+/g, '');
       data.password = $('#password').val().trim();
 
       this.socket.emit('loginUser', data, (err, res) => {

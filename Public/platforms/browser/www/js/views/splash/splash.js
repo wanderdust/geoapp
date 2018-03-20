@@ -32,7 +32,7 @@ $(function () {
     checkLocalStorage: function (user, password) {
       if (user !== null && password !== null) {
         this.socket.emit('loginUser', {
-          email: user,
+          phone: user,
           password: password
         }, (err, res) => {
           if (err)

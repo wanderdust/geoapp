@@ -68,7 +68,7 @@ $(function () {
 
     filterPhoneNumbers: function (phoneNumbers) {
       // Filter phones only with valid prefixes, and valid length.
-      console.log(JSON.stringify(phoneNumbers));
+
 
       // Send data to server and get and add new users if there is any.
       this.updateFriends(phoneNumbers);
@@ -77,16 +77,15 @@ $(function () {
     // Checks in the server if any user has a phone from the current user list.
     // if a phone is found the friend gets added.
     updateFriends: function (phoneNumbers) {
-      let that = this;
       let data = {};
       data.userId = sessionStorage.getItem('userId');
       data.phoneNumbers = phoneNumbers;
 
       this.socket.emit('updateFriendsList', data, (err, res) => {
         if (err)
-          console.log(err);
+          return console.log(err);
 
-        console.log('hello')
+        app.userCollection.add(res);
       });
     },
 
