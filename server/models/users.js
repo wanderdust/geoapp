@@ -8,7 +8,7 @@ let UserSchema = mongoose.Schema({
     minlength: 1
   },
   userImage: String,
-  email: {
+  phone: {
     type: String,
     required: true,
     trim: true,

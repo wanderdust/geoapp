@@ -65,18 +65,18 @@ io.on('connection', (socket) => {
       let newUser = {
         name: data.name,
         userImage: "",
-        email: data.email,
+        phone: data.phone,
         password: hash
       };
 
-      let email = validator.isEmail(data.email);
+      // let email = validator.isEmail(data.email);
 
       if (data.password !== data.confirmPassword) {
         return callback({Error: 0, Message: 'Las contraseñas no coinciden'});
       }
 
-      if (!email) {
-      return callback({Error: 7, Message: 'Email no válido'})
+      if (data.phone.length < 6) {
+      return callback({Error: 7, Message: 'Teléfono no válido'})
      }
 
      if (data.password === "") {
@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
 
   socket.on('loginUser', async (data, callback) => {
     try {
-      let user = await User.findOne({email: data.email});
+      let user = await User.findOne({phone: data.phone});
 
       if (user === null)
         return callback({Error: 1, Message: 'Usuario no válido'});
@@ -114,7 +114,7 @@ io.on('connection', (socket) => {
 
       if (!verify) {
         // if password is incorrect check if localStorage hash is the same as password.
-        let hash = await User.findOne({email: data.email, password: data.password});
+        let hash = await User.findOne({phone: data.phone, password: data.password});
 
         if (hash === null)
           return callback({Error: 2, Message: 'Contraseña incorrecta'});
@@ -612,6 +612,33 @@ socket.on('getUser', async (data, callback) => {
 
         data.phoneNumbers.splice(index, 1);
       }
+
+      // Loops through all numbers and if one is found in the DB, creates a
+      // new friend model.
+      for (let phoneNumber of data.phoneNumbers) {
+        let existingFriendInDb = await User.findOne({phone: phoneNumber});
+
+        if (existingFriendInDb !== null) {
+
+          // We create a Friend model both ways. For current user and other user.
+          let friendDataA = {
+            userId: data.userId ,
+            friendId: existingFriendInDb._id,
+            status: 'accepted'
+          };
+
+          let friendDataB = {
+            userId: existingFriendInDb._id ,
+            friendId: data.userId,
+            status: 'accepted'
+          };
+
+          let newFriendA = await new Friend(friendDataA).save();
+          let newFriendB = await new Friend(friendDataB).save();
+        }
+      };
+
+      callback(null, true)
 
     } catch (e) {
       console.log(e)

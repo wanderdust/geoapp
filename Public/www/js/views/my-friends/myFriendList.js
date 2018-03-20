@@ -9,7 +9,7 @@ $(function () {
     el: '.tabs-content',
 
     initialize: function () {
-      _.bindAll(this, 'getContacts', 'onSuccessContact')
+      _.bindAll(this, 'getContacts', 'onSuccessContact', 'updateFriends')
       this.socket = socket;
       this.$friendList = $('.groups-list ul');
 
@@ -77,6 +77,7 @@ $(function () {
     // Checks in the server if any user has a phone from the current user list.
     // if a phone is found the friend gets added.
     updateFriends: function (phoneNumbers) {
+      let that = this;
       let data = {};
       data.userId = sessionStorage.getItem('userId');
       data.phoneNumbers = phoneNumbers;
@@ -85,7 +86,7 @@ $(function () {
         if (err)
           console.log(err);
 
-        friendsPhoneList = res.friendsList;
+        console.log('hello')
       });
     },
 
