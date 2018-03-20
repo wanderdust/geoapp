@@ -591,6 +591,33 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
+  // Updates friends automatically by searching on the users contacts.
+  socket.on('updateFriendsList', async (data, callback) => {
+    try {
+      let existingPhones = [];
+      // First remove existing users from phones array.
+      let currentFriends = await Friend.find({userId: data.userId});
+
+      // Finds each user and adds its phone number to the array.
+      for (let currentFriend of currentFriends) {
+        let userDoc = await User.findById(currentFriend.friendId);
+        let friendPhoneNumber = userDoc.phone;
+
+        existingPhones.push(friendPhoneNumber)
+      }
+
+      // Find the existing users phones index in the contacts array and remove them.
+      for (let existingPhone of existingPhones) {
+        let index = data.phoneNumbers.indexOf(existingPhone);
+
+        data.phoneNumbers.splice(index, 1);
+      }
+
+    } catch (e) {
+      console.log(e)
+    }
+  })
+
   socket.on('searchFriends', async (data, callback) => {
     try {
       let searchResults = await User.find({name: {$regex : `(?i).*${data.query}.*`}});

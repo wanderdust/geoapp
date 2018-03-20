@@ -9,7 +9,7 @@ $(function () {
     el: '.tabs-content',
 
     initialize: function () {
-      _.bindAll(this, 'getContacts')
+      _.bindAll(this, 'getContacts', 'onSuccessContact')
       this.socket = socket;
       this.$friendList = $('.groups-list ul');
 
@@ -54,9 +54,39 @@ $(function () {
       let foo = navigator.contacts.find(fields, this.onSuccessContact, this.onErrorContact, options);
     },
 
-    onSuccessContact: function (e) {
-      console.log('First', JSON.stringify(e[2].phoneNumbers));
-      // console.log(JSON.stringify(e))
+    onSuccessContact: function (contacts) {
+      // First return make an array with only phone numbers. We eliminate any
+      // white spaces in between them.
+
+      let phoneNumbers = contacts.map((contact) => {
+        return contact.phoneNumbers[0].value.replace(/\s+/g, '');
+      });
+
+      // Second we filter the array to send only valid numbers.
+      this.filterPhoneNumbers(phoneNumbers);
+    },
+
+    filterPhoneNumbers: function (phoneNumbers) {
+      // Filter phones only with valid prefixes, and valid length.
+      console.log(JSON.stringify(phoneNumbers));
+
+      // Send data to server and get and add new users if there is any.
+      this.updateFriends(phoneNumbers);
+    },
+
+    // Checks in the server if any user has a phone from the current user list.
+    // if a phone is found the friend gets added.
+    updateFriends: function (phoneNumbers) {
+      let data = {};
+      data.userId = sessionStorage.getItem('userId');
+      data.phoneNumbers = phoneNumbers;
+
+      this.socket.emit('updateFriendsList', data, (err, res) => {
+        if (err)
+          console.log(err);
+
+        friendsPhoneList = res.friendsList;
+      });
     },
 
     onErrorContact: function () {

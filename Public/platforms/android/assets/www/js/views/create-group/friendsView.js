@@ -37,7 +37,7 @@ $(function () {
       new app.FriendList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'))
+      socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
       if (this.getUrl() === "create-group.html") {
         new app.FriendsMap();

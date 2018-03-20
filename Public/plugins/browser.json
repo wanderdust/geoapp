@@ -16,6 +16,9 @@
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
@@ -44,9 +47,6 @@
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
