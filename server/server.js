@@ -802,33 +802,34 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
-  // Changes the user's email
-  socket.on('changeEmail', async(data, callback) => {
-    try {
-      let email = validator.isEmail(data.newEmail);
-
-      // Verifies that the email format is valid
-      if (!email)
-        return callback({Error: 1, Message: 'Email no válido'});
-
-      let user = await User.findOne({_id: data._id});
-
-      let verify = bcrypt.compareSync(data.password, user.password);
-
-      if (user === null || !verify)
-        return callback({Error: 0, Message: 'Contraseña incorrecta'});
-
-      await User.findOneAndUpdate({_id: data._id}, {
-        $set: {
-          email: data.newEmail
-        }
-      }, {new: true});
-
-      callback(null, data.newEmail)
-    } catch (e) {
-      callback({Error: 99, Message: 'Ha ocurrido un error'})
-    }
-  });
+  // // Changes the user's email
+  // // Now we use a phone number. Deleting it for now.
+  // socket.on('changeEmail', async(data, callback) => {
+  //   try {
+  //     // let email = validator.isEmail(data.newEmail);
+  //
+  //     // Verifies that the email format is valid
+  //     if (!email)
+  //       return callback({Error: 1, Message: 'Email no válido'});
+  //
+  //     let user = await User.findOne({_id: data._id});
+  //
+  //     let verify = bcrypt.compareSync(data.password, user.password);
+  //
+  //     if (user === null || !verify)
+  //       return callback({Error: 0, Message: 'Contraseña incorrecta'});
+  //
+  //     await User.findOneAndUpdate({_id: data._id}, {
+  //       $set: {
+  //         email: data.newEmail
+  //       }
+  //     }, {new: true});
+  //
+  //     callback(null, data.newEmail)
+  //   } catch (e) {
+  //     callback({Error: 99, Message: 'Ha ocurrido un error'})
+  //   }
+  // });
 
   socket.on('changePassword', async(data, callback) => {
     try {
