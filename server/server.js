@@ -59,13 +59,13 @@ io.on('connection', (socket) => {
   socket.on('createUser', async (data, callback) => {
     try {
       let user;
+      let userPhone = `${data.prefix}${data.phone}`;
       let salt = bcrypt.genSaltSync(10);
       let hash = bcrypt.hashSync(data.password, salt);
-
       let newUser = {
         name: data.name,
         userImage: "",
-        phone: data.phone,
+        phone: userPhone,
         password: hash
       };
 
@@ -73,6 +73,10 @@ io.on('connection', (socket) => {
 
       if (data.password !== data.confirmPassword) {
         return callback({Error: 0, Message: 'Las contraseñas no coinciden'});
+      }
+
+      if (data.prefix === "") {
+        return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
       }
 
       if (data.phone.length < 6) {
@@ -94,21 +98,27 @@ io.on('connection', (socket) => {
       let err = e.errors;
 
       if (e.code === duplicate) {
-        callback({Error: 4, Message: 'Este email ya está en uso'})
+        callback({Error: 4, Message: 'Este teléfono ya está en uso'})
       } else if (typeof(err.name) !== 'undefined' && err.name.$isValidatorError) {
         callback({Error: 2, Message: 'Introduce tu nombre'})
       } else if (typeof(err.email) !== 'undefined' && err.email.$isValidatorError) {
-        callback({Error: 3, Message: 'Introduce tu email'})
+        callback({Error: 3, Message: 'Introduce tu teléfono'})
       }
     };
   });
 
   socket.on('loginUser', async (data, callback) => {
     try {
-      let user = await User.findOne({phone: data.phone});
+      let userPhone = `${data.prefix}${data.phone}`;
+      let user = await User.findOne({phone: userPhone});
+
+      if (data.prefix === "") {
+        return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
+      }
 
       if (user === null)
-        return callback({Error: 1, Message: 'Usuario no válido'});
+        return callback({Error: 1, Message: 'Teléfono no encontrado'});
+
 
       let verify = bcrypt.compareSync(data.password, user.password);
 

@@ -22,7 +22,7 @@
                 <div class='row'>
                   <div class='col s12'>
                   </div>
-                </div>
+                </div> 
 
                 <div class='row'>
                   <div class='input-field col s12 input-group name'>
@@ -33,11 +33,16 @@
                 </div>
 
                 <div class='row'>
-                  <div class='input-field col s12 input-group user-email'>
-                    <input id="email" type='email' name='email' />
+                  <div class='input-field col s3 input-group phone-prefix'>
+                    <input maxlength="5" placeholder="+00" id="prefix" type='tel'/>
+                    <label for='prefix'>Prefijo</label>
+                  </div>
+
+                  <div class='input-field col s9 input-group user-email'>
+                    <input id="email" type='tel' name='email' />
                     <label for='email' data-error="Please enter a value.">Móvil</label>
                   </div>
-                  <p class="error-message hidden error-email">Error</p>
+                  <p class="error-message hidden error-email col s12">Error</p>
                 </div>
 
                 <div class='row'>

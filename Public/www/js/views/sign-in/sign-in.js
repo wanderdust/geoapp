@@ -15,6 +15,7 @@ $(function () {
 
     initialize: function () {
       this.socket = socket;
+      this.getCountryCode();
     },
 
     render: function () {
@@ -25,6 +26,7 @@ $(function () {
       let data = {};
       data.name = $('#name').val().trim();
       data.phone = $('#email').val().replace(/\s+/g, '');
+      data.prefix = $('#prefix').val().replace(/\s+/g, '');
       data.password = $('#password').val().trim();
       data.confirmPassword = $('#confirm').val().trim();
 
@@ -37,7 +39,7 @@ $(function () {
             $('.input-group.name').addClass('error');
             $('.error-name').removeClass('hidden').html(err.Message);
           } else if (err.Error === 3 || err.Error === 7) {
-            // Email required
+            // phone required
             $('.input-group.user-email').addClass('error');
             $('.error-email').removeClass('hidden').html(err.Message);
           } else if (err.Error === 4) {
@@ -52,6 +54,10 @@ $(function () {
             // Password is too short
             $('.input-group.password').addClass('error');
             $('.error-password').removeClass('hidden').html(err.Message);
+          } else if (err.Error === 8) {
+            // phone code required
+            $('.input-group.phone-prefix').addClass('error');
+            $('.error-email').removeClass('hidden').html(err.Message);
           } else if (err.Error === 0) {
             // Passwords don't match
             $('.input-group.password').addClass('error');
@@ -72,6 +78,7 @@ $(function () {
 
     logIn: function () {
       let data = {};
+      data.prefix = $('#prefix').val().replace(/\s+/g, '');
       data.phone = $('#email').val().replace(/\s+/g, '');
       data.password = $('#password').val().trim();
 
@@ -87,6 +94,10 @@ $(function () {
             // Wrong password
             $('.input-group.password').addClass('error');
             $('.error-password').removeClass('hidden').html(err.Message);
+          } else if (err.Error === 8) {
+            // phone code required
+            $('.input-group.phone-prefix').addClass('error');
+            $('.error-email').removeClass('hidden').html(err.Message);
           } else if (err.Error === 99) {
             throw Error (err);
           }
@@ -99,6 +110,15 @@ $(function () {
         localStorage.setItem('userE1d9rg76397d11', data.phone);
         window.location.href = 'main.html#/online'
       })
+    },
+
+    // Gets country code from freegeoip and then gets the country prefix
+    // from restcountires
+    getCountryCode: async function () {
+      let getCountryCode = await $.getJSON('http://freegeoip.net/json/?callback=?');
+      let getCountryPrefix = await $.getJSON(`https://restcountries.eu/rest/v2/name/${getCountryCode.country_code}`);
+      // Appends the code in the input box
+      $('#prefix').val(`+${getCountryPrefix[0].callingCodes[0]}`);
     }
   })
   new app.SignInView();

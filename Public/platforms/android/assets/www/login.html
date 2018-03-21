@@ -24,11 +24,16 @@
                 </div>
 
                 <div class='row'>
-                  <div class='input-field col s12 input-group email'>
+                  <div class='input-field col s3 input-group phone-prefix'>
+                    <input maxlength="5" placeholder="+00" id="prefix" type='tel'/>
+                    <label for='prefix'>Prefijo</label>
+                  </div>
+
+                  <div class='input-field col s9 input-group email'>
                     <input type='email' name='email' id='email' />
                     <label for='email'>Móvil</label>
                   </div>
-                  <p class="error-message hidden error-email">Error</p>
+                  <p class="error-message hidden error-email col s12">Error</p>
                 </div>
 
                 <div class='row'>
