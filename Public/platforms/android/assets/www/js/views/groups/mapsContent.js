@@ -87,7 +87,6 @@ $(function () {
             } else if (this.userIsOnline) {
               // This means user is not near any place so it should be put
               // as offline from every group.
-
               this.userIsOnline = false;
               this.socket.emit('userOffBounds', {
                 userId: sessionStorage.getItem('userId'),

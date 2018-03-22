@@ -1338,7 +1338,7 @@ body.active {
 /* ****STYLES FOR SETTINGS PAGE ***** */
 
 .tabs-content.settings-page {
-  height: 90%;
+  height: 91%;
 }
 
 .tabs-content.settings-page #user-dashboard {
@@ -1438,6 +1438,11 @@ body.active {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.settings-li .icon img {
+  height: 40%;
+  width: auto;
 }
 
 .settings-li .title {
@@ -1655,4 +1660,27 @@ body.active {
   font-size: 15px;
   color: white;
   margin-bottom: 0px;
+}
+
+/* Styles for FAQ */
+
+.tabs-content.faq-page {
+  height: 91%;
+  overflow: scroll;
+}
+
+.faq-col {
+  padding: 0px !important;
+}
+
+.faq-list {
+  margin-top: 0px;
+}
+
+.faq-list {
+  font-size: 1.15em;
+}
+
+.collapsible-body {
+  font-size: 0.9em;
 }
