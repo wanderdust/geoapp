@@ -24,7 +24,11 @@ $(function () {
 
       socket.on('newGroupUpdates', (data) => {
         app.groupCollection.findAndUpdateOneOnline(data);
-      })
+      });
+
+      socket.on('userNameUpdate', (data) => {
+        app.groupCollection.findAndUpdateGroups(data);
+      });
 
       socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data)
