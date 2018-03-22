@@ -274,7 +274,7 @@ h4 {
 .tabs-content .group-header .group-title {
   position: absolute;
   width: 100%;
-  top: 5px;
+  top: 0px;
   font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
@@ -468,6 +468,7 @@ h4 {
   height: 100%;
   left: 0px;
   width: 15%;
+  border-radius: 55px;
 }
 
 #header-nav #back-arrow-container img, .back-arrow-container img {
@@ -1686,5 +1687,11 @@ body.active {
 }
 
 .collapsible-body {
+  position: relative;
   font-size: 0.9em;
+}
+
+.collapsible-body span i {
+  display: inline;
+  vertical-align: middle;
 }
