@@ -787,13 +787,37 @@ socket.on('getUser', async (data, callback) => {
   // Deletes user from the Group.
   socket.on('exitGroup', async (data, callback) => {
     try {
+      let socketsToUpdateGroups;
       let deletedUserGroup = await UserGroup.findOneAndRemove({
         groupId: data.groupId,
         userId: data.userId
       });
+      // Finds out the name of the user who is now online.
+      let userName = await User.findOne({_id: ObjectID(data.userId)});
+
+      let groupProperties = {
+        _id: data.groupId,
+        userOnline: userName.name,
+        userId: data.userId
+      };
+
+      // We update the sockets to set the users in the views as offline.
+      // They will permanently get removed after a refresh.
+      socketsToUpdateGroups = openSocketsGroups.findSockets({groupId: data.groupId});
+
+      socketsToUpdateGroups.forEach((e) => {
+        io.to(e.socketId).emit('userOffBounds', groupProperties);
+      });
+
+      socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+
+      socketsToUpdateUsers.forEach((e) => {
+        io.to(e.socketId).emit('updateUserStatus', data);
+      });
 
       callback(null, true);
     } catch (e) {
+      console.log(e)
       callback('No se ha podido completar la operación')
     }
   });

@@ -114,7 +114,7 @@ $(function () {
       navigator.notification.confirm(
         '¿Estás seguro de que quieres salir permanentemente de este grupo?',
         this.exitGroup,
-        'Eliminar cuenta',
+        'Eliminar grupo',
         ['Si', 'No']
       );
     },
