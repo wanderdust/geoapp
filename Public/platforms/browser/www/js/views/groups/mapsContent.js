@@ -45,6 +45,10 @@ $(function () {
       this.socket.on('newPendingUpdates', (data) => {
         app.groupCollection.findAndUpdateOnePending(data);
       });
+
+      this.socket.on('userNameUpdate', (data) => {
+        app.groupCollection.findAndUpdateGroups(data);
+      });
     },
 
     render: function () {

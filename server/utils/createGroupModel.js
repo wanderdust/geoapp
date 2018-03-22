@@ -16,6 +16,7 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
       online: true
     });
 
+
     for (let onlineUser of onlineUsersInGroup) {
       let userName = await User.findById(onlineUser.userId);
       if (onlineUser.userId === currentUserId) {
@@ -49,7 +50,7 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
 
     return newModel;
   } catch (e) {
-    console.log('e');
+    console.log(e);
   }
 }
 

@@ -138,6 +138,34 @@ $(function () {
       this.trigger('updateMarkers');
     },
 
+    // Updates the groups array if a user has changed it.
+    // Replaces the old name with the new one.
+    findAndUpdateGroups: function (data) {
+      if (data.userId === sessionStorage.getItem('userId'))
+        data.userOnline = 'Yo';
+
+      let model = this.findWhere({_id: data._id});
+      let onlineUsersArray = model.get('activeUsers');
+      let pendingUsersArray = model.get('pendingUsers');
+      let onlineUserIndex = onlineUsersArray.indexOf(data.oldUserName);
+      let pendingUserIndex = pendingUsersArray.indexOf(data.oldUserName);
+
+      if (onlineUserIndex !== -1) {
+        onlineUsersArray.splice(onlineUserIndex, 1, data.userOnline);
+        model.set({activeUsers: onlineUsersArray});
+      } else if (pendingUserIndex !== -1) {
+        pendingUsersArray.splice(pendingUserIndex, 1, data.userOnline);
+        model.set({pendingUsers: pendingUsersArray});
+      }
+
+      // Saves the new model updates in the collection.
+      this.set({model}, {add: false, remove: false, merge: true});
+
+      // Renders the changed model and the updates markers.
+      model.trigger('render');
+      model.trigger('change', model);
+    },
+
     fitImage: async function (view) {
       let i = new Image();
 

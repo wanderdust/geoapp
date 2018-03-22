@@ -156,6 +156,7 @@ io.on('connection', (socket) => {
       // Sends an array with all the group Models.
       callback(null, groupCollection);
     } catch (e) {
+      console.log('createGroupCollection error', e.message)
       callback(e);
     }
   });
@@ -825,6 +826,8 @@ socket.on('getUser', async (data, callback) => {
   // Saves the profile data changed by the user.
   socket.on('saveProfileSettings', async(data, callback) => {
     try {
+      let updatedDocuments = [];
+      let oldName = await User.findOne({_id: ObjectID(data.userId)});
       let user = await User.findOneAndUpdate({_id: data.userId}, {
         $set: {
           userImage: data.userImage,
@@ -833,8 +836,38 @@ socket.on('getUser', async (data, callback) => {
         }
       }, {new: true});
 
+      // Finds if he is online in a Group.
+      let findIfOnline = await UserGroup.findOne({userId: data.userId, online: true});
+
+      // Finds if he is pending in a group.
+      let findIfPenging = await UserGroup.findOne({userId: data.userId, pending: true});
+
+      updatedDocuments.push(findIfOnline, findIfPenging);
+      // Return all the models that need updated.
+      // Sends data to respective sockets.
+      for (let doc of updatedDocuments) {
+        let updatedProperties = {};
+        let socketsToUpdateGroups;
+
+        if (doc === null)
+          continue;
+
+        updatedProperties._id = doc.groupId;
+        updatedProperties.oldUserName = oldName.name;
+        updatedProperties.userOnline = user.name;
+        updatedProperties.userId = user._id;
+
+        // Finds the sockets in the  array that contain an updated group.
+        socketsToUpdateGroups = openSocketsGroups.findSockets(doc);
+
+        socketsToUpdateGroups.forEach((e) => {
+          io.to(e.socketId).emit('userNameUpdate', updatedProperties);
+        });
+      };
+
       callback(null, user);
     } catch (e) {
+      console.log(e);
       callback('Unable to save data')
     }
   });
