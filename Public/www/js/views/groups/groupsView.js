@@ -8,10 +8,9 @@ $(function () {
   app.GroupsView = Backbone.View.extend({
     el: '#app-container',
 
+    template: Templates.badge,
+
     events: {
-      "click .openbtn": "openSidebar",
-      "click .openbtn.closebtn": "closeSidebar",
-      "swipeleft #sidebar-container": "closeSidebar",
       "click .requests-btn": "getRequests",
       "click .pending-btn": "getPending",
       "click .new-group-btn": "getNewGroup",
@@ -21,7 +20,7 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'render', 'closeSidebar');
+      _.bindAll(this, 'render', 'getRequestsLength');
       this.socket = socket;
       this.$sideNav = $('#sidebar-container');
 
@@ -33,7 +32,9 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
+      socket.on('addNewRequest', () => this.getRequestsLength())
       this.render();
+      this.getRequestsLength();
     },
 
     render: function () {
@@ -61,13 +62,27 @@ $(function () {
       });
     },
 
-    openSidebar: function () {
-      // let isHasClass =   this.$sideNav.hasClass('swipeIt');
-      // this.$sideNav.toggleClass('swipeIt', !isHasClass);
+    // Gets the user's request length, to show notifications in the side-bar.
+    getRequestsLength: function () {
+      let requestLength;
+      let userId = sessionStorage.getItem('userId');
+      this.socket.emit('createRequestCollection', userId, (err, collection) => {
+        if (err)
+          return
+
+        requestLength = collection.length;
+        if (requestLength > 0)
+          this.showBadge(requestLength);
+      });
     },
 
-    closeSidebar: function () {
-      // this.$sideNav.removeClass('swipeIt');
+    // Appends notifications to the requests li element.
+    showBadge: function (requestLength) {
+      let template = Handlebars.compile(this.template);
+      let html = template({requestLength});
+
+      this.$('.list-notification').remove();
+      this.$('.requests').append(html);
     },
 
     getRequests: function () {

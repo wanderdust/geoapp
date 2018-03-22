@@ -30,6 +30,7 @@ $(function () {
       data.password = $('#password').val().trim();
       data.confirmPassword = $('#confirm').val().trim();
 
+
       this.socket.emit('createUser', data, (err, res) => {
         if (err) {
           $('.input-group').removeClass('error');
@@ -71,7 +72,7 @@ $(function () {
 
         sessionStorage.setItem('userId', res._id);
         localStorage.setItem('passwordE1d9rg76397d11', res.password);
-        localStorage.setItem('userE1d9rg76397d11', data.phone);
+        localStorage.setItem('userE1d9rg76397d11', res.phone);
         window.location.href = 'main.html#/online'
       })
     },
@@ -107,7 +108,7 @@ $(function () {
         sessionStorage.setItem('userId', res._id);
         // Random strings to avoid localStorage collisions.
         localStorage.setItem('passwordE1d9rg76397d11', res.password);
-        localStorage.setItem('userE1d9rg76397d11', data.phone);
+        localStorage.setItem('userE1d9rg76397d11', res.phone);
         window.location.href = 'main.html#/online'
       })
     },

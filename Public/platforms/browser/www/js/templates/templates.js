@@ -39,6 +39,23 @@ Templates.userTemplateB = [
       '</div>',
     '{{/if}}',
   '</div>'
+].join('\n');
+
+// Template for a user container
+Templates.userTemplateC = [
+  '<div class="group-container user-container">',
+    '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
+    '<div class="image">',
+      '<img src="{{userImage}}">',
+    '</div>',
+    '<div class="group-header">',
+      '<p class="group-title">{{name}}</p>',
+      '<p class="group-status">{{userStatus}}</p>',
+    '</div>',
+      // '<a class="pending-icon waves-effect waves-light">',
+      //   '<img src="css/assets/sidebar-icons/icon_vertical_options_orange.svg">',
+      // '</a>',
+  '</div>'
 ].join('\n')
 
 // Template for a group container
@@ -180,4 +197,9 @@ Templates.requestTemplateGroup = [
 // Template for infowindow in maps.
 Templates.infoWindowMaps = [
   '<p class="info-window">{{title}}</p>'
-].join('\n')
+].join('\n');
+
+// Template for notification in side-menu
+Templates.badge = [
+    '<span class="list-notification new badge" data-badge-caption="nuevos">{{requestLength}}</span>'
+].join('\n');

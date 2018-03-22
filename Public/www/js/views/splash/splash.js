@@ -33,7 +33,11 @@ $(function () {
       if (user !== null && password !== null) {
         this.socket.emit('loginUser', {
           phone: user,
-          password: password
+          password: password,
+          // The saved phone already contains the prefix, so we set it as empty.
+          prefix: "",
+          // Tells the server that it is okay if the prefix field is empty.
+          localStorage: true
         }, (err, res) => {
           if (err)
             return window.location.href = 'login.html';

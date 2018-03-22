@@ -92,7 +92,7 @@ io.on('connection', (socket) => {
 
       user = await new User(newUser).save();
 
-      callback(null, {_id: user._id, password: user.password});
+      callback(null, {_id: user._id, password: user.password, phone: user.phone});
     } catch (e) {
       let duplicate = 11000;
       let err = e.errors;
@@ -112,7 +112,9 @@ io.on('connection', (socket) => {
       let userPhone = `${data.prefix}${data.phone}`;
       let user = await User.findOne({phone: userPhone});
 
-      if (data.prefix === "") {
+
+      if (!data.localStorage && data.prefix === "") {
+        // only checks the prefix field if the data doesn't come from localStorage
         return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
       }
 
@@ -130,7 +132,7 @@ io.on('connection', (socket) => {
           return callback({Error: 2, Message: 'Contraseña incorrecta'});
       }
 
-      callback(null, {_id: user._id, password: user.password})
+      callback(null, {_id: user._id, password: user.password, phone: user.phone})
     } catch (e) {
       console.log(e)
       callback({Error: 99, Message: e})
@@ -214,7 +216,8 @@ socket.on('getUser', async (data, callback) => {
       // Sends an array with the request Models.
       callBack(null, requestCollection);
     } catch (e) {
-      callback(e);
+      console.log(e)
+      callBack(e);
     }
   });
 

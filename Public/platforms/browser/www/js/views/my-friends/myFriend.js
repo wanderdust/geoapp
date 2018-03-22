@@ -7,7 +7,7 @@ $(function () {
   app.MyFriendView = Backbone.View.extend({
     tagName: 'li',
 
-    template: Templates.userTemplateB,
+    template: Templates.userTemplateC,
 
     events: {
       "click .image": "openImageModal"

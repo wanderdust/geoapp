@@ -14,7 +14,7 @@
    id="svg4369"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="icon_vertical_options.svg">
+   sodipodi:docname="icon_vertical_options_orange.svg">
   <metadata
      id="metadata4379">
     <rdf:RDF>
@@ -23,7 +23,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,5 +55,5 @@
   <path
      d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
      id="path4373"
-     style="fill:#ffffff;fill-opacity:1" />
+     style="fill:#fb8c00;fill-opacity:1" />
 </svg>

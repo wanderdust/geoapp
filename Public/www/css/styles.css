@@ -333,6 +333,7 @@ h4 {
 }
 
 #slide-out li {
+  position: relative;
   margin-top: 10px;
 }
 
@@ -358,6 +359,12 @@ h4 {
   position: relative;
   height: 100%;
   width: 100%;
+}
+
+.list-notification {
+  position: absolute;
+  right: 4px;
+  top: 0px;
 }
 
 .link-icon {

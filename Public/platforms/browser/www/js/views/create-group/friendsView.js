@@ -23,12 +23,14 @@ $(function () {
     },
 
     initialize: function () {
+      _.bindAll(this, 'addGroupImage')
       this.socket = socket;
       this.groupCoords;
       this.groupFriends = [];
       this.groupImage = "";
       this.$sideNav = $('.status-users-content');
-      _.bindAll(this, 'addGroupImage')
+      this.$btn = $('#create-group-btn');
+
 
       this.listenTo(app.userCollection, 'showAlert', this.snackBar);
       this.listenTo(app.userCollection, 'groupCoords', this.updateCoords);
@@ -133,6 +135,8 @@ $(function () {
     createNewGroup: function () {
       let that = this;
       let groupData = {};
+      this.$btn.addClass('disabled');
+
       groupData.coords = this.groupCoords;
       groupData.title = $('.title-input').val();
       groupData.friends = this.groupFriends;
@@ -145,7 +149,7 @@ $(function () {
           if (err)
             return navigator.notification.alert(
               err,
-              (msg) => true,
+              (msg) => this.$btn.removeClass('disabled'),
               'Error'
             );
 
@@ -154,7 +158,7 @@ $(function () {
             if (err)
               return navigator.notification.alert(
                 err,
-                (msg) => true,
+                (msg) => this.$btn.removeClass('disabled'),
                 'Error'
               );
 
@@ -169,12 +173,15 @@ $(function () {
     groupValidation: function (coords, title, friends) {
       if (coords === undefined) {
         this.snackBar('Tienes que elegir un lugar en el mapa');
+        this.$btn.removeClass('disabled');
         return false;
       } else if (title.trim() === "") {
         this.snackBar('Tienes que añadir un título para el grupo');
+        this.$btn.removeClass('disabled');
         return false;
       } else if (friends.length === 0) {
         this.snackBar('Tienes que añadir por lo menos a 1 amigo');
+        this.$btn.removeClass('disabled');
         return false;
       }
 
