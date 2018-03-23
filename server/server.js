@@ -259,7 +259,7 @@ socket.on('getUser', async (data, callback) => {
     }
   })
 
-  // Updates user data when he changes location.
+  // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
     try {
       let updatedDocuments = [];
@@ -270,10 +270,11 @@ socket.on('getUser', async (data, callback) => {
       let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
 
       // Check if he has been updated already.
-      checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
+      checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId, online: true});
 
-      if (checkLocation.online)
-        return false
+      if (checkLocation !== null)
+        return;
+
 
       // Finds if he is online in another Group and sets it to false.
       findIfOnlineAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
@@ -289,12 +290,14 @@ socket.on('getUser', async (data, callback) => {
         }
       }, {new: true});
 
+
       //Finds the userGroup with the userId and groupId and updates the data in database.
       updateNewLocation = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
         $set: {
           online: true,
         }
       }, {new: true});
+
 
       updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
 

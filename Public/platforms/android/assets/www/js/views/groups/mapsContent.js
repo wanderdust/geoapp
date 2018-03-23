@@ -59,18 +59,23 @@ $(function () {
       let that = this;
 
       try {
-        if (!navigator.geolocation)
-          return navigator.notification.alert(
-            'Geolocation not supported',
-            (msg) => true,
-            'Error'
-          );
-
-        // await navigator.geolocation.getCurrentPosition
-        await navigator.geolocation.watchPosition((position) => {
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 8000};
+        // I add a frequency so that not too many requests are sent to the server.
+        // It only runs the function 1 every 3 times watch position gets executed.
+        // This fixes bug where watchposition executes too quiclkly the first time.
+        let minFrequency = 0;
+        let success = (position) => {
           let groups = app.groupCollection;
           let userLat = position.coords.latitude;
           let userLng = position.coords.longitude;
+
+          // Only goes through when minFrequency > 2;
+          if (minFrequency < 2){
+            minFrequency++;
+            return;
+           }
+          minFrequency = 0;
+
           that.updateUserLocation(userLat, userLng);
 
           // For each marker calculates the distance from the user.
@@ -98,8 +103,9 @@ $(function () {
               })
             }
           }
-        }, (err) => {
+        };
 
+        let error = (err) => {
           let groupId = app.groupCollection.findGroupId();
 
           navigator.notification.alert(
@@ -119,7 +125,10 @@ $(function () {
             },
             'Activa el GPS'
           );
-        }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000});
+        }
+
+        // Starts watchPosition
+        await navigator.geolocation.watchPosition(success, error, options);
 
       } catch (e) {
         return navigator.notification.alert(
@@ -309,18 +318,23 @@ $(function () {
     pointToUserLocation: async function () {
       try {
         let that = this;
+        let success = (position) => {
+          let userLat = position.coords.latitude;
+          let userLng = position.coords.longitude;
+          let latLng = new google.maps.LatLng(userLat, userLng);
+          that.map.panTo(latLng);
+        };
+
+        let error = (err) => {
+          app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
+        };
+
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 6000};
 
         if (this.userCurrentPosition === null) {
           app.groupCollection.trigger('showSnackBar', {message: 'Buscando...'});
-          return await navigator.geolocation.getCurrentPosition((position) => {
-            let userLat = position.coords.latitude;
-            let userLng = position.coords.longitude;
-            let latLng = new google.maps.LatLng(userLat, userLng);
-            that.map.panTo(latLng);
-            console.log(userLat);
-          }, (err) => {
-            app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
-          }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 3500} )
+
+          return await navigator.geolocation.getCurrentPosition(success, error, options)
         }
         this.map.panTo(this.userCurrentPosition.getPosition());
       } catch (e) {

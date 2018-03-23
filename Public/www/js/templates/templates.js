@@ -35,7 +35,7 @@ Templates.userTemplateB = [
     '</div>',
     '{{#if isPending}}',
       '<div class="pending-icon waves-effect waves-light">',
-        '<img src="css/assets/sidebar-icons/icon_walking.svg">',
+        '<img src="css/assets/sidebar-icons/icon_pending_orange.svg">',
       '</div>',
     '{{/if}}',
   '</div>'
