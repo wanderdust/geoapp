@@ -8,7 +8,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <access origin="http://192.168.1.250:3000/*" />
+    <access origin="https://pacific-scrubland-87047.herokuapp.com//*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -17,6 +17,10 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon density="ldpi" src="public/res/icon/android/icon-36-ldpi.png" />
+        <icon density="mdpi" src="public/res/icon/android/icon-48-mdpi.png" />
+        <icon density="hdpi" src="public/res/icon/android/icon-72-hdpi.png" />
+        <icon density="xhdpi" src="public/res/icon/android/icon-96-xhdpi.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
