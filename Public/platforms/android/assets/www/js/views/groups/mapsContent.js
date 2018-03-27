@@ -38,7 +38,8 @@ $(function () {
         app.groupCollection.findAndUpdateOneOnline(data);
       });
 
-      this.socket.on('userOffBounds', (data) => {
+      this.socket.on('userOffline', (data) => {
+        console.log('foo')
         app.groupCollection.userOffline(data);
       });
 
@@ -68,6 +69,10 @@ $(function () {
           let groups = app.groupCollection;
           let userLat = position.coords.latitude;
           let userLng = position.coords.longitude;
+          // Checks if any of the groups entered the online if/else.
+          // If none of them entered the condition it means he is none of the
+          // groups and therefore the user is online.
+          let onlineGroupCheck = 0;
 
           // Only goes through when minFrequency > 2;
           if (minFrequency < 2){
@@ -80,29 +85,33 @@ $(function () {
 
           // For each marker calculates the distance from the user.
           for (let i = 0; groups.length > i; i++) {
+
+
             let model = app.groupCollection.models[i];
             let groupLat = model.get('coords').lat;
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
-            if (distance <= 0.030) {
+            if (distance <= 0.003) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
               });
               // keeps track if user is currently online in a group.
-              this.userIsOnline = true;
+
               break;
-            } else if (this.userIsOnline) {
-              // This means user is not near any place so it should be put
-              // as offline from every group.
-              this.userIsOnline = false;
-              this.socket.emit('userOffBounds', {
-                userId: sessionStorage.getItem('userId'),
-                groupId: model.get('_id')
-              })
             }
+            onlineGroupCheck++
           }
+
+          // This means user is not near any place so it should be put
+          // as offline from every group.
+          if (onlineGroupCheck === app.groupCollection.length) {
+            this.socket.emit('userOffBounds', {
+              userId: sessionStorage.getItem('userId')
+            })
+          }
+
         };
 
         let error = (err) => {

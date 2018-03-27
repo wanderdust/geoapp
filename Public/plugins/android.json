@@ -13,9 +13,6 @@
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-console": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
@@ -43,10 +40,13 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-contacts": {
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/build/intermediates/res/merged/debug/color/wallet_secondary_text_holo_dark.xml",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/res/color/wallet_secondary_text_holo_dark.xml"
+    },
+    {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/build/intermediates/res/merged/debug/color/common_signin_btn_text_dark.xml",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/res/color/common_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/build/intermediates/res/merged/debug/color/common_signin_btn_text_light.xml",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/res/color/common_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/build/intermediates/res/merged/debug/color/wallet_primary_text_holo_light.xml",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/cordova-google-play-services/geoapp-google-play-services_lib/res/color/wallet_primary_text_holo_light.xml"
+    }
+]

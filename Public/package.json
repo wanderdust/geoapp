@@ -29,7 +29,6 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-dialogs": {},
@@ -42,7 +41,8 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-contacts": {}
+      "cordova-plugin-contacts": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android"

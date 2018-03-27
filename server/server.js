@@ -331,48 +331,55 @@ socket.on('getUser', async (data, callback) => {
         io.to(e.socketId).emit('updateUserStatus', data);
       });
 
+      console.log('User connected to GROUP')
+
     } catch (e) {
       console.log(e)
     }
   });
 
   socket.on('userOffBounds', async (data) => {
-    let socketsToUpdateGroups;
-    let socketsToUpdateUsers;
+    try {
+      let socketsToUpdateGroups;
+      let socketsToUpdateUsers;
 
-    // Only for users that are online to be set offline. Otherwise returns.
-    checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId});
-
-    if (!checkLocation.online)
-      return false
+      // Checks if the user is online in any group. If he is continues, if not returns.
+      checkLocation = await UserGroup.findOne({userId: data.userId, online: true});
 
 
-    let  setOffBounds = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
-      $set: {
-        online: false,
-      }
-    }, {new: true});
+      if (checkLocation === null)
+        return
 
-    // Finds out the name of the user who is now online.
-    let userName = await User.findOne({_id: ObjectID(data.userId)});
+      let  setOffBounds = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
+        $set: {
+          online: false,
+        }
+      }, {new: true});
 
-    let groupProperties = {
-      _id: data.groupId,
-      userOnline: userName.name,
-      userId: data.userId
-    };
+      // Finds out the name of the user who is now online.
+      let userName = await User.findOne({_id: ObjectID(data.userId)});
 
-    socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
+      let groupProperties = {
+        _id: setOffBounds.groupId,
+        userOnline: userName.name,
+        userId: setOffBounds.userId
+      };
 
-    socketsToUpdateGroups.forEach((e) => {
-      io.to(e.socketId).emit('userOffBounds', groupProperties);
-    });
+      socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
 
-    socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+      socketsToUpdateGroups.forEach((e) => {
+        io.to(e.socketId).emit('userOffline', groupProperties);
+      });
 
-    socketsToUpdateUsers.forEach((e) => {
-      io.to(e.socketId).emit('updateUserStatus', data);
-    });
+      socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
+
+      socketsToUpdateUsers.forEach((e) => {
+        io.to(e.socketId).emit('updateUserStatus', data);
+      });
+      console.log('User disconnected from GROUP')
+    } catch (e) {
+      console.log(e)
+    }
 
   });
 
@@ -537,9 +544,11 @@ socket.on('getUser', async (data, callback) => {
 
       for (let friend of friends) {
         let isExist = await UserGroup.findOne({groupId: data.groupId, userId: friend});
+        let requestSent = await Request.findOne({userId:data.senderId , recipientId: data.recipientId, groupId: data.groupId});
 
-        // if the user is already in the group, skips that user.
-        if (isExist !== null) {
+
+        // if the user is already in the group or has already been sent an invitation, skips that user.
+        if (isExist !== null || requestSent !== null) {
           continue;
         }
 

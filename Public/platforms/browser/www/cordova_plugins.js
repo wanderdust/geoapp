@@ -401,8 +401,8 @@ module.exports.metadata =
     "cordova-plugin-request-location-accuracy": "2.2.2",
     "cordova-plugin-screen-orientation": "3.0.1",
     "cordova-plugin-statusbar": "2.4.1",
-    "cordova-plugin-whitelist": "1.3.3",
-    "es6-promise-plugin": "4.2.2"
+    "es6-promise-plugin": "4.2.2",
+    "cordova-plugin-whitelist": "1.3.3"
 }
 // BOTTOM OF METADATA
 });

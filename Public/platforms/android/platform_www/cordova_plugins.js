@@ -380,7 +380,6 @@ module.exports.metadata =
 {
   "cordova-google-play-services": "25.0.0",
   "cordova-plugin-camera": "4.0.1",
-  "cordova-plugin-console": "1.1.0",
   "cordova-plugin-device": "2.0.1",
   "cordova-plugin-dialogs": "2.0.1",
   "cordova-plugin-file": "6.0.1",
@@ -391,8 +390,9 @@ module.exports.metadata =
   "es6-promise-plugin": "4.2.2",
   "cordova-plugin-screen-orientation": "3.0.1",
   "cordova-plugin-statusbar": "2.4.1",
-  "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-contacts": "3.0.1"
+  "cordova-plugin-contacts": "3.0.1",
+  "cordova-plugin-console": "1.1.0",
+  "cordova-plugin-whitelist": "1.3.3"
 };
 // BOTTOM OF METADATA
 });
