@@ -17,12 +17,10 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'userCoords');
+      _.bindAll(this, 'userCoords', 'render');
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
-      // Starts with true to check all paths in the if/else statement.
-      this.userIsOnline = true;
 
       // Stops map from executing if offline.
       this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
@@ -39,7 +37,6 @@ $(function () {
       });
 
       this.socket.on('userOffline', (data) => {
-        console.log('foo')
         app.groupCollection.userOffline(data);
       });
 
@@ -50,10 +47,11 @@ $(function () {
       this.socket.on('userNameUpdate', (data) => {
         app.groupCollection.findAndUpdateGroups(data);
       });
+
+      this.render();
     },
 
     render: function () {
-
     },
 
     userCoords: async function () {
@@ -97,8 +95,6 @@ $(function () {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
               });
-              // keeps track if user is currently online in a group.
-
               break;
             }
             onlineGroupCheck++
@@ -114,23 +110,15 @@ $(function () {
 
         };
 
-        let error = (err) => {
-          let groupId = app.groupCollection.findGroupId();
-
+        let error = function (err) {
           navigator.notification.alert(
             'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
             function () {
-              // Searches the user to see if he is online. If he is and his location cant be found,
               // we set the user offline.
-              let groupId = app.groupCollection.findGroupId();
-              let userId = sessionStorage.getItem('userId')
-
-              if (groupId) {
-                this.socket.emit('userOffBounds', {
-                  userId: userId,
-                  groupId: groupId
-                })
-              }
+              let userId = sessionStorage.getItem('userId');
+              this.socket.emit('userOffBounds', {
+                userId: userId
+              })
             },
             'Activa el GPS'
           );

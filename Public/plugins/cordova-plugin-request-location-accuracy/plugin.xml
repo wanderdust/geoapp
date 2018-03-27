@@ -10,7 +10,7 @@
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
-    
+
     <repo>https://github.com/dpa99c/cordova-plugin-request-location-accuracy.git</repo>
     <issue>https://github.com/dpa99c/cordova-plugin-request-location-accuracy/issues</issue>
     <keywords>ecosystem:cordova,cordova,phonegap,android,diagnostic,location,accuracy,high accuracy,fine accuracy,gps,settings</keywords>
@@ -24,7 +24,7 @@
         </config-file>
 
         <js-module src="www/android/RequestLocationAccuracy.js" name="RequestLocationAccuracy">
-            <clobbers target="cordova.plugins.locationAccuracy" />
+            <clobbers target="locationAccuracy" />
         </js-module>
 
         <source-file src="src/android/RequestLocationAccuracy.java" target-dir="src/cordova/plugin" />

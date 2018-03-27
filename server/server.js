@@ -37,6 +37,10 @@ let connectedUsers = new ConnectedUsers();
 
 io.on('connection', (socket) => {
 
+  socket.on('debug', (data) => {
+    console.log(data.foo)
+  })
+
   socket.on('connectedClient', (id) => {
     let users = connectedUsers.connectedUsers;
     let found = false;
@@ -544,8 +548,7 @@ socket.on('getUser', async (data, callback) => {
 
       for (let friend of friends) {
         let isExist = await UserGroup.findOne({groupId: data.groupId, userId: friend});
-        let requestSent = await Request.findOne({userId:data.senderId , recipientId: data.recipientId, groupId: data.groupId});
-
+        let requestSent = await Request.findOne({userId:data.senderId , recipientId: friend, groupId: data.groupId});
 
         // if the user is already in the group or has already been sent an invitation, skips that user.
         if (isExist !== null || requestSent !== null) {
