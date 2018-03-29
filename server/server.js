@@ -22,6 +22,7 @@ const {createUserModel} = require('./utils/createUserModel.js');
 const {createRequestModel} = require('./utils/createRequestModel.js');
 const {createFriendRequestModel} = require('./utils/createFriendRequestModel.js');
 const {createFriendModel} = require('./utils/createFriendModel.js');
+const {sendPushMessages} = require('./utils/sendPushNotification.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -38,7 +39,7 @@ let connectedUsers = new ConnectedUsers();
 io.on('connection', (socket) => {
 
   socket.on('debug', (data) => {
-    console.log(data.foo)
+    console.log('DEBUG FUNCTION:', data)
   })
 
   socket.on('connectedClient', (id) => {
@@ -70,7 +71,8 @@ io.on('connection', (socket) => {
         name: data.name,
         userImage: "",
         phone: userPhone,
-        password: hash
+        password: hash,
+        fcmRegId: ""
       };
 
       // let email = validator.isEmail(data.email);
@@ -142,6 +144,18 @@ io.on('connection', (socket) => {
       callback({Error: 99, Message: e})
     }
   });
+
+  socket.on('updateUserFcmId', async (data) => {
+    try {
+      let user = await User.findOneAndUpdate({_id: ObjectID(data.userId)}, {
+        $set: {
+          fcmRegId: data.regId
+        }
+      }, {new: true});
+    } catch (e) {
+      console.log(e)
+    }
+  })
 
   socket.on('createGroupCollection', async (userId, callback) => {
     try {
@@ -543,8 +557,17 @@ socket.on('getUser', async (data, callback) => {
   // Creates the request in the database.
   socket.on('addGroupRequests', async (data, callback) => {
     try {
+      // Array of the fmc tokens for the push notifications
+      let friendsFMC = [];
       let currentUser = data.currentUser;
       let friends = data.friends;
+      let group = await Group.findById(data.groupId);
+      let sender = await User.findById(data.currentUser);
+  
+      let notificationMsg = {
+        title: `Te han invitado a ${group.title}`,
+        body: `${sender.name} te ha invitado.`
+      }
 
       for (let friend of friends) {
         let isExist = await UserGroup.findOne({groupId: data.groupId, userId: friend});
@@ -571,10 +594,17 @@ socket.on('getUser', async (data, callback) => {
 
         if (socketsToUpdate[0] !== undefined)
           io.to(socketsToUpdate[0].socketId).emit('addNewRequest', newRequestModel);
+
+        // Finds the user's token and pushes it to the array.
+        let friendFMCToken = await User.findById(friend);
+        friendsFMC.push(friendFMCToken.fcmRegId);
       }
 
-      callback(null, 'Group created succesfully')
+      callback(null, 'Group created succesfully');
+
+      sendPushMessages(friendsFMC, notificationMsg);
     } catch (e) {
+      console.log(e)
       callback(e.message)
     }
   });

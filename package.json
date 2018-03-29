@@ -27,6 +27,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
+    "fcm-node": "^1.2.1",
     "hammerjs": "^2.0.8",
     "handlebars": "^4.0.11",
     "jquery": "^3.2.1",

@@ -10,6 +10,9 @@
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
     "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
@@ -22,22 +25,22 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
     "cordova-plugin-keyboard": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-console": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-whitelist": {
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },

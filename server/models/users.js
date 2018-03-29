@@ -26,6 +26,11 @@ let UserSchema = mongoose.Schema({
     required: false,
     trim: true,
     minlength: 1
+  },
+  fcmRegId: {
+    type: String,
+    required: false,
+    unique: false
   }
 });
 

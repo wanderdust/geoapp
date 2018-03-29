@@ -115,7 +115,59 @@ $(function () {
       x.addClass('show');
       setTimeout(function(){ x.removeClass('show'); }, 3000);
     }
-  })
+  });
+
+  var registerFCM = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        console.log('Received Device Ready Event');
+        console.log('calling setup push');
+        registerFCM.setupPush();
+    },
+    setupPush: function() {
+        console.log('calling push init');
+        var push = PushNotification.init({
+            "android": {
+                "senderID": "97678348194"
+            },
+            "browser": {},
+            "ios": {
+                "sound": true,
+                "vibration": true,
+                "badge": true
+            },
+            "windows": {}
+        });
+        console.log('after init');
+
+        push.on('registration', function(data) {
+          // Post registrationId to your app server as the value has changed
+          socket.emit('updateUserFcmId', {
+            regId: data.registrationId,
+            userId: sessionStorage.getItem('userId')
+          })
+        });
+
+        push.on('error', function(e) {
+            alert("push error = " + e.message);
+        });
+    }
+};
 
   new app.GroupsView();
+  registerFCM.initialize();
 })

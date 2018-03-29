@@ -25,19 +25,23 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
     "cordova-plugin-keyboard": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "phonegap-plugin-push": {
+      "FCM_VERSION": "11.6.2",
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },

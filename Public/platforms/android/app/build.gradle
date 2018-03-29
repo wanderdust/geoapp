@@ -91,6 +91,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "../phonegap-plugin-push/geoapp-push.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -260,7 +261,10 @@ dependencies {
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
     compile "com.android.support:support-v4:24.1.1+"
-    compile "com.google.android.gms:play-services-location:11.+"
+    compile "com.android.support:support-v13:26.+"
+    compile "me.leolin:ShortcutBadger:1.1.17@aar"
+    compile "com.google.firebase:firebase-messaging:11.6.2"
+    compile "com.google.android.gms:play-services-location:11.6.2"
     // SUB-PROJECT DEPENDENCIES END
 }
 

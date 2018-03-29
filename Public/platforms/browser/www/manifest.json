@@ -1,12 +1,1 @@
-{
-  "background_color": "#FFF",
-  "display": "standalone",
-  "name": "GeoApp",
-  "short_name": "GeoApp",
-  "version": "com.amigos.geoapp",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
-  "icons": [],
-  "orientation": "portrait",
-  "start_url": "login.html"
-}
+{"background_color":"#FFF","display":"standalone","name":"GeoApp","short_name":"GeoApp","version":"com.amigos.geoapp","description":"A sample Apache Cordova application that responds to the deviceready event.","author":"Apache Cordova Team","icons":[],"orientation":"portrait","start_url":"index.html","gcm_sender_id":"996231231186"}
