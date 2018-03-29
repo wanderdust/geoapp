@@ -7,10 +7,13 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-google-play-services": {
+    "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-camera": {
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-device": {
@@ -20,9 +23,6 @@
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-geolocation": {
@@ -35,15 +35,6 @@
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-contacts": {
-      "PACKAGE_NAME": "com.amigos.geoapp"
-    },
-    "cordova-plugin-console": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
     "cordova-plugin-whitelist": {

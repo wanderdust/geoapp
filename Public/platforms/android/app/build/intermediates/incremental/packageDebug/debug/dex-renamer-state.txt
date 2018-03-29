@@ -1,0 +1,4 @@
+#Thu Mar 29 18:23:33 BST 2018
+base.0=/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+file.0=/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

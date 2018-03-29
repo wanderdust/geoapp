@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="debug">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/platforms/android/app/build/intermediates/transforms/desugar/debug/0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

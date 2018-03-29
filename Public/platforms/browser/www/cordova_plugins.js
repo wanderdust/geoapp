@@ -325,30 +325,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
-        "id": "cordova-plugin-file-transfer.FileTransferError",
-        "pluginId": "cordova-plugin-file-transfer",
-        "clobbers": [
-            "window.FileTransferError"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
-        "id": "cordova-plugin-file-transfer.FileTransfer",
-        "pluginId": "cordova-plugin-file-transfer",
-        "clobbers": [
-            "window.FileTransfer"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-file-transfer/www/browser/FileTransfer.js",
-        "id": "cordova-plugin-file-transfer.BrowserFileTransfer",
-        "pluginId": "cordova-plugin-file-transfer",
-        "clobbers": [
-            "window.FileTransfer"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
         "id": "cordova-plugin-keyboard.keyboard",
         "pluginId": "cordova-plugin-keyboard",
@@ -365,20 +341,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-        "id": "cordova-plugin-statusbar.statusbar",
-        "pluginId": "cordova-plugin-statusbar",
-        "clobbers": [
-            "window.StatusBar"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-statusbar/src/browser/StatusBarProxy.js",
-        "id": "cordova-plugin-statusbar.StatusBarProxy",
-        "pluginId": "cordova-plugin-statusbar",
-        "runs": true
-    },
-    {
         "file": "plugins/es6-promise-plugin/www/promise.js",
         "id": "es6-promise-plugin.Promise",
         "pluginId": "es6-promise-plugin",
@@ -388,19 +350,16 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-google-play-services": "25.0.0",
     "cordova-plugin-camera": "4.0.1",
     "cordova-plugin-console": "1.1.0",
     "cordova-plugin-contacts": "3.0.1",
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-file-transfer": "1.7.1",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-keyboard": "1.2.0",
     "cordova-plugin-request-location-accuracy": "2.2.2",
     "cordova-plugin-screen-orientation": "3.0.1",
-    "cordova-plugin-statusbar": "2.4.1",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-whitelist": "1.3.3"
 }
