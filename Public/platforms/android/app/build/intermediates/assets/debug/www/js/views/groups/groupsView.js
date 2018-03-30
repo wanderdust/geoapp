@@ -142,7 +142,8 @@ $(function () {
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
-                "senderID": "97678348194"
+                "senderID": "97678348194",
+                "iconColor": "#FF6600"
             },
             "browser": {},
             "ios": {
@@ -163,8 +164,12 @@ $(function () {
         });
 
         push.on('error', function(e) {
-            alert("push error = " + e.message);
+            console.log("push error = " + e.message);
         });
+
+        push.on('notification', () => {
+          alert ('foo');
+        })
     }
 };
 

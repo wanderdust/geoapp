@@ -9,9 +9,10 @@ let sendPushMessages = function (recipients, msg) {
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
         to: recipient,
 
-        notification: {
+        data: {
             title: msg.title,
-            body: msg.body
+            message: msg.body,
+            image: './../assets/icons/icon-48-mdpi.png'
         }
     };
 

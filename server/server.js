@@ -280,6 +280,8 @@ socket.on('getUser', async (data, callback) => {
   // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
     try {
+      let usersInGroupFCM = [];
+      let message;
       let updatedDocuments = [];
       let checkLocation;
       let findIfOnlineAndUpdate;
@@ -349,7 +351,28 @@ socket.on('getUser', async (data, callback) => {
         io.to(e.socketId).emit('updateUserStatus', data);
       });
 
-      console.log('User connected to GROUP')
+      // We get the group name and the person name to send a
+      // personalized notification.
+      let usersInGroup = await UserGroup.find({groupId: data.groupId});
+      let onlineUser = await User.findById(data.userId);
+      let groupName = await Group.findById(data.groupId);
+
+      for (let userInGroup of usersInGroup) {
+        // Dont send a notification to the user who actually went online.
+        if (userInGroup.userId === data.userId)
+          continue;
+
+        let user = await User.findById(userInGroup.userId);
+        usersInGroupFCM.push(user.fcmRegId);
+      };
+
+      message = {
+        title: `GeoApp`,
+        body: `${onlineUser.name} ha llegado a ${groupName.title}`,
+      }
+
+      sendPushMessages(usersInGroupFCM, message);
+      console.log(usersInGroupFCM, message);
 
     } catch (e) {
       console.log(e)
@@ -563,7 +586,7 @@ socket.on('getUser', async (data, callback) => {
       let friends = data.friends;
       let group = await Group.findById(data.groupId);
       let sender = await User.findById(data.currentUser);
-  
+
       let notificationMsg = {
         title: `Te han invitado a ${group.title}`,
         body: `${sender.name} te ha invitado.`

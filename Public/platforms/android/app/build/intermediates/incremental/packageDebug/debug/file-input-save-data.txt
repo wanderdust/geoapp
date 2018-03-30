@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Mar 29 23:18:06 BST 2018
+#Fri Mar 30 01:21:03 BST 2018
 210.set=ASSET
 282.file=/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/assets/debug/www/css/assets/sidebar-icons/icon_group_invitation.svg
 14.set=ASSET
