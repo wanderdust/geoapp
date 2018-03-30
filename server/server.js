@@ -368,7 +368,7 @@ socket.on('getUser', async (data, callback) => {
 
       message = {
         title: `GeoApp`,
-        body: `${onlineUser.name} ha llegado a ${groupName.title}`,
+        body: `${onlineUser.name} ha llegado a ${groupName.title}`
       }
 
       sendPushMessages(usersInGroupFCM, message);
@@ -586,8 +586,8 @@ socket.on('getUser', async (data, callback) => {
       let sender = await User.findById(data.currentUser);
 
       let notificationMsg = {
-        title: `Te han invitado a ${group.title}`,
-        body: `${sender.name} te ha invitado.`
+        title: `GeoApp`,
+        body: `${sender.name} te ha invitado ${group.title}.`
       }
 
       for (let friend of friends) {

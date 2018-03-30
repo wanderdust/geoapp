@@ -203,3 +203,23 @@ Templates.infoWindowMaps = [
 Templates.badge = [
     '<span class="list-notification new badge" data-badge-caption="nuevos">{{requestLength}}</span>'
 ].join('\n');
+
+// Template for blue pre preloaderBlue
+Templates.preloaderBlue = [
+  '<div class="preloader-wrapper small active">',
+    '<div class="spinner-layer spinner-blue-only">',
+      '<div class="circle-clipper left">',
+        '<div class="circle"></div>',
+      '</div><div class="gap-patch">',
+        '<div class="circle"></div>',
+      '</div><div class="circle-clipper right">',
+        '<div class="circle"></div>',
+      '</div>',
+    '</div>',
+  '</div>'
+].join('\n');
+
+// Template for location image.
+Templates.myLocation = [
+  '<img src="./css/assets/my_location.svg">'
+].join('\n');

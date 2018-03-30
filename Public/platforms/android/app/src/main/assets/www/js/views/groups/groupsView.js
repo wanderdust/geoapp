@@ -141,6 +141,7 @@ $(function () {
         var push = PushNotification.init({
             "android": {
                 "senderID": "97678348194",
+                "icon": "../../../../res/icon/android/icon-36-ldpi2.png",
                 "iconColor": "#FF6600"
             },
             "browser": {},

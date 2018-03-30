@@ -23,7 +23,7 @@ $(function () {
       this.socket = socket;
 
       // Stops map from executing if offline.
-      this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
+      this.listenToOnce(app.groupCollection, 'blankMap', this.newMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll);
@@ -90,6 +90,7 @@ $(function () {
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
+            // KM
             if (distance <= 0.03) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
@@ -182,45 +183,46 @@ $(function () {
       };
     },
 
-    newMap: function (coords) {
+    newMap: function () {
       try {
         let map =  new google.maps.Map(document.getElementById('map-frame'), {
-            center: coords,
+            center: {lat: 55.948638, lng: -3.201244},
             zoom: 8,
             disableDefaultUI: true,
             styles: mapStyle
           });
         this.map = map;
+        this.pointToUserLocation();
         return map;
       } catch (e) {
         this.connectionError();
       }
     },
 
-    // Creates a new map with the center at the user's current location.
-    blankMap: async function () {
-      let that = this;
-      if (!navigator.geolocation)
-        return console.log('Geolocation not supported by your browser');
-
-      await navigator.geolocation.getCurrentPosition(function (position) {
-        let coords = {};
-        coords.lat = position.coords.latitude;
-        coords.lng = position.coords.longitude;
-        that.newMap(coords);
-        that.userCoords();
-      }, function (err) {
-        navigator.notification.alert(
-          'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-          () => {
-            let coords = {lat: 55.948638, lng: -3.201244}
-            that.newMap(coords);
-            that.userCoords();
-          },
-          'Activa el GPS'
-        );
-      }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000})
-    },
+    // // Creates a new map with the center at the user's current location.
+    // blankMap: async function () {
+    //   let that = this;
+    //   if (!navigator.geolocation)
+    //     return console.log('Geolocation not supported by your browser');
+    //
+    //   await navigator.geolocation.getCurrentPosition(function (position) {
+    //     let coords = {};
+    //     coords.lat = position.coords.latitude;
+    //     coords.lng = position.coords.longitude;
+    //     that.newMap(coords);
+    //     that.userCoords();
+    //   }, function (err) {
+    //     navigator.notification.alert(
+    //       'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
+    //       () => {
+    //         let coords = {lat: 55.948638, lng: -3.201244}
+    //         that.newMap(coords);
+    //         that.userCoords();
+    //       },
+    //       'Activa el GPS'
+    //     );
+    //   }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000})
+    // },
 
     // Inits google maps.
     initMap: function () {
@@ -320,18 +322,20 @@ $(function () {
           let userLng = position.coords.longitude;
           let latLng = new google.maps.LatLng(userLat, userLng);
           that.map.panTo(latLng);
+          that.updateUserLocation(userLat, userLng);
+          $('.my-location').removeClass('disabled').html(Templates.myLocation);
         };
 
         let error = (err) => {
+          $('.my-location').removeClass('disabled').html(Templates.myLocation);
           app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         };
 
         let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 6000};
 
         if (this.userCurrentPosition === null) {
-          app.groupCollection.trigger('showSnackBar', {message: 'Buscando...'});
-
-          return await navigator.geolocation.getCurrentPosition(success, error, options)
+          $('.my-location').html(Templates.preloaderBlue);
+          return await navigator.geolocation.getCurrentPosition(success, error, options);
         }
         this.map.panTo(this.userCurrentPosition.getPosition());
       } catch (e) {

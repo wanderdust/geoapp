@@ -70,7 +70,19 @@
       </ul>
 
       <div id="map-container">
-        <a class="my-location btn-floating btn-large waves-effect waves-light white"><img src="./css/assets/my_location.svg"></a>
+        <a class="disabled my-location btn-floating btn-large waves-effect waves-light white">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </a>
 
         <div id="map-frame"></div>
       </div>

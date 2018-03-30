@@ -17,6 +17,7 @@ $(function () {
     initialize: function () {
 
       this.getUserLocation();
+      this.initMap();
       this.currentMarkers = [];
 
     },
@@ -26,13 +27,13 @@ $(function () {
     },
 
     // Function to init google maps.
-    initMap: function (userCoords) {
+    initMap: async function () {
       // If offline google throws error.
       try {
         let coords = {};
         let that = this;
-        let map = new google.maps.Map(document.getElementById('map-container-friends'), {
-          center: {lat: userCoords.lat, lng: userCoords.lng},
+        let map = await new google.maps.Map(document.getElementById('map-container-friends'), {
+          center: {lat: 40.472795, lng: -3.868239},
           zoom: 8,
           disableDefaultUI: true,
           styles: mapStyle
@@ -47,6 +48,7 @@ $(function () {
         });
 
         this.searchbox(map);
+        await this.getUserLocation(map);
       } catch (e) {
         let template = Handlebars.compile(this.template);
         let html = template({placeholder: 'No tienes conexión a internet'});
@@ -106,23 +108,14 @@ $(function () {
     },
 
     // Gets the user current location to set as center of map.
-    getUserLocation: function () {
-      let that = this;
-      if (!navigator.geolocation)
-        return navigator.notification.alert(
-          'Geolocation not supported',
-          (msg) => true,
-          'Error'
-        );
-
-      navigator.geolocation.getCurrentPosition(function (position) {
-        let coords = {};
-        coords.lat = position.coords.latitude;
-        coords.lng = position.coords.longitude;
-        that.initMap(coords);
+    getUserLocation: async function (map) {
+      await navigator.geolocation.getCurrentPosition(function (position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        let latLng = new google.maps.LatLng(lat, lng);
+        map.panTo(latLng);
       }, function (err) {
-        let coords = {lat: 40.472795, lng: -3.868239}
-        that.initMap(coords);
+          return
       }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 3500});
     },
 

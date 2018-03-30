@@ -12,7 +12,8 @@ let sendPushMessages = function (recipients, msg) {
         data: {
             title: msg.title,
             message: msg.body,
-            image: './../assets/icons/icon-48-mdpi.png'
+            style: "inbox",
+            summaryText: "Tienes %n% notificaciones"
         }
     };
 
