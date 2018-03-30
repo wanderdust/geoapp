@@ -58,7 +58,7 @@ $(function () {
       let that = this;
 
       try {
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 8000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 13000};
         // I add a frequency so that not too many requests are sent to the server.
         // It only runs the function 1 every 3 times watch position gets executed.
         // This fixes bug where watchposition executes too quiclkly the first time.
@@ -331,7 +331,7 @@ $(function () {
           app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         };
 
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 6000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 10000};
 
         if (this.userCurrentPosition === null) {
           $('.my-location').html(Templates.preloaderBlue);
