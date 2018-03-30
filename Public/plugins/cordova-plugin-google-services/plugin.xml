@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-google-services"
+        version="1.2.1">
+
+  <name>Google Services Plugin</name>
+  <description>A simple Cordova plugin for Google Services.</description>
+  <author>Jernung, LLC</author>
+  <license>MIT</license>
+  <keywords>cordova,google,services</keywords>
+
+  <engines>
+    <engine name="cordova" version=">=6.4.0" />
+    <engine name="cordova-android" version=">=6.3.0" />
+    <engine name="cordova-ios" version=">=4.3.0" />
+  </engines>
+
+  <platform name="android">
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.INTERNET" />
+    </config-file>
+
+    <framework src="src/android/build.gradle" type="gradleReference" custom="true" />
+
+    <resource-file src="src/android/google-services.json" target="google-services.json" />
+
+    <hook type="after_prepare" src="hooks/android.js" />
+
+  </platform>
+
+  <platform name="ios">
+
+    <resource-file src="src/ios/GoogleService-Info.plist" />
+
+    <hook type="after_prepare" src="hooks/ios.js" />
+
+  </platform>
+
+</plugin>

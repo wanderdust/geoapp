@@ -34,11 +34,11 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="LocationActivation">
+        <param name="android-package" value="com.andretissot.locationactivator.LocationActivation" />
+    </feature>
     <feature name="Keyboard">
         <param name="android-package" onload="true" value="org.apache.cordova.labs.keyboard.Keyboard" />
-    </feature>
-    <feature name="RequestLocationAccuracy">
-        <param name="android-package" value="cordova.plugin.RequestLocationAccuracy" />
     </feature>
     <name>GeoApp</name>
     <description>

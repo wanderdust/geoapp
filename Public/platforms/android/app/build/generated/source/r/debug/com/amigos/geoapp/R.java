@@ -323,7 +323,8 @@ public final class R {
     public static final int google_crash_reporting_api_key=0x7f0a0019;
     public static final int google_storage_bucket=0x7f0a001a;
     public static final int launcher_name=0x7f0a001b;
-    public static final int status_bar_notification_info_overflow=0x7f0a001c;
+    public static final int project_id=0x7f0a001c;
+    public static final int status_bar_notification_info_overflow=0x7f0a001d;
   }
   public static final class style {
     public static final int TextAppearance_Compat_Notification=0x7f0b0000;

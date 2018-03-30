@@ -1,0 +1,62 @@
+{
+  "_from": "cordova-plugin-google-services",
+  "_id": "cordova-plugin-google-services@1.2.1",
+  "_inBundle": false,
+  "_integrity": "sha512-zL9St1s04bf7Zj3PkvKE+PfT+tWMeUhQoxTJJOxzVDx6ooiHTFzAi1olGoKswyljECdkDqG9524br62DaWqAGw==",
+  "_location": "/cordova-plugin-google-services",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-google-services",
+    "name": "cordova-plugin-google-services",
+    "escapedName": "cordova-plugin-google-services",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-google-services/-/cordova-plugin-google-services-1.2.1.tgz",
+  "_shasum": "8396c4cacb0283e00adf32302f275ee1fd9410ce",
+  "_spec": "cordova-plugin-google-services",
+  "_where": "/home/pablo/Desktop/GeoApp/geoapp/Public",
+  "author": {
+    "name": "Joshua McFarland"
+  },
+  "bugs": {
+    "url": "https://github.com/mcfarljw/cordova-plugin-google-services/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-google-services",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {
+    "fs-extra": "5.0.x"
+  },
+  "deprecated": false,
+  "description": "A simple Cordova plugin for Google Services.",
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": ">=3.8.6"
+  },
+  "homepage": "https://github.com/mcfarljw/cordova-plugin-google-services#readme",
+  "keywords": [
+    "cordova",
+    "google",
+    "services"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-google-services",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcfarljw/cordova-plugin-google-services.git"
+  },
+  "version": "1.2.1"
+}

@@ -351,19 +351,19 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-request-location-accuracy.RequestLocationAccuracy",
-    "file": "plugins/cordova-plugin-request-location-accuracy/www/android/RequestLocationAccuracy.js",
-    "pluginId": "cordova-plugin-request-location-accuracy",
-    "clobbers": [
-      "cordova.plugins.locationAccuracy"
-    ]
-  },
-  {
     "id": "cordova-plugin-statusbar.statusbar",
     "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
     "pluginId": "cordova-plugin-statusbar",
     "clobbers": [
       "window.StatusBar"
+    ]
+  },
+  {
+    "id": "cordova-plugin-geolocation-android-activator.geolocation-activator",
+    "file": "plugins/cordova-plugin-geolocation-android-activator/www/geolocation-activator.js",
+    "pluginId": "cordova-plugin-geolocation-android-activator",
+    "clobbers": [
+      "navigator.geolocation.activator"
     ]
   }
 ];
@@ -382,8 +382,9 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "phonegap-plugin-push": "2.1.3",
   "cordova-plugin-geolocation": "4.0.1",
-  "cordova-plugin-request-location-accuracy": "2.2.2",
-  "cordova-plugin-statusbar": "2.4.1"
+  "cordova-plugin-statusbar": "2.4.1",
+  "cordova-plugin-geolocation-android-activator": "1.1.2",
+  "cordova-plugin-google-services": "1.2.1"
 };
 // BOTTOM OF METADATA
 });

@@ -58,7 +58,7 @@ $(function () {
       let that = this;
 
       try {
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 13000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 10000};
         // I add a frequency so that not too many requests are sent to the server.
         // It only runs the function 1 every 3 times watch position gets executed.
         // This fixes bug where watchposition executes too quiclkly the first time.
@@ -112,17 +112,16 @@ $(function () {
         };
 
         let error = function (err) {
-          navigator.notification.alert(
-            'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-            function () {
-              // we set the user offline.
-              let userId = sessionStorage.getItem('userId');
-              this.socket.emit('userOffBounds', {
-                userId: userId
-              })
-            },
-            'Activa el GPS'
-          );
+          let userId = sessionStorage.getItem('userId');
+          navigator.geolocation.activator.askActivation(function(response) {
+            // If user accepts we do a page refresh so that geolocation gets activated.
+            window.location.href = "main.html"
+          }, function(error) {
+            // If user declines, we set user offline.
+            this.socket.emit('userOffBounds', {
+              userId: userId
+            })
+          });
         }
 
         // Starts watchPosition

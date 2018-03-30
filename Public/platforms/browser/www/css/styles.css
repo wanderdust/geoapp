@@ -1089,8 +1089,11 @@ body.active {
 }
 
 .add-friends #added-friends ul {
+  position: absolute;
   margin-top: 0px;
   height: 100%;
+  right: 0%;
+  width: 100%;
 }
 
 .add-friends #added-friends li {

@@ -1,0 +1,59 @@
+{
+  "_from": "cordova-plugin-geolocation-android-activator",
+  "_id": "cordova-plugin-geolocation-android-activator@1.1.2",
+  "_inBundle": false,
+  "_integrity": "sha1-rSTpgKsvF4zTTih+0HpV1+3/sjA=",
+  "_location": "/cordova-plugin-geolocation-android-activator",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-geolocation-android-activator",
+    "name": "cordova-plugin-geolocation-android-activator",
+    "escapedName": "cordova-plugin-geolocation-android-activator",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-geolocation-android-activator/-/cordova-plugin-geolocation-android-activator-1.1.2.tgz",
+  "_shasum": "ad24e980ab2f178cd34e287ed07a55d7edffb230",
+  "_spec": "cordova-plugin-geolocation-android-activator",
+  "_where": "/home/pablo/Desktop/GeoApp/geoapp/Public",
+  "author": {
+    "name": "André Augusto Tissot"
+  },
+  "bugs": {
+    "url": "https://github.com/andrehtissot/cordova-plugin-geolocation-android-activator/issues"
+  },
+  "bundleDependencies": false,
+  "cordova_name": "Location Activator Cordova Plugin",
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Simple method to activate gps if it is turned off.",
+  "engines": [],
+  "homepage": "https://github.com/andrehtissot/cordova-plugin-geolocation-android-activator/blob/master/README.md",
+  "keywords": [
+    "location",
+    "geolocation",
+    "gps",
+    "google api",
+    "cordova",
+    "android",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-geolocation-android-activator",
+  "platforms": [
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrehtissot/cordova-plugin-geolocation-android-activator.git"
+  },
+  "version": "1.1.2"
+}

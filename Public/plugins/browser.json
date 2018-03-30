@@ -40,15 +40,21 @@
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-request-location-accuracy": {
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     },
-    "cordova-plugin-statusbar": {
+    "cordova-plugin-geolocation-android-activator": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-google-services": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
   "dependent_plugins": {
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-compat": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   }

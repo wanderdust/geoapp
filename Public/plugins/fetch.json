@@ -97,18 +97,34 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-request-location-accuracy": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-request-location-accuracy@^2.2.2"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-statusbar": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-statusbar@2.4.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-geolocation-android-activator": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-geolocation-android-activator"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-compat": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-compat@^1.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-google-services": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-google-services"
     },
     "is_top_level": true,
     "variables": {}

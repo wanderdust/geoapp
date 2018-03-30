@@ -92,6 +92,8 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "../phonegap-plugin-push/geoapp-push.gradle"
+apply from: "../cordova-plugin-geolocation-android-activator/geoapp-LocationActivation.gradle"
+apply from: "../cordova-plugin-google-services/geoapp-build.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
