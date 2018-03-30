@@ -13,7 +13,6 @@ $(function () {
     },
 
     initialize: function () {
-      localStorage.clear();
       _.bindAll(this, 'onDeviceReady', 'checkLocalStorage')
       this.socket = socket;
       // Check for saved passwords and if found send automatically login.

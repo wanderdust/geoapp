@@ -18,11 +18,16 @@ $(function () {
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      document.addEventListener("deviceready", this.onDeviceReady, false);
 
     },
 
     render: function (model) {
 
+    },
+
+    onDeviceReady: function () {
+      return device.uuid;
     },
 
     backToMain: function () {
@@ -39,7 +44,8 @@ $(function () {
     },
 
     deleteAccount: function (btn) {
-      let $password = $('.change-mail-input.password').val();
+      let $prefix = $('#prefix').val();
+      let $phone = $('#phone').val();
       let remove;
 
       if (btn === 1) {
@@ -53,7 +59,9 @@ $(function () {
 
       this.socket.emit('deleteAccount', {
         _id: sessionStorage.getItem('userId'),
-        password: $password
+        uuid: this.onDeviceReady(),
+        prefix: $prefix,
+        phone: $phone
       }, (err, res) => {
         if (err) {
           if (err.Error === 0) {

@@ -15,11 +15,8 @@ let UserSchema = mongoose.Schema({
     minlength: 1,
     unique: true
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 6
+  isValidated: {
+    type: Boolean
   },
   userStatus: {
     type: String,

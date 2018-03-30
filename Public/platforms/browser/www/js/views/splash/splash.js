@@ -13,13 +13,12 @@ $(function () {
     },
 
     initialize: function () {
+      _.bindAll(this, 'onDeviceReady', 'checkLocalStorage')
       this.socket = socket;
       // Check for saved passwords and if found send automatically login.
       // Random strings to avoid localStorage collision
-      this.user = localStorage.getItem('userE1d9rg76397d11');
-      this.password = localStorage.getItem('passwordE1d9rg76397d11');
+      this.user = localStorage.getItem('userUuidGeoapp');
 
-      this.checkLocalStorage(this.user, this.password);
       if (socket.isOnline !== undefined) {
         this.snackBar('Comprueba tu conexión a internet')
       };
@@ -32,31 +31,23 @@ $(function () {
     },
 
     onDeviceReady: function () {
+      let uuid = device.uuid;
       if (cordova.platformId == 'android') {
           StatusBar.backgroundColorByHexString("#b47916");
       };
-
-      socket.emit('debug', device.uuid)
+      this.checkLocalStorage(uuid);
     },
 
-    checkLocalStorage: function (user, password) {
-      if (user !== null && password !== null) {
-        this.socket.emit('loginUser', {
-          phone: user,
-          password: password,
-          // The saved phone already contains the prefix, so we set it as empty.
-          prefix: "",
-          // Tells the server that it is okay if the prefix field is empty.
-          localStorage: true
-        }, (err, res) => {
-          if (err)
-            return window.location.href = 'login.html';
-          sessionStorage.setItem('userId', res._id);
-          window.location.href = 'main.html#/online'
-        })
-      } else {
-        window.location.href = 'login.html';
-      }
+    checkLocalStorage: function (uuid) {
+      this.socket.emit('passwordlessLogin', {
+        uuid: uuid
+      }, (err, res) => {
+        if (err)
+          return window.location.href = 'sign-in.html';
+
+        sessionStorage.setItem('userId', res._id);
+        window.location.href = 'main.html#/online'
+      })
     },
 
     snackBar: function (message) {

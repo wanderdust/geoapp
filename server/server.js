@@ -66,23 +66,14 @@ io.on('connection', (socket) => {
       let user;
       let uuid = data.uuid;
       let userPhone = `${data.prefix}${data.phone}`;
-      let salt = bcrypt.genSaltSync(10);
-      let hash = bcrypt.hashSync(data.password, salt);
       let newUser = {
         name: data.name,
         userImage: "",
         phone: userPhone,
-        password: hash,
         fcmRegId: "",
-        deviceUuid: uuid
+        deviceUuid: uuid,
+        isValidated: false
       };
-
-
-      // let email = validator.isEmail(data.email);
-
-      if (data.password !== data.confirmPassword) {
-        return callback({Error: 0, Message: 'Las contraseñas no coinciden'});
-      }
 
       if (data.prefix === "") {
         return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
@@ -91,20 +82,14 @@ io.on('connection', (socket) => {
       if (data.phone.length < 6) {
       return callback({Error: 7, Message: 'Teléfono no válido'})
      }
-
-     if (data.password === "") {
-       callback({Error: 5, Message: 'Contraseña necesaria'})
-     } else if (data.password < 6) {
-       callback({Error: 6, Message: 'La contraseña es demasiado corta'})
-     }
-
-
+     console.log(data.uuid)
       user = await new User(newUser).save();
 
       callback(null, {_id: user._id, uuid: newUser.deviceUuid});
     } catch (e) {
       let duplicate = 11000;
       let err = e.errors;
+      console.log(e)
 
       if (e.code === duplicate) {
         callback({Error: 4, Message: 'Este teléfono ya está en uso'})
@@ -116,37 +101,39 @@ io.on('connection', (socket) => {
     };
   });
 
-  socket.on('loginUser', async (data, callback) => {
-    try {
-      let userPhone = `${data.prefix}${data.phone}`;
-      let user = await User.findOne({phone: userPhone});
 
-
-      if (!data.localStorage && data.prefix === "") {
-        // only checks the prefix field if the data doesn't come from localStorage
-        return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
-      }
-
-      if (user === null)
-        return callback({Error: 1, Message: 'Teléfono no encontrado'});
-
-
-      let verify = bcrypt.compareSync(data.password, user.password);
-
-      if (!verify) {
-        // if password is incorrect check if localStorage hash is the same as password.
-        let hash = await User.findOne({phone: data.phone, password: data.password});
-
-        if (hash === null)
-          return callback({Error: 2, Message: 'Contraseña incorrecta'});
-      }
-
-      callback(null, {_id: user._id, uuid: user.deviceUuid})
-    } catch (e) {
-      console.log(e)
-      callback({Error: 99, Message: e})
-    }
-  });
+  // Login user no longer needed because we use device identification.
+  // socket.on('loginUser', async (data, callback) => {
+  //   try {
+  //     let userPhone = `${data.prefix}${data.phone}`;
+  //     let user = await User.findOne({phone: userPhone});
+  //
+  //
+  //     if (!data.localStorage && data.prefix === "") {
+  //       // only checks the prefix field if the data doesn't come from localStorage
+  //       return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
+  //     }
+  //
+  //     if (user === null)
+  //       return callback({Error: 1, Message: 'Teléfono no encontrado'});
+  //
+  //
+  //     let verify = bcrypt.compareSync(data.password, user.password);
+  //
+  //     if (!verify) {
+  //       // if password is incorrect check if localStorage hash is the same as password.
+  //       let hash = await User.findOne({phone: data.phone, password: data.password});
+  //
+  //       if (hash === null)
+  //         return callback({Error: 2, Message: 'Contraseña incorrecta'});
+  //     }
+  //
+  //     callback(null, {_id: user._id, uuid: user.deviceUuid})
+  //   } catch (e) {
+  //     console.log(e)
+  //     callback({Error: 99, Message: e})
+  //   }
+  // });
 
   // Passwordless login. Will substitue the above one.
   // Uses the users unique identifier as a login.
@@ -988,39 +975,40 @@ socket.on('getUser', async (data, callback) => {
   //   }
   // });
 
-  socket.on('changePassword', async(data, callback) => {
-    try {
-      let salt = bcrypt.genSaltSync(10);
-      let hash = bcrypt.hashSync(data.newPassword, salt);
-      let user = await User.findOne({_id: data._id});
-
-
-      let verify = bcrypt.compareSync(data.password, user.password);
-
-      if (user === null || !verify)
-        return callback({Error: 0, Message: 'Contraseña incorrecta'});
-
-        await User.findOneAndUpdate({_id: data._id}, {
-          $set: {
-            password: hash
-          }
-        }, {new: true});
-
-      callback(null, hash)
-    } catch (e) {
-      callback({Error: 99, Message: 'Ha ocurrido un error'})
-    }
-  })
+  // socket.on('changePassword', async(data, callback) => {
+  //   try {
+  //     let salt = bcrypt.genSaltSync(10);
+  //     let hash = bcrypt.hashSync(data.newPassword, salt);
+  //     let user = await User.findOne({_id: data._id});
+  //
+  //
+  //     let verify = bcrypt.compareSync(data.password, user.password);
+  //
+  //     if (user === null || !verify)
+  //       return callback({Error: 0, Message: 'Contraseña incorrecta'});
+  //
+  //       await User.findOneAndUpdate({_id: data._id}, {
+  //         $set: {
+  //           password: hash
+  //         }
+  //       }, {new: true});
+  //
+  //     callback(null, hash)
+  //   } catch (e) {
+  //     callback({Error: 99, Message: 'Ha ocurrido un error'})
+  //   }
+  // })
 
   // Deletes user's account.
   socket.on('deleteAccount', async(data, callback) => {
     try {
-      // Verify password
-      let user = await User.findOne({_id: data._id});
-      let verify = bcrypt.compareSync(data.password, user.password);
+      let phone = `${data.prefix}${data.phone}`;
+      console.log(data, phone)
+      // For now as long as they verify phone number is okay.
+      let user = await User.findOne({_id: data._id, deviceUuid: data.uuid, phone: phone});
 
-      if (user === null || !verify) {
-        return callback({Error: 0, Message: "Contraseña incorrecta"})
+      if (user === null) {
+        return callback({Error: 0, Message: "No se ha podido eliminar tu cuenta."})
       }
 
       let delete1 = await Friend.deleteOne({userId: data._id});
