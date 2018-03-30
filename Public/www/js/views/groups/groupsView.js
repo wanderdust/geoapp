@@ -134,9 +134,8 @@ $(function () {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log('Received Device Ready Event');
-        console.log('calling setup push');
         registerFCM.setupPush();
+        registerFCM.colorStatusBar();
     },
     setupPush: function() {
         var push = PushNotification.init({
@@ -164,6 +163,13 @@ $(function () {
         push.on('error', function(e) {
             console.log("push error = " + e.message);
         });
+    },
+
+    colorStatusBar: function () {
+      // IN case it doesnt fire on start, we have a backup here.
+      if (cordova.platformId == 'android') {
+          StatusBar.backgroundColorByHexString("#b47916");
+      }
     }
 };
 

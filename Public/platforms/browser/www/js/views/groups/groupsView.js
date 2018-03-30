@@ -139,7 +139,6 @@ $(function () {
         registerFCM.setupPush();
     },
     setupPush: function() {
-        console.log('calling push init');
         var push = PushNotification.init({
             "android": {
                 "senderID": "97678348194",
@@ -153,7 +152,6 @@ $(function () {
             },
             "windows": {}
         });
-        console.log('after init');
 
         push.on('registration', function(data) {
           // Post registrationId to your app server as the value has changed
@@ -166,10 +164,6 @@ $(function () {
         push.on('error', function(e) {
             console.log("push error = " + e.message);
         });
-
-        push.on('notification', () => {
-          alert ('foo')
-        })
     }
 };
 

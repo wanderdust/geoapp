@@ -47,5 +47,6 @@
         <variable name="SENDER_ID" value="97678348194" />
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <engine name="android" spec="^7.0.0" />
 </widget>

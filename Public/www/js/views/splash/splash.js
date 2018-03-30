@@ -22,11 +22,19 @@ $(function () {
       this.checkLocalStorage(this.user, this.password);
       if (socket.isOnline !== undefined) {
         this.snackBar('Comprueba tu conexión a internet')
-      }
+      };
+      document.addEventListener("deviceready", this.onDeviceReady, false);
+
     },
 
     render: function () {
 
+    },
+
+    onDeviceReady: function () {
+      if (cordova.platformId == 'android') {
+          StatusBar.backgroundColorByHexString("#b47916");
+      }
     },
 
     checkLocalStorage: function (user, password) {

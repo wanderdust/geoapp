@@ -372,8 +372,6 @@ socket.on('getUser', async (data, callback) => {
       }
 
       sendPushMessages(usersInGroupFCM, message);
-      console.log(usersInGroupFCM, message);
-
     } catch (e) {
       console.log(e)
     }
