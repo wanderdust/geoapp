@@ -64,6 +64,7 @@ io.on('connection', (socket) => {
   socket.on('createUser', async (data, callback) => {
     try {
       let user;
+      let uuid = data.uuid;
       let userPhone = `${data.prefix}${data.phone}`;
       let salt = bcrypt.genSaltSync(10);
       let hash = bcrypt.hashSync(data.password, salt);
@@ -72,8 +73,10 @@ io.on('connection', (socket) => {
         userImage: "",
         phone: userPhone,
         password: hash,
-        fcmRegId: ""
+        fcmRegId: "",
+        deviceUuid: uuid
       };
+
 
       // let email = validator.isEmail(data.email);
 
@@ -98,7 +101,7 @@ io.on('connection', (socket) => {
 
       user = await new User(newUser).save();
 
-      callback(null, {_id: user._id, password: user.password, phone: user.phone});
+      callback(null, {_id: user._id, uuid: newUser.deviceUuid});
     } catch (e) {
       let duplicate = 11000;
       let err = e.errors;
@@ -138,12 +141,30 @@ io.on('connection', (socket) => {
           return callback({Error: 2, Message: 'Contraseña incorrecta'});
       }
 
-      callback(null, {_id: user._id, password: user.password, phone: user.phone})
+      callback(null, {_id: user._id, uuid: user.deviceUuid})
     } catch (e) {
       console.log(e)
       callback({Error: 99, Message: e})
     }
   });
+
+  // Passwordless login. Will substitue the above one.
+  // Uses the users unique identifier as a login.
+  socket.on('passwordlessLogin', async (data, callback) => {
+    try {
+      console.log('Inside passwordLessLogin')
+      let uuid = data.uuid;
+      let user = await User.findOne({deviceUuid: uuid});
+
+      if (user === null) {
+        return callback({Error: 1, Message: 'Usuario no encontrado'});
+      }
+      console.log('User found')
+      callback(null, {_id: user._id, uuid: user.deviceUuid})
+    } catch (e) {
+
+    }
+  })
 
   socket.on('updateUserFcmId', async (data) => {
     try {

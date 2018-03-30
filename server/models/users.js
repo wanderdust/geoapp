@@ -31,6 +31,11 @@ let UserSchema = mongoose.Schema({
     type: String,
     required: false,
     unique: false
+  },
+  deviceUuid: {
+    type: String,
+    required: true,
+    unique: true
   }
 });
 

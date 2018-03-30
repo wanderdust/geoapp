@@ -16,14 +16,22 @@ $(function () {
     initialize: function () {
       this.socket = socket;
       this.getCountryCode();
+
+      document.addEventListener("deviceready", this.onDeviceReady, false);
     },
 
     render: function () {
 
     },
 
+    onDeviceReady: function () {
+      this.uuid = device.uuid;
+    },
+
+    // Creates new user.
     signIn: function () {
       let data = {};
+      data.uuid = device.uuid;
       data.name = $('#name').val().trim();
       data.phone = $('#email').val().replace(/\s+/g, '');
       data.prefix = $('#prefix').val().replace(/\s+/g, '');
@@ -71,8 +79,8 @@ $(function () {
 
 
         sessionStorage.setItem('userId', res._id);
-        localStorage.setItem('passwordE1d9rg76397d11', res.password);
-        localStorage.setItem('userE1d9rg76397d11', res.phone);
+        // User's unique device uuid
+        localStorage.setItem('userUuidGeoapp', res.uuid);
         window.location.href = 'main.html#/online'
       })
     },
@@ -107,8 +115,7 @@ $(function () {
 
         sessionStorage.setItem('userId', res._id);
         // Random strings to avoid localStorage collisions.
-        localStorage.setItem('passwordE1d9rg76397d11', res.password);
-        localStorage.setItem('userE1d9rg76397d11', res.phone);
+        localStorage.setItem('userUuidGeoapp', res.uuid);
         window.location.href = 'main.html#/online'
       })
     },

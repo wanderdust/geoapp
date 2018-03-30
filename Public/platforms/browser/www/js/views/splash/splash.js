@@ -34,7 +34,9 @@ $(function () {
     onDeviceReady: function () {
       if (cordova.platformId == 'android') {
           StatusBar.backgroundColorByHexString("#b47916");
-      }
+      };
+
+      socket.emit('debug', device.uuid)
     },
 
     checkLocalStorage: function (user, password) {
