@@ -48,17 +48,42 @@ $(function () {
         app.groupCollection.findAndUpdateGroups(data);
       });
 
+      document.addEventListener("deviceready", this.deviceReady, false);
+
       this.render();
     },
 
     render: function () {
+
+    },
+
+    deviceReady: function () {
+      this.isGpsEnabled();
+    },
+
+    isGpsEnabled () {
+      cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+        if (!enabled) {
+          navigator.geolocation.activator.askActivation(function(response) {
+            // If user accepts we do a page refresh so that geolocation gets activated.
+            window.location.href = "main.html"
+          }, function(error) {
+            // If user declines, we set user offline.
+            this.socket.emit('userOffBounds', {
+              userId: userId
+            })
+          });
+        }
+      }, function(error){
+          console.error("The following error occurred: "+error);
+      });
     },
 
     userCoords: async function () {
       let that = this;
 
       try {
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 10000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000};
         // I add a frequency so that not too many requests are sent to the server.
         // It only runs the function 1 every 3 times watch position gets executed.
         // This fixes bug where watchposition executes too quiclkly the first time.
@@ -113,15 +138,7 @@ $(function () {
 
         let error = function (err) {
           let userId = sessionStorage.getItem('userId');
-          navigator.geolocation.activator.askActivation(function(response) {
-            // If user accepts we do a page refresh so that geolocation gets activated.
-            window.location.href = "main.html"
-          }, function(error) {
-            // If user declines, we set user offline.
-            this.socket.emit('userOffBounds', {
-              userId: userId
-            })
-          });
+          this.isGpsEnabled();
         }
 
         // Starts watchPosition
@@ -330,7 +347,7 @@ $(function () {
           app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         };
 
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 10000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000};
 
         if (this.userCurrentPosition === null) {
           $('.my-location').html(Templates.preloaderBlue);

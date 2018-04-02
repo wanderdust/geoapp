@@ -49,6 +49,9 @@
     },
     "cordova-plugin-google-services": {
       "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
   "dependent_plugins": {

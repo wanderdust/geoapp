@@ -4,7 +4,7 @@
             "outputFile": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/res/values-port/values-port.xml",
+                    "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

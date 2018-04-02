@@ -403,7 +403,8 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-geolocation-android-activator": "1.1.2",
-    "cordova-plugin-google-services": "1.2.1"
+    "cordova-plugin-google-services": "1.2.1",
+    "cordova.plugins.diagnostic": "4.0.4"
 }
 // BOTTOM OF METADATA
 });

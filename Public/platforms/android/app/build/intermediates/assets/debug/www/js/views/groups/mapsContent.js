@@ -17,7 +17,7 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'userCoords', 'render');
+      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation');
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
@@ -48,10 +48,41 @@ $(function () {
         app.groupCollection.findAndUpdateGroups(data);
       });
 
+      document.addEventListener("deviceready", this.deviceReady, false);
+
       this.render();
     },
 
     render: function () {
+
+    },
+
+    deviceReady: function () {
+      // this.isGpsEnabled();
+    },
+    // Checks if Gps is enabled and asks for permission to activate it if it is not.
+    isGpsEnabled () {
+      let that  = this;
+      cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled) {
+        if (!enabled) {
+          navigator.geolocation.activator.askActivation(function(response) {
+            // If user accepts we do a page refresh so that geolocation gets activated.
+            window.location.href = "main.html"
+          }, function(error) {
+            let userId = sessionStorage.getItem('userId')
+            // If user declines, we set user offline.
+            that.socket.emit('userOffBounds', {
+              userId: userId
+            })
+          });
+        }
+      }, function(error) {
+        navigator.notification.alert(
+          e,
+          (msg) => true,
+          "Ha ocurrido un error:" + error
+        );
+      });
     },
 
     userCoords: async function () {
@@ -113,15 +144,7 @@ $(function () {
 
         let error = function (err) {
           let userId = sessionStorage.getItem('userId');
-          navigator.geolocation.activator.askActivation(function(response) {
-            // If user accepts we do a page refresh so that geolocation gets activated.
-            window.location.href = "main.html"
-          }, function(error) {
-            // If user declines, we set user offline.
-            this.socket.emit('userOffBounds', {
-              userId: userId
-            })
-          });
+          app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         }
 
         // Starts watchPosition
@@ -332,11 +355,22 @@ $(function () {
 
         let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000};
 
-        if (this.userCurrentPosition === null) {
-          $('.my-location').html(Templates.preloaderBlue);
-          return await navigator.geolocation.getCurrentPosition(success, error, options);
-        }
-        this.map.panTo(this.userCurrentPosition.getPosition());
+        // Checks if Gps is enabled. If it is it pans to user position.
+        // if it is not it executes isGpsEnabled();
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+            if (enabled) {
+              if (that.userCurrentPosition === null) {
+                $('.my-location').html(Templates.preloaderBlue);
+                return navigator.geolocation.getCurrentPosition(success, error, options);
+              }
+              that.map.panTo(that.userCurrentPosition.getPosition());
+            } else {
+              that.isGpsEnabled();
+              $('.my-location').removeClass('disabled').html(Templates.myLocation);
+            }
+        }, function(error){
+            alert("The following error occurred: "+error);
+        });
       } catch (e) {
         app.groupCollection.trigger('showSnackBar', {message: 'Ha ocurrido un error'})
       }

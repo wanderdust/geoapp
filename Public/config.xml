@@ -49,5 +49,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-geolocation-android-activator" spec="^1.1.2" />
     <plugin name="cordova-plugin-google-services" spec="^1.2.1" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.4" />
     <engine name="android" spec="^7.0.0" />
 </widget>

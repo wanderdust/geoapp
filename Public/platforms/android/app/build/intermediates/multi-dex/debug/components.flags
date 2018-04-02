@@ -32,6 +32,9 @@
 -injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/31.jar(**.class)
 -injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/32.jar(**.class)
 -injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/33.jar(**.class)
+-injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/34.jar(**.class)
+-injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/35.jar(**.class)
+-injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/transforms/desugar/debug/36.jar(**.class)
 -injars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/processing-tools/runtime-deps/debug/desugar_try_with_resources.jar(**.class)
 -outjars /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/multi-dex/debug/componentClasses.jar
 
