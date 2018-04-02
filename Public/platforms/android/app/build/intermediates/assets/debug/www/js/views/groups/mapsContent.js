@@ -214,7 +214,8 @@ $(function () {
             styles: mapStyle
           });
         this.map = map;
-        this.pointToUserLocation();
+        document.addEventListener("deviceready", this.pointToUserLocation, false);
+
         return map;
       } catch (e) {
         this.connectionError();

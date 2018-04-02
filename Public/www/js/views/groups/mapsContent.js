@@ -214,7 +214,10 @@ $(function () {
             styles: mapStyle
           });
         this.map = map;
-        this.pointToUserLocation();
+        // Point To user location checks if the GPS is enabled, and takes action.
+        // also it points to the user position once it has the position.
+        document.addEventListener("deviceready", this.pointToUserLocation, false);
+
         return map;
       } catch (e) {
         this.connectionError();

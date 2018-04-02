@@ -18,7 +18,7 @@ $(function () {
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
       "touchend .new-group-image" : "addGroupImage",
-      "swiperight .tabs-content": "closeNavAndSave",
+      "swiperight .tabs-content.groups-sidebar": "closeNavAndSave",
       "click .search-icon": "toggleScaleOut"
     },
 
