@@ -37,6 +37,9 @@
     <feature name="LocationActivation">
         <param name="android-package" value="com.andretissot.locationactivator.LocationActivation" />
     </feature>
+    <feature name="BackgroundGeolocation">
+        <param name="android-package" value="com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin" />
+    </feature>
     <feature name="Keyboard">
         <param name="android-package" onload="true" value="org.apache.cordova.labs.keyboard.Keyboard" />
     </feature>

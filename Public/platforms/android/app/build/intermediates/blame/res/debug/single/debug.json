@@ -580,6 +580,10 @@
         "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/res/anim/abc_fade_out.xml"
     },
     {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/xml_syncadapter.xml.flat",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/res/xml/syncadapter.xml"
+    },
+    {
         "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_tint.xml.flat",
         "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.2.aar/e0da58786a5fd64febea804231e5818a/res/color/common_google_signin_btn_tint.xml"
     },
@@ -866,6 +870,10 @@
     {
         "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/xml_authenticator.xml.flat",
+        "source": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/res/xml/authenticator.xml"
     },
     {
         "merged": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/anim_tooltip_enter.xml.flat",

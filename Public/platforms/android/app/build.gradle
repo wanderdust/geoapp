@@ -94,6 +94,7 @@ ext {
 apply from: "../phonegap-plugin-push/geoapp-push.gradle"
 apply from: "../cordova-plugin-geolocation-android-activator/geoapp-LocationActivation.gradle"
 apply from: "../cordova-plugin-google-services/geoapp-build.gradle"
+apply from: "../cordova-plugin-mauron85-background-geolocation/geoapp-logtofile.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -269,6 +270,7 @@ dependencies {
     compile "com.google.android.gms:play-services-location:11.6.2"
     compile "com.android.support:support-v4:26.+"
     compile "com.android.support:appcompat-v7:26.+"
+    compile "com.android.support:support-v4:23+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

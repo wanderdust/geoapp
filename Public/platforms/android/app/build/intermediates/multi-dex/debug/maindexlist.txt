@@ -91,6 +91,7 @@ android/support/v4/view/ViewPager$OnPageChangeListener.class
 android/support/v4/view/ViewCompat$ViewCompatApi17Impl.class
 android/support/v4/app/NotificationCompat$NotificationCompatImpl.class
 android/support/annotation/RequiresPermission$Write.class
+ch/qos/logback/core/joran/spi/NoAutoStart.class
 android/support/compat/R$styleable.class
 android/support/v4/view/PointerIconCompat.class
 android/support/v4/view/WindowInsetsCompat.class
@@ -150,6 +151,7 @@ android/support/v7/app/AppCompatDelegateImplV23.class
 android/support/annotation/RequiresPermission.class
 android/support/v4/util/ArrayMap$1.class
 android/support/annotation/RequiresPermission$Read.class
+ch/qos/logback/core/joran/spi/DefaultClass.class
 android/support/annotation/ArrayRes.class
 android/support/v4/app/NotificationCompat$NotificationVisibility.class
 android/support/v7/app/AppCompatCallback.class
@@ -388,6 +390,7 @@ com/google/firebase/FirebaseException.class
 android/support/v4/view/MenuCompat.class
 android/support/v4/view/ViewGroupCompat.class
 android/support/v13/app/FragmentCompat.class
+ch/qos/logback/core/net/AbstractSocketAppender.class
 android/support/v4/view/KeyEventCompat.class
 android/support/v4/widget/SearchViewCompat$OnCloseListener.class
 com/google/android/gms/location/FusedLocationProviderApi.class
@@ -402,6 +405,7 @@ android/support/v13/app/FragmentTabHost.class
 android/support/v4/view/LayoutInflaterCompat.class
 com/google/android/gms/common/api/internal/zzm.class
 org/apache/cordova/PluginResult.class
+ch/qos/logback/classic/jul/JULHelper.class
 android/support/v4/app/FragmentTransaction.class
 android/support/v7/app/NotificationCompat$MediaStyle.class
 me/leolin/shortcutbadger/impl/LGHomeBadger.class
@@ -412,10 +416,13 @@ android/support/v4/media/MediaBrowserServiceCompat$ResultFlags.class
 android/support/v4/app/DialogFragment$DialogStyle.class
 com/google/android/gms/common/api/internal/zzdg.class
 android/support/v4/app/FragmentActivity.class
+ch/qos/logback/core/rolling/SizeAndTimeBasedFNATP.class
 org/apache/cordova/Config.class
 android/support/v4/app/FragmentTabHost.class
+ch/qos/logback/classic/net/SocketAppender.class
 android/support/v4/view/accessibility/AccessibilityManagerCompat.class
 com/google/android/gms/common/api/GoogleApi.class
+ch/qos/logback/classic/jul/LevelChangePropagator.class
 android/support/v7/app/AlertDialog$Builder.class
 com/google/android/gms/internal/zzcdn.class
 android/support/v4/widget/ExploreByTouchHelper.class
@@ -426,6 +433,7 @@ android/support/v4/view/accessibility/AccessibilityEventCompat.class
 android/arch/lifecycle/LifecycleRegistryOwner.class
 android/support/v4/content/ParallelExecutorCompat.class
 com/google/android/gms/common/zzo.class
+ch/qos/logback/core/joran/spi/ConsoleTarget.class
 com/google/android/gms/location/SettingsApi.class
 android/support/v4/view/MenuItemCompat.class
 android/support/v4/view/ViewParentCompat.class
@@ -436,6 +444,7 @@ android/support/v4/widget/EdgeEffectCompat.class
 com/google/android/gms/internal/zzcel.class
 android/support/v4/widget/SearchViewCompat.class
 android/support/v4/widget/SlidingPaneLayout.class
+ch/qos/logback/core/ConsoleAppender.class
 android/support/v4/media/MediaBrowserServiceCompat$BrowserRoot.class
 com/google/android/gms/common/api/internal/zzdc.class
 com/google/android/gms/common/ConnectionResult.class
@@ -469,6 +478,7 @@ com/google/android/gms/common/data/AbstractDataBuffer.class
 android/support/v4/widget/ResourceCursorAdapter.class
 com/google/android/gms/location/LocationAvailability.class
 org/apache/cordova/CordovaWebView.class
+ch/qos/logback/classic/BasicConfigurator.class
 android/support/v4/print/PrintHelper$Orientation.class
 com/google/android/gms/internal/zzfdv.class
 android/support/v4/view/accessibility/AccessibilityManagerCompat$AccessibilityStateChangeListener.class
@@ -483,8 +493,11 @@ com/google/android/gms/internal/zzbcv.class
 me/leolin/shortcutbadger/impl/XiaomiHomeBadger.class
 android/support/v4/widget/SwipeRefreshLayout.class
 com/google/android/gms/location/ActivityRecognition.class
+ch/qos/logback/classic/sift/SiftingAppender.class
 com/google/android/gms/measurement/AppMeasurementContentProvider.class
 android/support/v4/view/accessibility/AccessibilityManagerCompat$AccessibilityStateChangeListenerCompat.class
+ch/qos/logback/classic/joran/action/LevelAction.class
+ch/qos/logback/core/net/AbstractSSLSocketAppender.class
 com/google/android/gms/common/internal/zzbv.class
 android/support/v7/widget/ActionMenuView$LayoutParams.class
 android/support/v4/view/MenuItemCompat$OnActionExpandListener.class
@@ -498,5 +511,6 @@ android/support/v4/view/MotionEventCompat.class
 android/support/v4/app/ActionBarDrawerToggle$DelegateProvider.class
 android/support/v7/app/NotificationCompat$DecoratedCustomViewStyle.class
 com/google/android/gms/common/api/CommonStatusCodes.class
+ch/qos/logback/classic/net/SSLSocketAppender.class
 com/google/android/gms/common/api/ApiException.class
 android/support/v4/print/PrintHelper$ColorMode.class

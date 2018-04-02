@@ -17,7 +17,7 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation');
+      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation', 'bgGeolocation');
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
@@ -50,6 +50,7 @@ $(function () {
 
       document.addEventListener("deviceready", this.deviceReady, false);
 
+
       this.render();
     },
 
@@ -58,8 +59,46 @@ $(function () {
     },
 
     deviceReady: function () {
-      // this.isGpsEnabled();
+      this.bgGeolocation.start();
+
+      document.addEventListener("pause", onPause, false);
+
+      let onPause = () => {
+        socket.emit('debug', 'foooooooooooooooooooooooooooooo, background')
+      }
+
     },
+
+    bgGeolocation: async function ()  {
+      try {
+        let success = function(location) {
+            socket.emit('debug','[js] BackgroundGeolocation callback:  ' + location.latitude + ',' + location.longitude);
+            backgroundGeolocation.finish();
+        };
+
+        let error = function(error) {
+            console.log('BackgroundGeolocation error');
+        };
+
+        // BackgroundGeolocation is highly configurable. See platform specific configuration options
+        backgroundGeolocation.configure(success, error, {
+            desiredAccuracy: 30,
+            stationaryRadius: 0,
+            distanceFilter: 0,
+            interval: 5000,
+            startForeground: false
+        });
+
+        // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
+        return backgroundGeolocation;
+      } catch (e) {
+        alert('AAARRGG')
+      }
+
+
+
+    },
+
     // Checks if Gps is enabled and asks for permission to activate it if it is not.
     isGpsEnabled () {
       let that  = this;
