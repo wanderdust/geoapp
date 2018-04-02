@@ -23,7 +23,11 @@ $(function () {
 
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
-      this.$header = $('#group-title-container');
+      this.$headerTitle = $('.group-name');
+      this.$header = $('.sub-title-container');
+
+      // Fast load of group title from cache.
+      this.$headerTitle.html(sessionStorage.getItem('currentGroupName'));
 
       // inits the modal
       this.modalElem = document.querySelector('.modal');
@@ -76,7 +80,6 @@ $(function () {
       // initModal sends the modal intance to each model.
       app.userCollection.trigger('initModal', this.modalInst);
 
-      let currentGroupName = sessionStorage.getItem('currentGroupName');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
       let isOnline = app.userCollection.isStatus('online');
@@ -95,7 +98,6 @@ $(function () {
       }));
 
       this.$header.html(headerTemplate({
-        groupName: currentGroupName,
         isOnline,
         isPending
       }));

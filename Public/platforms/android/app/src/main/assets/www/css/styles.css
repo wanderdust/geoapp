@@ -267,7 +267,7 @@ h4 {
 .tabs-content .group-container .group-header {
   position: absolute;
   left: 105px;
-  width: 45%;
+  width: 65%;
   height: 100%;
 }
 
@@ -276,6 +276,7 @@ h4 {
   width: 100%;
   top: 0px;
   font-size: 18px;
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -529,7 +530,7 @@ a:-webkit-any-link {
   padding: 0px;
 }
 
-#header-nav #group-title-container #group-title-group{
+#header-nav #group-title-container #group-title-group {
   position: absolute;
   top: 0;
   height: 60%;
@@ -564,8 +565,16 @@ a:-webkit-any-link {
 }
 
 #header-nav.group-view #group-title-container{
-  width: 70%;
+  width: 65%;
   left: 69px;
+}
+
+.group-name {
+  position: absolute;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tabs-content.status-users-content .user-container .group-header {

@@ -100,9 +100,6 @@ Templates.groupTemplatePending = [
 
 // Template for the header in the users view.
 Templates.usersGroupHeader = [
-  '<div id="group-title-group">',
-    '<p>{{groupName}}</p>',
-  '</div>',
   '<div id="group-sub-title">',
     '{{#if isOnline}}',
       '<p>Estado: online</p>',
