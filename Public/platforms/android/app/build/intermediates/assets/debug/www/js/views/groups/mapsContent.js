@@ -3,6 +3,7 @@
 var app = app || {};
 var socket  = loadSocket();
 
+
 $(function () {
 
   app.MapsContent = Backbone.View.extend({
@@ -17,7 +18,7 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation', 'bgGeolocation');
+      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation', 'bgGeolocation', 'onPause', 'onResume');
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
@@ -59,21 +60,62 @@ $(function () {
     },
 
     deviceReady: function () {
-      this.bgGeolocation.start();
-
-      document.addEventListener("pause", onPause, false);
-
-      let onPause = () => {
-        socket.emit('debug', 'foooooooooooooooooooooooooooooo, background')
-      }
-
+      document.addEventListener('pause', this.onPause, false);
+      document.addEventListener('resume', this.onResume, false);
     },
 
-    bgGeolocation: async function ()  {
+    // When app is on pause we switch to the background geolocation mode.
+    onPause: function () {
+      navigator.geolocation.clearWatch(this.positionWatch);
+      this.bgGeolocation().start();
+    },
+
+    // When app is on foreground we go back to using watchPosition
+    onResume: function () {
+      this.userCoords();
+      this.bgGeolocation().stop();
+    },
+
+    bgGeolocation: function ()  {
+      let that = this;
       try {
-        let success = function(location) {
-            socket.emit('debug','[js] BackgroundGeolocation callback:  ' + location.latitude + ',' + location.longitude);
-            backgroundGeolocation.finish();
+        let success = function(position) {
+          let groups = app.groupCollection;
+          let userLat = position.latitude;
+          let userLng = position.longitude;
+          // Checks if any of the groups entered the online if/else.
+          // If none of them entered the condition it means he is none of the
+          // groups and therefore the user is online.
+          let onlineGroupCheck = 0;
+
+          // For each marker calculates the distance from the user.
+          for (let i = 0; groups.length > i; i++) {
+            let model = app.groupCollection.models[i];
+            let groupLat = model.get('coords').lat;
+            let groupLng = model.get('coords').lng;
+            let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
+            socket.emit('debug', distance);
+            // KM
+            if (distance <= 0.03) {
+              socket.emit('debug', 'userInArea!')
+              this.socket.emit('userInArea', {
+                userId: sessionStorage.getItem('userId'),
+                groupId: model.get('_id')
+              });
+              break;
+            }
+            onlineGroupCheck++
+          }
+
+          // This means user is not near any place so it should be put
+          // as offline from every group.
+          if (onlineGroupCheck === app.groupCollection.length) {
+            this.socket.emit('userOffBounds', {
+              userId: sessionStorage.getItem('userId')
+            })
+          }
+
+          backgroundGeolocation.finish();
         };
 
         let error = function(error) {
@@ -85,18 +127,16 @@ $(function () {
             desiredAccuracy: 30,
             stationaryRadius: 0,
             distanceFilter: 0,
-            interval: 5000,
-            startForeground: false
+            interval: 6000,
+            locationProvider: backgroundGeolocation.provider.ANDROID_DISTANCE_FILTER_PROVIDER,
+            maxlocations: 100
         });
 
         // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
         return backgroundGeolocation;
       } catch (e) {
-        alert('AAARRGG')
+        socket.emit('debug', e)
       }
-
-
-
     },
 
     // Checks if Gps is enabled and asks for permission to activate it if it is not.
@@ -187,8 +227,7 @@ $(function () {
         }
 
         // Starts watchPosition
-        await navigator.geolocation.watchPosition(success, error, options);
-
+        this.positionWatch = await navigator.geolocation.watchPosition(success, error, options);
       } catch (e) {
         return navigator.notification.alert(
           e,
