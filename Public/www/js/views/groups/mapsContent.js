@@ -66,12 +66,14 @@ $(function () {
 
     // When app is on pause we switch to the background geolocation mode.
     onPause: function () {
+      socket.emit('debug', 'pause')
       navigator.geolocation.clearWatch(this.positionWatch);
       this.bgGeolocation().start();
     },
 
     // When app is on foreground we go back to using watchPosition
     onResume: function () {
+      socket.emit('debug', 'Resume')
       this.userCoords();
       this.bgGeolocation().stop();
     },
@@ -80,40 +82,22 @@ $(function () {
       let that = this;
       try {
         let success = function(position) {
-          let groups = app.groupCollection;
-          let userLat = position.latitude;
-          let userLng = position.longitude;
-          // Checks if any of the groups entered the online if/else.
-          // If none of them entered the condition it means he is none of the
-          // groups and therefore the user is online.
-          let onlineGroupCheck = 0;
+          let groups = app.groupCollection.models.map((model) => {
+            let foo = [];
+            foo.push(model.get('coords').lat);
+            foo.push(model.get('coords').lng);
+            foo.push(model.get('id'))
+            return foo;
+          });
 
-          // For each marker calculates the distance from the user.
-          for (let i = 0; groups.length > i; i++) {
-            let model = app.groupCollection.models[i];
-            let groupLat = model.get('coords').lat;
-            let groupLng = model.get('coords').lng;
-            let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
-            socket.emit('debug', distance);
-            // KM
-            if (distance <= 0.03) {
-              socket.emit('debug', 'userInArea!')
-              this.socket.emit('userInArea', {
-                userId: sessionStorage.getItem('userId'),
-                groupId: model.get('_id')
-              });
-              break;
-            }
-            onlineGroupCheck++
-          }
+          let data = {
+            lat: position.latitude,
+            lng: position.longitude,
+            userId: sessionStorage.getItem('userId'),
+            groups: groups
+          };
 
-          // This means user is not near any place so it should be put
-          // as offline from every group.
-          if (onlineGroupCheck === app.groupCollection.length) {
-            this.socket.emit('userOffBounds', {
-              userId: sessionStorage.getItem('userId')
-            })
-          }
+          $.post('http://192.168.1.250:3000/location', JSON.stringify(data));
 
           backgroundGeolocation.finish();
         };
@@ -129,7 +113,8 @@ $(function () {
             distanceFilter: 0,
             interval: 6000,
             locationProvider: backgroundGeolocation.provider.ANDROID_DISTANCE_FILTER_PROVIDER,
-            maxlocations: 100
+            maxlocations: 100,
+            url: 'http://192.168.1.250:3000/locations'
         });
 
         // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
