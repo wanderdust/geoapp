@@ -26,6 +26,7 @@ const {createFriendModel} = require('./utils/createFriendModel.js');
 const {sendPushMessages} = require('./utils/sendPushNotification.js');
 const {getDistanceFromLatLonInKm} = require('./utils/getDistanceFromLatLonInKm.js');
 const {updateUserOnline} = require('./utils/updateUserOnline.js');
+const {updateUsersOffline} = require('./utils/updateUsersOffline.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -63,7 +64,7 @@ io.on('connection', (socket) => {
         // KM
         if (distance <= 0.03) {
           // Update user.
-          updateUserOnline({groupId, userId: data.userId}, openSocketsGroups, openSocketsUsers)
+          updateUserOnline({groupId, userId: data.userId}, openSocketsGroups, openSocketsUsers, io);
           break;
         }
         onlineGroupCheck++
@@ -72,7 +73,7 @@ io.on('connection', (socket) => {
       // This means user is not near any place so it should be put
       // as offline from every group.
       if (onlineGroupCheck === data.groups.length) {
-        console.log('user offline')
+        updateUsersOffline({userId: data.userId}, openSocketsGroups, openSocketsUsers, io)
       };
 
       response.sendStatus(200);
@@ -322,6 +323,7 @@ socket.on('getUser', async (data, callback) => {
   // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
     try {
+      return
       let usersInGroupFCM = [];
       let message;
       let updatedDocuments = [];

@@ -4,7 +4,7 @@ const {Group} = require('./../models/groups.js');
 const {ObjectID} = require('mongodb');
 const {sendPushMessages} = require('./sendPushNotification.js');
 
-let updateUserOnline = async function (data, openSocketsUsers, openSocketsGroups) {
+let updateUserOnline = async function (data, openSocketsGroups, openSocketsUsers, io) {
   try {
     let usersInGroupFCM = [];
     let message;

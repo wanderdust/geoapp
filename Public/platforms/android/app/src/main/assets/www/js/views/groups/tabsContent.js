@@ -39,7 +39,7 @@ $(function () {
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'change', this.filterOne);
-      this.listenTo(app.groupCollection, 'reset', _.debounce(this.appendAll, 0))
+      this.listenTo(app.groupCollection, 'reset', this.appendAll);
 
       this.render();
     },

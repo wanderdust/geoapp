@@ -116,8 +116,7 @@ $(function () {
             distanceFilter: 0,
             interval: 10000,
             locationProvider: backgroundGeolocation.provider.ANDROID_DISTANCE_FILTER_PROVIDER,
-            maxlocations: 100,
-            url: 'http://192.168.1.250:3000/locations'
+            startForeground: false
         });
 
         // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
@@ -189,7 +188,7 @@ $(function () {
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
             // KM
-            if (distance <= 0.03) {
+            if (distance <= 0.003) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
