@@ -25,9 +25,13 @@ $(function () {
       this.$sideNav = $('#sidebar-container');
 
       this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar);
+      this.listenTo(app.groupCollection, 'checkForUpdates', this.updateGroupCollection);
+
+      new app.MapsContent();
+      new app.TabsContent();
+
       var elem = document.querySelector('.sidenav');
       var instance = M.Sidenav.init(elem, {});
-
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
@@ -39,9 +43,6 @@ $(function () {
 
     render: function () {
       this.$sideNav.hammer();
-
-      new app.MapsContent();
-      new app.TabsContent();
 
       this.socket.emit('createGroupCollection', {
         userId: sessionStorage.getItem('userId')
@@ -73,6 +74,21 @@ $(function () {
         requestLength = collection.length;
         if (requestLength > 0)
           this.showBadge(requestLength);
+      });
+    },
+
+    // Gets a brand new group collection
+    updateGroupCollection: function () {
+      this.socket.emit('createGroupCollection', {
+        userId: sessionStorage.getItem('userId')
+      }, (err, collection) => {
+        if(err)
+          return navigator.notification.alert(
+            err,
+            (msg) => true,
+            'Error'
+          );
+          app.groupCollection.reset(collection);
       });
     },
 

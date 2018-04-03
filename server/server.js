@@ -8,6 +8,7 @@ const {ObjectID} = require('mongodb');
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const multer  = require('multer');
+const bodyParser = require('body-parser');
 
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
@@ -23,6 +24,8 @@ const {createRequestModel} = require('./utils/createRequestModel.js');
 const {createFriendRequestModel} = require('./utils/createFriendRequestModel.js');
 const {createFriendModel} = require('./utils/createFriendModel.js');
 const {sendPushMessages} = require('./utils/sendPushNotification.js');
+const {getDistanceFromLatLonInKm} = require('./utils/getDistanceFromLatLonInKm.js');
+const {updateUserOnline} = require('./utils/updateUserOnline.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -34,13 +37,46 @@ let openSocketsGroups = new OpenSocketsGroups();
 let openSocketsUsers = new OpenSocketsUsers();
 let connectedUsers = new ConnectedUsers();
 
-// app.use(express.static(publicPath));
+// parse application/json
+app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
 
 io.on('connection', (socket) => {
 
   socket.on('debug', (data) => {
     console.log('DEBUG FUNCTION:', data)
   })
+
+  app.post('/location', function(request, response){
+    // Check distance from every group and update location.
+    let data = request.body;
+    // Checks if any of the groups entered the online if/else.
+    // If none of them entered the condition it means he is none of the
+    // groups and therefore the user is online.
+    let onlineGroupCheck = 0;
+
+      for (let group of data.groups) {
+        let groupLat = group[0];
+        let groupLng = group[1];
+        let groupId = group[2];
+
+        let distance = getDistanceFromLatLonInKm(data.lat, data.lng, groupLat, groupLng);
+        // KM
+        if (distance <= 0.03) {
+          // Update user.
+          updateUserOnline({groupId, userId: data.userId}, openSocketsGroups, openSocketsUsers)
+          break;
+        }
+        onlineGroupCheck++
+      };
+
+      // This means user is not near any place so it should be put
+      // as offline from every group.
+      if (onlineGroupCheck === data.groups.length) {
+        console.log('user offline')
+      };
+
+      response.sendStatus(200);
+  });
 
   socket.on('connectedClient', (id) => {
     let users = connectedUsers.connectedUsers;
@@ -139,14 +175,12 @@ io.on('connection', (socket) => {
   // Uses the users unique identifier as a login.
   socket.on('passwordlessLogin', async (data, callback) => {
     try {
-      console.log('Inside passwordLessLogin')
       let uuid = data.uuid;
       let user = await User.findOne({deviceUuid: uuid});
 
       if (user === null) {
         return callback({Error: 1, Message: 'Usuario no encontrado'});
       }
-      console.log('User found')
       callback(null, {_id: user._id, uuid: user.deviceUuid})
     } catch (e) {
 

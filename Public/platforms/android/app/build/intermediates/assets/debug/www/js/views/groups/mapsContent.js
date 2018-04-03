@@ -28,6 +28,7 @@ $(function () {
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll);
+      this.listenTo(app.groupCollection, 'reset', this.appendAll)
       // Temporary disable the markers filtering
       // this.listenTo(app.groupCollection, 'filter', this.filterAll);
       // this.listenTo(app.groupCollection, 'change', this.filterAll);
@@ -76,17 +77,19 @@ $(function () {
       socket.emit('debug', 'Resume')
       this.userCoords();
       this.bgGeolocation().stop();
+      // WHen app was in background it didnt update. We check for updates now.
+      app.groupCollection.trigger('checkForUpdates');
     },
 
     bgGeolocation: function ()  {
-      let that = this;
       try {
         let success = function(position) {
+
           let groups = app.groupCollection.models.map((model) => {
             let foo = [];
             foo.push(model.get('coords').lat);
             foo.push(model.get('coords').lng);
-            foo.push(model.get('id'))
+            foo.push(model.get('_id'))
             return foo;
           });
 
@@ -111,7 +114,7 @@ $(function () {
             desiredAccuracy: 30,
             stationaryRadius: 0,
             distanceFilter: 0,
-            interval: 6000,
+            interval: 10000,
             locationProvider: backgroundGeolocation.provider.ANDROID_DISTANCE_FILTER_PROVIDER,
             maxlocations: 100,
             url: 'http://192.168.1.250:3000/locations'

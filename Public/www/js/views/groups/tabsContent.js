@@ -13,7 +13,7 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'appendAll', 'appendOne');
       this.socket = socket;
       // this.$list = $('.group-list');
       this.$listOnline = $('.group-list.activos');
@@ -39,6 +39,7 @@ $(function () {
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'change', this.filterOne);
+      this.listenTo(app.groupCollection, 'reset', _.debounce(this.appendAll, 0))
 
       this.render();
     },
@@ -51,7 +52,6 @@ $(function () {
 
     // Appends a model every time there is an 'add' event.
     appendOne: function (group) {
-
       let isOnline = (group.get('activeUsers').length > 0 ? true : false);
       let isPending = (group.get('activeUsers').length === 0 && group.get('pendingUsers').length > 0 ? true : false);
       let view = new app.GroupView({model: group});
@@ -71,7 +71,9 @@ $(function () {
 
     // Clears the view and attaches the new collection.
     appendAll: function (collection) {
-      this.$list.html('');
+      this.$listOnline.html('');
+      this.$listPending.html('');
+      this.$listAll.html('');
       collection.each(this.appendOne, this);
     },
 
