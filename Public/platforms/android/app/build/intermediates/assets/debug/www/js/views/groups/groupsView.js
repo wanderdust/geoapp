@@ -88,7 +88,8 @@ $(function () {
             (msg) => true,
             'Error'
           );
-          app.groupCollection.reset(collection);
+          app.groupCollection.set(collection, {add: false, remove: false, merge: true});
+          // app.groupCollection.reset(collection);
       });
     },
 

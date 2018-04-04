@@ -4,7 +4,16 @@ let OpenSocketsGroups = class {
   }
 
   addSockets (groupId, socketId) {
+
     let newSocket = {groupId, socketId};
+
+		let alreadyExists = this.openSockets.filter((data) => {
+			return data.groupId +'' === groupId + ''
+		})
+
+		if (alreadyExists.length > 0) {
+			return;
+		}
 
   	this.openSockets.push(newSocket);
     return newSocket;

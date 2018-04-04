@@ -6,6 +6,14 @@ let OpenSocketsUsers = class {
   addSockets (userId, socketId) {
     let newSocket = {userId, socketId};
 
+		let alreadyExists = this.openSockets.filter((data) => {
+			return data.userId +'' === userId + ''
+		})
+
+		if (alreadyExists.length > 0) {
+			return;
+		}
+
   	this.openSockets.push(newSocket);
     return newSocket;
   }

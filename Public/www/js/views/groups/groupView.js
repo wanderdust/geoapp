@@ -16,15 +16,15 @@ $(function () {
     },
 
     initialize: function () {
-      this.listenTo(this.model, 'render', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
       // this.listenTo(this.model, 'visible', this.toggleVisible);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
-
+      i = 0;
       this.instance;
     },
 
     render: function () {
+      socket.emit('debug', i++)
       let isOnline = (this.model.get('activeUsers').length > 0 ? true : false);
       let isPending = (this.model.get('activeUsers').length === 0 && this.model.get('pendingUsers').length > 0 ? true : false);
       let template = Handlebars.compile(this.template);

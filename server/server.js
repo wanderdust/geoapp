@@ -216,6 +216,7 @@ io.on('connection', (socket) => {
 
       // Sends an array with all the group Models.
       callback(null, groupCollection);
+      console.log(openSocketsGroups.openSockets)
     } catch (e) {
       console.log('createGroupCollection error', e.message)
       callback(e);
@@ -322,6 +323,7 @@ socket.on('getUser', async (data, callback) => {
 
   // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
+    return
     updateUserOnline(data, openSocketsGroups, openSocketsUsers, io);
   });
 
