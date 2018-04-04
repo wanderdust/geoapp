@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
       // This means user is not near any place so it should be put
       // as offline from every group.
       if (onlineGroupCheck === data.groups.length) {
-        updateUsersOffline({userId: data.userId}, openSocketsGroups, openSocketsUsers, io)
+        updateUsersOffline({userId: data.userId}, openSocketsGroups, openSocketsUsers, io);
       };
 
       response.sendStatus(200);
@@ -322,148 +322,12 @@ socket.on('getUser', async (data, callback) => {
 
   // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
-    try {
-      return
-      let usersInGroupFCM = [];
-      let message;
-      let updatedDocuments = [];
-      let checkLocation;
-      let findIfOnlineAndUpdate;
-      let findIfPendingAndUpdate;
-      let updateNewLocation;
-      let socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
-
-      // Check if he has been updated already.
-      checkLocation = await UserGroup.findOne({userId: data.userId, groupId: data.groupId, online: true});
-
-      if (checkLocation !== null)
-        return;
-
-
-      // Finds if he is online in another Group and sets it to false.
-      findIfOnlineAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
-        $set: {
-          online: false
-        }
-      }, {new: true});
-
-      // Finds if he is pending in another group and sets it to false.
-      findIfPendingAndUpdate = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
-        $set: {
-          pending: false
-        }
-      }, {new: true});
-
-
-      //Finds the userGroup with the userId and groupId and updates the data in database.
-      updateNewLocation = await UserGroup.findOneAndUpdate({userId: data.userId, groupId: data.groupId}, {
-        $set: {
-          online: true,
-        }
-      }, {new: true});
-
-
-      updatedDocuments.push(findIfOnlineAndUpdate, findIfPendingAndUpdate, updateNewLocation);
-
-      // Return all the models that have been updated.
-      // Sends data to respective sockets.
-      for (let doc of updatedDocuments) {
-        let updatedProperties = {};
-        let username;
-        let socketsToUpdateGroups;
-
-        if (doc === null)
-          continue;
-
-        // Finds out the name of the user who is now online.
-        userName = await User.findOne({_id: ObjectID(doc.userId)});
-
-        updatedProperties._id = doc.groupId;
-        updatedProperties.userOnline = userName.name;
-        updatedProperties.userId = userName._id;
-
-        // Finds the sockets in the  array that contain an updated group.
-        socketsToUpdateGroups = openSocketsGroups.findSockets(doc);
-
-        socketsToUpdateGroups.forEach((e) => {
-          io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
-        });
-      };
-
-      // Sends data to the online/offline users group view.
-      socketsToUpdateUsers.forEach((e) => {
-        io.to(e.socketId).emit('updateUserStatus', data);
-      });
-
-      // We get the group name and the person name to send a
-      // personalized notification.
-      let usersInGroup = await UserGroup.find({groupId: data.groupId});
-      let onlineUser = await User.findById(data.userId);
-      let groupName = await Group.findById(data.groupId);
-
-      for (let userInGroup of usersInGroup) {
-        // Dont send a notification to the user who actually went online.
-        if (userInGroup.userId === data.userId)
-          continue;
-
-        let user = await User.findById(userInGroup.userId);
-        usersInGroupFCM.push(user.fcmRegId);
-      };
-
-      message = {
-        title: `GeoApp`,
-        body: `${onlineUser.name} ha llegado a ${groupName.title}`
-      }
-
-      sendPushMessages(usersInGroupFCM, message);
-    } catch (e) {
-      console.log(e)
-    }
+    updateUserOnline(data, openSocketsGroups, openSocketsUsers, io);
   });
 
+  // Sets the user offline because he is not in range of any group
   socket.on('userOffBounds', async (data) => {
-    try {
-      let socketsToUpdateGroups;
-      let socketsToUpdateUsers;
-
-      // Checks if the user is online in any group. If he is continues, if not returns.
-      checkLocation = await UserGroup.findOne({userId: data.userId, online: true});
-
-
-      if (checkLocation === null)
-        return
-
-      let  setOffBounds = await UserGroup.findOneAndUpdate({userId: data.userId, online: true}, {
-        $set: {
-          online: false,
-        }
-      }, {new: true});
-
-      // Finds out the name of the user who is now online.
-      let userName = await User.findOne({_id: ObjectID(data.userId)});
-
-      let groupProperties = {
-        _id: setOffBounds.groupId,
-        userOnline: userName.name,
-        userId: setOffBounds.userId
-      };
-
-      socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
-
-      socketsToUpdateGroups.forEach((e) => {
-        io.to(e.socketId).emit('userOffline', groupProperties);
-      });
-
-      socketsToUpdateUsers = openSocketsUsers.findSockets(data.userId);
-
-      socketsToUpdateUsers.forEach((e) => {
-        io.to(e.socketId).emit('updateUserStatus', data);
-      });
-      console.log('User disconnected from GROUP')
-    } catch (e) {
-      console.log(e)
-    }
-
+    updateUsersOffline({userId: data.userId}, openSocketsGroups, openSocketsUsers, io);
   });
 
   // Finds user's already selected pending group for the pending view.

@@ -293,6 +293,7 @@ h4 {
   text-overflow: ellipsis;
 }
 
+
 .round-button {
   background-color: #fb8c00;
 }
@@ -1407,6 +1408,10 @@ body.active {
 
 .tabs-content.settings-page #user-dashboard.user-info-btn{
   border-bottom: solid 0.5px lightgray;
+}
+
+#user-dashboard.user-info-btn .group-header .group-status {
+  width: 75%;
 }
 
 .tabs-content.settings-page #settings-list {

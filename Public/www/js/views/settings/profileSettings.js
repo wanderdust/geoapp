@@ -131,7 +131,9 @@ $(function () {
         'destinationType': 1,
         'sourceType': 0,
         'mediaType': 0,
-        'correctOrientation': true
+        'correctOrientation': true,
+        'quality': 25,
+        'allowEdit': true
       };
 
       navigator.camera.getPicture(function (image_URI) {

@@ -188,7 +188,7 @@ $(function () {
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
             // KM
-            if (distance <= 0.003) {
+            if (distance <= 0.045) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
