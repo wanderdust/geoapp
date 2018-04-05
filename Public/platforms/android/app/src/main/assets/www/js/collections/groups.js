@@ -106,7 +106,6 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
-      model.trigger('render');
       model.trigger('change', model);
       // Updates the markers.
       this.trigger('updateMarkers');

@@ -33,6 +33,7 @@ let updateUsersOffline = async function (data, openSocketsGroups, openSocketsUse
 
     socketsToUpdateGroups = openSocketsGroups.findSockets(setOffBounds);
 
+
     socketsToUpdateGroups.forEach((e) => {
       io.to(e.socketId).emit('userOffline', groupProperties);
     });

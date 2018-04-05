@@ -7,7 +7,7 @@ let OpenSocketsUsers = class {
     let newSocket = {userId, socketId};
 
 		let alreadyExists = this.openSockets.filter((data) => {
-			return data.userId +'' === userId + ''
+			return data.userId +'' === userId + '' && socketId + '' === data.socketId + ''
 		})
 
 		if (alreadyExists.length > 0) {

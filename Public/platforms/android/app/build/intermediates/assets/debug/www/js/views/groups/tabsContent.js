@@ -38,7 +38,6 @@ $(function () {
       });
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
-      this.listenTo(app.groupCollection, 'change', this.filterOne);
       // this.listenTo(app.groupCollection, 'reset', this.appendAll);
 
       this.render();
@@ -86,14 +85,6 @@ $(function () {
       } else {
         window.location.href = 'main.html#/all'
       }
-    },
-
-    filterOne: function (group) {
-      group.trigger('updateOne', group);
-    },
-
-    filterAll: function () {
-      app.groupCollection.each(this.filterOne, this);
     },
 
     swipeTabs: function (e) {

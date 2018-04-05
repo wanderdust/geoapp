@@ -251,22 +251,6 @@
             ]
         },
         {
-            "outputFile": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/values-hdpi-v4_values-hdpi-v4.arsc.flat",
-            "map": [
-                {
-                    "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/res/values-hdpi-v4/values-hdpi-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
-                        "endColumns": "13",
-                        "endOffsets": "327"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/values-eu_values-eu.arsc.flat",
             "map": [
                 {
@@ -335,6 +319,22 @@
                         "startOffsets": "2109,2215,2423,2551,2662,2868,2997,3334,3577,3687,3885,4017,4244,4433,4529,4624",
                         "endColumns": "105,207,127,110,205,128,135,242,109,197,131,226,188,95,94,107",
                         "endOffsets": "2210,2418,2546,2657,2863,2992,3128,3572,3682,3880,4012,4239,4428,4524,4619,4727"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/build/intermediates/res/merged/debug/values-hdpi-v4_values-hdpi-v4.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
                     }
                 }
             ]

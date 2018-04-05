@@ -216,7 +216,6 @@ io.on('connection', (socket) => {
 
       // Sends an array with all the group Models.
       callback(null, groupCollection);
-      console.log(openSocketsGroups.openSockets)
     } catch (e) {
       console.log('createGroupCollection error', e.message)
       callback(e);
@@ -323,7 +322,6 @@ socket.on('getUser', async (data, callback) => {
 
   // Updates user data when he changes location to be ONLINE.
   socket.on('userInArea', async (data) => {
-    return
     updateUserOnline(data, openSocketsGroups, openSocketsUsers, io);
   });
 
@@ -392,6 +390,7 @@ socket.on('getUser', async (data, callback) => {
         updatedProperties.userId = userName._id;
 
         let socketsToUpdate = openSocketsGroups.findSockets(doc);
+        console.log(socketsToUpdate);
 
         socketsToUpdate.forEach((e) => {
           io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
@@ -594,7 +593,9 @@ socket.on('getUser', async (data, callback) => {
         let friendPhoneNumber = userDoc.phone;
 
         existingPhones.push(friendPhoneNumber)
-      }
+      };
+
+      console.log(existingPhones)
 
       // Find the existing users phones index in the contacts array and remove them.
       for (let existingPhone of existingPhones) {
@@ -623,6 +624,15 @@ socket.on('getUser', async (data, callback) => {
             friendId: data.userId,
             status: 'accepted'
           };
+
+          // Double check that the model doesn't exist already.
+          // Just in case the user has this users number saved more than once.
+          let isExist = await Friend.findOne(friendDataA);
+          // if it exists it means that the user was saved more than once in the
+          // users phone list.
+          if (isExist !== null) {
+            continue;
+          }
 
           let newFriendA = await new Friend(friendDataA).save();
           let newFriendB = await new Friend(friendDataB).save();

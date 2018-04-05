@@ -8,11 +8,11 @@ let OpenSocketsGroups = class {
     let newSocket = {groupId, socketId};
 
 		let alreadyExists = this.openSockets.filter((data) => {
-			return data.groupId +'' === groupId + ''
+			return data.groupId +'' === groupId + '' && socketId +'' === data.socketId + ''
 		})
 
 		if (alreadyExists.length > 0) {
-			return;
+			return console.log('already exists');
 		}
 
   	this.openSockets.push(newSocket);

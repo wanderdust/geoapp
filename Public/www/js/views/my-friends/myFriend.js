@@ -15,6 +15,7 @@ $(function () {
 
     initialize: function () {
       _.bindAll(this, 'updateInstance', 'openImageModal');
+
       this.listenTo(app.userCollection, 'initModal', this.updateInstance);
 
       this.instance;

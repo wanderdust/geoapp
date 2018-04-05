@@ -16,15 +16,13 @@ $(function () {
     },
 
     initialize: function () {
-      this.listenToOnce(this.model, 'updateOne', this.updateOne);
+      this.listenToOnce(this.model, 'change', this.updateOne);
       // this.listenTo(this.model, 'visible', this.toggleVisible);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
-      i = 0;
       this.instance;
     },
 
     render: function () {
-      socket.emit('debug', i++)
       let isOnline = (this.model.get('activeUsers').length > 0 ? true : false);
       let isPending = (this.model.get('activeUsers').length === 0 && this.model.get('pendingUsers').length > 0 ? true : false);
       let template = Handlebars.compile(this.template);
@@ -39,6 +37,7 @@ $(function () {
     },
 
     updateOne: function (model) {
+      socket.emit('debug', 'I updated the model!');
       this.$el.remove();
       app.groupCollection.trigger('add', model);
     },
