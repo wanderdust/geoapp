@@ -42,10 +42,13 @@ let connectedUsers = new ConnectedUsers();
 app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
 
 io.on('connection', (socket) => {
-
+  console.log('userConnected')
+  
   socket.on('debug', (data) => {
     console.log('DEBUG FUNCTION:', data)
-  })
+  });
+
+  socket.emit('userConnected', {connected: true});
 
   app.post('/location', function(request, response){
     // Check distance from every group and update location.
@@ -176,6 +179,7 @@ io.on('connection', (socket) => {
   // Uses the users unique identifier as a login.
   socket.on('passwordlessLogin', async (data, callback) => {
     try {
+      console.log('passwordLessLogin')
       let uuid = data.uuid;
       let user = await User.findOne({deviceUuid: uuid});
 

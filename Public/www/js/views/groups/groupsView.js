@@ -27,8 +27,8 @@ $(function () {
       this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar);
       this.listenTo(app.groupCollection, 'checkForUpdates', this.updateGroupCollection);
 
-      new app.TabsContent();
       new app.MapsContent();
+      new app.TabsContent();
 
       var elem = document.querySelector('.sidenav');
       var instance = M.Sidenav.init(elem, {});
