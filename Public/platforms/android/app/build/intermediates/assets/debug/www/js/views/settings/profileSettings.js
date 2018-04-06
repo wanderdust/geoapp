@@ -57,13 +57,17 @@ $(function () {
     },
 
     saveDataLocally: function (userName, userStatus, _id) {
-      let userImage = localStorage.getItem('profileImageURI_geoApp')
+      let userImage;
+
       let userInfo = {
         name: userName,
         userStatus: userStatus,
-        _id: _id,
-        userImage: userImage
+        _id: _id
       };
+      if (localStorage.getItem('profileImageURI_geoApp') !== null) {
+        userInfo.userImage = localStorage.getItem('profileImageURI_geoApp');
+      }
+
       userInfo = JSON.stringify(userInfo);
       localStorage.setItem('profileInfo_geoApp', userInfo);
 

@@ -59,6 +59,10 @@
             {
               "xml": "<feature name=\"BackgroundGeolocation\"><param name=\"android-package\" value=\"com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -96,6 +100,10 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
               "count": 1
             }
           ],
@@ -372,6 +380,9 @@
       "ACCOUNT_LABEL": "@string/app_name",
       "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
       "CONTENT_AUTHORITY": "$PACKAGE_NAME",
+      "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
@@ -838,6 +849,23 @@
       "clobbers": [
         "backgroundGeolocation"
       ]
+    },
+    {
+      "id": "cordova-plugin-network-information.network",
+      "file": "plugins/cordova-plugin-network-information/www/network.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "navigator.connection",
+        "navigator.network.connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.Connection",
+      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "Connection"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -857,6 +885,7 @@
     "cordova-plugin-geolocation-android-activator": "1.1.2",
     "cordova-plugin-google-services": "1.2.1",
     "cordova.plugins.diagnostic": "4.0.4",
-    "cordova-plugin-mauron85-background-geolocation": "2.3.5"
+    "cordova-plugin-mauron85-background-geolocation": "2.3.5",
+    "cordova-plugin-network-information": "2.0.1"
   }
 }

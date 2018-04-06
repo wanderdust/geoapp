@@ -63,6 +63,9 @@
       "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
       "CONTENT_AUTHORITY": "$PACKAGE_NAME",
       "PACKAGE_NAME": "com.amigos.geoapp"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.amigos.geoapp"
     }
   },
   "dependent_plugins": {

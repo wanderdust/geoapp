@@ -82,6 +82,7 @@ $(function () {
         view.addClass('fit-horizontally');
       }
       i.src = view.attr('src');
+      // The image shows already resized.
       view.removeClass('hidden');
     }
   });

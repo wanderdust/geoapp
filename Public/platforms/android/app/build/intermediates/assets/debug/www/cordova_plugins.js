@@ -461,6 +461,23 @@ module.exports = [
     "clobbers": [
       "backgroundGeolocation"
     ]
+  },
+  {
+    "id": "cordova-plugin-network-information.network",
+    "file": "plugins/cordova-plugin-network-information/www/network.js",
+    "pluginId": "cordova-plugin-network-information",
+    "clobbers": [
+      "navigator.connection",
+      "navigator.network.connection"
+    ]
+  },
+  {
+    "id": "cordova-plugin-network-information.Connection",
+    "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+    "pluginId": "cordova-plugin-network-information",
+    "clobbers": [
+      "Connection"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -482,7 +499,8 @@ module.exports.metadata =
   "cordova-plugin-geolocation-android-activator": "1.1.2",
   "cordova-plugin-google-services": "1.2.1",
   "cordova.plugins.diagnostic": "4.0.4",
-  "cordova-plugin-mauron85-background-geolocation": "2.3.5"
+  "cordova-plugin-mauron85-background-geolocation": "2.3.5",
+  "cordova-plugin-network-information": "2.0.1"
 };
 // BOTTOM OF METADATA
 });
