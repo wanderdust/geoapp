@@ -25,13 +25,13 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
       this.loadCache();
+      this.getUser();
 
     },
 
     // Renders local data if there is any
     loadCache: function () {
       if (localStorage.getItem('profileInfo_geoApp') === null) {
-        this.getUser();
         return
       }
 

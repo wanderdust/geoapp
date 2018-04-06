@@ -70,7 +70,7 @@ $(function () {
             app.groupCollection.reset(collection);
           }
         }
-        that.saveDataLocally(collection)
+        that.saveDataLocally(collection);
       });
     },
 

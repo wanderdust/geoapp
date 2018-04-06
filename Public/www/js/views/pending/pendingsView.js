@@ -78,23 +78,7 @@ $(function () {
       let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
       app.groupCollection.add(cache);
     },
-    // // Saves the data from this session to the localStorage.
-    // saveDataLocally: function (collection) {
-    //   let groupCollection = collection.map((e) => {
-    //     let data = {
-    //       title: e.title,
-    //       coords: e.coords,
-    //       groupImage: '',
-    //       activeUsers: [],
-    //       pendingUsers: [],
-    //       _id: e._id
-    //     };
-    //     return data;
-    //   });
-    //   groupCollection = JSON.stringify(groupCollection);
-    //   localStorage.setItem('groupsCache_geoApp', groupCollection);
-    // },
-
+  
     backToMain: function () {
       window.location.href = 'main.html#/online';
     },

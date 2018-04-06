@@ -14,6 +14,7 @@ $(function () {
       this.$offlineUsers = $('.offline-users-list ul');
 
       this.listenTo(app.userCollection, 'add', this.appendOne);
+      this.listenTo(app.userCollection, 'reset', this.appendAll);
       this.listenTo(app.userCollection, 'change', this.filterOne);
     },
 

@@ -16,6 +16,7 @@ $(function () {
         view.addClass('fit-horizontally');
       }
       i.src = view.attr('src');
+      view.removeClass('hidden');
     }
   })
 
