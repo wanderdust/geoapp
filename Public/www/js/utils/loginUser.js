@@ -26,18 +26,21 @@ let checkConnection = {
   },
 
   loginUser: function () {
-    foo = io.connect('http://192.168.1.250:3000/');
-    let html = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+    // quick fix for this.
+      window.location.href = "index.html";
 
-    if (sessionStorage.getItem('userId') !== null)
-      return;
-
-    if (html === "online" || html === "pending" || html === "all")
-      html = "main.html"
-
-    foo.on('userConnected', (data) => {
-      checkConnection.passwordLessLogin(socket);
-    })
+    // socket = io.connect('http://192.168.1.250:3000/');
+    // let html = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+    //
+    // if (sessionStorage.getItem('userId') !== null)
+    //   return;
+    //
+    // if (html === "online" || html === "pending" || html === "all")
+    //   html = "main.html"
+    //
+    // socket.on('userConnected', (data) => {
+    //   checkConnection.passwordLessLogin(socket);
+    // })
   }
 };
 
