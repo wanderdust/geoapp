@@ -43,13 +43,13 @@ $(function () {
         }
 
         // If localStorage doesnt exist we load from http request.
-        if (localStorage.getItem('pendingGroupsCache_geoApp') === null) {
+        if (localStorage.getItem('groupsCache_geoApp') === null) {
           app.groupCollection.add(collection);
         } else {
           app.groupCollection.reset(collection);
         }
-        // Saves the gruoups in the localStorage.
-        that.saveDataLocally(collection);
+        // // Saves the gruoups in the localStorage.
+        // that.saveDataLocally(collection);
 
         that.socket.emit('findIfPending', {userId}, (err, status) => {
           if (err)
@@ -75,25 +75,25 @@ $(function () {
 
     // Loads the data from the localStorage.
     loadCache: function () {
-      let cache = JSON.parse(localStorage.getItem('pendingGroupsCache_geoApp'));
+      let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
       app.groupCollection.add(cache);
     },
-    // Saves the data from this session to the localStorage.
-    saveDataLocally: function (collection) {
-      let groupCollection = collection.map((e) => {
-        let data = {
-          title: e.title,
-          coords: e.coords,
-          groupImage: '',
-          activeUsers: [],
-          pendingUsers: [],
-          _id: e._id
-        };
-        return data;
-      });
-      groupCollection = JSON.stringify(groupCollection);
-      localStorage.setItem('pendingGroupsCache_geoApp', groupCollection);
-    },
+    // // Saves the data from this session to the localStorage.
+    // saveDataLocally: function (collection) {
+    //   let groupCollection = collection.map((e) => {
+    //     let data = {
+    //       title: e.title,
+    //       coords: e.coords,
+    //       groupImage: '',
+    //       activeUsers: [],
+    //       pendingUsers: [],
+    //       _id: e._id
+    //     };
+    //     return data;
+    //   });
+    //   groupCollection = JSON.stringify(groupCollection);
+    //   localStorage.setItem('groupsCache_geoApp', groupCollection);
+    // },
 
     backToMain: function () {
       window.location.href = 'main.html#/online';

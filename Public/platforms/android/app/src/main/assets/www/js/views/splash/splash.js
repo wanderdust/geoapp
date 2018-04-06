@@ -17,7 +17,6 @@ $(function () {
       _.bindAll(this, 'onDeviceReady', 'checkLocalStorage')
       this.socket = socket;
       // Check for saved passwords and if found send automatically login.
-      // Random strings to avoid localStorage collision
       this.user = localStorage.getItem('userUuidGeoapp');
 
       if (socket.isOnline !== undefined) {

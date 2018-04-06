@@ -38,7 +38,7 @@ $(function () {
       });
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
-      // this.listenTo(app.groupCollection, 'reset', this.appendAll);
+      this.listenTo(app.groupCollection, 'reset', this.appendAll);
 
       this.render();
     },

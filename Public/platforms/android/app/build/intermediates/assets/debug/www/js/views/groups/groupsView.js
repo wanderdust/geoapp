@@ -27,8 +27,8 @@ $(function () {
       this.listenTo(app.groupCollection, 'showSnackBar', this.snackBar);
       this.listenTo(app.groupCollection, 'checkForUpdates', this.updateGroupCollection);
 
-      new app.MapsContent();
       new app.TabsContent();
+      new app.MapsContent();
 
       var elem = document.querySelector('.sidenav');
       var instance = M.Sidenav.init(elem, {});
@@ -36,12 +36,17 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
-      socket.on('addNewRequest', () => this.getRequestsLength())
+      // Appends new notifications.
+      socket.on('addNewRequest', () => this.getRequestsLength());
+
+      // LoadCache loads local saved locally.
+      this.loadCache();
       this.render();
       this.getRequestsLength();
     },
 
     render: function () {
+      let that = this;
       this.$sideNav.hammer();
 
       this.socket.emit('createGroupCollection', {
@@ -58,9 +63,38 @@ $(function () {
         if (collection.length === 0) {
           app.groupCollection.trigger('blankMap')
         } else {
-          app.groupCollection.add(collection);
+          // If localStorage doesnt exist we load from http request.
+          if (localStorage.getItem('groupsCache_geoApp') === null) {
+            app.groupCollection.add(collection);
+          } else {
+            app.groupCollection.reset(collection);
+          }
         }
+        that.saveDataLocally(collection)
       });
+    },
+
+    // Loads the data from the localStorage.
+    loadCache: function () {
+      let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
+      app.groupCollection.add(cache);
+    },
+
+    // Saves the data from this session to the localStorage.
+    saveDataLocally: function (collection) {
+      let groupCollection = collection.map((e) => {
+        let data = {
+          title: e.title,
+          coords: e.coords,
+          groupImage: '',
+          activeUsers: [],
+          pendingUsers: [],
+          _id: e._id
+        };
+        return data;
+      });
+      groupCollection = JSON.stringify(groupCollection);
+      localStorage.setItem('groupsCache_geoApp', groupCollection);
     },
 
     // Gets the user's request length, to show notifications in the side-bar.
