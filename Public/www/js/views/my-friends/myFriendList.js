@@ -19,6 +19,7 @@ $(function () {
 
       this.listenTo(app.userCollection, 'add', this.appendOne);
       this.listenTo(app.userCollection, 'search', this.search);
+      this.listenToOnce(app.userCollection, 'reset', this.resetCacheArray)
       this.listenTo(app.userCollection, 'reset', this.appendAll)
 
       // inits the modal
@@ -51,11 +52,17 @@ $(function () {
       collection.each(this.appendOne, this);
     },
 
+    // When reset fires it clears the array so the new updated models can be pushed
+    resetCacheArray: function () {
+      this.currentFriendsCache = []
+    },
+
     saveOneModelLocally: function (model) {
       let user = {
         name: model.get('name'),
         _id: model.get('_id'),
-        userStatus: model.get('userStatus')
+        userStatus: model.get('userStatus'),
+        userImage: ''
       };
       // Array that keeps track of the users added
       this.currentFriendsCache.push(user);

@@ -13,6 +13,7 @@ $(function () {
     },
 
     initialize: function () {
+      localStorage.clear();
       _.bindAll(this, 'onDeviceReady', 'checkLocalStorage')
       this.socket = socket;
       // Check for saved passwords and if found send automatically login.
@@ -23,7 +24,6 @@ $(function () {
         this.snackBar('Comprueba tu conexión a internet')
       };
       document.addEventListener("deviceready", this.onDeviceReady, false);
-
     },
 
     render: function () {

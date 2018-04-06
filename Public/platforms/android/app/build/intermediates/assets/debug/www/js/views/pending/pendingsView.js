@@ -29,6 +29,8 @@ $(function () {
       this.listenTo(app.groupCollection, 'update', this.render);
       this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
 
+      this.loadCache();
+
       this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
         if(err){
           return navigator.notification.alert(
@@ -40,7 +42,15 @@ $(function () {
           app.groupCollection.trigger('addPlaceHolder')
         }
 
-        app.groupCollection.add(collection);
+        // If localStorage doesnt exist we load from http request.
+        if (localStorage.getItem('pendingGroupsCache_geoApp') === null) {
+          app.groupCollection.add(collection);
+        } else {
+          app.groupCollection.reset(collection);
+        }
+        // Saves the gruoups in the localStorage.
+        that.saveDataLocally(collection);
+
         that.socket.emit('findIfPending', {userId}, (err, status) => {
           if (err)
             return navigator.notification.alert(
@@ -61,6 +71,28 @@ $(function () {
 
       let template = Handlebars.compile(this.template);
       this.$groupsLength.html(template({title:'Grupos' , count}));
+    },
+
+    // Loads the data from the localStorage.
+    loadCache: function () {
+      let cache = JSON.parse(localStorage.getItem('pendingGroupsCache_geoApp'));
+      app.groupCollection.add(cache);
+    },
+    // Saves the data from this session to the localStorage.
+    saveDataLocally: function (collection) {
+      let groupCollection = collection.map((e) => {
+        let data = {
+          title: e.title,
+          coords: e.coords,
+          groupImage: '',
+          activeUsers: [],
+          pendingUsers: [],
+          _id: e._id
+        };
+        return data;
+      });
+      groupCollection = JSON.stringify(groupCollection);
+      localStorage.setItem('pendingGroupsCache_geoApp', groupCollection);
     },
 
     backToMain: function () {

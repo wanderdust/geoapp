@@ -19,6 +19,7 @@ $(function () {
       this.$requestList = $('.groups-list ul');
 
       this.listenTo(app.groupCollection, 'add', this.appendOne);
+      this.listenTo(app.groupCollection, 'reset', this.appendAll);
       this.listenTo(app.groupCollection, 'add addPlaceHolder', this.render);
       this.listenTo(app.groupCollection, 'removeClassSelected', this.removeAndUpdate)
 

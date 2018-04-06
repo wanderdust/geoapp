@@ -810,7 +810,7 @@ socket.on('getUser', async (data, callback) => {
   });
 
   // Saves the profile data changed by the user.
-  socket.on('saveProfileSettings', async(data, callback) => {
+  socket.on('saveProfileSettings', async(data) => {
     try {
       let updatedDocuments = [];
       let oldName = await User.findOne({_id: ObjectID(data.userId)});
@@ -850,11 +850,8 @@ socket.on('getUser', async (data, callback) => {
           io.to(e.socketId).emit('userNameUpdate', updatedProperties);
         });
       };
-
-      callback(null, user);
     } catch (e) {
       console.log(e);
-      callback('Unable to save data')
     }
   });
 

@@ -24,6 +24,8 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', userId);
 
+      
+
       this.loadCache();
 
       this.socket.emit('createFriendsCollection', userId, (err, collection) => {
@@ -39,8 +41,6 @@ $(function () {
           app.userCollection.add(collection);
         } else {
           app.userCollection.reset(collection);
-          // when we reset the collection we wipe all the data.
-          localStorage.removeItem('friendsCache_geoApp');
         }
 
       });
