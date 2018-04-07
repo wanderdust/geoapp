@@ -67,14 +67,12 @@ $(function () {
 
     // When app is on pause we switch to the background geolocation mode.
     onPause: function () {
-      socket.emit('debug', 'pause')
       navigator.geolocation.clearWatch(this.positionWatch);
       this.bgGeolocation().start();
     },
 
     // When app is on foreground we go back to using watchPosition
     onResume: function () {
-      socket.emit('debug', 'Resume')
       this.userCoords();
       this.bgGeolocation().stop();
       // WHen app was in background it didnt update. We check for updates now.
@@ -100,13 +98,13 @@ $(function () {
             groups: groups
           };
 
-          $.post('http://192.168.1.250:3000/location', JSON.stringify(data));
+          $.post('https://pacific-scrubland-87047.herokuapp.com/location', JSON.stringify(data));
 
           backgroundGeolocation.finish();
         };
 
         let error = function(error) {
-            console.log('BackgroundGeolocation error');
+            return
         };
 
         // BackgroundGeolocation is highly configurable. See platform specific configuration options
@@ -122,7 +120,7 @@ $(function () {
         // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
         return backgroundGeolocation;
       } catch (e) {
-        socket.emit('debug', e)
+        return
       }
     },
 
@@ -288,31 +286,6 @@ $(function () {
         this.connectionError();
       }
     },
-
-    // // Creates a new map with the center at the user's current location.
-    // blankMap: async function () {
-    //   let that = this;
-    //   if (!navigator.geolocation)
-    //     return console.log('Geolocation not supported by your browser');
-    //
-    //   await navigator.geolocation.getCurrentPosition(function (position) {
-    //     let coords = {};
-    //     coords.lat = position.coords.latitude;
-    //     coords.lng = position.coords.longitude;
-    //     that.newMap(coords);
-    //     that.userCoords();
-    //   }, function (err) {
-    //     navigator.notification.alert(
-    //       'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-    //       () => {
-    //         let coords = {lat: 55.948638, lng: -3.201244}
-    //         that.newMap(coords);
-    //         that.userCoords();
-    //       },
-    //       'Activa el GPS'
-    //     );
-    //   }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000})
-    // },
 
     // Inits google maps.
     initMap: function () {

@@ -211,10 +211,6 @@ $(function () {
             userId: sessionStorage.getItem('userId')
           })
         });
-
-        push.on('error', function(e) {
-            console.log("push error = " + e.message);
-        });
     },
 
     colorStatusBar: function () {

@@ -18,15 +18,34 @@ $(function () {
     },
 
     initialize: function () {
+      _.bindAll(this, 'loadCache', 'getUser')
       let userId = sessionStorage.getItem('userId');
       this.socket = socket;
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      this.loadCache();
+      this.getUser();
 
+    },
+
+    // Renders local data if there is any
+    loadCache: function () {
+      if (localStorage.getItem('profileInfo_geoApp') === null) {
+        return
+      }
+
+      let cache = JSON.parse(localStorage.getItem('profileInfo_geoApp'));
+      let model = new app.UserModel(cache);
+      this.render(model);
+    },
+
+    getUser: function () {
+      socket.emit('debug', 'getUser')
+      let that = this;
       // find the current user.
       // *creates a new user model with the data retrieved from db.
-      this.socket.emit('getUser', {
+      socket.emit('getUser', {
         userId: sessionStorage.getItem('userId')
       }, (err, res) => {
         if (err)
@@ -37,7 +56,7 @@ $(function () {
           );
 
         let model = new app.UserModel(res);
-        this.render(model);
+        that.render(model);
       })
     },
 

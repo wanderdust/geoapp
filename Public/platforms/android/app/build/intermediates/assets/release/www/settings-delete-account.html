@@ -30,8 +30,17 @@
               <p>Se eliminarán todos tus datos, y ya volverás a tener acceso a tu cuenta.</p>
             </li>
             <li class="contact-form change-mail">
-              <h4>Introduce tu contraseña</h4>
-              <input class="change-mail-input password" type="password" name="" value="">
+              <div class='row'>
+                <div class='input-field col s3 input-group phone-prefix'>
+                  <input maxlength="5" placeholder="+00" id="prefix" type='tel'/>
+                  <label for='prefix'>Prefijo</label>
+                </div>
+
+                <div class='input-field col s9 input-group user-email'>
+                  <input id="phone" type='tel' name='phone' />
+                  <label for='phone' data-error="Please enter a value.">Móvil</label>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -45,8 +54,9 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="./js/templates/templates.js"></script>
-    <script src="http://192.168.1.250:3000/socket.io/socket.io.js/"></script>
+    <script src="https://pacific-scrubland-87047.herokuapp.com/socket.io/socket.io.js/"></script>
     <script src="./js/utils/loadSocket.js"></script>
+    <script src="./js/utils/loginUser.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
     <script src="./js/libs/hammer.min.js"></script>

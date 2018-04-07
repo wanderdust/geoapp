@@ -17,30 +17,46 @@ $(function () {
     initialize: function () {
       this.socket = socket;
       let userId = sessionStorage.getItem('userId');
+      new app.UserList();
 
-      this.listenTo(app.userCollection, 'add', this.render)
+      this.listenTo(app.userCollection, 'add', this.render);
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', userId);
 
+      
+
+      this.loadCache();
+
       this.socket.emit('createFriendsCollection', userId, (err, collection) => {
-        if (err)
+        if (err) {
           return navigator.notification.alert(
             err,
             (msg) => true,
             'Error'
           );
+        }
+        // If localStorage doesnt exist we load from http request.
+        if (localStorage.getItem('friendsCache_geoApp') === null) {
+          app.userCollection.add(collection);
+        } else {
+          app.userCollection.reset(collection);
+        }
 
-        app.userCollection.add(collection);
       });
 
-      new app.UserList();
+
       this.render();
     },
 
-    render: function () {
+    render: function (ff) {
       let friendsLength = app.userCollection.length;
-      $('.friends-length span').html(friendsLength)
+      $('.friends-length span').html(friendsLength);
+    },
+
+    loadCache: function () {
+      let cache = JSON.parse(localStorage.getItem('friendsCache_geoApp'));
+      app.userCollection.add(cache);
     },
 
     backToMain: function () {

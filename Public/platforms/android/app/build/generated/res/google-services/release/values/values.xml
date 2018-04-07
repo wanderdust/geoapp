@@ -7,4 +7,5 @@
     <string name="google_app_id" translatable="false">1:97678348194:android:f70e1a9d371b1ca1</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDqsGEnrluKDHywPHYn2Nw7UsIifSkw6K8</string>
     <string name="google_storage_bucket" translatable="false">geoapp-a5cf6.appspot.com</string>
+    <string name="project_id" translatable="false">geoapp-a5cf6</string>
 </resources>

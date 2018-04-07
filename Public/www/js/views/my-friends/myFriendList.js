@@ -108,14 +108,14 @@ $(function () {
 
       this.socket.emit('updateFriendsList', data, (err, res) => {
         if (err)
-          return console.log(err);
+          return alert(err);
 
         app.userCollection.add(res);
       });
     },
 
-    onErrorContact: function () {
-      console.log(JSON.stringify(e))
+    onErrorContact: function (e) {
+      alert('Ha ocurrido un error')
     },
 
     // Shows/hides users when introducing a query.

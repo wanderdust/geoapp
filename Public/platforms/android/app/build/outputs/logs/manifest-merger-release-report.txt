@@ -20,13 +20,14 @@ INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src
 	android:name
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:15:43-101
 manifest
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:17:1-31:12
-MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:16:1-30:12
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:2:1-5:12
+MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:16:1-30:12
 MERGED from [com.google.firebase:firebase-core:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-core-11.6.2.aar/33ec58460ad74027e4f5e5865bc758fa/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:16:1-35:12
 MERGED from [com.google.firebase:firebase-analytics-impl:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.6.2.aar/5061da3d90e8c11fa0343c4c76b3bcfc/AndroidManifest.xml:16:1-29:12
@@ -39,24 +40,26 @@ MERGED from [com.android.support:support-v4:26.1.0] /home/pablo/.gradle/caches/t
 MERGED from [me.leolin:ShortcutBadger:1.1.17] /home/pablo/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.17.aar/f1fa6d76887c9810a72215a677308ec7/AndroidManifest.xml:2:1-52:12
 MERGED from [:CordovaLib] /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/CordovaLib/build/intermediates/manifests/full/release/AndroidManifest.xml:20:1-27:12
 MERGED from [com.android.support:multidex:1.0.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/7f40a1f14de646b63724b7fafd6090f3/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:17:1-31:12
 MERGED from [com.google.firebase:firebase-messaging-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-11.6.2.aar/686cc45ed7aac0a7ac6502c7fa6d76aa/AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-iid-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.6.2.aar/87a7237df643707d398419e97e8e17ec/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.6.2.aar/3099cd636a47c777f0d5de95d2a4cf76/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-common-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-common-license-11.6.2.aar/6266c2a3e7fa1c7ead57cdd897ae2ba2/AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-analytics-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-license-11.6.2.aar/647b4ef72b0bb1796ddbe063c4b1fdfe/AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:2:1-6:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/0059e37e023ea55ea182d9091576280a/AndroidManifest.xml:17:1-30:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:2:1-6:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
 	package
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:102-129
 		INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml
@@ -98,13 +101,15 @@ MERGED from [com.google.firebase:firebase-iid:11.6.2] /home/pablo/.gradle/caches
 	android:name
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:4:22-64
 application
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:5:5-28:19
-MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:25:5-29:19
-MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:19:5-29:19
-MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:19:5-29:19
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:5:5-48:19
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:4:5-19
+MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:19:5-29:19
+MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:19:5-29:19
 MERGED from [com.google.firebase:firebase-core:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-core-11.6.2.aar/33ec58460ad74027e4f5e5865bc758fa/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-core:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-core-11.6.2.aar/33ec58460ad74027e4f5e5865bc758fa/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:24:5-34:19
@@ -123,36 +128,40 @@ MERGED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.
 MERGED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:19:5-21:19
 MERGED from [com.android.support:support-v4:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/248c551f95fdc6bc3c5c627bc33dc2eb/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-v4:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/248c551f95fdc6bc3c5c627bc33dc2eb/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:25:5-29:19
 MERGED from [com.google.firebase:firebase-messaging-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-11.6.2.aar/686cc45ed7aac0a7ac6502c7fa6d76aa/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-messaging-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-11.6.2.aar/686cc45ed7aac0a7ac6502c7fa6d76aa/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-iid-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.6.2.aar/87a7237df643707d398419e97e8e17ec/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-iid-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.6.2.aar/87a7237df643707d398419e97e8e17ec/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-basement-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.6.2.aar/3099cd636a47c777f0d5de95d2a4cf76/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-basement-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.6.2.aar/3099cd636a47c777f0d5de95d2a4cf76/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-common-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-common-license-11.6.2.aar/6266c2a3e7fa1c7ead57cdd897ae2ba2/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-common-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-common-license-11.6.2.aar/6266c2a3e7fa1c7ead57cdd897ae2ba2/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-analytics-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-license-11.6.2.aar/647b4ef72b0bb1796ddbe063c4b1fdfe/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-analytics-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-license-11.6.2.aar/647b4ef72b0bb1796ddbe063c4b1fdfe/AndroidManifest.xml:5:5-20
-MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:5:5-20
-MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:5:5-20
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/0059e37e023ea55ea182d9091576280a/AndroidManifest.xml:24:5-28:19
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/0059e37e023ea55ea182d9091576280a/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:5:5-20
 	android:supportsRtl
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:5:114-140
 	android:label
@@ -217,14 +226,92 @@ action#com.google.firebase.INSTANCE_ID_EVENT
 ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:25:17-80
 	android:name
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:25:25-77
+meta-data#com.google.android.gms.version
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:28:9-122
+MERGED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:20:9-121
+MERGED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:28:66-119
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:28:20-65
+service#com.marianhello.bgloc.sync.SyncService
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:9-34:19
+	android:process
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:96-119
+	android:exported
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:18-41
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:42-95
+intent-filter#android.content.SyncAdapter
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:30:13-32:29
+action#android.content.SyncAdapter
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:31:17-70
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:31:25-67
+meta-data#android.content.SyncAdapter
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:33:13-105
+	android:resource
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:33:67-102
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:33:24-66
+service#com.marianhello.bgloc.sync.AuthenticatorService
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:35:9-40:19
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:35:18-80
+intent-filter#android.accounts.AccountAuthenticator
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:36:13-38:29
+action#android.accounts.AccountAuthenticator
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:37:17-80
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:37:25-77
+meta-data#android.accounts.AccountAuthenticator
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:39:13-117
+	android:resource
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:39:77-114
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:39:24-76
+provider#com.marianhello.bgloc.sync.DummyContentProvider
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:41:9-181
+	android:authorities
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:41:19-66
+	android:syncable
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:41:155-178
+	android:exported
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:41:67-91
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:41:92-154
+service#com.marianhello.bgloc.LocationService
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:42:9-121
+	android:enabled
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:42:18-40
+	android:exported
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:42:41-65
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:42:66-118
+receiver#com.marianhello.bgloc.BootCompletedReceiver
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:43:9-47:20
+	android:enabled
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:43:19-41
+	android:exported
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:43:42-65
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:43:66-124
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:44:13-46:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:45:17-79
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:45:25-76
 uses-sdk
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:5-74
-MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:21:5-23:55
-MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:21:5-23:55
-MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:17:5-43
-MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:17:5-43
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:49:5-74
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:3:5-43
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:3:5-43
+MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:21:5-23:55
+MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:21:5-23:55
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:21:5-23:78
+MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:17:5-43
+MERGED from [com.google.firebase:firebase-messaging:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.6.2.aar/baad19c90b47a3946ee923e09d75b95c/AndroidManifest.xml:17:5-43
 MERGED from [com.google.firebase:firebase-core:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-core-11.6.2.aar/33ec58460ad74027e4f5e5865bc758fa/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-core:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-core-11.6.2.aar/33ec58460ad74027e4f5e5865bc758fa/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:17:5-43
@@ -249,72 +336,64 @@ MERGED from [:CordovaLib] /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/and
 MERGED from [:CordovaLib] /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/CordovaLib/build/intermediates/manifests/full/release/AndroidManifest.xml:25:5-44
 MERGED from [com.android.support:multidex:1.0.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/7f40a1f14de646b63724b7fafd6090f3/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:multidex:1.0.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/7f40a1f14de646b63724b7fafd6090f3/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:21:5-23:60
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:21:5-23:61
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:21:5-23:58
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:21:5-23:61
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:21:5-23:58
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:21:5-23:58
 MERGED from [com.google.firebase:firebase-messaging-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-11.6.2.aar/686cc45ed7aac0a7ac6502c7fa6d76aa/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-messaging-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-11.6.2.aar/686cc45ed7aac0a7ac6502c7fa6d76aa/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-iid-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.6.2.aar/87a7237df643707d398419e97e8e17ec/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-iid-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-license-11.6.2.aar/87a7237df643707d398419e97e8e17ec/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-basement-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.6.2.aar/3099cd636a47c777f0d5de95d2a4cf76/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-basement-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.6.2.aar/3099cd636a47c777f0d5de95d2a4cf76/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-common-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-common-license-11.6.2.aar/6266c2a3e7fa1c7ead57cdd897ae2ba2/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-common-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-common-license-11.6.2.aar/6266c2a3e7fa1c7ead57cdd897ae2ba2/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-analytics-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-license-11.6.2.aar/647b4ef72b0bb1796ddbe063c4b1fdfe/AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-analytics-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-license-11.6.2.aar/647b4ef72b0bb1796ddbe063c4b1fdfe/AndroidManifest.xml:4:5-43
-MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:4:5-43
-MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.6.2.aar/60089ca01d65bb4d076df49f4e034d11/AndroidManifest.xml:4:5-43
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/0059e37e023ea55ea182d9091576280a/AndroidManifest.xml:20:5-22:41
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/0059e37e023ea55ea182d9091576280a/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:4:5-43
 	tools:overrideLibrary
 		ADDED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:23:9-52
 	android:targetSdkVersion
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:42-71
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:49:42-71
 	android:minSdkVersion
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:29:15-41
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:49:15-41
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:30:5-81
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:50:5-81
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:30:22-78
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:50:22-78
 uses-permission#android.permission.READ_CONTACTS
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:31:5-72
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:51:5-72
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:31:22-69
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:51:22-69
 uses-permission#android.permission.WRITE_CONTACTS
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:32:5-73
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:52:5-73
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:32:22-70
-uses-permission#android.permission.GET_ACCOUNTS
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:33:5-71
-	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:33:22-68
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:34:5-81
-	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:34:22-78
-uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:35:5-79
-	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:35:22-76
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:52:22-70
 uses-feature#android.hardware.location.gps
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:36:5-66
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:53:5-66
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:36:19-63
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:53:19-63
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:37:5-79
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:54:5-79
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:21:5-78
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:21:5-78
 MERGED from [com.google.firebase:firebase-analytics-impl:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.6.2.aar/5061da3d90e8c11fa0343c4c76b3bcfc/AndroidManifest.xml:21:5-78
@@ -322,9 +401,9 @@ MERGED from [com.google.firebase:firebase-analytics-impl:11.6.2] /home/pablo/.gr
 MERGED from [com.google.firebase:firebase-iid:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.6.2.aar/243376b8318d6faa3f2635dbd48eec07/AndroidManifest.xml:19:5-78
 MERGED from [com.google.firebase:firebase-iid:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.6.2.aar/243376b8318d6faa3f2635dbd48eec07/AndroidManifest.xml:19:5-78
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:37:22-76
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:54:22-76
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:38:5-68
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:55:5-68
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-analytics:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-11.6.2.aar/22815dd1add042f56c28218972e1db81/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-analytics-impl:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-11.6.2.aar/5061da3d90e8c11fa0343c4c76b3bcfc/AndroidManifest.xml:22:5-67
@@ -332,11 +411,55 @@ MERGED from [com.google.firebase:firebase-analytics-impl:11.6.2] /home/pablo/.gr
 MERGED from [com.google.firebase:firebase-iid:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.6.2.aar/243376b8318d6faa3f2635dbd48eec07/AndroidManifest.xml:21:5-67
 MERGED from [com.google.firebase:firebase-iid:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-iid-11.6.2.aar/243376b8318d6faa3f2635dbd48eec07/AndroidManifest.xml:21:5-67
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:38:22-65
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:55:22-65
 uses-permission#android.permission.VIBRATE
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:39:5-66
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:56:5-66
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:39:22-63
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:56:22-63
+uses-permission#android.permission.BLUETOOTH
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:57:5-68
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:57:22-65
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:58:5-71
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:58:22-68
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:59:5-81
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:59:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:60:5-79
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:60:22-76
+uses-permission#android.permission.AUTHENTICATE_ACCOUNTS
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:61:5-80
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:61:22-77
+uses-permission#android.permission.READ_SYNC_SETTINGS
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:62:5-77
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:62:22-74
+uses-permission#android.permission.WRITE_SYNC_SETTINGS
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:63:5-78
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:63:22-75
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:64:5-81
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:64:22-78
+uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:65:5-94
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:65:22-91
+uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:66:5-89
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:66:22-86
+uses-permission#android.hardware.location
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:5-65
+	android:name
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:22-62
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:13:13-116
 	android:resource
@@ -345,16 +468,22 @@ ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/ma
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:13:24-74
 meta-data#android.support.VERSION
 ADDED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-v4:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/248c551f95fdc6bc3c5c627bc33dc2eb/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-v4:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/248c551f95fdc6bc3c5c627bc33dc2eb/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/219b8e9fd837347d2c134aace39ba965/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/97256c905d9f4688bdffadb2a7e67678/AndroidManifest.xml:23:9-25:38
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-fragment:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/14d9bf562b606b3ef06419f7619ecd20/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5c429f8ebf0150573e09d45b5b51917e/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/15cef9f1b7b646e1e8c4adadbf9fb55b/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/9bb53adf6b9c32d7d5b9b0068e1864b1/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:support-compat:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/5f802405d3e17e77f31db309be1228af/AndroidManifest.xml:26:9-28:38
 	android:value
@@ -485,12 +614,6 @@ ADDED from [com.google.android.gms:play-services-base:11.6.2] /home/pablo/.gradl
 		ADDED from [com.google.android.gms:play-services-base:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.2.aar/e0da58786a5fd64febea804231e5818a/AndroidManifest.xml:19:86-145
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-11.6.2.aar/e0da58786a5fd64febea804231e5818a/AndroidManifest.xml:19:19-85
-meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:20:9-121
-	android:value
-		ADDED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:20:66-119
-	android:name
-		ADDED from [com.google.android.gms:play-services-basement:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.6.2.aar/0b454e3de11624146c9270b2d73cd257/AndroidManifest.xml:20:20-65
 uses-permission#com.sec.android.provider.badge.permission.READ
 ADDED from [me.leolin:ShortcutBadger:1.1.17] /home/pablo/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.17.aar/f1fa6d76887c9810a72215a677308ec7/AndroidManifest.xml:19:5-86
 	android:name

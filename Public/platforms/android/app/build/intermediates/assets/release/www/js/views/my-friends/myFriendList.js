@@ -13,8 +13,14 @@ $(function () {
       this.socket = socket;
       this.$friendList = $('.groups-list ul');
 
+      // Array that keeps track of the data to be saved locally
+      this.currentFriendsCache = [];
+      new app.MyFriendView();
+
       this.listenTo(app.userCollection, 'add', this.appendOne);
       this.listenTo(app.userCollection, 'search', this.search);
+      this.listenToOnce(app.userCollection, 'reset', this.resetCacheArray)
+      this.listenTo(app.userCollection, 'reset', this.appendAll)
 
       // inits the modal
       this.modalElem = document.querySelector('.modal');
@@ -24,8 +30,6 @@ $(function () {
       });
 
       document.addEventListener("deviceready", this.getContacts, false);
-
-      new app.MyFriendView();
     },
 
     render: function () {
@@ -35,15 +39,36 @@ $(function () {
     // Appends a model every time there is an 'add' event.
     appendOne: function (user) {
       let view = new app.MyFriendView({model: user});
+      $('.preloader').remove();
       this.$friendList.append(view.render().el);
 
       // initModal sends the modal intance to each model.
       app.userCollection.trigger('initModal', this.modalInst);
+      this.saveOneModelLocally(user);
     },
 
     appendAll: function (collection) {
       this.$friendList.html('');
       collection.each(this.appendOne, this);
+    },
+
+    // When reset fires it clears the array so the new updated models can be pushed
+    resetCacheArray: function () {
+      this.currentFriendsCache = []
+    },
+
+    saveOneModelLocally: function (model) {
+      let user = {
+        name: model.get('name'),
+        _id: model.get('_id'),
+        userStatus: model.get('userStatus'),
+        userImage: ''
+      };
+      // Array that keeps track of the users added
+      this.currentFriendsCache.push(user);
+      // We convert the array to JSON to store it.
+      let stringData = JSON.stringify(this.currentFriendsCache);
+      localStorage.setItem('friendsCache_geoApp', stringData);
     },
 
     getContacts: function () {

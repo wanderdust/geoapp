@@ -37,6 +37,23 @@
 
       <div class="tabs-content status-users-content">
         <div class="groups-list">
+
+          <div class="row preloader">
+            <div class="col s2 offset-s5">
+              <div class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <ul></ul>
         </div>
 
@@ -59,8 +76,9 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="./js/templates/templates.js"></script>
-    <script src="http://192.168.1.250:3000/socket.io/socket.io.js/"></script>
+    <script src="https://pacific-scrubland-87047.herokuapp.com/socket.io/socket.io.js/"></script>
     <script src="./js/utils/loadSocket.js"></script>
+    <script src="./js/utils/loginUser.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
     <script src="./js/libs/hammer.min.js"></script>

@@ -42,8 +42,8 @@ let connectedUsers = new ConnectedUsers();
 app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
 
 io.on('connection', (socket) => {
-  console.log('userConnected')
-  
+  console.log('userConnected');
+
   socket.on('debug', (data) => {
     console.log('DEBUG FUNCTION:', data)
   });
@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
       if (data.phone.length < 6) {
       return callback({Error: 7, Message: 'Teléfono no válido'})
      }
-     console.log(data.uuid)
+
       user = await new User(newUser).save();
 
       callback(null, {_id: user._id, uuid: newUser.deviceUuid});
@@ -141,45 +141,10 @@ io.on('connection', (socket) => {
     };
   });
 
-
-  // Login user no longer needed because we use device identification.
-  // socket.on('loginUser', async (data, callback) => {
-  //   try {
-  //     let userPhone = `${data.prefix}${data.phone}`;
-  //     let user = await User.findOne({phone: userPhone});
-  //
-  //
-  //     if (!data.localStorage && data.prefix === "") {
-  //       // only checks the prefix field if the data doesn't come from localStorage
-  //       return callback({Error: 8, Message: 'Introduce el prefijo de tu país'})
-  //     }
-  //
-  //     if (user === null)
-  //       return callback({Error: 1, Message: 'Teléfono no encontrado'});
-  //
-  //
-  //     let verify = bcrypt.compareSync(data.password, user.password);
-  //
-  //     if (!verify) {
-  //       // if password is incorrect check if localStorage hash is the same as password.
-  //       let hash = await User.findOne({phone: data.phone, password: data.password});
-  //
-  //       if (hash === null)
-  //         return callback({Error: 2, Message: 'Contraseña incorrecta'});
-  //     }
-  //
-  //     callback(null, {_id: user._id, uuid: user.deviceUuid})
-  //   } catch (e) {
-  //     console.log(e)
-  //     callback({Error: 99, Message: e})
-  //   }
-  // });
-
   // Passwordless login. Will substitue the above one.
   // Uses the users unique identifier as a login.
   socket.on('passwordlessLogin', async (data, callback) => {
     try {
-      console.log('passwordLessLogin')
       let uuid = data.uuid;
       let user = await User.findOne({deviceUuid: uuid});
 
@@ -394,7 +359,6 @@ socket.on('getUser', async (data, callback) => {
         updatedProperties.userId = userName._id;
 
         let socketsToUpdate = openSocketsGroups.findSockets(doc);
-        console.log(socketsToUpdate);
 
         socketsToUpdate.forEach((e) => {
           io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
@@ -598,8 +562,6 @@ socket.on('getUser', async (data, callback) => {
 
         existingPhones.push(friendPhoneNumber)
       };
-
-      console.log(existingPhones)
 
       // Find the existing users phones index in the contacts array and remove them.
       for (let existingPhone of existingPhones) {
@@ -916,7 +878,6 @@ socket.on('getUser', async (data, callback) => {
   socket.on('deleteAccount', async(data, callback) => {
     try {
       let phone = `${data.prefix}${data.phone}`;
-      console.log(data, phone)
       // For now as long as they verify phone number is okay.
       let user = await User.findOne({_id: data._id, deviceUuid: data.uuid, phone: phone});
 

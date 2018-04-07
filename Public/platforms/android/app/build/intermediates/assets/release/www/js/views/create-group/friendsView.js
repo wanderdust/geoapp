@@ -18,7 +18,7 @@ $(function () {
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
       "touchend .new-group-image" : "addGroupImage",
-      "swiperight .tabs-content": "closeNavAndSave",
+      "swiperight .tabs-content.groups-sidebar": "closeNavAndSave",
       "click .search-icon": "toggleScaleOut"
     },
 
@@ -194,7 +194,9 @@ $(function () {
         'destinationType': 1,
         'sourceType': 0,
         'mediaType': 0,
-        'correctOrientation': true
+        'correctOrientation': true,
+        'quality': 25,
+        'allowEdit': true
       };
 
       let addImage = navigator.camera.getPicture(function (image_URI) {

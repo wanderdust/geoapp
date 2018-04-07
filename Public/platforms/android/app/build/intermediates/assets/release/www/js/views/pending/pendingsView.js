@@ -29,6 +29,8 @@ $(function () {
       this.listenTo(app.groupCollection, 'update', this.render);
       this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
 
+      this.loadCache();
+
       this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
         if(err){
           return navigator.notification.alert(
@@ -40,7 +42,15 @@ $(function () {
           app.groupCollection.trigger('addPlaceHolder')
         }
 
-        app.groupCollection.add(collection);
+        // If localStorage doesnt exist we load from http request.
+        if (localStorage.getItem('groupsCache_geoApp') === null) {
+          app.groupCollection.add(collection);
+        } else {
+          app.groupCollection.reset(collection);
+        }
+        // // Saves the gruoups in the localStorage.
+        // that.saveDataLocally(collection);
+
         that.socket.emit('findIfPending', {userId}, (err, status) => {
           if (err)
             return navigator.notification.alert(
@@ -63,6 +73,12 @@ $(function () {
       this.$groupsLength.html(template({title:'Grupos' , count}));
     },
 
+    // Loads the data from the localStorage.
+    loadCache: function () {
+      let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
+      app.groupCollection.add(cache);
+    },
+  
     backToMain: function () {
       window.location.href = 'main.html#/online';
     },

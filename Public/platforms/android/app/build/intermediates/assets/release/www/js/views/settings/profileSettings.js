@@ -18,11 +18,14 @@ $(function () {
     },
 
     initialize: function () {
+      _.bindAll(this, 'saveDataLocally')
       let userId = sessionStorage.getItem('userId');
       this.socket = socket;
 
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
+
+      this.loadCache();
 
       // find the current user.
       // *creates a new user model with the data retrieved from db.
@@ -40,6 +43,34 @@ $(function () {
         this.render(model);
         this.updateData(model.get('userImage'));
       })
+    },
+
+    // Renders local data if there is any
+    loadCache: function () {
+      if (localStorage.getItem('profileInfo_geoApp') === null)
+        return;
+
+      let cache = JSON.parse(localStorage.getItem('profileInfo_geoApp'));
+      let model = new app.UserModel(cache);
+      this.render(model);
+      this.updateData(model.get('userImage'));
+    },
+
+    saveDataLocally: function (userName, userStatus, _id) {
+      let userImage;
+
+      let userInfo = {
+        name: userName,
+        userStatus: userStatus,
+        _id: _id
+      };
+      if (localStorage.getItem('profileImageURI_geoApp') !== null) {
+        userInfo.userImage = localStorage.getItem('profileImageURI_geoApp');
+      }
+
+      userInfo = JSON.stringify(userInfo);
+      localStorage.setItem('profileInfo_geoApp', userInfo);
+
     },
 
     // Renders and sets the initial values for the user variables.
@@ -106,23 +137,15 @@ $(function () {
       if (!this.verifyData(userStatus, userName))
         return this.snackBar('Nombre y estado tienen que contener al menos 1 caracter');
 
+      this.saveDataLocally(userName, userStatus, userId);
       this.socket.emit('saveProfileSettings', {
         userId,
         userName,
         userImage,
         userStatus
-      }, (err, res) => {
-        if (err) {
-          // Native alerts from phonegap
-          return navigator.notification.alert(
-            err,
-            (msg) => true,
-            'Error'
-          );
-        }
+      });
 
-        window.location.href = 'settings.html';
-      })
+      window.location.href = 'settings.html';
     },
 
     addUserImage: function () {
@@ -131,10 +154,13 @@ $(function () {
         'destinationType': 1,
         'sourceType': 0,
         'mediaType': 0,
-        'correctOrientation': true
+        'correctOrientation': true,
+        'quality': 25,
+        'allowEdit': true
       };
 
       navigator.camera.getPicture(function (image_URI) {
+        localStorage.setItem('profileImageURI_geoApp', image_URI)
         that.updateData(image_URI);
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.userImage = base64Image;

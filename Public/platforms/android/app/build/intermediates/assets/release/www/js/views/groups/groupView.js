@@ -16,11 +16,9 @@ $(function () {
     },
 
     initialize: function () {
-      this.listenTo(this.model, 'render', this.render);
-      this.listenToOnce(this.model, 'updateOne', this.updateOne);
+      this.listenToOnce(this.model, 'change', this.updateOne);
       // this.listenTo(this.model, 'visible', this.toggleVisible);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
-
       this.instance;
     },
 
@@ -39,6 +37,7 @@ $(function () {
     },
 
     updateOne: function (model) {
+      socket.emit('debug', 'I updated the model!');
       this.$el.remove();
       app.groupCollection.trigger('add', model);
     },

@@ -81,7 +81,6 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
-      model.trigger('render');
       model.trigger('change', model);
       // Updates the markers.
       this.trigger('updateMarkers');
@@ -107,7 +106,6 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
-      model.trigger('render');
       model.trigger('change', model);
       // Updates the markers.
       this.trigger('updateMarkers');
@@ -132,7 +130,6 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model.
-      model.trigger('render');
       model.trigger('change', model);
       // Updates the Markers.
       this.trigger('updateMarkers');
@@ -162,7 +159,6 @@ $(function () {
       this.set({model}, {add: false, remove: false, merge: true});
 
       // Renders the changed model and the updates markers.
-      model.trigger('render');
       model.trigger('change', model);
     },
 
@@ -175,6 +171,8 @@ $(function () {
         view.addClass('fit-horizontally');
       }
       i.src = view.attr('src');
+      // The image shows already resized.
+      view.removeClass('hidden');
     }
   })
 

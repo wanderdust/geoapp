@@ -19,11 +19,20 @@ $(function () {
     },
 
     initialize: function () {
+      let that = this;
       this.socket = socket;
 
       this.$onlineUsers = $('.online-users-list p');
       this.$offlineUsers = $('.offline-users-list p');
-      this.$header = $('#group-title-container');
+      this.$headerTitle = $('.group-name');
+      this.$header = $('.sub-title-container');
+
+      this.currentGroupId = sessionStorage.getItem('currentGroupId');
+      // Groups name in localStorage.
+      this.groupInLS = `usersCache_${this.currentGroupId}_geoApp`
+
+      // Fast load of group title from cache.
+      this.$headerTitle.html(sessionStorage.getItem('currentGroupName'));
 
       // inits the modal
       this.modalElem = document.querySelector('.modal');
@@ -47,6 +56,9 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'))
 
+      // LoadCache loads local saved locally.
+      this.loadCache();
+
       this.socket.emit('createUsersCollection', {
         groupId: sessionStorage.getItem('currentGroupId'),
         userId: sessionStorage.getItem('userId')
@@ -58,7 +70,13 @@ $(function () {
             'Error'
           );
 
-        app.userCollection.add(collection);
+          // If localStorage doesnt exist we load from http request.
+          if (localStorage.getItem(this.groupInLS) === null) {
+            app.userCollection.add(collection);
+          } else {
+            app.userCollection.reset(collection);
+          }
+          that.saveDataLocally(collection);
       });
 
       // Listens for server if user is online/offline in a group to update it.
@@ -76,7 +94,6 @@ $(function () {
       // initModal sends the modal intance to each model.
       app.userCollection.trigger('initModal', this.modalInst);
 
-      let currentGroupName = sessionStorage.getItem('currentGroupName');
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;
       let isOnline = app.userCollection.isStatus('online');
@@ -95,10 +112,34 @@ $(function () {
       }));
 
       this.$header.html(headerTemplate({
-        groupName: currentGroupName,
         isOnline,
         isPending
       }));
+
+      // Socket.isOnline can be either false or undefined.
+      if (this.socket.isOnline === false)
+        $('.btn-floating').addClass('disabled');
+    },
+
+    // Loads the data from the localStorage.
+    loadCache: function () {
+      let cache = JSON.parse(localStorage.getItem(this.groupInLS));
+      app.userCollection.add(cache);
+    },
+
+    // Saves the data from this session to the localStorage.
+    saveDataLocally: function (collection) {
+      let userCollection = collection.map((e) => {
+        let data = {
+          name: e.name,
+          userImage: '',
+          userStatus: e.userStatus,
+          _id: e._id
+        };
+        return data;
+      });
+      userCollection = JSON.stringify(userCollection);
+      localStorage.setItem(this.groupInLS, userCollection);
     },
 
     addFriends: function () {

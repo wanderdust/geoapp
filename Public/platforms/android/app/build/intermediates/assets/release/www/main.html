@@ -70,7 +70,19 @@
       </ul>
 
       <div id="map-container">
-        <a class="my-location btn-floating btn-large waves-effect waves-light white"><img src="./css/assets/my_location.svg"></a>
+        <a class="disabled my-location btn-floating btn-large waves-effect waves-light white">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </a>
 
         <div id="map-frame"></div>
       </div>
@@ -103,8 +115,9 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="./js/templates/templates.js"></script>
-    <script src="http://192.168.1.250:3000/socket.io/socket.io.js/"></script>
+    <script src="https://pacific-scrubland-87047.herokuapp.com/socket.io/socket.io.js/"></script>
     <script src="./js/utils/loadSocket.js"></script>
+    <script src="./js/utils/loginUser.js"></script>
     <script src="./js/libs/jquery.min.js"></script>
     <script src="js/libs/materialize.js"></script>
     <script src="./js/libs/hammer.min.js"></script>

@@ -3,6 +3,7 @@
 var app = app || {};
 var socket  = loadSocket();
 
+
 $(function () {
 
   app.MapsContent = Backbone.View.extend({
@@ -17,16 +18,17 @@ $(function () {
     },
 
     initialize: function () {
-      _.bindAll(this, 'userCoords', 'render');
+      _.bindAll(this, 'userCoords', 'render', 'deviceReady', 'isGpsEnabled', 'pointToUserLocation', 'bgGeolocation', 'onPause', 'onResume');
       this.currentMarkers = [];
       this.userCurrentPosition = null;
       this.socket = socket;
 
       // Stops map from executing if offline.
-      this.listenToOnce(app.groupCollection, 'blankMap', this.blankMap);
+      this.listenToOnce(app.groupCollection, 'blankMap', this.newMap);
       this.listenToOnce(app.groupCollection, 'update', this.initMap);
       this.listenToOnce(app.groupCollection, 'update', this.appendAll);
       this.listenTo(app.groupCollection, 'updateMarkers', this.updateAll);
+      this.listenTo(app.groupCollection, 'reset', this.appendAll)
       // Temporary disable the markers filtering
       // this.listenTo(app.groupCollection, 'filter', this.filterAll);
       // this.listenTo(app.groupCollection, 'change', this.filterAll);
@@ -48,17 +50,112 @@ $(function () {
         app.groupCollection.findAndUpdateGroups(data);
       });
 
+      document.addEventListener("deviceready", this.deviceReady, false);
+
+
       this.render();
     },
 
     render: function () {
+
+    },
+
+    deviceReady: function () {
+      document.addEventListener('pause', this.onPause, false);
+      document.addEventListener('resume', this.onResume, false);
+    },
+
+    // When app is on pause we switch to the background geolocation mode.
+    onPause: function () {
+      socket.emit('debug', 'pause')
+      navigator.geolocation.clearWatch(this.positionWatch);
+      this.bgGeolocation().start();
+    },
+
+    // When app is on foreground we go back to using watchPosition
+    onResume: function () {
+      socket.emit('debug', 'Resume')
+      this.userCoords();
+      this.bgGeolocation().stop();
+      // WHen app was in background it didnt update. We check for updates now.
+      app.groupCollection.trigger('checkForUpdates');
+    },
+
+    bgGeolocation: function ()  {
+      try {
+        let success = function(position) {
+
+          let groups = app.groupCollection.models.map((model) => {
+            let foo = [];
+            foo.push(model.get('coords').lat);
+            foo.push(model.get('coords').lng);
+            foo.push(model.get('_id'))
+            return foo;
+          });
+
+          let data = {
+            lat: position.latitude,
+            lng: position.longitude,
+            userId: sessionStorage.getItem('userId'),
+            groups: groups
+          };
+
+          $.post('https://pacific-scrubland-87047.herokuapp.com/location', JSON.stringify(data));
+
+          backgroundGeolocation.finish();
+        };
+
+        let error = function(error) {
+            console.log('BackgroundGeolocation error');
+        };
+
+        // BackgroundGeolocation is highly configurable. See platform specific configuration options
+        backgroundGeolocation.configure(success, error, {
+            desiredAccuracy: 30,
+            stationaryRadius: 0,
+            distanceFilter: 0,
+            interval: 10000,
+            locationProvider: backgroundGeolocation.provider.ANDROID_DISTANCE_FILTER_PROVIDER,
+            startForeground: false
+        });
+
+        // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
+        return backgroundGeolocation;
+      } catch (e) {
+        socket.emit('debug', e)
+      }
+    },
+
+    // Checks if Gps is enabled and asks for permission to activate it if it is not.
+    isGpsEnabled () {
+      let that  = this;
+      cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled) {
+        if (!enabled) {
+          navigator.geolocation.activator.askActivation(function(response) {
+            // If user accepts we do a page refresh so that geolocation gets activated.
+            window.location.href = "main.html"
+          }, function(error) {
+            let userId = sessionStorage.getItem('userId')
+            // If user declines, we set user offline.
+            that.socket.emit('userOffBounds', {
+              userId: userId
+            })
+          });
+        }
+      }, function(error) {
+        navigator.notification.alert(
+          e,
+          (msg) => true,
+          "Ha ocurrido un error:" + error
+        );
+      });
     },
 
     userCoords: async function () {
       let that = this;
 
       try {
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 8000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000};
         // I add a frequency so that not too many requests are sent to the server.
         // It only runs the function 1 every 3 times watch position gets executed.
         // This fixes bug where watchposition executes too quiclkly the first time.
@@ -90,7 +187,8 @@ $(function () {
             let groupLng = model.get('coords').lng;
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
-            if (distance <= 0.03) {
+            // KM
+            if (distance <= 0.045) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
@@ -111,22 +209,12 @@ $(function () {
         };
 
         let error = function (err) {
-          navigator.notification.alert(
-            'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-            function () {
-              // we set the user offline.
-              let userId = sessionStorage.getItem('userId');
-              this.socket.emit('userOffBounds', {
-                userId: userId
-              })
-            },
-            'Activa el GPS'
-          );
+          let userId = sessionStorage.getItem('userId');
+          app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         }
 
         // Starts watchPosition
-        await navigator.geolocation.watchPosition(success, error, options);
-
+        this.positionWatch = await navigator.geolocation.watchPosition(success, error, options);
       } catch (e) {
         return navigator.notification.alert(
           e,
@@ -182,45 +270,49 @@ $(function () {
       };
     },
 
-    newMap: function (coords) {
+    newMap: function () {
       try {
         let map =  new google.maps.Map(document.getElementById('map-frame'), {
-            center: coords,
+            center: {lat: 55.948638, lng: -3.201244},
             zoom: 8,
             disableDefaultUI: true,
             styles: mapStyle
           });
         this.map = map;
+        // Point To user location checks if the GPS is enabled, and takes action.
+        // also it points to the user position once it has the position.
+        document.addEventListener("deviceready", this.pointToUserLocation, false);
+
         return map;
       } catch (e) {
         this.connectionError();
       }
     },
 
-    // Creates a new map with the center at the user's current location.
-    blankMap: async function () {
-      let that = this;
-      if (!navigator.geolocation)
-        return console.log('Geolocation not supported by your browser');
-
-      await navigator.geolocation.getCurrentPosition(function (position) {
-        let coords = {};
-        coords.lat = position.coords.latitude;
-        coords.lng = position.coords.longitude;
-        that.newMap(coords);
-        that.userCoords();
-      }, function (err) {
-        navigator.notification.alert(
-          'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
-          () => {
-            let coords = {lat: 55.948638, lng: -3.201244}
-            that.newMap(coords);
-            that.userCoords();
-          },
-          'Activa el GPS'
-        );
-      }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000})
-    },
+    // // Creates a new map with the center at the user's current location.
+    // blankMap: async function () {
+    //   let that = this;
+    //   if (!navigator.geolocation)
+    //     return console.log('Geolocation not supported by your browser');
+    //
+    //   await navigator.geolocation.getCurrentPosition(function (position) {
+    //     let coords = {};
+    //     coords.lat = position.coords.latitude;
+    //     coords.lng = position.coords.longitude;
+    //     that.newMap(coords);
+    //     that.userCoords();
+    //   }, function (err) {
+    //     navigator.notification.alert(
+    //       'No se ha podido encontrar tu ubicación. Por favor activa los servicios GPS para poder disfrutar de la app.',
+    //       () => {
+    //         let coords = {lat: 55.948638, lng: -3.201244}
+    //         that.newMap(coords);
+    //         that.userCoords();
+    //       },
+    //       'Activa el GPS'
+    //     );
+    //   }, {enableHighAccuracy: true, maximumAge: 5000, timeout: 5000})
+    // },
 
     // Inits google maps.
     initMap: function () {
@@ -320,20 +412,33 @@ $(function () {
           let userLng = position.coords.longitude;
           let latLng = new google.maps.LatLng(userLat, userLng);
           that.map.panTo(latLng);
+          that.updateUserLocation(userLat, userLng);
+          $('.my-location').removeClass('disabled').html(Templates.myLocation);
         };
 
         let error = (err) => {
+          $('.my-location').removeClass('disabled').html(Templates.myLocation);
           app.groupCollection.trigger('showSnackBar', {message: 'No se ha podido encontrar tu ubicación'});
         };
 
-        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 6000};
+        let options = {enableHighAccuracy: true, maximumAge: 5000, timeout: 15000};
 
-        if (this.userCurrentPosition === null) {
-          app.groupCollection.trigger('showSnackBar', {message: 'Buscando...'});
-
-          return await navigator.geolocation.getCurrentPosition(success, error, options)
-        }
-        this.map.panTo(this.userCurrentPosition.getPosition());
+        // Checks if Gps is enabled. If it is it pans to user position.
+        // if it is not it executes isGpsEnabled();
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+            if (enabled) {
+              if (that.userCurrentPosition === null) {
+                $('.my-location').html(Templates.preloaderBlue);
+                return navigator.geolocation.getCurrentPosition(success, error, options);
+              }
+              that.map.panTo(that.userCurrentPosition.getPosition());
+            } else {
+              that.isGpsEnabled();
+              $('.my-location').removeClass('disabled').html(Templates.myLocation);
+            }
+        }, function(error){
+            alert("The following error occurred: "+error);
+        });
       } catch (e) {
         app.groupCollection.trigger('showSnackBar', {message: 'Ha ocurrido un error'})
       }

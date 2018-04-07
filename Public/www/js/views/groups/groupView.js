@@ -48,7 +48,6 @@ $(function () {
 
     // Saves data in session storage and sends you to users.html.
     showUsers: function () {
-      console.log('hi')
       let groupId = this.model.get('_id');
       let groupName = this.model.get('title');
       sessionStorage.setItem('currentGroupName', groupName);

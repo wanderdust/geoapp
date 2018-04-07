@@ -5,7 +5,7 @@ Templates.userTemplateA = [
   '<div class="group-container user-container waves-effect waves-light">',
     '<div class="image-animation"></div>',
     '<div class="image">',
-      '<img src={{userImage}} class="img-responive img-fluid">',
+      '<img src={{userImage}} class="hidden">',
     '</div>',
     '<div class="group-header">',
       '<p class="group-title">{{name}}</p>',
@@ -22,7 +22,7 @@ Templates.userTemplateB = [
   '<div class="group-container user-container">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
-      '<img src="{{userImage}}">',
+      '<img src="{{userImage}}" class="hidden">',
     '</div>',
     '<div class="group-header">',
       '<p class="group-title">{{name}}</p>',
@@ -46,7 +46,7 @@ Templates.userTemplateC = [
   '<div class="group-container user-container">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
-      '<img src="{{userImage}}">',
+      '<img src="{{userImage}}" class="hidden">',
     '</div>',
     '<div class="group-header">',
       '<p class="group-title">{{name}}</p>',
@@ -62,7 +62,7 @@ Templates.userTemplateC = [
 Templates.groupTemplateA = [
   '<div class="group-container main waves-effect waves-orange">',
     '<div class="image-animation"></div>',
-    '<div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>',
+    '<div class="image"><img src="{{groupImage}}" class="hidden"></div>',
     '<div class="group-header">',
       '<p class="group-title user-name">{{title}}</p>',
       '{{#if activeUsers.[0]}}',
@@ -82,7 +82,7 @@ Templates.groupTemplateA = [
 Templates.groupTemplatePending = [
   '<div class="group-container pending">',
     '<div class="image-animation"></div>',
-    '<div class="image"><img src="{{groupImage}}" class="img-responive img-fluid"></div>',
+    '<div class="image"><img src="{{groupImage}}" class="hidden"></div>',
     '<div class="group-header pending">',
       '<p class="group-title user-name">{{title}}</p>',
       '{{#if activeUsers.[0]}}',
@@ -100,9 +100,6 @@ Templates.groupTemplatePending = [
 
 // Template for the header in the users view.
 Templates.usersGroupHeader = [
-  '<div id="group-title-group">',
-    '<p>{{groupName}}</p>',
-  '</div>',
   '<div id="group-sub-title">',
     '{{#if isOnline}}',
       '<p>Estado: online</p>',
@@ -202,4 +199,24 @@ Templates.infoWindowMaps = [
 // Template for notification in side-menu
 Templates.badge = [
     '<span class="list-notification new badge" data-badge-caption="nuevos">{{requestLength}}</span>'
+].join('\n');
+
+// Template for blue pre preloaderBlue
+Templates.preloaderBlue = [
+  '<div class="preloader-wrapper small active">',
+    '<div class="spinner-layer spinner-blue-only">',
+      '<div class="circle-clipper left">',
+        '<div class="circle"></div>',
+      '</div><div class="gap-patch">',
+        '<div class="circle"></div>',
+      '</div><div class="circle-clipper right">',
+        '<div class="circle"></div>',
+      '</div>',
+    '</div>',
+  '</div>'
+].join('\n');
+
+// Template for location image.
+Templates.myLocation = [
+  '<img src="./css/assets/my_location.svg">'
 ].join('\n');

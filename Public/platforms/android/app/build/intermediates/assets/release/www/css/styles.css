@@ -267,7 +267,7 @@ h4 {
 .tabs-content .group-container .group-header {
   position: absolute;
   left: 105px;
-  width: 45%;
+  width: 65%;
   height: 100%;
 }
 
@@ -276,6 +276,7 @@ h4 {
   width: 100%;
   top: 0px;
   font-size: 18px;
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -291,6 +292,7 @@ h4 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 .round-button {
   background-color: #fb8c00;
@@ -529,7 +531,7 @@ a:-webkit-any-link {
   padding: 0px;
 }
 
-#header-nav #group-title-container #group-title-group{
+#header-nav #group-title-container #group-title-group {
   position: absolute;
   top: 0;
   height: 60%;
@@ -564,8 +566,16 @@ a:-webkit-any-link {
 }
 
 #header-nav.group-view #group-title-container{
-  width: 70%;
+  width: 65%;
   left: 69px;
+}
+
+.group-name {
+  position: absolute;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tabs-content.status-users-content .user-container .group-header {
@@ -1089,8 +1099,11 @@ body.active {
 }
 
 .add-friends #added-friends ul {
+  position: absolute;
   margin-top: 0px;
   height: 100%;
+  right: 0%;
+  width: 100%;
 }
 
 .add-friends #added-friends li {
@@ -1395,6 +1408,10 @@ body.active {
 
 .tabs-content.settings-page #user-dashboard.user-info-btn{
   border-bottom: solid 0.5px lightgray;
+}
+
+#user-dashboard.user-info-btn .group-header .group-status {
+  width: 75%;
 }
 
 .tabs-content.settings-page #settings-list {
