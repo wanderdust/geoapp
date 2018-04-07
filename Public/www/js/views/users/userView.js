@@ -17,7 +17,7 @@ $(function () {
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
-      this.listenTo(app.userCollection, 'initModal', this.updateInstance);
+      this.listenToOnce(this.model, 'initModal', this.updateInstance);
 
       this.instance;
 

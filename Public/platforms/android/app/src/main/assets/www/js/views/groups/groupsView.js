@@ -122,7 +122,7 @@ $(function () {
             (msg) => true,
             'Error'
           );
-          app.groupCollection.set(collection, {add: false, remove: false, merge: true});
+          app.groupCollection.reset(collection);
           // app.groupCollection.reset(collection);
       });
     },
@@ -210,10 +210,6 @@ $(function () {
             regId: data.registrationId,
             userId: sessionStorage.getItem('userId')
           })
-        });
-
-        push.on('error', function(e) {
-            console.log("push error = " + e.message);
         });
     },
 

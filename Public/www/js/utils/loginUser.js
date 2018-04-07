@@ -19,7 +19,6 @@ let checkConnection = {
       if (err)
         return window.location.href = 'sign-in.html';
 
-      socket.emit('debug', 'succesFull login')
       localStorage.setItem('userUuidGeoapp', res.uuid);
       sessionStorage.setItem('userId', res._id);
       window.location.href = html

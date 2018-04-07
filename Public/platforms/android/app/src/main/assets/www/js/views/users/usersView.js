@@ -34,12 +34,6 @@ $(function () {
       // Fast load of group title from cache.
       this.$headerTitle.html(sessionStorage.getItem('currentGroupName'));
 
-      // inits the modal
-      this.modalElem = document.querySelector('.modal');
-      this.modalInst = M.Modal.init(this.modalElem, {
-        dismissible:true,
-        preventScrolling: true
-      });
 
       // menu options
       let elem = document.querySelector('.fixed-action-btn');
@@ -91,8 +85,6 @@ $(function () {
 
     // Gathers data from database and then renders it to the view.
     render: function () {
-      // initModal sends the modal intance to each model.
-      app.userCollection.trigger('initModal', this.modalInst);
 
       let onlineUsers = app.userCollection.onlineUsers().length;
       let offlineUsers = app.userCollection.offlineUsers().length;

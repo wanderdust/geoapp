@@ -37,7 +37,6 @@ $(function () {
     },
 
     updateOne: function (model) {
-      socket.emit('debug', 'I updated the model!');
       this.$el.remove();
       app.groupCollection.trigger('add', model);
     },

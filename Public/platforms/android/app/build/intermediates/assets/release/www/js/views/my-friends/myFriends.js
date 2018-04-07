@@ -24,7 +24,7 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', userId);
 
-      
+
 
       this.loadCache();
 
@@ -60,7 +60,6 @@ $(function () {
     },
 
     backToMain: function () {
-      console.log('foo')
       window.location.href = 'main.html#/online';
     },
 

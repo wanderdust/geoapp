@@ -37,7 +37,6 @@ $(function () {
     },
 
     updateOne: function (model) {
-      socket.emit('debug', 'I updated the model!');
       this.$el.remove();
       app.groupCollection.trigger('add', model);
     },
@@ -48,7 +47,6 @@ $(function () {
 
     // Saves data in session storage and sends you to users.html.
     showUsers: function () {
-      console.log('hi')
       let groupId = this.model.get('_id');
       let groupName = this.model.get('title');
       sessionStorage.setItem('currentGroupName', groupName);

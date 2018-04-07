@@ -186,7 +186,7 @@ $(function () {
             let distance = this.getDistanceFromLatLonInKm(userLat, userLng, groupLat, groupLng);
 
             // KM
-            if (distance <= 0.045) {
+            if (distance <= 0.075) {
               this.socket.emit('userInArea', {
                 userId: sessionStorage.getItem('userId'),
                 groupId: model.get('_id')
@@ -405,6 +405,7 @@ $(function () {
                 return navigator.geolocation.getCurrentPosition(success, error, options);
               }
               that.map.panTo(that.userCurrentPosition.getPosition());
+              $('.my-location').removeClass('disabled').html(Templates.myLocation);
             } else {
               that.isGpsEnabled();
               $('.my-location').removeClass('disabled').html(Templates.myLocation);

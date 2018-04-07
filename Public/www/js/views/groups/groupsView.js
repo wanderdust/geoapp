@@ -122,7 +122,7 @@ $(function () {
             (msg) => true,
             'Error'
           );
-          app.groupCollection.set(collection, {add: false, remove: false, merge: true});
+          app.groupCollection.reset(collection);
           // app.groupCollection.reset(collection);
       });
     },

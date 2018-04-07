@@ -16,6 +16,13 @@ $(function () {
       this.listenTo(app.userCollection, 'add', this.appendOne);
       this.listenTo(app.userCollection, 'reset', this.appendAll);
       this.listenTo(app.userCollection, 'change', this.filterOne);
+
+      // inits the modal
+      this.modalElem = document.querySelector('.modal');
+      this.modalInst = M.Modal.init(this.modalElem, {
+        dismissible:true,
+        preventScrolling: true
+      });
     },
 
     render: function () {
@@ -36,6 +43,9 @@ $(function () {
       } else {
         this.$offlineUsers.append(view.render().el)
       }
+
+      // initModal sends the modal intance to each model.
+      user.trigger('initModal', this.modalInst);
     },
 
     appendAll: function (collection) {
