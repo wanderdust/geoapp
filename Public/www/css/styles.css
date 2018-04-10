@@ -1860,12 +1860,10 @@ body.active {
 
 
 #messages {
-  position: absolute;
   width: 100%;
   height: 82.5%;
   margin-top: 63px;
   margin-bottom: 0px;
-  flex-grow: 1;
   overflow-y: scroll;
   padding-top: 5px;
   padding-left: 10px;
@@ -1874,13 +1872,18 @@ body.active {
   list-style-type: none;
 }
 
+#messages .message {
+  position: relative;
+  display: flex;
+  align-items: right;
+}
+
 #messages .message-container {
-  position: relative ;
+  display: block;
   max-width: 70%;
   background: #fff6e5;
   border-radius: 15px;
   padding: 7px;
-  float: left;
   margin-bottom: 13px;
 }
 
@@ -1899,10 +1902,6 @@ body.active {
   color: #999;
 }
 
-#messages .my-message {
-  float: right;
-}
-
-#message .message-body {
-
+#messages .message-body p {
+  display: block;
 }

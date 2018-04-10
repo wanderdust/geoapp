@@ -15,6 +15,7 @@ const {Group} = require('./models/groups.js');
 const {UserGroup} = require('./models/user-groups.js');
 const {Request} = require('./models/requests.js');
 const {Friend} = require('./models/friends.js');
+const {Messages} = require('./models/message.js')
 const {ConnectedUsers} = require('./utils/connectedUsers.js');
 const {OpenSocketsGroups} = require('./utils/openSocketsGroups.js');
 const {OpenSocketsUsers} = require('./utils/openSocketsUsers.js');
@@ -446,6 +447,7 @@ socket.on('getUser', async (data, callback) => {
       };
 
       userGroup = await new UserGroup(userGroup).save();
+      chatGroup = await new Messages({groupId: userGroup.groupId});
       return callback(null, groupModel)
     } catch (e) {
       callback(e.message)
@@ -821,59 +823,6 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
-  // // Changes the user's email
-  // // Now we use a phone number. Deleting it for now.
-  // socket.on('changeEmail', async(data, callback) => {
-  //   try {
-  //     // let email = validator.isEmail(data.newEmail);
-  //
-  //     // Verifies that the email format is valid
-  //     if (!email)
-  //       return callback({Error: 1, Message: 'Email no válido'});
-  //
-  //     let user = await User.findOne({_id: data._id});
-  //
-  //     let verify = bcrypt.compareSync(data.password, user.password);
-  //
-  //     if (user === null || !verify)
-  //       return callback({Error: 0, Message: 'Contraseña incorrecta'});
-  //
-  //     await User.findOneAndUpdate({_id: data._id}, {
-  //       $set: {
-  //         email: data.newEmail
-  //       }
-  //     }, {new: true});
-  //
-  //     callback(null, data.newEmail)
-  //   } catch (e) {
-  //     callback({Error: 99, Message: 'Ha ocurrido un error'})
-  //   }
-  // });
-
-  // socket.on('changePassword', async(data, callback) => {
-  //   try {
-  //     let salt = bcrypt.genSaltSync(10);
-  //     let hash = bcrypt.hashSync(data.newPassword, salt);
-  //     let user = await User.findOne({_id: data._id});
-  //
-  //
-  //     let verify = bcrypt.compareSync(data.password, user.password);
-  //
-  //     if (user === null || !verify)
-  //       return callback({Error: 0, Message: 'Contraseña incorrecta'});
-  //
-  //       await User.findOneAndUpdate({_id: data._id}, {
-  //         $set: {
-  //           password: hash
-  //         }
-  //       }, {new: true});
-  //
-  //     callback(null, hash)
-  //   } catch (e) {
-  //     callback({Error: 99, Message: 'Ha ocurrido un error'})
-  //   }
-  // })
-
   // Deletes user's account.
   socket.on('deleteAccount', async(data, callback) => {
     try {
@@ -901,6 +850,30 @@ socket.on('getUser', async (data, callback) => {
       callback({Error: 99, Message: 'Ha ocurrido un error'})
     }
   });
+
+  socket.on('createMessage', async (data) => {
+    let socketsToUpdateGroups = openSocketsGroups.findSockets(data);
+    let userName = await User.findById(data.userId);
+    let message = {
+      from: userName,
+      body: data.body,
+      timeStamp: data.timeStamp
+    };
+
+    // Appends the messages.
+    // let messageList = await Messages.findByIdAndUpdate(data.userId, {
+    //   $push: {
+    //     messageList: message
+    //   }
+    // }, {new: true});
+
+    // Add a socket to send data to connected sockets
+    console.log(socketsToUpdateGroups)
+
+    socketsToUpdateGroups.forEach((e) => {
+      io.to(e.socketId).emit('newMessage', message);
+    });
+  })
 
   socket.on('disconnect', () => {
     // Finds the user that disconnected and starts handshake to check if he is still online.

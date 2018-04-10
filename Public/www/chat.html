@@ -15,43 +15,18 @@
           <img src="./css/assets/sidebar-icons/icon_chevron_left.svg" alt="">
         </div>
         <div id="chat-nav-header" class="col s8 row">
-          <div id="user-group-image" class="col s3">
-            <div id="image-container">
-              <img src="https://www.fillmurray.com/60/60">
-            </div>
-          </div>
-          <div id="chat-title-subtitle" class="col s9">
-            <div id="chat-title" class="nav-text valign-wrapper">
-              <p class="truncate">Chat group tralala</p>
-            </div>
-            <div id="chat-sub-title" class="nav-text valign-wrapper">
-              <p class="truncate">sub-title</p>
-            </div>
-          </div>
+
         </div>
         <div id="options-icon" class="col s2 valign-wrapper">
           <img src="css/assets/sidebar-icons/icon_vertical_options.svg">
         </div>
       </nav>
 
-      <ol id="messages" class="chat-messages">
-
-        <li class="message">
-          <div class="message-container">
-            <div class="message-title">
-              <h4>{{name}}</h4>
-              <span class="valign-wrapper">{{timeStamp}}</span>
-            </div>
-            <div class="message-body">
-              <p class="flow-text">{{message}}</p>
-            </div>
-          </div>
-        </li>
-      </ol>
+      <ol id="messages" class="chat-messages"></ol>
 
       <div id="chat-footer" class="row z-depth-2">
         <div class="text-input col s10">
-          <textarea name="name" placeholder="Escribe aqui..." ></textarea>
+          <textarea name="message" placeholder="Escribe aqui..." ></textarea>
         </div>
         <div class="send-icon col s2  waves-effect waves-light">
           <img src="./css/assets/sidebar-icons/icon_send_orange.svg" alt="">
@@ -71,11 +46,11 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
-      <script src="./js/libs/moment.js"></script>
-    <script src="./js/models/userModel.js"></script>
-    <script src="./js/collections/users.js"></script>
-    <script src="./js/views/users/userView.js"></script>
-    <script src="./js/views/users/userList.js"></script>
-    <script src="./js/views/users/usersView.js"></script>
+    <script src="./js/libs/moment.js"></script>
+    <script src="./js/models/messageModel.js"></script>
+    <script src="./js/collections/messages.js"></script>
+    <script src="./js/views/chat/messageView.js"></script>
+    <script src="./js/views/chat/messageList.js"></script>
+    <script src="./js/views/chat/chatView.js"></script>
   </body>
 </html>
