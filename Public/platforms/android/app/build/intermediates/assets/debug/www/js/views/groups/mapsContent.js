@@ -98,7 +98,7 @@ $(function () {
             groups: groups
           };
 
-          $.post('https://pacific-scrubland-87047.herokuapp.com/location', JSON.stringify(data));
+          $.post('http://192.168.1.250:3000/location', JSON.stringify(data));
 
           backgroundGeolocation.finish();
         };

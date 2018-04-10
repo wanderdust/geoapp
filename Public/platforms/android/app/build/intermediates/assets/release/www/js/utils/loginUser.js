@@ -38,7 +38,7 @@ let checkConnection = {
     if (isOnline(checkConnection.checkConnectionType()) !== isOnline(checkConnection.initialConnection))
       window.location.href = "index.html";
 
-    // socket = io.connect('https://pacific-scrubland-87047.herokuapp.com');
+    // socket = io.connect('http://192.168.1.250:3000');
     // let html = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     //
     // if (sessionStorage.getItem('userId') !== null)
