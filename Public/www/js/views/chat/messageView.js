@@ -14,10 +14,13 @@ $(function () {
     },
 
     initialize: function () {
-
+      this.currentUser = sessionStorage.getItem('userId');
     },
 
     render: function () {
+      this.model.getFormattedTime();
+      this.model.getCurrentUserName(this.currentUser);
+    
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 

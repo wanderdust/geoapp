@@ -37,13 +37,13 @@ let io = socketIO(server);
 
 let openSocketsGroups = new OpenSocketsGroups();
 let openSocketsUsers = new OpenSocketsUsers();
+let openSocketsChat = new OpenSocketsGroups();
 let connectedUsers = new ConnectedUsers();
 
 // parse application/json
 app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
 
 io.on('connection', (socket) => {
-  console.log('userConnected');
 
   socket.on('debug', (data) => {
     console.log('DEBUG FUNCTION:', data)
@@ -447,7 +447,7 @@ socket.on('getUser', async (data, callback) => {
       };
 
       userGroup = await new UserGroup(userGroup).save();
-      chatGroup = await new Messages({groupId: userGroup.groupId});
+      chatGroup = await new Messages({groupId: groupModel._id}).save();
       return callback(null, groupModel)
     } catch (e) {
       callback(e.message)
@@ -851,28 +851,86 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
+  // Gets the info of the group to append in the nav bar.
+  socket.on('getGroupInfo', async (data, callback) => {
+    try {
+      let usersArray = [];
+      let usersString = '';
+      let groupData = {};
+      let usersInGroup = await UserGroup.find({groupId: data.groupId});
+      let group = await Group.findById(data.groupId);
+
+      for (let userInGroup of usersInGroup) {
+        let user = await User.findById(userInGroup.userId);
+        let userName = user.name;
+
+        if (userInGroup.userId === data.userId) {
+          userName = 'Yo'
+        }
+
+        usersArray.push(userName);
+      }
+
+      for (let i = 0; usersArray.length > i; i++) {
+        if (usersArray.length - 1 == i) {
+          usersString = `${usersString} ${usersArray[i]}`
+        } else {
+          usersString = `${usersString} ${usersArray[i]}, `
+        }
+      }
+
+
+      groupData.title = group.title;
+      groupData.image = group.groupImage;
+      groupData.status = usersString;
+      groupData.image = (group.groupImage === "" ? './css/assets/group_placeholder.svg' : groupData.image);
+
+      callback(null, groupData)
+    } catch (e) {
+      console.log(e)
+    }
+  })
+
+  // Finds the collection of messages for a group.
+  socket.on('createMessageCollection', async (data, callback) => {
+    try {
+      let messageList = await Messages.findOne({groupId: data.groupId});
+
+      // Updates the current openSockets Users array.
+      openSocketsChat.addSockets(data.groupId, socket.id);
+
+      callback(null, messageList.messageList);
+    } catch (e) {
+      console.log(e)
+    }
+  });
+
+
+  // Adds a new message to the conversation.
   socket.on('createMessage', async (data) => {
-    let socketsToUpdateGroups = openSocketsGroups.findSockets(data);
-    let userName = await User.findById(data.userId);
-    let message = {
-      from: userName,
-      body: data.body,
-      timeStamp: data.timeStamp
-    };
+    try {
+      let socketsToUpdateChat = openSocketsChat.findSockets(data);
+      let userName = await User.findById(data.userId);
+      let message = {
+        from: userName.name,
+        body: data.body,
+        timeStamp: data.timeStamp,
+        userId: data.userId
+      };
 
-    // Appends the messages.
-    // let messageList = await Messages.findByIdAndUpdate(data.userId, {
-    //   $push: {
-    //     messageList: message
-    //   }
-    // }, {new: true});
+      // Appends the messages.
+      let messageList = await Messages.findOneAndUpdate({groupId: data.groupId}, {
+        $push: {
+          messageList: message
+        }
+      }, {new: true});
 
-    // Add a socket to send data to connected sockets
-    console.log(socketsToUpdateGroups)
-
-    socketsToUpdateGroups.forEach((e) => {
-      io.to(e.socketId).emit('newMessage', message);
-    });
+      socketsToUpdateChat.forEach((e) => {
+        io.to(e.socketId).emit('newMessage', message);
+      });
+    } catch (e) {
+      console.log(e)
+    }
   })
 
   socket.on('disconnect', () => {
@@ -919,6 +977,7 @@ socket.on('getUser', async (data, callback) => {
     // Removes from array the groups from the disconnected socket.
     openSocketsGroups.removeSockets(socket);
     openSocketsUsers.removeSockets(socket);
+    openSocketsChat.removeSockets(socket);
   })
 });
 

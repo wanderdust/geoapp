@@ -5,10 +5,11 @@ let MessagesSchema = mongoose.Schema({
   messageList: [{
     from: String,
     body: String,
-    timeStamp: Number
+    timeStamp: Number,
+    userId: String
   }]
 });
 
 let Messages = mongoose.model('Messages', MessagesSchema);
 
-module.exports = {Messages}
+module.exports = {Messages};

@@ -14,9 +14,6 @@ $(function () {
       this.listenTo(app.messageCollection, 'add', this.appendOne);
 
       socket.on('newMessage', (data) => {
-        if (err)
-          return;
-
         app.messageCollection.add(data)
       })
     },

@@ -8,21 +8,46 @@ $(function () {
   app.ChatView = Backbone.View.extend({
     el: '#app-container',
 
+    template: Templates.messagesNav,
+
     events: {
-      "click .send-icon": "sendMessage"
+      "click .send-icon": "sendMessage",
+      "click .back-arrow": "backToGroup"
     },
 
     initialize: function () {
       this.socket = socket;
+      this.groupId = sessionStorage.getItem('currentGroupId');
+      this.userId = sessionStorage.getItem('userId');
 
       new app.MessageList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'))
+      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+
+      socket.emit('createMessageCollection', {groupId: this.groupId}, (err, messageList) => {
+        if (err)
+          return
+
+        app.messageCollection.add(messageList)
+      });
+
+      socket.emit('getGroupInfo', {
+        groupId: this.groupId,
+        userId: this.userId
+      }, (err, data) => {
+        if (err)
+          return
+
+        this.render(data);
+      })
     },
 
-    render: function () {
+    render: function (data) {
+      let template = Handlebars.compile(this.template);
+      let html = template(data);
 
+      this.$('#chat-nav-header').html(html);
     },
 
     sendMessage: function () {
@@ -41,6 +66,10 @@ $(function () {
       socket.emit('createMessage', message);
 
       $messageTextBox.val('')
+    },
+
+    backToGroup: function () {
+      window.location.href = 'users.html'
     }
   })
 

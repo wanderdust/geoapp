@@ -97,6 +97,8 @@ let updateUserOnline = async function (data, openSocketsGroups, openSocketsUsers
       body: `${onlineUser.name} ha llegado a ${groupName.title}`
     }
 
+
+
     sendPushMessages(usersInGroupFCM, message);
     console.log('inside the function')
   } catch (e) {

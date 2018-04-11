@@ -224,7 +224,7 @@ Templates.myLocation = [
 Templates.messagesNav = [
   '<div id="user-group-image" class="col s3">',
     '<div id="image-container">',
-      '<img src="{{groupImage}}">',
+      '<img src="{{image}}">',
     '</div>',
   '</div>',
   '<div id="chat-title-subtitle" class="col s9">',
@@ -240,11 +240,13 @@ Templates.messagesNav = [
 Templates.message = [
     '<div class="message-container">',
       '<div class="message-title">',
-      '  <h4>{{title}}</h4>',
-        '<span class="valign-wrapper">{{timeStamp}}</span>',
+      '  <h4>{{from}}</h4>',
       '</div>',
       '<div class="message-body">',
         '<p class="flow-text">{{body}}</p>',
+      '</div>',
+      '<div class="msg-timeStamp">',
+        '<p class=".right-align">{{timeStamp}}</p>',
       '</div>',
     '</div>'
 ].join('\n');
