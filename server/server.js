@@ -894,20 +894,25 @@ socket.on('getUser', async (data, callback) => {
   // Finds the collection of messages for a group.
   socket.on('createMessageCollection', async (data, callback) => {
     try {
-      console.log(data.groupId)
       let messageList = await Messages.findOne({groupId: data.groupId});
-      // count keeps track of the times the user has asked for a refresh.
-      let count = data.count;
 
-      let newItems = Math.max(messageList.messageList.length) - (10 + 10*count);
-      let newItemsUpdated = newItems;
+      let sliceEnd = messageList.messageList.length - data.displayMessages;
+      let sliceBegin = sliceEnd - 50;
 
       // If the index is below 0 we set it to 0 to avoid errors in slice.
-      if (newItems < 0)
-        newItemsUpdated = 0;
+      if (sliceBegin < 0) {
+        sliceBegin = 0;
+      }
 
-      // Returns a new array with only 10 messages.
-      let lastMessages = messageList.messageList.slice(newItemsUpdated ,newItems + 10);
+      if (sliceEnd < 0) {
+        sliceEnd = 0;
+      }
+
+      if (sliceEnd === 0 && sliceBegin === 0)
+        return callback({Error: 0, Message: 'No more messages to show'})
+
+      // Returns a new array with only 50 messages.
+      let lastMessages = messageList.messageList.slice(sliceBegin ,sliceEnd);
 
       // Updates the current openSockets Users array.
       openSocketsChat.addSockets(data.groupId, socket.id);

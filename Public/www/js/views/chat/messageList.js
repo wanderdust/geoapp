@@ -11,7 +11,6 @@ $(function () {
     initialize: function () {
       _.bindAll(this, 'loadOlderMessages')
       this.socket = socket;
-      this.refreshCount = 0;
 
       this.listenTo(app.messageCollection, 'add', this.appendOne);
       $('#messages').on('scroll', this.loadOlderMessages)
@@ -64,22 +63,20 @@ $(function () {
       let clientHeight = messages.prop('clientHeight');
       let scrollTop = messages.prop('scrollTop');
       let scrollHeight = messages.prop('scrollHeight');
-      let messagesLength = app.messageCollection.length;
-      // That means that until the length of the messages isnt as long
-      // as it is supposed to be after the prepended messages, it wont
-      // do another reload. 10 is the amount of messages loaded each time.
-      let minListLength = 10*(this.refreshCount + 1);
 
-      // fix last one -->
-      if (scrollTop === 0 && scrollHeight > clientHeight && messagesLength >= minListLength) {
-        this.refreshCount++;
+      if (scrollTop === 0 && scrollHeight > clientHeight) {
+        $('.chat-view').append(Templates.preloaderBlue);
         socket.emit('createMessageCollection', {
           groupId: sessionStorage.getItem('currentGroupId'),
-          count: this.refreshCount
+          displayMessages: app.messageCollection.length
         }, (err, messages) => {
-          if (err)
+          if (err) {
+            $('.preloader-wrapper').remove();
             return
+          }
+
           app.messageCollection.add(messages.reverse());
+          $('.preloader-wrapper').remove();
         });
       }
     }

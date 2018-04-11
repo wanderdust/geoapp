@@ -1944,3 +1944,12 @@ body.active {
   height: 55%;
   width: auto;
 }
+
+.chat-view .preloader-wrapper {
+  position: absolute;
+  top: 69px;
+  left: 50%;
+  margin-left: -20px;
+  display: inline-block;
+  text-align: center;
+}
