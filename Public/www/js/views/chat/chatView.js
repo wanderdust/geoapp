@@ -25,11 +25,11 @@ $(function () {
       // When client connects sends user data to keep track of user.
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
-      socket.emit('createMessageCollection', {groupId: this.groupId}, (err, messageList) => {
+      socket.emit('createMessageCollection', {groupId: this.groupId, count: 0}, (err, messageList) => {
         if (err)
           return
 
-        app.messageCollection.add(messageList)
+        app.messageCollection.add(messageList.reverse())
       });
 
       socket.emit('getGroupInfo', {

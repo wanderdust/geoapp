@@ -1718,11 +1718,15 @@ body.active {
 
 
 /* CHAT HTML VIEW */
+#app-container.chat-view {
+  background: #fff6e5;
+}
 
 #chat-nav {
   position: fixed;
   height:61px;
   background: #c88719;
+  margin-bottom: 0px;
 }
 
 #chat-nav div{
@@ -1732,6 +1736,8 @@ body.active {
 #chat-nav .back-arrow {
   padding: 0px;
   border-radius: 50px;
+  display: flex;
+  vertical-align: center;
 }
 
 #chat-nav .back-arrow img {
@@ -1807,6 +1813,7 @@ body.active {
   border-radius: 50px;
   display: flex;
   vertical-align: center;
+  justify-content: center;
 }
 
 #chat-nav #options-icon img {
@@ -1864,10 +1871,12 @@ body.active {
 
 
 #messages {
+  position: absolute;
   width: 100%;
-  height: 82%;
-  margin-top: 63px;
+  top: 64px;
+  bottom: 60px;
   margin-bottom: 0px;
+  margin-top: 0px;
   overflow-y: scroll;
   padding-top: 5px;
   padding-left: 10px;
@@ -1876,24 +1885,36 @@ body.active {
   list-style-type: none;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 #messages .message {
   position: relative;
   display: flex;
   align-items: right;
+  text-align: left;
+  margin-left: auto;
 }
 
 #messages .message-container {
   display: block;
   max-width: 70%;
-  background: #fff6e5;
-  border-radius: 15px;
-  padding: 7px;
+  background: white;
+  border-radius: 0px 15px 15px 15px;
+  padding-left: 7px;
+  padding-right: 7px;
   margin-bottom: 13px;
+}
+
+#messages .my-message .message-container {
+  margin-left: auto;
+  border-radius: 15px 0px 15px 15px;
 }
 
 #messages .message-title {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 #messages .message-title h4 {
@@ -1908,5 +1929,18 @@ body.active {
 }
 
 #messages .message-body p {
-  display: block;
+  display: flex;
+  margin-bottom: 0px;
+}
+
+.open-chat-btn {
+  position: absolute;
+  bottom: 15%;
+  right: 5%;
+}
+
+.open-chat-btn img {
+  position: absolute;
+  height: 55%;
+  width: auto;
 }

@@ -19,12 +19,13 @@ $(function () {
 
     render: function () {
       this.model.getFormattedTime();
-      this.model.getCurrentUserName(this.currentUser);
-    
+      let isMyMessage = this.model.getCurrentUserName(this.currentUser);
+
       let template = Handlebars.compile(this.template);
       let html = template(this.model.toJSON());
 
       this.$el.addClass('message');
+      isMyMessage ? this.$el.addClass('my-message') : "";
       this.$el.html(html);
       return this;
     }

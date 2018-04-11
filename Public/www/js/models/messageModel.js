@@ -20,7 +20,8 @@ $(function () {
       if (userId === this.get('userId')) {
         this.set({from: 'Yo'});
         return true;
-      }
+      };
+      return false;
     }
   })
 })

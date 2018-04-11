@@ -15,7 +15,8 @@ $(function () {
     events: {
       "click #back-arrow-container": "backToMain",
       "click #invite-friends-btn.af": "addFriends",
-      "click #exit-group-link": "confirmExit"
+      "click #exit-group-link": "confirmExit",
+      "click .open-chat-btn": "getChat"
     },
 
     initialize: function () {
@@ -137,6 +138,10 @@ $(function () {
     addFriends: function () {
       window.location.href = 'users-add-friends.html';
 
+    },
+
+    getChat: function () {
+      window.location.href = 'chat.html'
     },
 
     backToMain: function () {
