@@ -18,6 +18,7 @@ $(function () {
       socket.on('newMessage', (data) => {
         app.messageCollection.add(data, {flag: true});
       })
+
     },
 
     render: function () {
@@ -33,7 +34,6 @@ $(function () {
         this.scrollToBottom();
       } else {
         $('#messages').prepend(view.render().el);
-        // Scroll to last 'old' message
       }
     },
 
@@ -57,12 +57,24 @@ $(function () {
       }
     },
 
+    scrollToFirstMessage: function (oldMessage) {
+      let messages = $('#messages');
+
+      let clientHeight = messages.prop('clientHeight');
+      let scrollTop = messages.prop('scrollTop');
+      let scrollHeight = messages.prop('scrollHeight');
+      let oldMessageHeight = oldMessage.innerHeight();
+
+      messages.scrollTop(oldMessage.offset().top - oldMessageHeight);
+    },
+
     loadOlderMessages: function () {
       let messages = $('#messages');
       // Heights
       let clientHeight = messages.prop('clientHeight');
       let scrollTop = messages.prop('scrollTop');
       let scrollHeight = messages.prop('scrollHeight');
+      let oldMessage = messages.children('li:first-child')
 
       if (scrollTop === 0 && scrollHeight > clientHeight) {
         $('.chat-view').append(Templates.preloaderBlue);
@@ -76,6 +88,7 @@ $(function () {
           }
 
           app.messageCollection.add(messages.reverse());
+          this.scrollToFirstMessage(oldMessage);
           $('.preloader-wrapper').remove();
         });
       }

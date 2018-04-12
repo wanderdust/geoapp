@@ -28,8 +28,8 @@ $(function () {
       socket.emit('createMessageCollection', {groupId: this.groupId, displayMessages: 0}, (err, messageList) => {
         if (err)
           return
-
-        app.messageCollection.add(messageList.reverse())
+        // Fist time it loads normal. Appending not prepending.
+        app.messageCollection.add(messageList, {flag: true})
       });
 
       socket.emit('getGroupInfo', {
