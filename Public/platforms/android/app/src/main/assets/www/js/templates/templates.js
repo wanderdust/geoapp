@@ -220,3 +220,33 @@ Templates.preloaderBlue = [
 Templates.myLocation = [
   '<img src="./css/assets/my_location.svg">'
 ].join('\n');
+
+Templates.messagesNav = [
+  '<div id="user-group-image" class="col s3">',
+    '<div id="image-container">',
+      '<img src="{{image}}">',
+    '</div>',
+  '</div>',
+  '<div id="chat-title-subtitle" class="col s9">',
+    '<div id="chat-title" class="nav-text valign-wrapper">',
+      '<p class="truncate">{{title}}</p>',
+    '</div>',
+    '<div id="chat-sub-title" class="nav-text valign-wrapper">',
+      '<p class="truncate">{{status}}</p>',
+    '</div>',
+  '</div>'
+].join('\n');
+
+Templates.message = [
+    '<div class="message-container">',
+      '<div class="message-title">',
+      '  <h4>{{from}}</h4>',
+      '</div>',
+      '<div class="message-body">',
+        '<p class="flow-text">{{body}}</p>',
+      '</div>',
+      '<div class="msg-timeStamp">',
+        '<p class=".right-align">{{timeStamp}}</p>',
+      '</div>',
+    '</div>'
+].join('\n');

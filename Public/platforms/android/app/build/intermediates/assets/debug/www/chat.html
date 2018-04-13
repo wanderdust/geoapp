@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0 maximum-scale=1; minimum-scale=1">
+    <title>Geo App</title>
+    <link type="text/css" rel="stylesheet" href="css/libs/materialize.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app-container" class="chat-view">
+      <nav id="chat-nav" class="row">
+        <div class="col s2 valign-wrapper back-arrow waves-effect waves-light">
+          <img src="./css/assets/sidebar-icons/icon_chevron_left.svg" alt="">
+        </div>
+        <div id="chat-nav-header" class="col s8 row">
+
+        </div>
+        <div id="options-icon" class="col s2 valign-wrapper waves-effect waves-light">
+          <img src="css/assets/sidebar-icons/icon_vertical_options.svg">
+        </div>
+      </nav>
+
+
+      <ol id="messages" class="chat-messages"></ol>
+
+      <div id="chat-footer" class="row z-depth-2">
+        <div class="text-input col s10">
+          <textarea name="message" placeholder="Escribe aqui..." ></textarea>
+        </div>
+        <div class="send-icon col s2  waves-effect waves-light">
+          <img src="./css/assets/sidebar-icons/icon_send_orange.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/templates/templates.js"></script>
+    <script src="http://192.168.1.250:3000/socket.io/socket.io.js"></script>
+    <script src="./js/utils/loadSocket.js"></script>
+    <script src="./js/utils/loginUser.js"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="js/libs/materialize.js"></script>
+    <script src="./js/libs/hammer.min.js"></script>
+    <script src="./js/libs/jquery.hammer.js"></script>
+    <script src="./js/libs/handlebars.min.js"></script>
+    <script src="./js/libs/underscore-min.js"></script>
+    <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/libs/moment.js"></script>
+    <script src="./js/models/messageModel.js"></script>
+    <script src="./js/collections/messages.js"></script>
+    <script src="./js/views/chat/messageView.js"></script>
+    <script src="./js/views/chat/messageList.js"></script>
+    <script src="./js/views/chat/chatView.js"></script>
+  </body>
+</html>
