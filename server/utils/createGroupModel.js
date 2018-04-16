@@ -45,6 +45,9 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
     newModel.coords = groupModel.coords;
     newModel.activeUsers = onlineUsersArray;
     newModel.pendingUsers =  pendingUsersArray;
+    newModel.date = groupModel.date;
+    newModel.time = groupModel.time;
+    newModel.frequency = groupModel.frequency;
     newModel._id = groupModel._id;
     groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
 

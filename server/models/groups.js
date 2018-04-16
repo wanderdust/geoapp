@@ -6,7 +6,10 @@ let GroupSchema = mongoose.Schema({
   coords: {
     lat: Number,
     lng: Number
-  }
+  },
+  date: Number,
+  time: Number,
+  frequence: String
 });
 
 let Group = mongoose.model('Group', GroupSchema);

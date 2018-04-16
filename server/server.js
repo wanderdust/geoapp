@@ -433,7 +433,10 @@ socket.on('getUser', async (data, callback) => {
         coords: {
           lat: data.coords.lat,
           lng: data.coords.lng
-        }
+        },
+        date: moment().valueOf(data.date),
+        time: moment().valueOf(data.time),
+        frequence: data.frequence
       };
 
       groupModel = await new Group(group).save();
