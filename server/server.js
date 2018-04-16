@@ -441,6 +441,7 @@ socket.on('getUser', async (data, callback) => {
 
       groupModel = await new Group(group).save();
 
+
       userGroup = {
         groupId: groupModel._id,
         userId: data.currentUser,
