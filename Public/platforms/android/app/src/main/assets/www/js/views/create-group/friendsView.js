@@ -17,9 +17,12 @@ $(function () {
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
-      "touchend .new-group-image" : "addGroupImage",
+      "click .new-group-image-container" : "addGroupImage",
       "swiperight .tabs-content.groups-sidebar": "closeNavAndSave",
-      "click .search-icon": "toggleScaleOut"
+      "click .search-icon": "toggleScaleOut",
+      "click .group-frequence input": "addFrequence",
+      "click .timepicker": "blurOut",
+      "click .timepicker-modal": "blurOut"
     },
 
     initialize: function () {
@@ -28,6 +31,9 @@ $(function () {
       this.groupCoords;
       this.groupFriends = [];
       this.groupImage = "";
+      this.groupDate;
+      this.groupTime;
+      this.groupFrequence;
       this.$sideNav = $('.status-users-content');
       this.$btn = $('#create-group-btn');
 
@@ -46,11 +52,21 @@ $(function () {
         new app.AddedFriendList();
       }
 
+
       this.render();
     },
 
     render: function () {
       this.$sideNav.hammer();
+      let options = datePickerOptions
+
+      // Date-picker initialize
+      let elemDate = document.querySelector('.datepicker');
+      let instanceDate = M.Datepicker.init(elemDate, options);
+
+      // Time-picker initialize
+      let elemTime = document.querySelector('.timepicker');
+      let instanceTime = M.Timepicker.init(elemTime, options);
     },
 
     // Gets the url of the current document to use only some of the js/files
@@ -202,7 +218,7 @@ $(function () {
       let addImage = navigator.camera.getPicture(function (image_URI) {
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.groupImage = base64Image;
-          $('.new-group-image').html(`<img src="${base64Image}">`);
+          $('.new-group-image-container').html(`<img src="${base64Image}">`);
           app.userCollection.fitImage($('.new-group-image img'));
         })
 
@@ -269,6 +285,28 @@ $(function () {
       // $('.glass-orange').toggleClass('scale-out', !isHasClass);
       // $('.glass-white').toggleClass('scale-out', isHasClass);
       // $('.search-input').toggleClass('scale-out', !isHasClass);
+    },
+
+    // Blurs the timePicker input to not show keyboard
+    blurOut: function () {
+      $('#time_picker').blur();
+    },
+
+    // Sets the frequence of the group
+    addFrequence: function(e) {
+      let el = $(e.target);
+
+      // Checks which of the buttons have been clicked.
+      if (el.hasClass('once-btn')) {
+        this.groupFrequence = 'once';
+        $('.datepicker').attr('disabled', false)
+      } else if (el.hasClass('weekly-btn')) {
+        this.groupFrequence = 'weekly';
+        $('.datepicker').attr('disabled', false)
+      } else if (el.hasClass('always-btn')) {
+        this.groupFrequence = 'always';
+        $('.datepicker').attr('disabled', true)
+      }
     }
   })
 

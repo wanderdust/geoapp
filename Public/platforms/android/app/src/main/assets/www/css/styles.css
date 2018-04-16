@@ -30,9 +30,10 @@ h4 {
   position: absolute;
   height: 100%;
   width: 100%;
-  /* min-height: 537px; */
+  min-height: 600px;
   overflow: hidden;
 }
+
 
 #app-container.clearfix {
   overflow: hidden;
@@ -960,7 +961,7 @@ body.active {
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 80%;
-  margin-top: 18px;
+  margin-top: 10px;
   margin-left: 10%;
   border-radius: 2px;
   border-bottom: none;
@@ -975,31 +976,36 @@ body.active {
   font-size: 15px;
 }
 
+.content-container {
+  position: absolute;
+  top: 60px;
+  bottom: 0px;
+  width: 100%;
+}
 
 #app-container #map-container-friends {
   position: absolute;
-  top: 60px;
-  height: 46.5%;
+  top: 0px;
+  height: 40%;
   width: 100%;
 }
 
 #app-container .tabs-content.create-group {
-  height: 44%;
+  position: absolute;
+  top: 40%;
+  margin-top: 0px;
+  height: 60%;
   width: 100%;
   overflow: hidden;
   background-color: #fafafa;
 }
 
 .tabs-content.create-group .add-title {
-  position: relative;
+  position: absolute;
+  top: 0px;
   width: 100%;
-  height: 33%;
-}
-
-.tabs-content.create-group .add-friends{
-  margin-top: 3%;
-  width: 100%;
-  height: 35%;
+  height: 30%;
+  margin-bottom: 0px;
 }
 
 .tabs-content.create-group #create-group-btn {
@@ -1023,44 +1029,127 @@ body.active {
   z-index: 1;
 }
 
-.new-group-image {
-  border: solid 2px #c88719;
-  position: absolute;
-  top: 25%;
-  left: 20px;
-  width: 64px;
-  height: 64px;
-  overflow: hidden;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  z-index: 1;
+.group-title-image {
+  height: 20%;
+  width: 100%;
 }
 
-.new-group-image img {
-  position: absolute;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: 0;
+.group-title-image p {
+  margin-top: 3px;
+  margin-bottom: 0px;
+  padding-left: 2%;
+  font-weight: bolder;
+  color: #c88719;
+}
+
+.new-group-image {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-group-image-container {
+  height: 65px;
+  width: 65px;
+  overflow: hidden;
+  border-radius: 50px;
+  border: solid #c88719 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-group-image-container img {
+  min-height: 70%;
 }
 
 .new-group-title {
-  position: absolute;
+  height: 80%;
+  margin-top: 0px;
   display: flex;
   align-items: center;
-  margin-left: 30%;
-  margin-top: 10%;
-  width: 60%;
-  height: 50%;
+  justify-content: center;
 }
 
 .new-group-title .title-input{
+  z-index: 1;
+}
+
+.row .input-field.new-group-title label {
+  top: 20px;
+  z-index: 0;
+}
+
+.add-date {
   position: absolute;
+  top: 30%;
+  height: 40%;
   width: 100%;
-  font-size: 1.3rem !important;
+  margin-bottom: 0px;
+}
+
+.add-date .date-title {
+  position: absolute;
+  top: 0px;
+  height: 20%;
+  width: 100%
+}
+
+.add-date .date-title p {
+  padding-left: 2%;
+  font-weight: bolder;
+  color: #c88719;
+}
+
+.date-picker-inputs {
+  position: absolute;
+  top: 20%;
+  height: 40%;
+  width: 100%;
+}
+
+.group-frequence {
+  position: absolute;
+  height: 40%;
+  bottom: 0px;
+  width: 100%;
+}
+
+.frequence-title {
+  position: absolute;
+  top: 0px;
+  height: 40%;
+  width: 100%
+}
+
+.frequence-title p {
+  padding-left: 2%;
+  font-weight: bolder;
+  color: #c88719;
+}
+
+.group-frequence form {
+  padding-left: 2%;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin: auto;
+}
+
+.group-frequence form p {
+  width: 33.333%;
 }
 
 .add-friends {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1886,10 +1975,6 @@ body.active {
   list-style-type: none;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 #messages .message {
   position: relative;
   display: flex;
@@ -1953,4 +2038,8 @@ body.active {
   margin-left: -20px;
   display: inline-block;
   text-align: center;
+}
+
+#app-container.chat-view {
+  min-height: 0px;
 }

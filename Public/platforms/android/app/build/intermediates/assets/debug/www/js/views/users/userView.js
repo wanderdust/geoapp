@@ -11,16 +11,18 @@ $(function () {
 
     events: {
       "click .pending-icon": "showPendingStatus",
-      "click .image": "openImageModal",
-      "press .user-container": "showOptions"
+      "click .image": "openImageModal"
     },
 
     initialize: function () {
+      _.bindAll(this, 'showOptions');
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
 
-      let mc = this.$('user-container').hammer();
+      // Hammerjs press event
+      let mc = this.$el.hammer({}).bind("press", this.showOptions);
+      mc.data('hammer').get('press').set({time: 800});
 
       this.instance;
 
@@ -37,6 +39,7 @@ $(function () {
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
       app.userCollection.fitImage(this.$('.image img'));
+
       return this;
     },
 
@@ -63,7 +66,7 @@ $(function () {
     },
 
     showOptions: function () {
-      alert('options')
+      console.log('foo')
     }
   })
 
