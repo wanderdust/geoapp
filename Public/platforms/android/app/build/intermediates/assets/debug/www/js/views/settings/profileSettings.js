@@ -11,7 +11,7 @@ $(function () {
     events: {
       "click #back-arrow-container": "backToMain",
       "click .edit-icon": "editName",
-      "blur .name-input": "closeEdit",
+      "blur .name-input input": "closeEdit",
       "click .edit-icon-status": "editStatus",
       "blur .status-input": "closeEditStatus",
       "click #profile-image-container": "addUserImage"
@@ -80,41 +80,47 @@ $(function () {
       let userStatus = model.get('userStatus');
 
       $('.user-image .photo').attr('src', userImage);
-      $('.name-input').html(userName);
-      $('.status-input').html(userStatus);
+      $('.name-input p').html(userName);
+      $('.status-input p').html(userStatus);
       app.userCollection.fitImage(this.$('.user-image .photo'));
     },
 
     // Sets the name in edit mode.
     editName: function () {
-      $('.name-input').attr('contenteditable', 'true').focus();
+      $('.name-input p').addClass('hidden');
+      $('.name-input input')
+        .removeClass('hidden')
+        .val($('.name-input p').html())
+        .focus();
     },
 
     // Ends the name edit mode.
     closeEdit: function () {
-      $('.name-input')
-      .attr('contenteditable', 'false')
-      .html($('.name-input').text().trim());
+      $('.name-input input').addClass('hidden');
+      $('.name-input p').removeClass('hidden').html($('.name-input input').val());
       this.updateData();
     },
 
     // Sets the status in edit mode.
     editStatus: function () {
-      $('.status-input').attr('contenteditable', 'true').focus();
+      $('.status-input p').addClass('hidden');
+      $('.status-input input')
+        .removeClass('hidden')
+        .val($('.status-input p').html())
+        .focus();
     },
 
     // Ends the status edit mode.
     closeEditStatus: function () {
-      $('.status-input')
-      .attr('contenteditable', 'false')
-      .html($('.status-input').text().trim());
+      $('.status-input input').addClass('hidden')
+      $('.status-input p').removeClass('hidden').html($('.status-input input').val())
       this.updateData();
     },
 
     // updates the variables with the user info.
     updateData: function (imageData) {
-      this.userStatus = $('.status-input').html();
-      this.userName = $('.name-input').html();
+      this.userStatus = $('.status-input p').html();
+      this.userName = $('.name-input p').html();
       if (imageData)
           this.userImage = imageData;
     },

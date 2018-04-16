@@ -272,7 +272,7 @@ $(function () {
       try {
         let map =  new google.maps.Map(document.getElementById('map-frame'), {
             center: {lat: 55.948638, lng: -3.201244},
-            zoom: 8,
+            maxZoom: 16,
             disableDefaultUI: true,
             styles: mapStyle
           });

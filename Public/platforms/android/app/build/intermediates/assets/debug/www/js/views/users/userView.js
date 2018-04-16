@@ -11,13 +11,16 @@ $(function () {
 
     events: {
       "click .pending-icon": "showPendingStatus",
-      "click .image": "openImageModal"
+      "click .image": "openImageModal",
+      "press .user-container": "showOptions"
     },
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
+
+      let mc = this.$('user-container').hammer();
 
       this.instance;
 
@@ -57,6 +60,10 @@ $(function () {
       app.userCollection.fitImage($('#modal1 img'));
       $('#modal1 img').attr('src', userImage);
       this.instance.open();
+    },
+
+    showOptions: function () {
+      alert('options')
     }
   })
 

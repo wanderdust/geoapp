@@ -30,9 +30,10 @@ h4 {
   position: absolute;
   height: 100%;
   width: 100%;
-  /* min-height: 537px; */
+  min-height: 537px;
   overflow: hidden;
 }
+
 
 #app-container.clearfix {
   overflow: hidden;
@@ -1569,6 +1570,7 @@ body.active {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50px;
 }
 
 #settings-list.user-settings .name-container .edit-icon-status img,
@@ -1885,10 +1887,6 @@ body.active {
   list-style-type: none;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 #messages .message {
   position: relative;
   display: flex;
@@ -1952,4 +1950,8 @@ body.active {
   margin-left: -20px;
   display: inline-block;
   text-align: center;
+}
+
+#app-container.chat-view {
+  min-height: 0px;
 }

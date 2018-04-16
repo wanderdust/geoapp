@@ -1557,7 +1557,7 @@ body.active {
   display: flex;
   align-items: center;
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #settings-list.user-settings .name-container .edit-icon-status,
@@ -1569,6 +1569,7 @@ body.active {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50px;
 }
 
 #settings-list.user-settings .name-container .edit-icon-status img,
