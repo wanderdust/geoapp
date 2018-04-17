@@ -14,6 +14,9 @@ $(function () {
       activeUsers: [],
       groupImage: 'css/assets/group_placeholder.svg',
       pendingUsers: [],
+      date: "",
+      time: "",
+      frequence: "",
       _id: ''
     }
   })

@@ -257,11 +257,11 @@ h4 {
   background-color:#cccccc;
 }
 
-.tabs-content .online .group-container .image-animation{
+.tabs-content .online .image-animation{
   background-color: #64db64;
 }
 
-.tabs-content .pending .group-container .image-animation{
+.tabs-content .pending .image-animation{
   background-color: #4e81a8;
 }
 
@@ -2042,4 +2042,88 @@ body.active {
 
 #app-container.chat-view {
   min-height: 0px;
+}
+
+
+/* Group template for main view / groups view */
+
+.group-template {
+  height: 70px;
+  width: 100%;
+  margin: 0px !important;
+}
+
+.group-img-container {
+  position: relative;
+  height: 100%;
+  padding: 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.group-data-container {
+  height: 100%;
+  padding-left: 0px !important;
+}
+
+.group-template .image {
+  overflow: hidden;
+  position: relative;
+  height: 67px;
+  width: 67px;
+  border-radius: 50px;
+  border: solid 4px #cccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.group-template .image img {
+  z-index: 1;
+}
+
+.tabs-content  .online .group-template .image{
+  border:solid 3px #64db64;
+}
+
+.tabs-content .pending .group-template .image{
+  border:solid 3px #4e81a8;
+}
+
+.group-data-container .col.s12 {
+  height: 30%;
+}
+
+.group-data-container .title-group p {
+  margin: 0px;
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.group-data-container .date-group {
+  position: relative;
+}
+
+.group-data-container .date-group p {
+  position: absolute;
+  font-size: 15px !important;
+  top: 0px;
+  color: gray;
+  margin: 0px;
+}
+
+.group-data-container .status-group {
+  position: relative;
+  vertical-align: top;
+  overflow: visible;
+}
+
+.group-data-container .status-group p {
+  position: absolute;
+  top: 0px;
+  margin: 0px !important;
+  font-size: 17px !important;
 }

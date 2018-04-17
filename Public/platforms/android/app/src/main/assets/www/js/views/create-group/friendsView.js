@@ -33,7 +33,7 @@ $(function () {
       this.groupImage = "";
       this.groupDate;
       this.groupTime;
-      this.groupFrequence;
+      this.groupFrequence = "once"
       this.$sideNav = $('.status-users-content');
       this.$btn = $('#create-group-btn');
 
@@ -158,9 +158,12 @@ $(function () {
       groupData.friends = this.groupFriends;
       groupData.image = this.groupImage;
       groupData.currentUser = sessionStorage.getItem('userId');
+      groupData.date = $('#date_picker').val();
+      groupData.time = $('#time_picker').val();
+      groupData.frequence = this.groupFrequence;
 
       // If validation goes right, the group is created.
-      if (this.groupValidation(groupData.coords, groupData.title, groupData.friends)) {
+      if (this.groupValidation(groupData)) {
         this.socket.emit('addGroup', groupData, (err, data) => {
           if (err)
             return navigator.notification.alert(
@@ -186,16 +189,20 @@ $(function () {
     },
 
     // Checks that all fields have been filled correctly.
-    groupValidation: function (coords, title, friends) {
-      if (coords === undefined) {
+    groupValidation: function (data) {
+      if (data.coords === undefined) {
         this.snackBar('Tienes que elegir un lugar en el mapa');
         this.$btn.removeClass('disabled');
         return false;
-      } else if (title.trim() === "") {
+      } else if (data.title.trim() === "") {
         this.snackBar('Tienes que añadir un título para el grupo');
         this.$btn.removeClass('disabled');
         return false;
-      } else if (friends.length === 0) {
+      } else if (data.date.trim() === "" || data.time.trim() === "") {
+        this.snackBar('Tienes que añadir fecha y hora del evento');
+        this.$btn.removeClass('disabled');
+        return false;
+      } else if (data.friends.length === 0) {
         this.snackBar('Tienes que añadir por lo menos a 1 amigo');
         this.$btn.removeClass('disabled');
         return false;

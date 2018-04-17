@@ -78,6 +78,36 @@ Templates.groupTemplateA = [
   '</div>'
 ].join('\n');
 
+// Responsive group template with materialize.css
+Templates.groupTemplateB = [
+  '<div class="waves-effect waves-orange row group-template">',
+    '<div class="group-img-container col s3">',
+      '<div class="image">',
+        '<img src="{{groupImage}}" class="hidden">',
+      '</div>',
+    '</div>',
+    '<div class="group-data-container col s9 row">',
+      '<div class="title-group col s12">',
+        '<p class="truncate">{{title}}</p>',
+      '</div>',
+      '<div class="date-group col s12">',
+        '<p class="truncate">{{date}}</p>',
+      '</div>',
+      '<div class="status-group col s12">',
+        '{{#if activeUsers.[0]}}',
+        '<p class="truncate">Están: {{#each activeUsers}} {{this}}.  {{/each}}</p>',
+        '{{else}}',
+          '{{#if pendingUsers}}',
+          '<p class="truncate">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>',
+          '{{else}}',
+          '<p class="truncate">Todavía no ha llegado nadie</p>',
+          '{{/if}}',
+        '{{/if}}',
+      '</div>',
+    '</div>',
+  '</div>'
+].join('\n')
+
 // Template for a group container (pending)
 Templates.groupTemplatePending = [
   '<div class="group-container pending">',
