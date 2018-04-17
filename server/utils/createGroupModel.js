@@ -42,11 +42,18 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
       }
     }
 
+    if (groupModel.frequence === 'once') {
+      newModel.date = moment(groupModel.date).locale('es').format("dddd DD MMMM, hh:mm a");
+    } else if (groupModel.frequence === 'weekly') {
+      newModel.date = `Los ${moment(groupModel.date).locale('es').format("dddd")} a las ${moment(groupModel.date).locale('es').format("hh:mm a")}`;
+    } else if (groupModel.frequence === 'always') {
+      newModel.date = `Todos los días`
+    }
+
     newModel.title = groupModel.title;
     newModel.coords = groupModel.coords;
     newModel.activeUsers = onlineUsersArray;
     newModel.pendingUsers =  pendingUsersArray;
-    newModel.date = moment(groupModel.date).locale('es').format("dddd DD MMMM, hh:mm a");
     newModel.frequency = groupModel.frequency;
     newModel._id = groupModel._id;
     groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";

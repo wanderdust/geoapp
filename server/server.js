@@ -452,6 +452,14 @@ socket.on('getUser', async (data, callback) => {
 
       userGroup = await new UserGroup(userGroup).save();
       chatGroup = await new Messages({groupId: groupModel._id}).save();
+
+      // Function that sets timeouts depending on frequency of Groups.
+        // Format in Unix time
+      let eventTime = moment(group.date).format('X');
+
+      
+
+
       return callback(null, groupModel)
     } catch (e) {
       callback(e.message)
@@ -900,7 +908,7 @@ socket.on('getUser', async (data, callback) => {
     try {
       // Updates the current openSockets Users array.
       openSocketsChat.addSockets(data.groupId, socket.id);
-      
+
       let messageList = await Messages.findOne({groupId: data.groupId});
 
       let sliceEnd = messageList.messageList.length - data.displayMessages;
