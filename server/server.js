@@ -434,8 +434,8 @@ socket.on('getUser', async (data, callback) => {
           lat: data.coords.lat,
           lng: data.coords.lng
         },
-        date: moment().valueOf(data.date),
-        time: moment().valueOf(data.time),
+        date: moment(data.date, 'MMM DD, YYYY hh:mm A', 'es').format(),
+        time: data.time,
         frequence: data.frequence
       };
 

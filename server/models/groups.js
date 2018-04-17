@@ -7,8 +7,8 @@ let GroupSchema = mongoose.Schema({
     lat: Number,
     lng: Number
   },
-  date: Number,
-  time: Number,
+  date: String,
+  time: String,
   frequence: String
 });
 

@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {User} = require('./../models/users.js');
 const {Group} = require('./../models/groups.js');
 const {UserGroup} = require('./../models/user-groups.js');
@@ -45,8 +46,7 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
     newModel.coords = groupModel.coords;
     newModel.activeUsers = onlineUsersArray;
     newModel.pendingUsers =  pendingUsersArray;
-    newModel.date = groupModel.date;
-    newModel.time = groupModel.time;
+    newModel.date = moment(groupModel.date).locale('es').format("dddd DD MMMM, hh:mm a");
     newModel.frequency = groupModel.frequency;
     newModel._id = groupModel._id;
     groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
