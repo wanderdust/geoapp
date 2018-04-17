@@ -11,7 +11,7 @@ $(function () {
     template: Templates.groupTemplateB,
 
     events: {
-      "click .group-template": "showUsers",
+      "click .group-data-container": "showUsers",
       "click .image": "openImageModal",
     },
 

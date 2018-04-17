@@ -158,8 +158,8 @@ $(function () {
       groupData.friends = this.groupFriends;
       groupData.image = this.groupImage;
       groupData.currentUser = sessionStorage.getItem('userId');
-      groupData.date = $('#date_picker').val();
       groupData.time = $('#time_picker').val();
+      groupData.date = `${$('#date_picker').val()} ${groupData.time}`;
       groupData.frequence = this.groupFrequence;
 
       // If validation goes right, the group is created.

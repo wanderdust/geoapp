@@ -100,7 +100,7 @@ Templates.groupTemplateB = [
           '{{#if pendingUsers}}',
           '<p class="truncate">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>',
           '{{else}}',
-          '<p class="truncate">Todavía no ha llegado nadie</p>',
+          '<p class="truncate offline-status">Sin actividad</p>',
           '{{/if}}',
         '{{/if}}',
       '</div>',

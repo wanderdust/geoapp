@@ -898,6 +898,9 @@ socket.on('getUser', async (data, callback) => {
   // Finds the collection of messages for a group.
   socket.on('createMessageCollection', async (data, callback) => {
     try {
+      // Updates the current openSockets Users array.
+      openSocketsChat.addSockets(data.groupId, socket.id);
+      
       let messageList = await Messages.findOne({groupId: data.groupId});
 
       let sliceEnd = messageList.messageList.length - data.displayMessages;
@@ -918,8 +921,6 @@ socket.on('getUser', async (data, callback) => {
       // Returns a new array with only 50 messages.
       let lastMessages = messageList.messageList.slice(sliceBegin ,sliceEnd);
 
-      // Updates the current openSockets Users array.
-      openSocketsChat.addSockets(data.groupId, socket.id);
       callback(null, lastMessages);
     } catch (e) {
       console.log(e)

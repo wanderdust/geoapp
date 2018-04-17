@@ -20,10 +20,10 @@ INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src
 	android:name
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:15:43-101
 manifest
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
 MERGED from [com.google.android.gms:play-services-location:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-11.6.2.aar/eebd88bd0d38464e8790d087788dfa49/AndroidManifest.xml:2:1-5:12
 MERGED from [com.android.support:support-v13:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/support-v13-26.1.0.aar/839bff771ffcabe53966b3756a27aa02/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] /home/pablo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/1b9ac67c1c0ec2c489e7e9d7fb04d9f3/AndroidManifest.xml:17:1-31:12
@@ -57,9 +57,9 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/pablo/.gradle/caches/tr
 MERGED from [com.google.firebase:firebase-analytics-impl-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-license-11.6.2.aar/d572771abdafefb40605394b7357ff00/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-location-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-location-license-11.6.2.aar/810d9970a292ba1d54da203a2099f922/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-base-license:11.6.2] /home/pablo/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.6.2.aar/7b97350eeb2a2fb634bcb453b1fa9561/AndroidManifest.xml:2:1-6:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
-INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-69:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
+INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:1-68:12
 	package
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:2:102-129
 		INJECTED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml
@@ -456,14 +456,10 @@ uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
 ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:66:5-89
 	android:name
 		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:66:22-86
-uses-permission#android.permission.ACCESS_SUPERUSER
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:5-75
-	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:22-72
 uses-permission#android.hardware.location
-ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:68:5-65
+ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:5-65
 	android:name
-		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:68:22-62
+		ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:67:22-62
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from /home/pablo/Desktop/GeoApp/geoapp/Public/platforms/android/app/src/main/AndroidManifest.xml:13:13-116
 	android:resource

@@ -42,7 +42,7 @@ h4 {
 #map-container {
   position:absolute;
   top:0px;
-  height: 60%;
+  height: 55%;
   width: 100%;
   transition: 0.5s;
 }
@@ -94,7 +94,7 @@ h4 {
 #tabs-header {
   position: relative;
   width: auto;
-  height: 40%;
+  height: 45%;
   background-color: #fff6e5;
 }
 
@@ -118,7 +118,7 @@ h4 {
   position: absolute;
   bottom: 0;
   height: 100%;
-  transform: translateY(60%);
+  transform: translateY(55%);
   width: 100%;
   transition: 0.5s;
   text-align: left;
@@ -2074,7 +2074,7 @@ body.active {
   height: 67px;
   width: 67px;
   border-radius: 50px;
-  border: solid 4px #cccc;
+  border: solid 3px #cccc;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2109,7 +2109,7 @@ body.active {
 
 .group-data-container .date-group p {
   position: absolute;
-  font-size: 15px !important;
+  font-size: 14px !important;
   top: 0px;
   color: gray;
   margin: 0px;
@@ -2125,5 +2125,9 @@ body.active {
   position: absolute;
   top: 0px;
   margin: 0px !important;
-  font-size: 17px !important;
+  font-size: 15px !important;
+}
+
+.offline-status {
+  color: gray;
 }
