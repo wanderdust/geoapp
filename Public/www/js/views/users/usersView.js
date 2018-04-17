@@ -43,8 +43,7 @@ $(function () {
         hoverEnabled: false
       });
 
-      this.listenTo(app.userCollection, 'update', this.render);
-      this.listenTo(app.userCollection, 'change', this.render);
+      this.listenTo(app.userCollection, 'all', this.render);
 
       new app.UserList();
 
