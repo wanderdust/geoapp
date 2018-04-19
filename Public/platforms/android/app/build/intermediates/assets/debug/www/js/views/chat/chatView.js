@@ -26,8 +26,12 @@ $(function () {
       socket.emit('connectedClient', sessionStorage.getItem('userId'));
 
       socket.emit('createMessageCollection', {groupId: this.groupId, displayMessages: 0}, (err, messageList) => {
-        if (err)
-          return
+        if (err) {
+          if (err.ERROR === 0) {
+            window.location.href = 'main.html'
+          }
+        }
+
         // Fist time it loads normal. Appending not prepending.
         app.messageCollection.add(messageList, {flag: true})
       });

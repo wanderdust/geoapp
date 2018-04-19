@@ -57,12 +57,17 @@ $(function () {
         groupId: sessionStorage.getItem('currentGroupId'),
         userId: sessionStorage.getItem('userId')
       }, (err, collection) => {
-        if (err)
+        if (err) {
+          // This error means the group no longer exists;
+          if (err.ERROR == 0) {
+            return window.location.href = 'main.html'
+          }
           return navigator.notification.alert(
             err,
             (msg) => true,
             'Error'
           );
+        }
 
           // If localStorage doesnt exist we load from http request.
           if (localStorage.getItem(this.groupInLS) === null) {

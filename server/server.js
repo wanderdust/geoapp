@@ -198,6 +198,12 @@ io.on('connection', (socket) => {
   // Finds all the users belonging to a group
   socket.on('createUsersCollection', async (data, callback) => {
     try {
+      // First we check that group still exists;
+      let group = await Group.findById(data.groupId);
+      // If this is true the group doesnt exist anymore.
+      if (group === null)
+        return callback({ERROR: 0, message: 'Este grupo ya no existe'});
+
       let userCollection = [];
       let userCursors = await UserGroup.find({groupId: data.groupId});
 
@@ -928,6 +934,10 @@ socket.on('getUser', async (data, callback) => {
       openSocketsChat.addSockets(data.groupId, socket.id);
 
       let messageList = await Messages.findOne({groupId: data.groupId});
+      // If messageLIst is null, it means it doesnt exist anymore.
+      if (messageList === null) {
+        return callback({ERROR: 0, message: 'Este grupo ya no existe'})
+      }
 
       let sliceEnd = messageList.messageList.length - data.displayMessages;
       let sliceBegin = sliceEnd - 50;
