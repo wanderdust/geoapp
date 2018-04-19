@@ -257,11 +257,11 @@ h4 {
   background-color:#cccccc;
 }
 
-.tabs-content .online .image-animation{
+.tabs-content .online .group-container .image-animation{
   background-color: #64db64;
 }
 
-.tabs-content .pending .image-animation{
+.tabs-content .pending .group-container .image-animation{
   background-color: #4e81a8;
 }
 

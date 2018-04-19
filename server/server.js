@@ -9,6 +9,7 @@ const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const multer  = require('multer');
 const bodyParser = require('body-parser');
+const schedule = require('node-schedule');
 
 const {User} = require('./models/users.js');
 const {Group} = require('./models/groups.js');
@@ -28,6 +29,8 @@ const {sendPushMessages} = require('./utils/sendPushNotification.js');
 const {getDistanceFromLatLonInKm} = require('./utils/getDistanceFromLatLonInKm.js');
 const {updateUserOnline} = require('./utils/updateUserOnline.js');
 const {updateUsersOffline} = require('./utils/updateUsersOffline.js');
+const {removeGroupTimeout} = require('./utils/eventsTimeouts.js');
+const {sendEventReminder} = require('./utils/eventsTimeouts.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -453,14 +456,13 @@ socket.on('getUser', async (data, callback) => {
       userGroup = await new UserGroup(userGroup).save();
       chatGroup = await new Messages({groupId: groupModel._id}).save();
 
+      callback(null, groupModel)
+
       // Function that sets timeouts depending on frequency of Groups.
-        // Format in Unix time
-      let eventTime = moment(group.date).format('X');
-
-      
-
-
-      return callback(null, groupModel)
+        // We set a timeout to remove the group once the day has passed.
+      if (data.frequence === 'once') {
+        removeGroupTimeout(group.date, groupModel._id);
+      }
     } catch (e) {
       callback(e.message)
     }
@@ -479,6 +481,11 @@ socket.on('getUser', async (data, callback) => {
       let notificationMsg = {
         title: `GeoApp`,
         body: `${sender.name} te ha invitado ${group.title}.`
+      };
+      // Message for the setTimeoutReminder
+      let eventReminderMsg = {
+        title: `Recordatorio de evento`,
+        body: `${group.title} hoy a las ${moment(group.date).format("HH:mm A")}`
       }
 
       for (let friend of friends) {
@@ -515,6 +522,7 @@ socket.on('getUser', async (data, callback) => {
       callback(null, 'Group created succesfully');
 
       sendPushMessages(friendsFMC, notificationMsg);
+      sendEventReminder(group.date, friendsFMC, eventReminderMsg)
     } catch (e) {
       console.log(e)
       callback(e.message)
