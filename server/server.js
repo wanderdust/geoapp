@@ -462,6 +462,8 @@ socket.on('getUser', async (data, callback) => {
         // We set a timeout to remove the group once the day has passed.
       if (data.frequence === 'once') {
         removeGroupTimeout(group.date, groupModel._id);
+      } else if (data.frequence === 'weekly') {
+
       }
     } catch (e) {
       callback(e.message)
@@ -522,7 +524,15 @@ socket.on('getUser', async (data, callback) => {
       callback(null, 'Group created succesfully');
 
       sendPushMessages(friendsFMC, notificationMsg);
-      sendEventReminder(group.date, friendsFMC, eventReminderMsg)
+
+      // If the group is a once event or weekly event we send a reminder.
+      // Otherwise we dont send anything.
+      if (group.frequence === 'once' || group.frequence === 'weekly') {
+          // We add the token of the current User to the array, so he also gets a reminder
+          friendsFMC.push(sender.fcmRegId)
+          sendEventReminder(group.date, friendsFMC, eventReminderMsg)
+      };
+
     } catch (e) {
       console.log(e)
       callback(e.message)

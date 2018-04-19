@@ -272,6 +272,7 @@ $(function () {
       try {
         let map =  new google.maps.Map(document.getElementById('map-frame'), {
             center: {lat: 55.948638, lng: -3.201244},
+            zoom: 16,
             maxZoom: 16,
             disableDefaultUI: true,
             styles: mapStyle
@@ -294,7 +295,7 @@ $(function () {
         let bounds = this.getCenter(app.groupCollection).bound;
         let coords = {lat: center.lat(), lng: center.lng()}
 
-        let map = this.newMap(coords);
+        let map = this.newMap();
         map.fitBounds(bounds);
       } catch (e) {
         this.connectionError();
