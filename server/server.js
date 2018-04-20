@@ -464,12 +464,10 @@ socket.on('getUser', async (data, callback) => {
 
       callback(null, groupModel)
 
-      // Function that sets timeouts depending on frequency of Groups.
-        // We set a timeout to remove the group once the day has passed.
+      // Function that sets timeout to check when event occurs
       if (data.frequence === 'once') {
+        // We set a timeout to remove the group once the day has passed.
         removeGroupTimeout(group.date, groupModel._id);
-      } else if (data.frequence === 'weekly') {
-
       }
     } catch (e) {
       callback(e.message)
@@ -526,7 +524,7 @@ socket.on('getUser', async (data, callback) => {
         let friendFMCToken = await User.findById(friend);
         friendsFMC.push(friendFMCToken.fcmRegId);
       }
-
+      // Callback function to notify client.
       callback(null, 'Group created succesfully');
 
       sendPushMessages(friendsFMC, notificationMsg);
@@ -536,7 +534,7 @@ socket.on('getUser', async (data, callback) => {
       if (group.frequence === 'once' || group.frequence === 'weekly') {
           // We add the token of the current User to the array, so he also gets a reminder
           friendsFMC.push(sender.fcmRegId)
-          sendEventReminder(group.date, friendsFMC, eventReminderMsg)
+          sendEventReminder(group.date, friendsFMC, eventReminderMsg, group.frequence)
       };
 
     } catch (e) {
