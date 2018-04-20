@@ -436,10 +436,14 @@ socket.on('getUser', async (data, callback) => {
   // Creates a new group in the database and a new userGroup reference.
   socket.on('addGroup', async (data, callback) => {
     try {
-
+      let date = moment(data.date, 'MMM DD, YYYY hh:mm A', 'es').format();
       let groupModel;
       let userGroup;
       let group;
+      
+      if (data.frequence === 'always') {
+        date = null
+      };
 
       group = {
         title: data.title,
@@ -448,7 +452,7 @@ socket.on('getUser', async (data, callback) => {
           lat: data.coords.lat,
           lng: data.coords.lng
         },
-        date: moment(data.date, 'MMM DD, YYYY hh:mm A', 'es').format(),
+        date: date,
         time: data.time,
         frequence: data.frequence
       };
