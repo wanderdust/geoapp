@@ -45,7 +45,13 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
     if (groupModel.frequence === 'once') {
       newModel.date = moment(groupModel.date).locale('es').format("dddd DD MMMM, hh:mm a");
     } else if (groupModel.frequence === 'weekly') {
-      newModel.date = `Los ${moment(groupModel.date).locale('es').format("dddd")} a las ${moment(groupModel.date).locale('es').format("hh:mm a")}`;
+      let day = moment(groupModel.date).locale('es').format("dddd");
+      if (day === 'sábado') {
+        day = 'sábados'
+      } else if (day === 'domingo') {
+        day = 'domingos'
+      }
+      newModel.date = `Los ${day} a las ${moment(groupModel.date).locale('es').format("hh:mm a")}`;
     } else if (groupModel.frequence === 'always') {
       newModel.date = `Todos los días`
     }

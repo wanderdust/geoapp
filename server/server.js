@@ -31,6 +31,7 @@ const {updateUserOnline} = require('./utils/updateUserOnline.js');
 const {updateUsersOffline} = require('./utils/updateUsersOffline.js');
 const {removeGroupTimeout} = require('./utils/eventsTimeouts.js');
 const {sendEventReminder} = require('./utils/eventsTimeouts.js');
+const {startEventReminders} = require('./utils/eventsTimeouts.js');
 
 const publicPath = path.join(__dirname, '../public');
 const PORT = process.env.PORT || 3000;
@@ -45,6 +46,10 @@ let connectedUsers = new ConnectedUsers();
 
 // parse application/json
 app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
+
+
+// Function that restarts all the timeouts.
+startEventReminders();
 
 io.on('connection', (socket) => {
 
