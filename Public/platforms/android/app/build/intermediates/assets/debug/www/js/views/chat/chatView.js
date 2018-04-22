@@ -52,6 +52,7 @@ $(function () {
       let html = template(data);
 
       this.$('#chat-nav-header').html(html);
+      app.messageCollection.fitImage(this.$('#image-container img'));
     },
 
     sendMessage: function () {

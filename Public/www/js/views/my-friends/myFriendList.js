@@ -84,6 +84,7 @@ $(function () {
       // white spaces in between them.
 
       let phoneNumbers = contacts.map((contact) => {
+        socket.emit('debug', contact.phoneNumbers)
         return contact.phoneNumbers[0].value.replace(/\s+/g, '');
       });
 

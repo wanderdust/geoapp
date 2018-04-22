@@ -19,7 +19,7 @@ Templates.userTemplateA = [
 
 // Template for a user container
 Templates.userTemplateB = [
-  '<div class="group-container user-container">',
+  '<div class="group-container user-container waves-effect waves-orange">',
     '<div class="image-animation {{#if isOnline}} online-group {{/if}}"></div>',
     '<div class="image">',
       '<img src="{{userImage}}" class="hidden">',
@@ -38,6 +38,10 @@ Templates.userTemplateB = [
         '<img src="css/assets/sidebar-icons/icon_pending_orange.svg">',
       '</div>',
     '{{/if}}',
+
+    '<div class="dropdown z-depth-2 hidden">',
+      '<p class="options-add-friend waves-effect waves-orange">Añadir como amigo</p>',
+    '</div>',
   '</div>'
 ].join('\n');
 
@@ -254,7 +258,7 @@ Templates.myLocation = [
 Templates.messagesNav = [
   '<div id="user-group-image" class="col s3">',
     '<div id="image-container">',
-      '<img src="{{image}}">',
+      '<img class="hidden" src="{{image}}">',
     '</div>',
   '</div>',
   '<div id="chat-title-subtitle" class="col s9">',

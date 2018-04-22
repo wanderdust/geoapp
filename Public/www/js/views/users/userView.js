@@ -12,7 +12,7 @@ $(function () {
     events: {
       "click .pending-icon": "showPendingStatus",
       "click .image": "openImageModal",
-      "click .options-add-friend": "addFriend"
+      "touchend .options-add-friend": "addFriend"
     },
 
     initialize: function () {
@@ -73,6 +73,7 @@ $(function () {
 
     addFriend: function (e) {
       e.stopPropagation();
+      console.log('foo')
 
       socket.emit('addFriend', {
         friendId: this.model.get('_id'),

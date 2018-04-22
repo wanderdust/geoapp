@@ -8,6 +8,10 @@ $(function () {
   app.MessageList = Backbone.View.extend({
     el: '.tabs-content',
 
+    events: {
+      "resize .tabs-content": "scrollToBottom"
+    },
+
     initialize: function () {
       _.bindAll(this, 'loadOlderMessages')
       this.socket = socket;

@@ -16,7 +16,8 @@ $(function () {
       "click #back-arrow-container": "backToMain",
       "click #invite-friends-btn.af": "addFriends",
       "click #exit-group-link": "confirmExit",
-      "click .open-chat-btn": "getChat"
+      "click .open-chat-btn": "getChat",
+      "touchstart": "hideSettingsMenu"
     },
 
     initialize: function () {
@@ -44,6 +45,7 @@ $(function () {
       });
 
       this.listenTo(app.userCollection, 'all', this.render);
+      this.listenTo(app.userCollection, 'snackBar', this.snackBar)
 
       new app.UserList();
 
@@ -186,6 +188,17 @@ $(function () {
 
         window.location.href = 'main.html#/online';
       })
+    },
+
+    snackBar: function (message) {
+      let x = this.$("#snackbar");
+      x.html(message);
+      x.addClass('show');
+      setTimeout(function(){ x.removeClass('show'); }, 3000);
+    },
+
+    hideSettingsMenu: function () {
+      $('.dropdown').addClass('hidden')
     }
   });
 
