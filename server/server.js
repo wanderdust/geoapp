@@ -574,7 +574,7 @@ socket.on('getUser', async (data, callback) => {
   });
 
   // Updates friends automatically by searching on the users contacts.
-  socket.on('updateFriendsList', async (data, callback) => {
+  socket.on('updateFriendsList', async (data) => {
     try {
       let existingPhones = [];
       // First remove existing users from phones array.
@@ -634,7 +634,7 @@ socket.on('getUser', async (data, callback) => {
           user.userStatus = existingFriendInDb.userStatus;
           user._id = existingFriendInDb._id;
 
-          callback(null, user)
+          socket.emit('addNewFriends', user);
         }
       };
 
