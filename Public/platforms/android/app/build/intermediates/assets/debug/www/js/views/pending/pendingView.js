@@ -34,7 +34,6 @@ $(function () {
     },
 
     addPending: function () {
-      app.groupCollection.trigger('removeClassSelected');
       this.$el.addClass('selected');
     },
 

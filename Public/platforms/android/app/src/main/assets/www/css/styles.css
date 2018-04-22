@@ -903,8 +903,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
   width: 70%;
 }
 
-.pending.selected .ok-tick,
-.online.selected .ok-tick {
+.selected .ok-tick,
+.selected .ok-tick {
   background-color: #fb8c00;
 }
 

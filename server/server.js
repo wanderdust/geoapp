@@ -297,12 +297,15 @@ socket.on('getUser', async (data, callback) => {
   // Finds user's already selected pending group for the pending view.
   socket.on('findIfPending', async (data, callback) => {
     try {
-      let pendingUser = await UserGroup.findOne({userId: data.userId, pending: true});
+      let pendingUsers = await UserGroup.find({userId: data.userId, pending: true});
 
-      if (pendingUser !== null)
-          callback(null, pendingUser)
+      if (pendingUsers === null)
+          return;
+
+      callback(null, pendingUsers);
 
     } catch (e) {
+      console.log(e)
       callback(e)
     }
   });
@@ -322,14 +325,8 @@ socket.on('getUser', async (data, callback) => {
         online: true
       });
       if (userIsOnline !== null)
-        throw Error ('Ya estás online en este grupo');
+        throw Error ('Ya estás activo en este grupo');
 
-      // Finds if he is pending in another group and sets to false.
-      let oldPending = await UserGroup.findOneAndUpdate({userId: data.userId, pending: true}, {
-        $set: {
-          pending: false
-        }
-      });
       // Finds new group and sets pending to true.
       let newPending = await UserGroup.findOneAndUpdate({groupId: data.groupId, userId: data.userId}, {
         $set: {
@@ -338,27 +335,22 @@ socket.on('getUser', async (data, callback) => {
         }
       }, {new: true});
 
-      updatedDocuments.push(oldPending, newPending);
-
       // Loops trough the updated docs and sends info to the mapsContentView.
-      for (let doc of updatedDocuments) {
-        let updatedProperties = {};
+      let updatedProperties = {};
 
-        if (doc === null)
-          continue;
+      let user = await User.findOne({_id: ObjectID(newPending.userId)});
 
-        let userName = await User.findOne({_id: ObjectID(doc.userId)});
+      updatedProperties._id = newPending.groupId;
+      updatedProperties.userName = user.name;
+      updatedProperties.userId = user._id;
+      console.log(updatedProperties)
 
-        updatedProperties._id = doc.groupId;
-        updatedProperties.userName = userName.name;
-        updatedProperties.userId = userName._id;
+      let socketsToUpdate = openSocketsGroups.findSockets(newPending);
 
-        let socketsToUpdate = openSocketsGroups.findSockets(doc);
+      socketsToUpdate.forEach((e) => {
+        io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
+      })
 
-        socketsToUpdate.forEach((e) => {
-          io.to(e.socketId).emit('newPendingUpdates', updatedProperties);
-        })
-      };
 
       // Gets the timeStamp of the last updated Pending status
       data.timeStamp = newPending.timeStamp;
@@ -735,9 +727,13 @@ socket.on('getUser', async (data, callback) => {
       let findIfOnline = await UserGroup.findOne({userId: data.userId, online: true});
 
       // Finds if he is pending in a group.
-      let findIfPenging = await UserGroup.findOne({userId: data.userId, pending: true});
+      let findIfPending = await UserGroup.find({userId: data.userId, pending: true});
 
-      updatedDocuments.push(findIfOnline, findIfPenging);
+      updatedDocuments.push(findIfOnline);
+
+      findIfPending.forEach((pendingModel) => {
+        updatedDocuments.push(pendingModel)
+      });
       // Return all the models that need updated.
       // Sends data to respective sockets.
       for (let doc of updatedDocuments) {

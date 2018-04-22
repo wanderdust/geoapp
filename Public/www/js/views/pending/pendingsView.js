@@ -51,17 +51,19 @@ $(function () {
         // // Saves the gruoups in the localStorage.
         // that.saveDataLocally(collection);
 
-        that.socket.emit('findIfPending', {userId}, (err, status) => {
+        that.socket.emit('findIfPending', {userId}, (err, data) => {
           if (err)
             return navigator.notification.alert(
               err,
               (msg) => true,
               'Error'
             );
-
-          let model = app.groupCollection.findWhere({_id: status.groupId});
-          model.trigger('updateSelected')
-        })
+            
+            data.forEach((e) => {
+              let model = app.groupCollection.findWhere({_id: e.groupId});
+              model.trigger('updateSelected')
+            })
+        });
       })
       this.render();
     },
@@ -78,7 +80,7 @@ $(function () {
       let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
       app.groupCollection.add(cache);
     },
-  
+
     backToMain: function () {
       window.location.href = 'main.html#/online';
     },
