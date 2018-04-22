@@ -343,7 +343,6 @@ socket.on('getUser', async (data, callback) => {
       updatedProperties._id = newPending.groupId;
       updatedProperties.userName = user.name;
       updatedProperties.userId = user._id;
-      console.log(updatedProperties)
 
       let socketsToUpdate = openSocketsGroups.findSockets(newPending);
 

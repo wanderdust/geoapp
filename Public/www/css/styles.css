@@ -903,11 +903,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
   width: 70%;
 }
 
-.selected .ok-tick,
-.selected .ok-tick {
-  background-color: #fb8c00;
-}
-
 .tabs-content .group-container:hover {
   background-color: white;
 }
@@ -2149,4 +2144,18 @@ body.active {
   padding: 5px;
   margin: 0px;
   font-size: 16px;
+}
+
+/* PENDING responsive model styles */
+
+.confirm-tick {
+  height: 100%;
+  border-radius: 50px;
+  padding: 0px;
+  padding: 0px;
+}
+
+.confirm-tick img {
+  width: 100%;
+  height: auto;
 }
