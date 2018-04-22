@@ -2110,7 +2110,7 @@ body.active {
 .group-data-container .date-group p {
   position: absolute;
   font-size: 14px !important;
-  top: 0px;
+  top: 1.5px;
   color: gray;
   margin: 0px;
 }

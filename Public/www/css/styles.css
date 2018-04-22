@@ -2110,7 +2110,7 @@ body.active {
 .group-data-container .date-group p {
   position: absolute;
   font-size: 14px !important;
-  top: 0px;
+  top: 1.5px;
   color: gray;
   margin: 0px;
 }
@@ -2130,4 +2130,23 @@ body.active {
 
 .offline-status {
   color: gray;
+}
+
+/* Dropdown menu for user */
+.dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 10px;
+  top: 20px;
+  min-height: 1px;
+  background-color: white;
+  z-index: 9999;
+}
+
+.dropdown p {
+  display: block;
+  padding: 5px;
+  margin: 0px;
+  font-size: 16px;
 }

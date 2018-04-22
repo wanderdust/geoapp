@@ -199,11 +199,18 @@ $(function () {
         this.$btn.removeClass('disabled');
         return false;
       } else if (data.date.trim() === "" || data.time.trim() === "") {
+        if (data.frequence === 'always')
+          return true
         this.snackBar('Tienes que añadir fecha y hora del evento');
         this.$btn.removeClass('disabled');
         return false;
       } else if (data.friends.length === 0) {
         this.snackBar('Tienes que añadir por lo menos a 1 amigo');
+        this.$btn.removeClass('disabled');
+        return false;
+      } else if (moment(data.date, 'MMM DD, YYYY hh:mm A', 'es').format('X') < moment().format('X')) {
+        // if the selected date is smaller than the current date in seconds.
+        this.snackBar('No puedes elegir una fecha anterior a este momento');
         this.$btn.removeClass('disabled');
         return false;
       }

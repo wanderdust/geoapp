@@ -11,7 +11,8 @@ $(function () {
 
     events: {
       "click .pending-icon": "showPendingStatus",
-      "click .image": "openImageModal"
+      "click .image": "openImageModal",
+      "click .options-add-friend": "addFriend"
     },
 
     initialize: function () {
@@ -65,8 +66,26 @@ $(function () {
       this.instance.open();
     },
 
-    showOptions: function () {
-      console.log('foo')
+    showOptions: function (e) {
+      e.stopPropagation();
+      this.$('.dropdown').removeClass('hidden');
+    },
+
+    addFriend: function (e) {
+      e.stopPropagation();
+
+      socket.emit('addFriend', {
+        friendId: this.model.get('_id'),
+        userId: sessionStorage.getItem('userId')
+      }, (err, res) => {
+        if (err) {
+          app.userCollection.trigger('snackBar', err.Message);
+          return
+        }
+        app.userCollection.trigger('snackBar', res.Message);
+      });
+
+      this.$('.dropdown').addClass('hidden');
     }
   })
 

@@ -295,7 +295,7 @@ $(function () {
         let bounds = this.getCenter(app.groupCollection).bound;
         let coords = {lat: center.lat(), lng: center.lng()}
 
-        let map = this.newMap();
+        let map = this.newMap(coords);
         map.fitBounds(bounds);
       } catch (e) {
         this.connectionError();

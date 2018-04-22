@@ -267,26 +267,6 @@ socket.on('getUser', async (data, callback) => {
     }
   });
 
-  // Creates a new friend Request collection
-  // socket.on('createFriendRequestCollection', async (userId, callback) => {
-  //   try {
-  //     let requestCollection = [];
-  //     let requestCursors = await Friend.find({friendId: userId, status: "pending"});
-  //
-  //     for (let requestCursor of requestCursors) {
-  //       // Returns an object with the request model properties
-  //       let requestModel = await createFriendRequestModel(requestCursor);
-  //       requestCollection.push(requestModel);
-  //     }
-  //     // Updates the current openSockets Users array.
-  //     openSocketsUsers.addSockets(userId, socket.id);
-  //     // Sends an array with the friend request Models.
-  //     callback(null, requestCollection);
-  //   } catch (e) {
-  //     callback(e.message)
-  //   }
-  // });
-
   // FInds all the friends for each user and creates a collection.
   socket.on('createFriendsCollection', async (userId, callback) => {
     try {
@@ -440,7 +420,7 @@ socket.on('getUser', async (data, callback) => {
       let groupModel;
       let userGroup;
       let group;
-      
+
       if (data.frequence === 'always') {
         date = null
       };
@@ -663,124 +643,42 @@ socket.on('getUser', async (data, callback) => {
     }
   })
 
-  // socket.on('searchFriends', async (data, callback) => {
-  //   try {
-  //     let searchResults = await User.find({name: {$regex : `(?i).*${data.query}.*`}});
-  //     let searchCollection = [];
-  //
-  //     for (let result of searchResults) {
-  //       let model = {};
-  //
-  //       model.name = result.name;
-  //       model._id = result._id;
-  //       model.userStatus = result.userStatus;
-  //       result.userImage ? model.userImage = result.userImage : "";
-  //
-  //       // Doesn't show the current user in the search list
-  //       if (data.userId == model._id)
-  //         continue;
-  //
-  //       searchCollection.push(model);
-  //
-  //       if (searchCollection.length > 20)
-  //         break;
-  //     };
-  //
-  //     callback(null, searchCollection)
-  //   } catch (e) {
-  //     callback(e)
-  //   }
-  // });
-  //
-  // // Creates a pending request to be sent to the friend to accept/reject.
-  // socket.on('sendFriendRequest', async (data, callback) => {
-  //   try {
-  //     let newFriend;
-  //     let newFriendModel;
-  //     let socketsToUpdate = openSocketsUsers.findSockets(data.recipientId);
-  //     let request = {
-  //       userId: data.senderId,
-  //       friendId: data.recipientId,
-  //       status: 'pending'
-  //     };
-  //
-  //     // Check if the user is alreay friends with that user or has sent already an invitation.
-  //     let hasFriend = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'accepted'});
-  //     let requestSent = await Friend.findOne({userId:data.senderId , friendId: data.recipientId, status: 'pending'});
-  //     // Check if the other user has already sent an invitation to him.
-  //     let invited = await Friend.findOne({friendId: data.senderId, userId: data.recipientId, status: 'pending'});
-  //
-  //     if (hasFriend) {
-  //       return callback ('y tu ya sois amigos');
-  //     } else if (requestSent) {
-  //       return callback('está pendiente de aceptar tu invitación');
-  //     } else if (invited) {
-  //       return callback('ya te ha enviado una petición de amistad')
-  //     }
-  //
-  //
-  //     // Adds the request to the database.
-  //     newFriend = await new Friend(request).save();
-  //     newFriendModel = await createFriendRequestModel(newFriend);
-  //
-  //     // Sends data to that friend.
-  //     if (socketsToUpdate[0] !== undefined)
-  //       io.to(socketsToUpdate[0].socketId).emit('addNewFriendRequest', newFriendModel);
-  //
-  //     // Success message.
-  //     callback(null, 'Invitación enviada con éxito')
-  //
-  //   } catch (e) {
-  //     callback(e.message);
-  //   }
-  // });
+  socket.on('addFriend', async (data, callback) => {
+    try {
+      let alreadyFriends = await Friend.findOne({
+        userId: data.userId,
+        friendId: data.friendId
+      });
 
-  // socket.on('addFriend', async (data, callback) => {
-  //   try {
-  //     let addFriendAB;
-  //     let addFriendBA;
-  //     let friendRequest;
-  //     let friendName;
-  //
-  //     // 1st we change the friendRequest id to accepted.
-  //     addFriendAB = await Friend.findOneAndUpdate({
-  //       _id: data
-  //     }, {
-  //       $set: {status: "accepted"}
-  //     });
-  //
-  //     // 2nd we create a new friendship BA for the other user.
-  //     friendRequest = {
-  //       userId: addFriendAB.friendId,
-  //       friendId: addFriendAB.userId,
-  //       status: 'accepted'
-  //     }
-  //     addFriendBA = await new Friend(friendRequest).save();
-  //
-  //     // We find out the name of the added user.
-  //     friendName = await User.findById(addFriendBA.friendId);
-  //
-  //     callback(null, `${friendName.name} ha sido añadido a tu lista de amigos`)
-  //   } catch (e) {
-  //     callback('No se ha podido añadir a este usuario')
-  //   }
-  // });
-  //
-  // // Rejects friend invitation
-  // socket.on('rejectFriend', async (data, callback) => {
-  //   try {
-  //     let userName;
-  //     let deletedDocument = await Friend.findOneAndRemove({
-  //       _id: ObjectID(data),
-  //       status: "pending"
-  //     });
-  //     userName = await User.findById(deletedDocument.userId);
-  //
-  //     callback(null, `Has rechazado a ${userName.name}`)
-  //   } catch (e) {
-  //     callback('No se ha podido completar la operación')
-  //   }
-  // });
+      let friendModel = await User.findById(data.friendId);
+      let friendName = friendModel.name;
+
+      if (data.userId === data.friendId) {
+        return callback({Error: 1, Message: `No puedes añadirte a ti mismo como amigo...`})
+      } else if (alreadyFriends !== null) {
+        return callback({Error: 0, Message: `${friendModel.name} y tu ya sois amigos`});
+      }
+
+      let friendDataA = {
+        userId: data.userId,
+        friendId: data.friendId,
+        status: 'accepted'
+      };
+
+      let friendDataB = {
+        userId: data.friendId,
+        friendId: data.userId,
+        status: 'accepted'
+      }
+
+      let newFriendA = await new Friend(friendDataA).save();
+      let newFriendB = await new Friend(friendDataB).save();
+
+      callback(null, {Message: `${friendName} se ha añadido a tu lista de amigos`});
+    } catch (e) {
+      console.log(e)
+    }
+  })
 
   // Deletes user from the Group.
   socket.on('exitGroup', async (data, callback) => {

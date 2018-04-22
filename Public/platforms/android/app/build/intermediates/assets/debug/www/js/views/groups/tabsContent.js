@@ -20,7 +20,7 @@ $(function () {
       this.$listPending = $('.group-list.pendientes');
       this.$listAll = $('.group-list.desconectado');
 
-      this.$tabsHeader = $('#tabs-header');
+      this.$groupList = $('.group-list');
 
       // inits the modal to view group's images
       this.modalElem = document.querySelector('.modal');
@@ -45,7 +45,7 @@ $(function () {
 
     render: function () {
       // Swipe Events;
-      let mc = this.$tabsHeader.hammer();
+      let mc = this.$groupList.hammer();
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
