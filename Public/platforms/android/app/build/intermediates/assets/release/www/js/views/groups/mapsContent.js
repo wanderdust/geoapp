@@ -98,7 +98,7 @@ $(function () {
             groups: groups
           };
 
-          $.post('http://192.168.1.250:3000/location', JSON.stringify(data));
+          $.post('http://192.168.1.154:1337/location', JSON.stringify(data));
 
           backgroundGeolocation.finish();
         };

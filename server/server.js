@@ -34,7 +34,7 @@ const {sendEventReminder} = require('./utils/eventsTimeouts.js');
 const {startEventReminders} = require('./utils/eventsTimeouts.js');
 
 const publicPath = path.join(__dirname, '../public');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1337;
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
