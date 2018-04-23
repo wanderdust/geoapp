@@ -135,7 +135,7 @@ h4 {
 }
 
 #tabs-container .tab a {
-  font-size: 1.2em;
+  font-size: 1rem;
 }
 
 .tabs .tab a:hover, .tabs .tab a {
@@ -2162,4 +2162,8 @@ body.active {
 
 #confirm-pending img {
   width: 80%;
+}
+
+.tabs-fixed-width {
+  display:flex !important;
 }

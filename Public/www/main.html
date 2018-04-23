@@ -90,14 +90,14 @@
       <div id="tabs-container">
         <a class="up-swipe-tabs btn-floating btn-large waves-effect waves-light white"><img src="./css/assets/sidebar-icons/icon_up.svg"></a>
         <div id="tabs-header">
-          <ul id="tabs-swipe-demo" class="tabs z-depth-1">
-            <li class="tab col s3"><a class="active" href="#swipe-1">Activos</a></li>
-            <li class="tab col s3"><a href="#swipe-2">Pendientes</a></li>
-            <li class="tab col s3"><a href="#swipe-3">Offline</a></li>
+          <ul id="tabs-swipe-demo" class="tabs z-depth-1 tabs-fixed-width">
+            <li class="tab col s4"><a class="active" href="#swipe-1">Hoy</a></li>
+            <li class="tab col s4"><a href="#swipe-2">Mañana</a></li>
+            <li class="tab col s4"><a href="#swipe-3">Próximos</a></li>
           </ul>
-          <div id="swipe-1" class="col s12 "><ul class="group-list activos"></ul></div>
-          <div id="swipe-2" class="col s12 "><ul class="group-list pendientes"></ul></div>
-          <div id="swipe-3" class="col s12 "><ul class="group-list desconectado"></ul></div>
+          <div id="swipe-1" class="col s12 "><ul class="group-list today"></ul></div>
+          <div id="swipe-2" class="col s12 "><ul class="group-list tomorrow"></ul></div>
+          <div id="swipe-3" class="col s12 "><ul class="group-list upcoming"></ul></div>
         </div>
       </div>
 
@@ -125,6 +125,7 @@
     <script src="./js/libs/handlebars.min.js"></script>
     <script src="./js/libs/underscore-min.js"></script>
     <script src="./js/libs/backbone-min.js"></script>
+    <script src="./js/libs/moment.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgsIcalYBQwJJygvBmmzYtAfqdWi3RbNA"></script>
     <script src ="./js/utils/map-styles.js"></script>
     <script src="./js/models/groupModel.js"></script>

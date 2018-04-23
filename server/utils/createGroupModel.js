@@ -60,10 +60,10 @@ let createGroupModel = async function (currentGroupId, currentUserId) {
     newModel.coords = groupModel.coords;
     newModel.activeUsers = onlineUsersArray;
     newModel.pendingUsers =  pendingUsersArray;
-    newModel.frequency = groupModel.frequency;
+    newModel.frequence = groupModel.frequence;
+    newModel.timeStamp = groupModel.date;
     newModel._id = groupModel._id;
     groupModel.groupImage ? newModel.groupImage = groupModel.groupImage : "";
-
     return newModel;
   } catch (e) {
     console.log(e);
