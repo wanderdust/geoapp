@@ -16,9 +16,9 @@ $(function () {
       _.bindAll(this, 'render', 'appendAll', 'appendOne');
       this.socket = socket;
       // this.$list = $('.group-list');
-      this.$listOnline = $('.group-list.activos');
-      this.$listPending = $('.group-list.pendientes');
-      this.$listAll = $('.group-list.desconectado');
+      this.$listToday = $('.group-list.today');
+      this.$listTomorrow = $('.group-list.tomorrow');
+      this.$listUpcoming = $('.group-list.upcoming');
 
       this.$groupList = $('.group-list');
 
@@ -49,18 +49,62 @@ $(function () {
       mc.data('hammer').get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     },
 
+    isToday: function (group) {
+      let timeStamp = group.get('timeStamp');
+      let today = moment();
+      let parsedTimeStamp = moment(timeStamp);
+
+      if (timeStamp === null) return true;
+
+      if (group.get('frequence') === 'once') {
+        today = today.format('d/M/Y');
+        parsedTimeStamp = parsedTimeStamp.format('d/M/Y');
+
+        if (parsedTimeStamp === today) return true;
+      } else if (group.get('frequence') === 'weekly') {
+        today = today.format('d');
+        parsedTimeStamp = parsedTimeStamp.format('d');
+
+        if (parsedTimeStamp === today) return true;
+      }
+
+      return false;
+    },
+
+    isTomorrow: function (group) {
+      let timeStamp = group.get('timeStamp');
+      let tomorrow = moment().add(24, 'hours');
+      let parsedTimeStamp = moment(timeStamp);
+
+      if (timeStamp === null) return false;
+
+      if (group.get('frequence') === 'once') {
+        tomorrow = tomorrow.format('d/M/Y');
+        parsedTimeStamp = parsedTimeStamp.format('d/M/Y');
+
+        if (parsedTimeStamp === tomorrow) return true;
+      } else if (group.get('frequence') === 'weekly') {
+        tomorrow = tomorrow.format('d');
+        parsedTimeStamp = parsedTimeStamp.format('d');
+
+        if (parsedTimeStamp === tomorrow) return true;
+      }
+
+      return false;
+    },
+
     // Appends a model every time there is an 'add' event.
     appendOne: function (group) {
-      let isOnline = (group.get('activeUsers').length > 0 ? true : false);
-      let isPending = (group.get('activeUsers').length === 0 && group.get('pendingUsers').length > 0 ? true : false);
+      let isToday = this.isToday(group);
+      let isTomorrow = this.isTomorrow(group);
       let view = new app.GroupView({model: group});
 
-      if (isOnline) {
-        this.$listOnline.append(view.render().el);
-      } else if (isPending) {
-        this.$listPending.append(view.render().el);
+      if (isToday) {
+        this.$listToday.append(view.render().el);
+      } else if (isTomorrow) {
+        this.$listTomorrow.append(view.render().el);
       } else {
-        this.$listAll.append(view.render().el);
+        this.$listUpcoming.append(view.render().el);
       }
 
       // initModal sends the modal intance to each model.
@@ -70,9 +114,9 @@ $(function () {
 
     // Clears the view and attaches the new collection.
     appendAll: function (collection) {
-      this.$listOnline.html('');
-      this.$listPending.html('');
-      this.$listAll.html('');
+      this.$listToday.html('');
+      this.$listTomorrow.html('');
+      this.$listUpcoming.html('');
       collection.each(this.appendOne, this);
     },
 
@@ -98,12 +142,6 @@ $(function () {
       } else {
         $('.up-swipe-tabs img').attr('src', './css/assets/sidebar-icons/icon_down.svg');
       }
-
-      // if (e.gesture.offsetDirection === 8) {
-      //   $elements.addClass('swipeUp');
-      // } else if (e.gesture.offsetDirection === 16) {
-      //   $elements.removeClass('swipeUp');
-      // }
     }
 
   })

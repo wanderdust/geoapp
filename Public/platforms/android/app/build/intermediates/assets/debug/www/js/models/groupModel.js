@@ -15,7 +15,7 @@ $(function () {
       groupImage: 'css/assets/group_placeholder.svg',
       pendingUsers: [],
       date: "",
-      time: "",
+      timeStamp: "",
       frequence: "",
       _id: ''
     }

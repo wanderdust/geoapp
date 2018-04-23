@@ -17,7 +17,8 @@ $(function () {
       "click #invite-friends-btn.af": "addFriends",
       "click #exit-group-link": "confirmExit",
       "click .open-chat-btn": "getChat",
-      "touchstart": "hideSettingsMenu"
+      "touchstart": "hideSettingsMenu",
+      "click #confirm-pending": "addPending"
     },
 
     initialize: function () {
@@ -54,6 +55,7 @@ $(function () {
 
       // LoadCache loads local saved locally.
       this.loadCache();
+      this.findIfPending();
 
       this.socket.emit('createUsersCollection', {
         groupId: sessionStorage.getItem('currentGroupId'),
@@ -195,6 +197,48 @@ $(function () {
       x.html(message);
       x.addClass('show');
       setTimeout(function(){ x.removeClass('show'); }, 3000);
+    },
+
+    findIfPending: function () {
+      let userId = sessionStorage.getItem('userId');
+      let groupId = sessionStorage.getItem('currentGroupId');
+
+      this.socket.emit('findIfPending', {userId}, (err, data) => {
+        if (err)
+          return;
+
+        data.forEach((pending) => {
+          if (groupId !== pending.groupId)
+            return;
+          this.$('#confirm-pending').addClass('selected');
+        }, this)
+      })
+    },
+
+    addPending: function () {
+      let groupId = sessionStorage.getItem('currentGroupId');
+      let userId = sessionStorage.getItem('userId');
+      let isSelected = this.$('#confirm-pending').hasClass('selected');
+
+      if (!isSelected) {
+        this.socket.emit('updatePending', {groupId, userId}, (err, res) => {
+          if (err) {
+            this.snackBar(err)
+            return;
+          }
+          this.snackBar(res);
+          this.$('#confirm-pending').addClass('selected');
+        });
+      } else {
+        this.socket.emit('cancelPending', {groupId, userId}, (err, callback) => {
+          if (err) {
+            this.snackBar(err)
+            return
+          }
+
+        this.$('#confirm-pending').removeClass('selected');
+        })
+      }
     },
 
     hideSettingsMenu: function () {

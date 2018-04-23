@@ -86,6 +86,9 @@ $(function () {
         let data = {
           title: e.title,
           coords: e.coords,
+          date: e.date,
+          timeStamp: e.timeStamp,
+          frequence: e.frequence,
           groupImage: '',
           activeUsers: [],
           pendingUsers: [],

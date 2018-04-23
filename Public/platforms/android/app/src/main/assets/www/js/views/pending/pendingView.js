@@ -11,7 +11,7 @@ $(function () {
     template: Templates.groupTemplatePending,
 
     events: {
-      "click .ok-tick": "addPendingAndUpdate"
+      "touchend .group-template": "addPendingAndUpdate"
     },
 
     initialize: function () {
@@ -35,6 +35,7 @@ $(function () {
 
     addPending: function () {
       this.$el.addClass('selected');
+      this.$('.confirm-tick img').removeClass('scale-out');
     },
 
     addPendingAndUpdate: function () {
@@ -60,6 +61,7 @@ $(function () {
             return
           }
 
+        this.$('.confirm-tick img').addClass('scale-out');
         this.$el.removeClass('selected');
         })
       }

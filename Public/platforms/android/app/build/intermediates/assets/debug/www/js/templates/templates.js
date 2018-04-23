@@ -35,7 +35,7 @@ Templates.userTemplateB = [
     '</div>',
     '{{#if isPending}}',
       '<div class="pending-icon waves-effect waves-light">',
-        '<img src="css/assets/sidebar-icons/icon_pending_orange.svg">',
+        '<img src="css/assets/sidebar-icons/ok_tick_orange.svg">',
       '</div>',
     '{{/if}}',
 
@@ -114,23 +114,36 @@ Templates.groupTemplateB = [
 
 // Template for a group container (pending)
 Templates.groupTemplatePending = [
-  '<div class="group-container pending">',
-    '<div class="image-animation"></div>',
-    '<div class="image"><img src="{{groupImage}}" class="hidden"></div>',
-    '<div class="group-header pending">',
-      '<p class="group-title user-name">{{title}}</p>',
-      '{{#if activeUsers.[0]}}',
-      '<p class="group-status">Están: {{#each activeUsers}} {{this}}.  {{/each}}</p>',
-      '{{else}}',
-        '{{#if pendingUsers}}',
-          '<p class="group-status">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>',
+  '<div class="waves-effect waves-orange row group-template">',
+    '<div class="group-img-container col s3">',
+      '<div class="image">',
+        '<img src="{{groupImage}}" class="hidden">',
+      '</div>',
+    '</div>',
+    '<div class="group-data-container col s7 row">',
+      '<div class="title-group col s12">',
+        '<p class="truncate">{{title}}</p>',
+      '</div>',
+      '<div class="date-group col s12">',
+        '<p class="truncate">{{date}}</p>',
+      '</div>',
+      '<div class="status-group col s12">',
+        '{{#if activeUsers.[0]}}',
+        '<p class="truncate">Están: {{#each activeUsers}} {{this}}.  {{/each}}</p>',
+        '{{else}}',
+          '{{#if pendingUsers}}',
+          '<p class="truncate">Van: {{#each pendingUsers}} {{this}}. {{/each}}</p>',
+          '{{else}}',
+          '<p class="truncate offline-status">Sin actividad</p>',
+          '{{/if}}',
         '{{/if}}',
-      '{{/if}}',
+      '</div>',
     '</div>',
-    '<div class="ok-tick"><image class="img-responive img-fluid " src="./css/assets/sidebar-icons/ok-tick.svg">',
+    '<div class="confirm-tick col s2 row valign-wrapper">',
+      '<img class="scale-transition scale-out" src="./css/assets/sidebar-icons/ok_tick_orange.svg">',
     '</div>',
-  '</div>',
-].join('\n');
+  '</div>'
+].join('\n')
 
 // Template for the header in the users view.
 Templates.usersGroupHeader = [
