@@ -19,9 +19,9 @@ let sendPushMessages = function (recipients, msg) {
 
     fcm.send(message, function(err, response){
         if (err) {
-            console.log("Something has gone wrong!");
+            // console.log("Something has gone wrong!");
         } else {
-            console.log("Successfully sent");
+            // console.log("Successfully sent");
         }
     });
   })

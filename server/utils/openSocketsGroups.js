@@ -12,7 +12,7 @@ let OpenSocketsGroups = class {
 		})
 
 		if (alreadyExists.length > 0) {
-			return console.log('already exists');
+			return;
 		}
 
   	this.openSockets.push(newSocket);

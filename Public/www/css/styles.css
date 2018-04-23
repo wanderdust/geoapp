@@ -2159,3 +2159,7 @@ body.active {
   width: 100%;
   height: auto;
 }
+
+#confirm-pending img {
+  width: 80%;
+}

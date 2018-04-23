@@ -869,11 +869,18 @@ socket.on('getUser', async (data, callback) => {
     try {
       let socketsToUpdateChat = openSocketsChat.findSockets(data);
       let userName = await User.findById(data.userId);
+      let group = await Group.findById(data.groupId);
+      let friendsFMC = [];
       let message = {
         from: userName.name,
         body: data.body,
         timeStamp: data.timeStamp,
         userId: data.userId
+      };
+
+      let notificationMsg = {
+        title: `GeoApp`,
+        body: `Nuevo mensaje de ${userName.name} en ${group.title}`
       };
 
       // Appends the messages.
@@ -886,6 +893,15 @@ socket.on('getUser', async (data, callback) => {
       socketsToUpdateChat.forEach((e) => {
         io.to(e.socketId).emit('newMessage', message);
       });
+
+      let usersInChat = await UserGroup.find({groupId: data.groupId});
+
+      for (let userInChat of usersInChat) {
+        let user = await User.findById(userInChat.userId);
+        friendsFMC.push(user.fcmRegId);
+      }
+      sendPushMessages(friendsFMC, notificationMsg);
+
     } catch (e) {
       console.log(e)
     }

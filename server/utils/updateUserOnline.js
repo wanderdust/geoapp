@@ -66,7 +66,7 @@ let updateUserOnline = async function (data, openSocketsGroups, openSocketsUsers
 
       // Finds the sockets in the  array that contain an updated group.
       socketsToUpdateGroups = openSocketsGroups.findSockets(doc);
-      console.log('GroupSockets', socketsToUpdateGroups)
+
       socketsToUpdateGroups.forEach((e) => {
         io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
       });
@@ -100,7 +100,6 @@ let updateUserOnline = async function (data, openSocketsGroups, openSocketsUsers
 
 
     sendPushMessages(usersInGroupFCM, message);
-    console.log('inside the function')
   } catch (e) {
     console.log(e)
   }
