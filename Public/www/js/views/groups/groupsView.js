@@ -34,7 +34,17 @@ $(function () {
       var instance = M.Sidenav.init(elem, {});
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      socket.emit('connectedClient', {
+        id: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
+      }, (err, res) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
+        }
+        return
+      });
 
       // Appends new notifications.
       socket.on('addNewRequest', () => this.getRequestsLength());
@@ -50,14 +60,14 @@ $(function () {
       this.$sideNav.hammer();
 
       this.socket.emit('createGroupCollection', {
-        userId: sessionStorage.getItem('userId')
+        userId: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
       }, (err, collection) => {
-        if(err)
-          return navigator.notification.alert(
-            err,
-            (msg) => true,
-            'Error'
-          );
+        if(err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html';
+          return
+        }
 
         // If it is a new user with no groups it triggers blankMap event.
         if (collection.length === 0) {
@@ -117,16 +127,16 @@ $(function () {
     // Gets a brand new group collection
     updateGroupCollection: function () {
       this.socket.emit('createGroupCollection', {
-        userId: sessionStorage.getItem('userId')
+        userId: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
       }, (err, collection) => {
-        if(err)
-          return navigator.notification.alert(
-            err,
-            (msg) => true,
-            'Error'
-          );
-          app.groupCollection.reset(collection);
-          // app.groupCollection.reset(collection);
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html';
+          return;
+        }
+        app.groupCollection.reset(collection);
+        // app.groupCollection.reset(collection);
       });
     },
 

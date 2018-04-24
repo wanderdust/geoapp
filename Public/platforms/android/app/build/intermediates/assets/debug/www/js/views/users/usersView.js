@@ -51,7 +51,17 @@ $(function () {
       new app.UserList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'))
+      socket.emit('connectedClient', {
+        id: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
+      }, (err, res) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
+        }
+        return
+      });
 
       // LoadCache loads local saved locally.
       this.loadCache();

@@ -75,7 +75,23 @@ UserSchema.methods.removeToken = function (token) {
   })
 };
 
+UserSchema.statics.findByToken = async function (token) {
+  let User = this;
+  let decoded;
 
+  try {
+    decoded = jwt.verify(token, secret);
+  } catch (e) {
+    throw {Error: 401, Message: 'Usuario no verificado'}
+  }
+
+  let user = await User.findOne({
+    '_id': decoded._id,
+    'tokens.token': token,
+    'tokens.access': 'auth'
+  })
+  return user;
+};
 
 
 let User = mongoose.model('User', UserSchema);

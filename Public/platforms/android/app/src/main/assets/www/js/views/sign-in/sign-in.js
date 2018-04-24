@@ -65,44 +65,10 @@ $(function () {
         sessionStorage.setItem('userId', res._id);
         // User's unique device uuid
         localStorage.setItem('userUuidGeoapp', res.uuid);
+        sessionStorage.setItem('token', res.token);
         window.location.href = 'main.html#/online'
       })
     },
-    //
-    // logIn: function () {
-    //   let data = {};
-    //   data.prefix = $('#prefix').val().replace(/\s+/g, '');
-    //   data.phone = $('#email').val().replace(/\s+/g, '');
-    //   data.password = $('#password').val().trim();
-    //
-    //   this.socket.emit('loginUser', data, (err, res) => {
-    //     if (err) {
-    //       $('.input-group').removeClass('error');
-    //       $('.error-message').addClass('hidden');
-    //       if (err.Error === 1) {
-    //         // No user found
-    //         $('.input-group.email').addClass('error');
-    //         $('.error-email').removeClass('hidden').html(err.Message);
-    //       } else if (err.Error === 2) {
-    //         // Wrong password
-    //         $('.input-group.password').addClass('error');
-    //         $('.error-password').removeClass('hidden').html(err.Message);
-    //       } else if (err.Error === 8) {
-    //         // phone code required
-    //         $('.input-group.phone-prefix').addClass('error');
-    //         $('.error-email').removeClass('hidden').html(err.Message);
-    //       } else if (err.Error === 99) {
-    //         throw Error (err);
-    //       }
-    //       return;
-    //     }
-    //
-    //     sessionStorage.setItem('userId', res._id);
-    //     // Random strings to avoid localStorage collisions.
-    //     localStorage.setItem('userUuidGeoapp', res.uuid);
-    //     window.location.href = 'main.html#/online'
-    //   })
-    // },
 
     // Gets country code from freegeoip and then gets the country prefix
     // from restcountires

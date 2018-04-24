@@ -23,7 +23,17 @@ $(function () {
       new app.MessageList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      socket.emit('connectedClient', {
+        id: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
+      }, (err, res) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
+        }
+        return
+      });
 
       socket.emit('createMessageCollection', {groupId: this.groupId, displayMessages: 0}, (err, messageList) => {
         if (err) {

@@ -92,21 +92,29 @@ io.on('connection', (socket) => {
       response.sendStatus(200);
   });
 
-  socket.on('connectedClient', (id) => {
-    let users = connectedUsers.connectedUsers;
-    let found = false;
-    // checks if the user exists in the array. If it does it changes the socket.id,
-    // if it doesn't exist it add the user to the array.
-    for (let user of users) {
-      if (user.userId === id) {
-        user.takeHandshake();
-        user.socketId = socket.id;
-        found = true;
-        break;
+  socket.on('connectedClient', async (data, callback) => {
+    try {
+      await User.findByToken(data.token);
+
+      let users = connectedUsers.connectedUsers;
+      let found = false;
+      // checks if the user exists in the array. If it does it changes the socket.id,
+      // if it doesn't exist it add the user to the array.
+      for (let user of users) {
+        if (user.userId === data.id) {
+          user.takeHandshake();
+          user.socketId = socket.id;
+          found = true;
+          break;
+        };
       };
-    };
-    if (!found) {
-      connectedUsers.addUser(id, socket.id);
+      if (!found) {
+        connectedUsers.addUser(data.id, socket.id);
+      }
+
+      callback (null, true);
+    } catch (e) {
+      callback(e);
     }
   })
 
@@ -114,6 +122,7 @@ io.on('connection', (socket) => {
   socket.on('createUser', async (data, callback) => {
     try {
       let user;
+      let token;
       let uuid = data.uuid;
       let userPhone = `${data.prefix}${data.phone}`;
       let newUser = {
@@ -134,10 +143,9 @@ io.on('connection', (socket) => {
      }
 
       user = await new User(newUser).save();
+      token = await user.generateAuthToken();
 
-      let token = await user.generateAuthToken();
-
-      callback(null, {_id: user._id, uuid: newUser.deviceUuid});
+      callback(null, {_id: user._id, uuid: newUser.deviceUuid, token});
     } catch (e) {
       let duplicate = 11000;
       let err = e.errors;
@@ -184,14 +192,15 @@ io.on('connection', (socket) => {
     }
   })
 
-  socket.on('createGroupCollection', async (userId, callback) => {
+  socket.on('createGroupCollection', async (data, callback) => {
     try {
+      await User.findByToken(data.token);
       let groupCollection = [];
-      let groupCursors = await UserGroup.find(userId);
+      let groupCursors = await UserGroup.find({userId: data.userId});
 
       for (let currentGroup of groupCursors) {
         // Returns an object with the group model properties.
-        let newModel = await createGroupModel(currentGroup.groupId, userId.userId);
+        let newModel = await createGroupModel(currentGroup.groupId, data.userId);
 
         // Adds a new element mapping groupId with socketId.
         openSocketsGroups.addSockets(newModel._id, socket.id);
@@ -201,7 +210,7 @@ io.on('connection', (socket) => {
       // Sends an array with all the group Models.
       callback(null, groupCollection);
     } catch (e) {
-      console.log('createGroupCollection error', e.message)
+      console.log(e)
       callback(e);
     }
   });
@@ -229,6 +238,7 @@ io.on('connection', (socket) => {
       // Sends an array with all the user Models.
       callback(null, userCollection);
     } catch (e) {
+      return console.log(e)
       callback(e);
     }
   });
