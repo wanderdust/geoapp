@@ -51,6 +51,7 @@ app.use(bodyParser.json({ type : '*/*' , limit: '50mb'})); // force json
 // Function that restarts all the timeouts.
 startEventReminders();
 
+
 io.on('connection', (socket) => {
 
   socket.on('debug', (data) => {
@@ -134,6 +135,8 @@ io.on('connection', (socket) => {
 
       user = await new User(newUser).save();
 
+      let token = await user.generateAuthToken();
+
       callback(null, {_id: user._id, uuid: newUser.deviceUuid});
     } catch (e) {
       let duplicate = 11000;
@@ -159,8 +162,11 @@ io.on('connection', (socket) => {
 
       if (user === null) {
         return callback({Error: 1, Message: 'Usuario no encontrado'});
-      }
-      callback(null, {_id: user._id, uuid: user.deviceUuid})
+      };
+
+      let token = await user.generateAuthToken();
+
+      callback(null, {_id: user._id, uuid: user.deviceUuid, token})
     } catch (e) {
 
     }
@@ -939,7 +945,12 @@ socket.on('getUser', async (data, callback) => {
                   io.to(e.socketId).emit('newGroupUpdates', updatedProperties);
                 });
               }
+
               connectedUsers.removeSockets(socket);
+
+              // removes the token
+              let usr = await User.findById(userId);
+              await usr.removeToken(usr.tokens[0].token);
             }).catch((e) => console.log(e));
           }
         } catch (e) {
