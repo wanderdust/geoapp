@@ -98,7 +98,7 @@ $(function () {
             groups: groups
           };
 
-          $.post('http://192.168.1.250:1337/location', JSON.stringify(data));
+          $.post('http://amigos-geoapp.dynu.net:1337/location', JSON.stringify(data));
 
           backgroundGeolocation.finish();
         };
