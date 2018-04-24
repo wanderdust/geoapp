@@ -43,13 +43,12 @@ $(function () {
           app.userCollection.reset(collection);
         }
 
+        $('.preloader').remove();
+        this.render();
       });
-
-
-      this.render();
     },
 
-    render: function (ff) {
+    render: function () {
       let friendsLength = app.userCollection.length;
       $('.friends-length span').html(friendsLength);
     },

@@ -205,6 +205,7 @@ $(function () {
         this.$btn.removeClass('disabled');
         return false;
       } else if (data.friends.length === 0) {
+        return true
         this.snackBar('Tienes que añadir por lo menos a 1 amigo');
         this.$btn.removeClass('disabled');
         return false;
@@ -313,13 +314,13 @@ $(function () {
       // Checks which of the buttons have been clicked.
       if (el.hasClass('once-btn')) {
         this.groupFrequence = 'once';
-        $('.datepicker').attr('disabled', false)
+        $('.time-input').attr('disabled', false);
       } else if (el.hasClass('weekly-btn')) {
         this.groupFrequence = 'weekly';
-        $('.datepicker').attr('disabled', false)
+        $('.time-input').attr('disabled', false);
       } else if (el.hasClass('always-btn')) {
         this.groupFrequence = 'always';
-        $('.datepicker').attr('disabled', true)
+        $('.time-input').attr('disabled', true);
       }
     }
   })

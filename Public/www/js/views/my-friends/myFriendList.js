@@ -43,7 +43,6 @@ $(function () {
     // Appends a model every time there is an 'add' event.
     appendOne: function (user) {
       let view = new app.MyFriendView({model: user});
-      $('.preloader').remove();
       this.$friendList.append(view.render().el);
 
       // initModal sends the modal intance to each model.

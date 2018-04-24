@@ -38,7 +38,7 @@ let checkConnection = {
     if (isOnline(checkConnection.checkConnectionType()) !== isOnline(checkConnection.initialConnection))
       window.location.href = "index.html";
 
-    // socket = io.connect('http://192.168.1.154:1337');
+    // socket = io.connect('http://amigos-geoapp.dynu.net:1337');
     // let html = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     //
     // if (sessionStorage.getItem('userId') !== null)
