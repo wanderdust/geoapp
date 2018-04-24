@@ -335,7 +335,7 @@ h4 {
 /* The side navigation menu */
 #logo-container {
   width: 100%;
-  height: 100px;
+  height: 50px;
   position: relative;
 }
 
@@ -2167,3 +2167,15 @@ body.active {
 .tabs-fixed-width {
   display:flex !important;
 }
+
+/* LOGO STYLES */
+ #logo-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   overflow: visible;
+ }
+
+ .divider-bottom {
+   margin-top: 40px !important;
+ }
