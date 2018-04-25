@@ -8,10 +8,10 @@ $(function () {
   app.GroupView = Backbone.View.extend({
     tagName: 'li',
 
-    template: Templates.groupTemplateA,
+    template: Templates.groupTemplateB,
 
     events: {
-      "click .group-header": "showUsers",
+      "click .group-data-container": "showUsers",
       "click .image": "openImageModal",
     },
 

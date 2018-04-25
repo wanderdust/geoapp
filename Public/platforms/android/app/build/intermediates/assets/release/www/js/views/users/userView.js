@@ -11,13 +11,19 @@ $(function () {
 
     events: {
       "click .pending-icon": "showPendingStatus",
-      "click .image": "openImageModal"
+      "click .image": "openImageModal",
+      "touchend .options-add-friend": "addFriend"
     },
 
     initialize: function () {
+      _.bindAll(this, 'showOptions');
       this.listenTo(this.model, 'change', this.render);
       this.listenToOnce(this.model, 'updateOne', this.updateOne);
       this.listenToOnce(this.model, 'initModal', this.updateInstance);
+
+      // Hammerjs press event
+      let mc = this.$el.hammer({}).bind("press", this.showOptions);
+      mc.data('hammer').get('press').set({time: 800});
 
       this.instance;
 
@@ -34,6 +40,7 @@ $(function () {
       this.$el.toggleClass('online', isOnline);
       this.$el.toggleClass('pending', isPending);
       app.userCollection.fitImage(this.$('.image img'));
+
       return this;
     },
 
@@ -57,6 +64,29 @@ $(function () {
       app.userCollection.fitImage($('#modal1 img'));
       $('#modal1 img').attr('src', userImage);
       this.instance.open();
+    },
+
+    showOptions: function (e) {
+      e.stopPropagation();
+      this.$('.dropdown').removeClass('hidden');
+    },
+
+    addFriend: function (e) {
+      e.stopPropagation();
+      console.log('foo')
+
+      socket.emit('addFriend', {
+        friendId: this.model.get('_id'),
+        userId: sessionStorage.getItem('userId')
+      }, (err, res) => {
+        if (err) {
+          app.userCollection.trigger('snackBar', err.Message);
+          return
+        }
+        app.userCollection.trigger('snackBar', res.Message);
+      });
+
+      this.$('.dropdown').addClass('hidden');
     }
   })
 

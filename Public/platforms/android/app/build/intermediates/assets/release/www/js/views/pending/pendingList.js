@@ -21,7 +21,6 @@ $(function () {
       this.listenTo(app.groupCollection, 'add', this.appendOne);
       this.listenTo(app.groupCollection, 'reset', this.appendAll);
       this.listenTo(app.groupCollection, 'add addPlaceHolder', this.render);
-      this.listenTo(app.groupCollection, 'removeClassSelected', this.removeAndUpdate)
 
       socket.on('newGroupUpdates', (data) => {
         app.groupCollection.findAndUpdateOneOnline(data);
@@ -59,10 +58,6 @@ $(function () {
     appendAll: function (collection) {
       this.$requestList.html('');
       collection.each(this.appendOne, this);
-    },
-
-    removeAndUpdate: function () {
-      this.$(".selected").removeClass('selected');
     }
   })
 

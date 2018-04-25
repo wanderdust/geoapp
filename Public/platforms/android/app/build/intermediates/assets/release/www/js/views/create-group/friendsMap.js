@@ -34,7 +34,7 @@ $(function () {
         let that = this;
         let map = await new google.maps.Map(document.getElementById('map-container-friends'), {
           center: {lat: 40.472795, lng: -3.868239},
-          zoom: 8,
+          zoom: 12,
           disableDefaultUI: true,
           styles: mapStyle
         });

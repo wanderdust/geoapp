@@ -30,6 +30,10 @@ $(function () {
       });
 
       document.addEventListener("deviceready", this.getContacts, false);
+
+      socket.on('addNewFriends', (user) => {
+        app.userCollection.add(user)
+      });
     },
 
     render: function () {
@@ -39,7 +43,6 @@ $(function () {
     // Appends a model every time there is an 'add' event.
     appendOne: function (user) {
       let view = new app.MyFriendView({model: user});
-      $('.preloader').remove();
       this.$friendList.append(view.render().el);
 
       // initModal sends the modal intance to each model.
@@ -82,20 +85,19 @@ $(function () {
     onSuccessContact: function (contacts) {
       // First return make an array with only phone numbers. We eliminate any
       // white spaces in between them.
+      let phoneNumbers = [];
 
-      let phoneNumbers = contacts.map((contact) => {
-        return contact.phoneNumbers[0].value.replace(/\s+/g, '');
-      });
+      for (let contact of contacts) {
+        contact.phoneNumbers.forEach((e) => {
+          phoneNumbers.push(e.value.replace(/\s+/g, ''))
+        })
+      }
 
       // Second we filter the array to send only valid numbers.
       this.filterPhoneNumbers(phoneNumbers);
     },
 
     filterPhoneNumbers: function (phoneNumbers) {
-      // Filter phones only with valid prefixes, and valid length.
-
-
-      // Send data to server and get and add new users if there is any.
       this.updateFriends(phoneNumbers);
     },
 
@@ -106,12 +108,7 @@ $(function () {
       data.userId = sessionStorage.getItem('userId');
       data.phoneNumbers = phoneNumbers;
 
-      this.socket.emit('updateFriendsList', data, (err, res) => {
-        if (err)
-          return alert(err);
-
-        app.userCollection.add(res);
-      });
+      this.socket.emit('updateFriendsList', data);
     },
 
     onErrorContact: function (e) {

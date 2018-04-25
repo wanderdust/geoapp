@@ -24,20 +24,31 @@ $(function () {
       new app.PendingList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      socket.emit('connectedClient', {
+        id: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
+      }, (err, res) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
+        }
+        return
+      });
 
       this.listenTo(app.groupCollection, 'update', this.render);
       this.listenTo(app.groupCollection, 'showAlert', this.snackBar);
 
       this.loadCache();
 
-      this.socket.emit('createGroupCollection', {userId}, (err, collection) => {
-        if(err){
-          return navigator.notification.alert(
-            err,
-            (msg) => true,
-            'Error'
-          );
+      this.socket.emit('createGroupCollection', {
+        userId,
+        token: sessionStorage.getItem('token')
+      }, (err, collection) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
         } else if (collection.length === 0) {
           app.groupCollection.trigger('addPlaceHolder')
         }
@@ -51,7 +62,7 @@ $(function () {
         // // Saves the gruoups in the localStorage.
         // that.saveDataLocally(collection);
 
-        that.socket.emit('findIfPending', {userId}, (err, status) => {
+        that.socket.emit('findIfPending', {userId}, (err, data) => {
           if (err)
             return navigator.notification.alert(
               err,
@@ -59,9 +70,11 @@ $(function () {
               'Error'
             );
 
-          let model = app.groupCollection.findWhere({_id: status.groupId});
-          model.trigger('updateSelected')
-        })
+            data.forEach((e) => {
+              let model = app.groupCollection.findWhere({_id: e.groupId});
+              model.trigger('updateSelected')
+            })
+        });
       })
       this.render();
     },
@@ -78,7 +91,7 @@ $(function () {
       let cache = JSON.parse(localStorage.getItem('groupsCache_geoApp'));
       app.groupCollection.add(cache);
     },
-  
+
     backToMain: function () {
       window.location.href = 'main.html#/online';
     },

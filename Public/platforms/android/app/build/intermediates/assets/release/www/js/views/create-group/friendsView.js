@@ -17,9 +17,12 @@ $(function () {
       "click .add-friends-btn": "openNavBar",
       "keyup .friends-query" : "search",
       "click #create-group-btn": "createNewGroup",
-      "touchend .new-group-image" : "addGroupImage",
+      "click .new-group-image-container" : "addGroupImage",
       "swiperight .tabs-content.groups-sidebar": "closeNavAndSave",
-      "click .search-icon": "toggleScaleOut"
+      "click .search-icon": "toggleScaleOut",
+      "click .group-frequence input": "addFrequence",
+      "click .timepicker": "blurOut",
+      "click .timepicker-modal": "blurOut"
     },
 
     initialize: function () {
@@ -28,6 +31,9 @@ $(function () {
       this.groupCoords;
       this.groupFriends = [];
       this.groupImage = "";
+      this.groupDate;
+      this.groupTime;
+      this.groupFrequence = "once"
       this.$sideNav = $('.status-users-content');
       this.$btn = $('#create-group-btn');
 
@@ -39,18 +45,38 @@ $(function () {
       new app.FriendList();
 
       // When client connects sends user data to keep track of user.
-      socket.emit('connectedClient', sessionStorage.getItem('userId'));
+      socket.emit('connectedClient', {
+        id: sessionStorage.getItem('userId'),
+        token: sessionStorage.getItem('token')
+      }, (err, res) => {
+        if (err) {
+          if (err.Error === 401)
+            return window.location.href = 'index.html'
+          return
+        }
+        return
+      });
 
       if (this.getUrl() === "create-group.html") {
         new app.FriendsMap();
         new app.AddedFriendList();
       }
 
+
       this.render();
     },
 
     render: function () {
       this.$sideNav.hammer();
+      let options = datePickerOptions
+
+      // Date-picker initialize
+      let elemDate = document.querySelector('.datepicker');
+      let instanceDate = M.Datepicker.init(elemDate, options);
+
+      // Time-picker initialize
+      let elemTime = document.querySelector('.timepicker');
+      let instanceTime = M.Timepicker.init(elemTime, options);
     },
 
     // Gets the url of the current document to use only some of the js/files
@@ -142,9 +168,12 @@ $(function () {
       groupData.friends = this.groupFriends;
       groupData.image = this.groupImage;
       groupData.currentUser = sessionStorage.getItem('userId');
+      groupData.time = $('#time_picker').val();
+      groupData.date = `${$('#date_picker').val()} ${groupData.time}`;
+      groupData.frequence = this.groupFrequence;
 
       // If validation goes right, the group is created.
-      if (this.groupValidation(groupData.coords, groupData.title, groupData.friends)) {
+      if (this.groupValidation(groupData)) {
         this.socket.emit('addGroup', groupData, (err, data) => {
           if (err)
             return navigator.notification.alert(
@@ -170,17 +199,29 @@ $(function () {
     },
 
     // Checks that all fields have been filled correctly.
-    groupValidation: function (coords, title, friends) {
-      if (coords === undefined) {
+    groupValidation: function (data) {
+      if (data.coords === undefined) {
         this.snackBar('Tienes que elegir un lugar en el mapa');
         this.$btn.removeClass('disabled');
         return false;
-      } else if (title.trim() === "") {
+      } else if (data.title.trim() === "") {
         this.snackBar('Tienes que añadir un título para el grupo');
         this.$btn.removeClass('disabled');
         return false;
-      } else if (friends.length === 0) {
+      } else if (data.date.trim() === "" || data.time.trim() === "") {
+        if (data.frequence === 'always')
+          return true
+        this.snackBar('Tienes que añadir fecha y hora del evento');
+        this.$btn.removeClass('disabled');
+        return false;
+      } else if (data.friends.length === 0) {
+        return true
         this.snackBar('Tienes que añadir por lo menos a 1 amigo');
+        this.$btn.removeClass('disabled');
+        return false;
+      } else if (moment(data.date, 'MMM DD, YYYY hh:mm A', 'es').format('X') < moment().format('X')) {
+        // if the selected date is smaller than the current date in seconds.
+        this.snackBar('No puedes elegir una fecha anterior a este momento');
         this.$btn.removeClass('disabled');
         return false;
       }
@@ -202,7 +243,7 @@ $(function () {
       let addImage = navigator.camera.getPicture(function (image_URI) {
         that.getFileContentAsBase64(image_URI, (base64Image) => {
           that.groupImage = base64Image;
-          $('.new-group-image').html(`<img src="${base64Image}">`);
+          $('.new-group-image-container').html(`<img src="${base64Image}">`);
           app.userCollection.fitImage($('.new-group-image img'));
         })
 
@@ -269,6 +310,28 @@ $(function () {
       // $('.glass-orange').toggleClass('scale-out', !isHasClass);
       // $('.glass-white').toggleClass('scale-out', isHasClass);
       // $('.search-input').toggleClass('scale-out', !isHasClass);
+    },
+
+    // Blurs the timePicker input to not show keyboard
+    blurOut: function () {
+      $('#time_picker').blur();
+    },
+
+    // Sets the frequence of the group
+    addFrequence: function(e) {
+      let el = $(e.target);
+
+      // Checks which of the buttons have been clicked.
+      if (el.hasClass('once-btn')) {
+        this.groupFrequence = 'once';
+        $('.time-input').attr('disabled', false);
+      } else if (el.hasClass('weekly-btn')) {
+        this.groupFrequence = 'weekly';
+        $('.time-input').attr('disabled', false);
+      } else if (el.hasClass('always-btn')) {
+        this.groupFrequence = 'always';
+        $('.time-input').attr('disabled', true);
+      }
     }
   })
 
