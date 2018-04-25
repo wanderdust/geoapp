@@ -1598,8 +1598,6 @@ body.active {
 
 #user-dashboard #profile-image-container .user-image img {
   position: absolute;
-  min-width: 100%;
-  min-height: 100%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
