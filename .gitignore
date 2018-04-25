@@ -1,3 +1,5 @@
 node_modules
 public/test
 Public/platforms/android/app/build/outputs/apk/
+minifiedjs
+gulpfile.js
